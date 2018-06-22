@@ -80,7 +80,7 @@ $ APPLICATION_ID=aaaaaaaa-bbbb-cccc-dddd-0123456789ab
 Finally, using our application ID and and private.key that was generated when we first created the Nexmo Application, we can create the system token. You should navigate to the directory the `private.key` file is in and then run the following command:
 
 ```sh
-$ SYSTEM_TOKEN=$(nexmo jwt:generate private.key application_id=$APPLICATION_ID acl=""paths": {"/v1/users/**": {}, "/v1/conversations/**": {}, "/v1/sessions/**": {}, "/v1/devices/**": {}, "/v1/image/**": {}, "/v3/media/**": {}, "/v1/applications/**": {}"/v1/push/**": {}}")
+$ SYSTEM_TOKEN=$(nexmo jwt:generate private.key application_id=$APPLICATION_ID acl='{"paths":{"/v1/users/**":{},"/v1/conversations/**":{},"/v1/sessions/**":{},"/v1/devices/**":{},"/v1/image/**":{},"/v3/media/**":{},"/v1/applications/**":{},"/v1/push/**":{},"/v1/knocking/**":{}}}')
 ```
 
 After you've successfully ran the command. Verify for yourself that the JWT generated is correct. You can visit [jwt.io](jwt.io) and paste in your the output of `SYSTEM_TOKEN`. Make sure that the payload has the `application_id` and `acl` properties.
