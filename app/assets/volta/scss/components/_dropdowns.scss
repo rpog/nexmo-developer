@@ -162,6 +162,28 @@
 			&:active {
 				background: rgba($black, 0.1);
 			}
+
+			&.Vlt-dropdown__row {
+				&--noclick {
+					cursor: default;
+
+					&:hover {
+						background: transparent;
+					}
+
+					&:active {
+						background: transparent;
+					}
+				}
+
+				&--noborder {
+					padding-top: 6px;
+					
+					&:before {
+						display: none;
+					}
+				}
+			}
 		}
 	}
 }

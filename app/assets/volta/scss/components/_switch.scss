@@ -68,4 +68,21 @@
 			}
 		}
 	}
+
+	&--small {
+		height: 20px;
+		position: relative;
+		width: 32px;
+
+		.Vlt-switch__slider:before {
+			height: 18px;
+			width: 18px;
+		}
+
+		input:checked ~ .Vlt-switch__slider {
+			&:before {
+				left: 13px;
+			}
+		}
+	}
 }

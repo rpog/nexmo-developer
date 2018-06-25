@@ -79,5 +79,9 @@
 
 	&__docs {
 		padding-top: $unit5;
+
+		.Vlt-tooltip {
+			white-space: nowrap;
+		}
 	}
 }

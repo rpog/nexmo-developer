@@ -2,21 +2,21 @@
     font-family: 'Lato';
     font-style: normal;
     font-weight: 600;
-    src: url($font-url-semibold + '.woff2') format('woff2'), url($font-url-semibold + '@include woff') format('woff');
+    src: url($Vlt-font-url + 'Lato-Semibold.woff2') format('woff2'), url($Vlt-font-url + 'Lato-Semibold.woff') format('woff');
 }
 
 @font-face {
     font-family: 'Lato';
     font-style: normal;
     font-weight: 900;
-    src: url($font-url-black + '.woff2') format('woff2'), url($font-url-black + '@include woff') format('woff');
+    src: url($Vlt-font-url + 'Lato-Black.woff2') format('woff2'), url($Vlt-font-url + 'Lato-Black.woff') format('woff');
 }
 
 @font-face {
     font-family: 'Lato';
     font-style: normal;
     font-weight: normal;
-    src: url($font-url-regular + '.woff2') format('woff2'), url($font-url-regular + '@include woff') format('woff');
+    src: url($Vlt-font-url + 'Lato-Regular.woff2') format('woff2'), url($Vlt-font-url + 'Lato-Regular.woff') format('woff');
 }
 
 html {
@@ -200,14 +200,15 @@ h3 {
 	}
 
 	&.Vlt-title--icon svg {
-		flex: 0 0 18px;
-		height: 18px;
-		width: 18px;
+		flex: 0 0 20px;
+		height: 20px;
+		width: 20px;
 
 		@media #{$L-plus} {
-			flex: 0 0 20px;
-			height: 20px;
-			width: 20px;
+			flex: 0 0 22px;
+			height: 22px;
+			margin-top: 5px;
+			width: 22px;
 		}
 	}
 }

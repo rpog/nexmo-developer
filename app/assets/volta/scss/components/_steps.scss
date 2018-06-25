@@ -4,6 +4,7 @@
 	justify-content: center;
 	list-style: none;
 	margin: 0;
+	overflow-x: auto;
 	padding: 0;
 
 	&__item {
@@ -14,6 +15,13 @@
 		font-size: 14px;
 		font-weight: bold;
 		margin: 0 0 0 10px;
+
+		@media #{$S-only} {
+			flex: 1;
+			flex-flow: column;
+			position: relative;
+			text-align: center;
+		}
 
 		&:first-child {
 			margin-left: 0;
@@ -36,6 +44,11 @@
 			justify-content: center;
 			margin-right: $unit2;
 			width: 40px;
+
+			@media #{$S-only} {
+				margin-bottom: $unit0;
+				margin-right: 0;
+			}
   		}
 
 		&--selected {
@@ -57,6 +70,12 @@
 			margin-left: 10px;
 			margin-right: 5px;
 			width: 24px;
+
+			@media #{$S-only} {
+				position: absolute;
+				right: -15px;
+				top: 7px;
+			}
 		}
 
 		&:last-child {

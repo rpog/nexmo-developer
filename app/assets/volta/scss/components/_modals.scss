@@ -44,13 +44,19 @@
 		box-shadow: 0 30px 40px rgba($black, 0.2);
 		display: flex;
 		flex-flow: column;
-		max-height: 95%;
+		max-height: 100%;
 		padding: $unit2 $unit3;
 		position: relative;
 		width: calc(100vw - 20px);
 
 		@media #{$M-plus} {
 			width: 400px;
+		}
+
+		@media #{$S-only} {
+			margin-bottom: 80px;
+			margin-top: 80px;
+			max-height: calc(70vh);
 		}
 
 		p {
@@ -142,6 +148,7 @@
 	}
 
 	&__content {
+		-webkit-overflow-scrolling: touch;
 		flex: auto; // not flex: 1 because IE11 needs flex-basis: auto
 		overflow-x: hidden; // otherwise IE11 shows a scrollbar on forms
 		overflow-y: auto;
@@ -154,6 +161,14 @@
 
 	&--form {
 		text-align: left;
+	}
+}
+
+body.Vlt-body--modal-open {
+	overflow: hidden;
+
+	main {
+		overflow: hidden;
 	}
 }
 

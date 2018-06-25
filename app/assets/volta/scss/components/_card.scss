@@ -5,6 +5,7 @@
 	display: block;
 	margin-bottom: $unit3;
 	padding: $unit3;
+	width: 100%;
 
 	&--center {
 		text-align: center;
@@ -153,6 +154,15 @@
 
 		.Vlt-card__content {
 			padding: $unit2 $unit3 $unit3;
+		}
+	}
+
+	&--title {
+		padding: $unit2;
+
+		.Vlt-card__header {
+			border-bottom: 1px solid $grey-light;
+			margin-bottom: $unit3;
 		}
 	}
 

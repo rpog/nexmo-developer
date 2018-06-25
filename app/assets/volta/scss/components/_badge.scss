@@ -11,6 +11,7 @@
 	margin: 0 10px;
 	padding: 4px 10px;
 	vertical-align: bottom;
+	white-space: nowrap;
 
 	&--red {
 		background: $red;
@@ -43,6 +44,12 @@
 			opacity: 0.6;
 			width: 16px;
 		}
+	}
+
+	&--small {
+		font-size: 0.9rem;
+		height: 13px;
+		padding: 2px 6px;
 	}
 
 	& + div.Vlt-badge {

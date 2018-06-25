@@ -36,6 +36,18 @@
 
 				svg {
 					fill: $blue;
+					opacity: 0.8;
+				}
+
+				.Vlt-sidemenu__label {
+					opacity: 0.8;
+				}
+
+				&_active {
+					svg,
+					.Vlt-sidemenu__label {
+						opacity: 1;
+					}
 				}
 			}
 

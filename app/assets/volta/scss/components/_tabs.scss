@@ -82,6 +82,7 @@
 %tabs-header {
 	border-bottom: 1px solid $grey-light;
 	margin: 0;
+	overflow-x: auto;
 	white-space: nowrap;
 }
 
@@ -92,6 +93,10 @@
 
 	&__link {
 		@extend %tabs-link;
+
+		svg {
+			fill: $blue;
+		}
 
 		&_active,
 		&:active {
@@ -135,6 +140,11 @@
 	}
 
 	&--icons {
+		.Vlt-tabs__header {
+			overflow-x: visible;
+			white-space: normal;
+		}
+
 		.Vlt-tabs__link {
 			display: inline-block;
 			padding: 8px 4px;
