@@ -202,6 +202,7 @@ class Feedback extends React.Component {
         </div>
 
         <input type="submit" className="Vlt-btn Vlt-btn--primary Vlt-btn--app" value="Send Feedback" onClick={ () => { this.sendFeedback() } } disabled={ this.sendFeedbackButtonDisabled() }/>
+        <p>Your data will be treated in accordance with our <a href="https://www.nexmo.com/privacy-policy">Privacy Policy</a>, which sets out the rights you have in respect of your data.</p>
       </div>
     )
   }
