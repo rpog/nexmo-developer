@@ -10,7 +10,7 @@ Here is a complete overview of the basic markdown and custom plugins that Nexmo 
 
 We use plugins sparingly to extend functionality where the only other option would be HTML.
 
-You can find this document in `/app/views/static/styleguide.md`. The side navigation has been left present to be an accurate representation of the content width.
+You can find this document in `/app/views/contribute/guides/styleguide.md`. The side navigation has been left present to be an accurate representation of the content width.
 
 There is no markdown syntax in here as this document is rendered with the same engine and no support exists for escaping markdown. Examples would ultimately be rendered. To understand recursion you must first understand recursion.
 
@@ -280,3 +280,15 @@ The HTML `<audio>` element can be utilised in Markdown with the following syntax
 This produces the following output:
 
 🔈[https://developer.nexmo.com.s3.amazonaws.com/assets/ssml/06-phonemes.mp3]
+
+## Dynamic content
+
+You can use sytax such as:
+
+````
+Welcome to [~dynamic_content_example~]
+````
+
+This will render as:
+
+Welcome to [~dynamic_content_example~]

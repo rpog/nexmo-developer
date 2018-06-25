@@ -72,25 +72,25 @@ Read more about:
 
 * [API Reference](/api/stitch)
 * [Nexmo CLI](https://github.com/nexmo/nexmo-cli/tree/beta)
-* [Server-side Gateway](https://github.com/Nexmo/messaging-gateway) with [Android](https://github.com/Nexmo/messaging-demo-android) and [JavaScript](https://github.com/Nexmo/messaging-demo-js) client demos
+* [Node.JS and Angular Demo](https://github.com/Nexmo/stitch-demo) with an [Android](https://github.com/Nexmo/stitch-demo-android) client demo
 
 ## Find the SDKs online
 
 <div class="Vlt-grid">
   <div class="Vlt-col Vlt-col--center">
-    <a href="https://www.npmjs.com/package/nexmo-conversation" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
+    <a href="https://www.npmjs.com/package/nexmo-stitch" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
       <svg><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-open"></use></svg>
       JavaScript
     </a>
   </div>
   <div class="Vlt-col Vlt-col--center">
-    <a href="https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.nexmo%22%20AND%20a%3A%22conversation%22" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
+    <a href="https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.nexmo%22%20AND%20a%3A%22stitch%22" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
       <svg><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-open"></use></svg>
       Android
     </a>
   </div>
   <div class="Vlt-col Vlt-col--center">
-    <a href="https://cocoapods.org/pods/Stitch" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
+    <a href="https://github.com/nexmo/stitch-ios-sdk" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
       <svg><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-open"></use></svg>
       iOS
     </a>
