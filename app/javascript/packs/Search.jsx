@@ -129,36 +129,36 @@ class Search extends React.Component {
     return index.hits.map((hit) => {
       if (index.index == 'zendesk_nexmo_articles') {
         return (
-          <div className="search-result" key={ index.index + hit.objectID }>
-            <a href={ `https://help.nexmo.com/hc/en-us/articles/${hit.id}` } target="_blank">
+          <div className="Nxd-search__result" key={ index.index + hit.objectID }>
+            <a className="Nxd-search__result__link" href={ `https://help.nexmo.com/hc/en-us/articles/${hit.id}` } target="_blank">
               <div>
-                <span className="meta">{ hit.section.full_path }</span>
-                <h3>{ hit.title }</h3>
+                <h6 className="Vlt-blue-dark">{ hit.title }</h6>
                 <p
-                  className="search-highlighted"
+                  className="Nxd-search__result__highlight"
                   dangerouslySetInnerHTML={{ __html: `...${hit._snippetResult.body_safe.value}...` }}
-                ></p>
+                ></p>             
+                <span className="Vlt-badge Vlt-badge--grey Nxd-search__badge">{ hit.section.full_path }</span>
               </div>
             </a>
           </div>
         )
       } else if (index.index.includes('nexmo_developer')) {
         return (
-          <div className="search-result" key={ index.index + hit.objectID }>
-            <a href={ `${hit.path}#${hit.anchor}` }>
-              <div>
-                <span className="meta">{ hit.product }</span>
-                <h3>
+          <div className="Nxd-search__result" key={ index.index + hit.objectID }>
+            <a className="Nxd-search__result__link" href={ `${hit.path}#${hit.anchor}` }>
+              <div>              
+                <h6 className="Vlt-blue-dark">
                   { hit.title }
                   { this.renderHeading(hit) }
-                </h3>
+                </h6>
 
-                <p><b>{ hit.description ? hit.description.substring(0, 150) : '' }</b></p>
+                <p className="Nxd-search__result__desc">{ hit.description ? hit.description.substring(0, 150) : '' }</p>
                 <p
-                  className="search-highlighted"
+                  className="Nxd-search__result__highlight"
                   dangerouslySetInnerHTML={{ __html: `...${hit._snippetResult.body.value}...` }}
                 >
                 </p>
+                <span className="Vlt-badge Vlt-badge--grey Nxd-search__badge">{ hit.product }</span>
               </div>
             </a>
           </div>
@@ -177,7 +177,7 @@ class Search extends React.Component {
 
   renderIndexResultsEmpty() {
     return (
-      <p><i>No results</i></p>
+      <p className="Nxd-search--no-results"><i>No results</i></p>
     )
   }
 
@@ -195,8 +195,8 @@ class Search extends React.Component {
     } else {
       return this.state.results.map((index) => {
         return(
-          <div className="results-index" key={ index.index }>
-            <h3>{ this.renderIndexHeading(index.index) }</h3>
+          <div className="Nxd-search__results" key={ index.index }>
+            <h3 className="Nx-search__title">{ this.renderIndexHeading(index.index) }</h3>
             { index.hits.length > 0 ? this.renderIndexResults(index) : this.renderIndexResultsEmpty(index) }
           </div>
         )
@@ -207,7 +207,7 @@ class Search extends React.Component {
   renderClearButton() {
     if (this.state.query !== '') {
       return (
-        <i id="search-clear" className="icon icon-times-circle" onClick={ this.reset.bind(this) }></i>
+        <svg className="Nxd-search__clear" onClick={ this.reset.bind(this) }><use xlinkHref="/symbol/volta-icons.svg#Vlt-icon-cross"/></svg>
       )
     }
   }
@@ -215,23 +215,32 @@ class Search extends React.Component {
   render() {
     return (
       <div>
-        <input
-          type="text"
-          id="searchbox"
-          name="query"
-          placeholder="Search"
-          name="query"
-          autoComplete="off"
-          onChange={ this.handleChange.bind(this) }
-          onKeyDown={ this.handleKeyDown.bind(this) }
-          ref="input"
-        />
+        <div className="Vlt-form__element">
+          <div className="Vlt-composite">
+            <div className="Vlt-composite__prepend Vlt-composite__prepend--icon">
+              <svg><use xlinkHref="/symbol/volta-icons.svg#Vlt-icon-search"/></svg>
+            </div>
+            <div className="Vlt-input">
+              <input
+                type="text"
+                id="searchbox-test"
+                name="query"
+                placeholder="Search"
+                name="query"
+                autoComplete="off"
+                onChange={ this.handleChange.bind(this) }
+                onKeyDown={ this.handleKeyDown.bind(this) }
+                ref="input"
+              />
+            </div>
+          </div>
+        </div>
 
         { this.renderClearButton() }
 
         { this.shouldShowResults() &&
-          <div className="quicksearch">
-            <div className="quicksearch__results">
+          <div className="Nxd-search">
+            <div className="Nxd-search__wrapper">
               { this.renderResults() }
             </div>
           </div>

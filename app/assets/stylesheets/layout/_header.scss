@@ -106,13 +106,9 @@
     position: relative;
   }
 
-
-  .quicksearch a {
-    padding: 0;
-  }
-
   form {
     float: right;
+    min-width: 350px;
   }
 
   @include tablet {
