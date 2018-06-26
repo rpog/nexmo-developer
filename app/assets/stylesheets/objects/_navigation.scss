@@ -34,29 +34,8 @@
   }
 }
 
-.sidenav {
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 18px;
-
-  > ul {
-    position: relative;
-  }
-
-  .sidenav-back {
-    color: $blue;
-    font-size: 0.9em;
-    font-weight: 500;
-  }
-
-  .expanded {
-    border-left: 1px solid $gray-light;
-    margin-left: 5px;
-    padding-left: $spacing - 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-
-  }
+.Vlt-sidenav {
+  height: auto;
 }
 
 .navigation--documentation {

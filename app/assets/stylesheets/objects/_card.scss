@@ -100,3 +100,11 @@
     margin: 0 auto $unit1;
   }
 }
+
+.Nxd-card {
+  width: calc(100% - 280px);
+
+  @media #{$S-only} {
+    width: 100%;
+  }
+}

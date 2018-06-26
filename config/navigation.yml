@@ -50,6 +50,8 @@ navigation_overrides:
     svgColor: 'blue'
   redact:
     label: 'Developer Preview'
+    svg: 'lock'
+    svgColor: 'red'
   stitch:
     svg: 'duplicate'
     svgColor: 'teal'
