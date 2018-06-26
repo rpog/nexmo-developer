@@ -42,8 +42,6 @@ class Search extends React.Component {
       return this.reset()
     }
 
-    $('.wrapper').addClass('wrapper--blur')
-
     this.setState({
       query: event.target.value,
       loading: this.state.query === '',
@@ -100,7 +98,6 @@ class Search extends React.Component {
   }
 
   reset() {
-    $('.wrapper').removeClass('wrapper--blur')
     this.resetAnalyticsListeners()
     this.refs.input.value = '';
     this.setState({
