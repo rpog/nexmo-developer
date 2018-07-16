@@ -3,13 +3,20 @@
     <div class="item">
       <a href="<%= tutorial.path %>" class="Vlt-card Vlt-card--image Nxd-card--tutorials">
         <div class="Vlt-card__image Vlt-card__image--tech Vlt-card__image--blue">
-          <div class="Vlt-badge Vlt-badge--large Vlt-badge--blue"><%= tutorial.subtitle %></div>
+          <div class="Vlt-badge Vlt-badge--large Vlt-badge--blue Nxd-tutorials__product"><%= tutorial.subtitle %></div>
         </div>
         <div class="Vlt-card__content">
           <h2>
               <span><%= tutorial.title %></span>
           </h2>
-          <p><%= tutorial.description %></p>
+          <p><%= tutorial.description %></p>        
+          
+          <% if tutorial.languages.count > 0 %>
+            <% tutorial.languages.each do |language| %>
+              <small class="Vlt-grey-darker Nxd-tutorials__language Nxd-tutorials__language--<%= language %>"><span>●</span> <%= language %></small>
+            <% end %>
+          <% end %>
+
           <div class="Vlt-card__cta">
             <div class="Vlt-btn Vlt-btn--secondary">Read more</div>
           </div>
