@@ -78,6 +78,7 @@
 .Vlt-composite {
 	display: flex !important;
 	flex-flow: row;
+	position: relative;
 
 	.Vlt-input,
 	.Vlt-select {
@@ -88,14 +89,21 @@
 			flex: 0;
 			flex-basis: auto;
 		}
+	}
 
-		&:first-child {
-			input,
-			select {
-				border-bottom-right-radius: 0;
-				border-right: 0;
-				border-top-right-radius: 0;
-			}
+	&--appendedicon {
+		.Vlt-input input,
+		.Vlt-select select {
+			padding-right: 40px;
+		}
+	}
+
+	&:not(.Vlt-composite--appendedicon) {
+		.Vlt-input:first-child input,
+		.Vlt-select:first-child select {
+			border-bottom-right-radius: 0;
+			border-right: 0;
+			border-top-right-radius: 0;
 		}
 	}
 
@@ -125,12 +133,27 @@
 
 	&__append {
 		position: relative;
+		z-index: 2;
 
 		.Vlt-btn,
 		.Vlt-dropdown__btn,
 		.Vlt-native-dropdown select {
 			border-bottom-left-radius: 0;
 			border-top-left-radius: 0;
+		}
+
+		&--icon {
+			height: 100%;
+			padding: 8px 10px 7px;
+			position: absolute;
+			right: 0;
+			width: 40px;
+
+			svg {
+				fill: $grey-dark;
+				height: 20px;
+				width: 20px;
+			}
 		}
 	}
 
@@ -145,14 +168,11 @@
 			border-top-right-radius: 0;
 		}
 
-		& + .Vlt-input input,
-		& + .Vlt-select select {
+		&:not(.Vlt-composite__prepend--icon) + .Vlt-input input,
+		&:not(.Vlt-composite__prepend--icon) + .Vlt-select select {
 			border-bottom-left-radius: 0;
-			border-bottom-right-radius: 4px;
 			border-left: 0;
-			border-right: 1px solid $grey;
 			border-top-left-radius: 0;
-			border-top-right-radius: 4px;
 		}
 
 		&--icon {
@@ -169,9 +189,6 @@
 
 			& + .Vlt-input input,
 			& + .Vlt-select select {
-				border-bottom-left-radius: 4px;
-				border-left: 1px solid $grey;
-				border-top-left-radius: 4px;
 				padding-left: 40px;
 			}
 		}
@@ -248,6 +265,12 @@
 		& + .Vlt-form__group,
 		& + .Vlt-form__element {
 			margin-top: 0; // This ensures vertical spacing consistency
+		}
+	}
+
+	&--inline {
+		@media #{$M-plus} {
+			display: inline-flex;
 		}
 	}
 }
@@ -378,6 +401,7 @@
 		// We removed cursor: pointer because it would add complications in case it's disabled
 		align-items: flex-start;
 		display: flex;
+		text-align: left;
 	}
 
 	&__button {
@@ -507,7 +531,7 @@
 .Vlt-form-focus-style {
 	background: $white;
 	border-color: $blue;
-	box-shadow: 0 0 5px fade($blue, 50);
+	box-shadow: 0 0 5px rgba($blue, 0.5);
 	outline: none;
 
 	&:hover {

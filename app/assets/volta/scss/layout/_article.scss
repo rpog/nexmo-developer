@@ -104,5 +104,10 @@
 }
 
 .Vlt-section {
+	display: inline-block; //remove margin collapse
 	margin: $unit3 0;
+}
+
+.Vlt-inset {
+	margin-left: $unit4;
 }

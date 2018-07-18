@@ -61,7 +61,7 @@ $grey-lighter: #f8fafc;
 $grey-light: #e7ebee;
 $grey: #c4cdd5;
 $grey-dark: #919eab;
-$grey-darker: #637381;
+$grey-darker: #4e5a64;
 $black: #2c2d30;
 
 $aqua-lighter: #d0e7f1;
@@ -78,5 +78,12 @@ $unit3: 24px;
 $unit4: 32px;
 $unit5: 40px;
 
-$Vlt-font-url: '';
+$Vlt-font-url: '../../fonts/' !default;
 
+$z-index-dropdowns: 500;
+$z-index-flash: 1000;
+$z-index-modals: 900;
+$z-index-tooltips: 600;
+$z-index-sidenav: 800; // Sidenav needs to be higher than the header for mobile
+$z-index-sidenav-mobile-trigger: 650; // Sidenav button on mobile needs to be lower than the header for mobile
+$z-index-header: 700;

@@ -66,4 +66,8 @@ $colors: (
 		color: $color-variable !important;
 		fill: $color-variable !important;
 	}
+
+	.Vlt-bg-#{$color} {
+		background-color: $color-variable !important;
+	}
 }

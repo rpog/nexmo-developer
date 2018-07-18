@@ -1,11 +1,18 @@
 .Vlt-sidenav {
 	&__mobile--light {
-		background: $grey-lighter;
+		background: $white;
+		box-shadow: 1px 0 8px rgba($black, 0.2);
 
 		button {
 			svg {
 				fill: $grey-dark;
 			}
+		}
+
+		.Vlt-template--header & {
+			background: $grey-lighter;
+			border-bottom: 1px solid $grey-light;
+			box-shadow: none;
 		}
 	}
 

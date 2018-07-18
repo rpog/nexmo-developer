@@ -14,7 +14,7 @@
 		transform: translate(-100vw, 0);
 		transition: transform 0.2s;
 		width: 80vw;
-		z-index: 9999999;
+		z-index: $z-index-sidenav;
 
 		&_visible {
 			box-shadow: 4px 0 12px rgba($black, 0.15), 20vw 0 0 rgba($black, 0.15);
@@ -79,6 +79,10 @@
 
 				svg {
 					width: 100%; // For IE
+				}
+
+				img {
+					height: 40px;
 				}
 			}
 		}
@@ -304,7 +308,7 @@
 		display: flex;
 		justify-content: space-between;
 		left: 0;
-		padding: 10px 10px 10px 20px;
+		padding: 10px;
 		position: fixed;
 		top: 0;
 		width: 100%;
@@ -326,6 +330,11 @@
 				height: 24px;
 				width: 24px;
 			}
+		}
+
+		.Vlt-template--header & {
+			padding-bottom: 5px;
+			padding-top: 5px;
 		}
 	}
 }

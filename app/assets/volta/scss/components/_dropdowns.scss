@@ -1,5 +1,96 @@
 .Vlt-dropdown {
+	display: inline-block;
 	position: relative;
+
+	&__link,
+	&__block {
+		color: $black;
+		overflow: hidden;
+		padding: 12px 20px;
+		position: relative;
+		text-align: left;
+
+		&:before {
+			background: $grey-light;
+			content: '';
+			display: block;
+			height: 1px;
+			left: 20px;
+			position: absolute;
+			top: 0;
+			width: calc(100% - 40px);
+		}
+
+		&--noborder {
+			// Fixes the spacing without changing the proportion of the element
+			margin-top: -4px;
+
+			&:before {
+				display: none;
+			}
+		}
+
+		&--disabled,
+		&--selected {
+			color: $grey-dark;
+			cursor: default;
+			pointer-events: none;
+		}
+
+		&--highlighted {
+			color: $blue;
+		}
+
+		&__icon {
+			flex: 0 0 20px;
+			height: 20px;
+			margin-bottom: -3px;
+			margin-right: 10px;
+			opacity: 0.8;
+			vertical-align: middle;
+			width: 20px;
+		}
+	}
+
+	&__link {
+		cursor: pointer;
+		display: flex;
+		justify-content: space-between;
+		white-space: nowrap;
+
+		&:hover {
+			background: rgba($black, 0.05);
+		}
+
+		&:active {
+			background: rgba($black, 0.1);
+		}
+
+		&--nohover {
+			&:hover {
+				background: transparent;
+			}
+		}
+	}
+
+	&__block {
+		&--nowrap {
+			white-space: nowrap;
+		}
+
+		&--center {
+			text-align: center;
+		}
+	}
+
+	&__label {
+		flex: 1;
+	}
+
+	& + .Vlt-btn,
+	.Vlt-btn + & {
+		margin-left: $unit1;
+	}
 }
 
 .Vlt-dropdown__btn {
@@ -14,7 +105,9 @@
 		content: '';
 		display: inline-block;
 		height: 20px;
+		margin-bottom: -1px;
 		margin-left: 5px;
+		margin-top: -1px;
 		vertical-align: middle;
 		width: 20px;
 	}
@@ -97,6 +190,17 @@
 			padding-right: 50px !important;
 		}
 	}
+
+	& + .Vlt-btn,
+	.Vlt-btn + & {
+		margin-left: $unit1;
+	}
+
+	&--app {
+		select {
+			@include btn-app-radius;
+		}
+	}
 }
 
 .Vlt-dropdown__selection {
@@ -109,7 +213,7 @@
 	min-width: 100%;
 	overflow: hidden;
 	position: absolute;
-	top: calc(100% + 5px);
+	top: 100%;
 	z-index: 99999999;
 
 	&__content {
@@ -124,72 +228,72 @@
 			overflow-y: scroll;
 		}
 
-		li {
-			cursor: pointer;
-			overflow: hidden;
-			padding: 12px;
-			position: relative;
-
-			&:before {
-				background: $grey-light;
-				content: '';
-				display: block;
-				height: 1px;
-				left: 12px;
-				position: absolute;
-				top: 0;
-				width: calc(100% - 24px);
-			}
-
-			&:first-child {
-				border-top-left-radius: $unit1;
-				border-top-right-radius: $unit1;
+		> *:first-child {
+			border-top-left-radius: $unit1;
+			border-top-right-radius: $unit1;
 
 				&:before {
 					display: none;
 				}
 			}
 
-			&:last-child {
-				border-bottom-left-radius: $unit1;
-				border-bottom-right-radius: $unit1;
-			}
-
-			&:hover {
-				background: rgba($black, 0.05);
-			}
-
-			&:active {
-				background: rgba($black, 0.1);
-			}
-
-			&.Vlt-dropdown__row {
-				&--noclick {
-					cursor: default;
-
-					&:hover {
-						background: transparent;
-					}
-
-					&:active {
-						background: transparent;
-					}
-				}
-
-				&--noborder {
-					padding-top: 6px;
-					
-					&:before {
-						display: none;
-					}
-				}
-			}
+		> *:last-child {
+			border-bottom-left-radius: $unit1;
+			border-bottom-right-radius: $unit1;
 		}
+
+		li:not([class]) {
+			display: block; // Needed for IE if the __link or __block is in a nested div to avoid extra spacing
+		}
+	}
+
+	&--left {
+		right: 0;
+	}
+
+	&--width2 {
+		min-width: 200px;
+	}
+
+	&--width3 {
+		min-width: 300px;
+	}
+
+	&--nomaxheight {
+		max-height: none;
+	}
+
+	.Vlt-btn {
+		margin-bottom: 0;
+		margin-top: 0;
 	}
 }
 
-.Vlt-dropdown--expanded .Vlt-dropdown__panel {
+.Vlt-dropdown__scroll {
+	flex: 1;
+	overflow-y: auto;
+}
+
+.Vlt-dropdown--expanded .Vlt-dropdown__panel,
+.Vlt-dropdown_expanded .Vlt-dropdown__panel,
+.Vlt-dropdown__panel_open {
 	max-height: 100vh;
 	overflow: visible;
 	transition: 0.3s;
+
+	&__content {
+		max-height: 400px;
+		overflow-y: auto;
+
+		&--scroll-area {
+			display: flex;
+			flex-flow: column;
+			overflow-y: hidden;
+
+			.Vlt-dropdown__link,
+			.Vlt-dropdown__block {
+				flex-shrink: 0;
+			}
+		}
+	}
 }

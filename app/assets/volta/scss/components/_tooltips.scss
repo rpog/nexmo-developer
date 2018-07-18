@@ -13,7 +13,7 @@ span.Vlt-tooltip {
 }
 
 .Vlt-tooltip--js {
-	z-index: 99999;
+	z-index: $z-index-tooltips;
 
 	&[x-placement^='bottom'] {
 		.Vlt-tooltip__content {
@@ -117,7 +117,7 @@ span.Vlt-tooltip {
 	transition: display 0.2s;
 	white-space: normal;
 	width: max-content;
-	z-index: 99999;
+	z-index: $z-index-tooltips;
 }
 
 %tooltip-content {

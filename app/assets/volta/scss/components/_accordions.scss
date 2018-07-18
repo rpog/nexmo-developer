@@ -6,6 +6,7 @@
 
 	&_open {
 		height: auto;
+		overflow: visible;
 	}
 }
 
@@ -15,16 +16,19 @@
 
 .Vlt-accordion {
 	&__trigger {
-		@extend .p-large;
 		@extend .reset-button;
 		border-bottom: 1px solid rgba($black, 0.1);
 		cursor: pointer;
 		display: flex;
 		justify-content: space-between;
-		margin-bottom: $unit0;
 		padding: $unit1 0;
 		text-align: left;
+		transition: margin 0.2s;
 		width: 100%;
+
+		&:not(.Vlt-accordion__trigger_active) {
+			margin-bottom: $unit0 !important;
+		}
 
 		span {
 			flex: 1;
@@ -47,6 +51,14 @@
 		&_active {
 			&:after {
 				transform: rotate(180deg);
+			}
+		}
+
+		&--noborder {
+			border: 0;
+
+			&:not(.Vlt-accordion__trigger_active) {
+				margin-bottom: 0 !important;
 			}
 		}
 	}

@@ -2,21 +2,21 @@
     font-family: 'Lato';
     font-style: normal;
     font-weight: 600;
-    src: url($Vlt-font-url + 'Lato-Semibold.woff2') format('woff2'), url($Vlt-font-url + 'Lato-Semibold.woff') format('woff');
+    src: url('Lato-Semibold.woff2') format('woff2'), url('Lato-Semibold.woff') format('woff');
 }
 
 @font-face {
     font-family: 'Lato';
     font-style: normal;
     font-weight: 900;
-    src: url($Vlt-font-url + 'Lato-Black.woff2') format('woff2'), url($Vlt-font-url + 'Lato-Black.woff') format('woff');
+    src: url('Lato-Black.woff2') format('woff2'), url('Lato-Black.woff') format('woff');
 }
 
 @font-face {
     font-family: 'Lato';
     font-style: normal;
     font-weight: normal;
-    src: url($Vlt-font-url + 'Lato-Regular.woff2') format('woff2'), url($Vlt-font-url + 'Lato-Regular.woff') format('woff');
+    src: url('Lato-Regular.woff2') format('woff2'), url('Lato-Regular.woff') format('woff');
 }
 
 html {
@@ -137,6 +137,10 @@ p {
 .Vlt-title--center {
 	justify-content: center;
 	text-align: center;
+}
+
+.Vlt-title--nomargin {
+	margin: 0;
 }
 
 h1 {

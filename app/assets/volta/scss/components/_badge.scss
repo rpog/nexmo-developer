@@ -8,7 +8,7 @@
 	font-weight: 600;
 	height: 20px;
 	line-height: 1;
-	margin: 0 10px;
+	margin: 0;
 	padding: 4px 10px;
 	vertical-align: bottom;
 	white-space: nowrap;
@@ -103,5 +103,14 @@
 				margin-left: 0;
 			}
 		}
+	}
+
+	+ .Vlt-badge {
+		margin-left: $unit1;
+	}
+
+	&--margin {
+		margin-bottom: $unit1;
+		margin-top: $unit1;
 	}
 }

@@ -89,6 +89,11 @@
 .Vlt-tabs {
 	&__header {
 		@extend %tabs-header;
+
+		&--spaced {
+			display: flex;
+			justify-content: space-evenly;
+		}
 	}
 
 	&__link {
