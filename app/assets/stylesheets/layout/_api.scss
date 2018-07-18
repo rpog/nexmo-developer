@@ -84,4 +84,19 @@
 			white-space: nowrap;
 		}
 	}
+
+	.tabs--sticky {
+		position: fixed;
+		top: 111px;
+		width: max-content;
+		z-index: 1000;
+
+		@media #{$S-only} {
+			left: 0;
+			padding: 0 $unit1;
+			top: 100px;
+			width: 100%;
+		}
+	}
 }
+

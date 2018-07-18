@@ -34,8 +34,10 @@
   }
 }
 
-.Vlt-sidenav {
-  height: auto;
+@media #{$M-plus} {
+  .Vlt-sidenav {
+    height: calc(100vh - 111px);
+  }
 }
 
 .navigation--documentation {
@@ -56,5 +58,20 @@
     .navigation-item--ncco-reference {
       @include highlighted-navigation($teal);
     }
+  }
+}
+
+#Vlt-sidenav-mobile-trigger {
+  display: inline-block;
+  margin-top: $unit0;
+  margin-right: $unit2;
+
+  svg {
+    height: 24px;
+    width: 24px;
+  }
+
+  @media #{$M-plus} {
+    display: none;
   }
 }

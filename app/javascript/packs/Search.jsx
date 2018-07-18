@@ -14,10 +14,11 @@ class Search extends React.Component {
       results: [],
       query: '',
       loading: false,
-      analyticsTriggered: false
+      analyticsTriggered: false,
+      expanded: false
     }
 
-    $(document).on('click', '.wrapper', this.onClickOutside.bind(this))
+    $(document).on('click', '.Nxd-template', this.onClickOutside.bind(this))
 
     this.triggerAnalyticalSearch = this.triggerAnalyticalSearch.bind(this)
   }
@@ -25,6 +26,10 @@ class Search extends React.Component {
   onClickOutside(event) {
     if (this.shouldShowResults()) {
       this.reset()
+    }
+
+    if(this.state.expanded) {
+      this.setState({expanded: false})
     }
   }
 
@@ -212,7 +217,7 @@ class Search extends React.Component {
   render() {
     return (
       <div>
-        <div className="Vlt-form__element">
+        <div className={`Vlt-form__element ${this.state.expanded ? 'Nxd-search-expanded' : ''}`} onClick={() => {this.setState({expanded: true})}}>
           <div className="Vlt-composite">
             <div className="Vlt-composite__prepend Vlt-composite__prepend--icon">
               <svg><use xlinkHref="/symbol/volta-icons.svg#Vlt-icon-search"/></svg>
@@ -226,7 +231,7 @@ class Search extends React.Component {
                 name="query"
                 autoComplete="off"
                 onChange={ this.handleChange.bind(this) }
-                onKeyDown={ this.handleKeyDown.bind(this) }
+                onKeyDown={ this.handleKeyDown.bind(this) }              
                 ref="input"
               />
             </div>

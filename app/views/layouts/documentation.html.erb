@@ -2,25 +2,22 @@
 <html>
   <%= render partial: 'layouts/partials/head' %>
 
-  <body class="<%= theme %>" data-push-state-root="<%= canonical_path %>">
+  <body class="Nxd-template" data-push-state-root="<%= canonical_path %>">
     <%= render partial: 'layouts/partials/header' %>
-    <div class="wrapper">
-      <div class="container">
-        <div class="row"> 
-          <div id="Vlt-sidenav" class="Vlt-sidenav Vlt-sidenav--light">
-            <div class="Vlt-sidenav__scroll">
-              <nav class="sidenav" id="sidenav" data-turbolinks-permanent>
-                <%= sidenav(@sidenav_root) %>
-              </nav>
-            </div>
-          </div>
-          <div data-turbolinks-permanent class="columns small-12 medium-9 Vlt-card Vlt-article Nxd-card" id="primary-content">
-            <%= yield %>
-            <%= render partial: 'layouts/partials/feedback' %>
-          </div>
-        </div>
+    <div id="Vlt-sidenav" class="Vlt-sidenav Vlt-sidenav--light">
+      <div class="Vlt-sidenav__scroll">
+        <nav class="sidenav" id="Vlt-sidenav" data-turbolinks-permanent>
+          <%= sidenav(@sidenav_root) %>
+        </nav>
       </div>
     </div>
-    <%= render partial: 'layouts/partials/footer' %>
+    <div class="Vlt-main Vlt-main--light Nxd-main">
+      <div class="Vlt-card" data-turbolinks-permanent id="primary-content">
+        <%= render partial: 'layouts/partials/notices' %>
+        <%= yield %>
+        <%= render partial: 'layouts/partials/feedback' %>
+        <%= render partial: 'layouts/partials/footer' %>
+      </div>
+    </div>   
   </body>
 </html>

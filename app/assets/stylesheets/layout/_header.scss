@@ -1,49 +1,32 @@
-.Nxd-main-header {
-  background: $blue-darker;
-  color: $white;
-  padding: $unit2 0;
+.Nxd-header {
+  height: 111px;
+  width: 100%;
+  z-index: 700;
 
   @media #{$S-only} {
-    text-align: center;
-    padding: $spacing*0.75 0 $spacing*0.5 0;
-  };
-
-  .container {
-    display: flex;
-    align-items: center;
-    flex-flow: row wrap;
-
-    @media #{$S-only} {
-      flex-flow: column;
-    }
+    height: auto;
   }
+}
 
-  nav {
-    flex: 1;
+.Nxd-header__main {
+  align-items: center;
+  background: $blue-darker;
+  color: $white;
+  display: flex;
+  height: 55px;
+  flex: 0 0 100%;
+  padding: $unit2;
+  transition: height .5s;
+
+  @media #{$S-only} {
+    justify-content: space-between;
     text-align: center;
+    padding: 0 $unit2;
 
-    @media #{$M-plus} {
-      white-space: nowrap;
-      text-align: right;
+    .Nxd-scroll-minify & {
+      height: 0;
+      overflow: hidden;     
     }
-
-    a {
-      display: inline-block;
-      margin: $unit2 $unit1;
-      color: rgba($white, 80);
-
-      @media #{$M-plus} {
-         margin: $unit1 $unit3 $unit1 0;
-      }
-
-      &:hover {
-        color: $white;
-      }
-    }
-
-    @media #{$S-only} {
-      float: none;
-    };
   }
 
   .Vlt-btn {
@@ -52,10 +35,18 @@
 }
 
 .Nxd-logo {
-  flex: 1;
-  position: relative;
   display: flex;
-  align-items: center;
+  max-width: 100%;
+  flex: 1 0 0;
+
+  @media #{$M-plus} {
+    position: relative;
+    align-items: center;
+  }
+
+  @media #{$S-only} {
+    flex: 0 0 auto;
+  }
 
   a:nth-child(2) {
     flex-shrink: 0;
@@ -94,43 +85,63 @@
       top: 7px;
     }
   }
-
 }
 
-#subnav {
-  background: $white;
-  margin-bottom: 40px;
-  box-shadow: $shadow-soft;
+.Nxd-header__nav {
+  display: flex;
+  text-align: right;
 
-  .container {
-    position: relative;
+  @media #{$M-plus} {
+    white-space: nowrap;
+    text-align: right;
   }
+
+  a {
+    display: inline-block;
+    margin: $unit2 $unit1;
+    color: rgba($white, 80);
+
+    @media #{$M-plus} {
+       margin: $unit1 $unit3 $unit1 0;
+    }
+
+    &:hover {
+      color: $white;
+    }
+  }
+
+  @media #{$S-only} {
+    text-align: right
+  }
+}
+
+.Nxd-header__sub {
+  align-items: center;
+  background: $white;
+  box-shadow: $shadow-soft;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 $unit2 4px;
+  position: relative;
 
   form {
     float: right;
     min-width: 350px;
-  }
 
-  @include tablet {
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      > a {
-        margin-right: 0;
-        text-align: center;
-        flex-grow: 1;
+    @media only screen and (max-width: 876px) {
+      min-width: auto;
+      position: absolute;
+      right: $unit1;
+      top: 0;
+
+      input {
+        transition: width .5s;
+        width: 0;
       }
 
-      form {
-        flex-grow: 1;
-        margin: 0;
-        margin-bottom: 10px;
-        min-width: 150px;
-        input {
-          float: none;
-          width: 100%;
-        }
+      .Nxd-search-expanded input {
+        width: 350px;
       }
     }
-  };
+  }
 }

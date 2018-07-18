@@ -14,20 +14,15 @@ body {
   // }
 }
 
-.wrapper {
-  flex: 1;
-  transition: filter 400ms ease-in-out;
+.Nxd-template {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+}
 
-  &--tint {
-    background: $ice;
-  }
-
-  &--blur {
-    filter: blur(3px);
-
-    @media #{$S-only} {
-      filter: none;
-    }
+@media #{$M-plus} {
+  .Nxd-main {
+    height: calc(100vh - 111px);
   }
 }
 

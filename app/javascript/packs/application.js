@@ -13,7 +13,6 @@ import { TweenLite, CSSPlugin } from 'gsap'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Collapsible from './Collapsible'
-import Scrollspy from './Scrollspy'
 import GithubCards from './GithubCards'
 import TabbedExamples from './TabbedExamples'
 import Format from './Format'
@@ -42,12 +41,13 @@ turbolinksAnimate()
 let refresh = () => {
   Notices()
   GithubCards()
-  Scrollspy()
   JsSequenceDiagrams()
   new TabbedExamples
   new Format
   Modals()
   APIStatus()
+  Scroll()
+  Navigation()
 
   if (document.getElementById('SearchComponent')) {
     ReactDOM.render(<Search/>, document.getElementById('SearchComponent'))
