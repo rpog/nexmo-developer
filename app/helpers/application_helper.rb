@@ -119,7 +119,7 @@ module ApplicationHelper
           if context.first[:children]
             ss << "<a class='Vlt-sidemenu__trigger'>#{options['svg'] && options['svgColor'] ? '<svg class="Vlt-' + options['svgColor'] + '"><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-' + options['svg'] + '" /></svg>' : ''} <span class='Vlt-sidemenu__label'>#{normalised_title(child)}</span></a>"
           else 
-            ss << "<p class='Vlt-sidemenu__trigger'>#{options['svg'] && options['svgColor'] ? '<svg class="Vlt-' + options['svgColor'] + '"><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-' + options['svg'] + '" /></svg>' : ''} <span class='Vlt-sidemenu__label'>#{normalised_title(child)}</span></p>"
+            ss << "<h5 class='Vlt-sidemenu__title'>#{normalised_title(child)}</h5>"
           end
         elsif options['link'] == false
           ss << "<span>#{normalised_title(child)}</span>"
