@@ -50,7 +50,7 @@ gem 'banzai', '~> 0.1.2'
 gem 'foundation-rails', '6.4.1.2'
 
 # Nokogiri (鋸) is an HTML, XML, SAX, and Reader parser. Among Nokogiri's many features is the ability to search documents via XPath or CSS3 selectors.
-gem 'nokogiri', '1.8.1'
+gem 'nokogiri', '1.8.2'
 
 # Autoload dotenv in Rails.
 gem 'dotenv-rails', groups: [:development, :test]
@@ -83,10 +83,10 @@ gem 'icalendar', require: false
 #
 # Development & staging environments may use a dependency from a repo:
 #
-# gem 'oas_parser', github: 'Nexmo/oas_parser', branch: 'oneof-properties'
+# gem 'oas_parser', github: 'Nexmo/oas_parser', branch: 'definition-path-methods'
 #
 # Otherwise use a published gem:
-gem 'oas_parser', '0.11.1'
+  gem 'oas_parser', '0.11.2'
 
 # Generate JSON strings from Ruby objects with flexible formatting options.
 gem 'neatjson'
@@ -122,7 +122,7 @@ gem 'groupdate', '3.2.0'
 gem 'gravatar_image_tag', '1.2.0'
 
 # Provides Open API Spec 3 definitions for Nexmo APIs
-gem 'nexmo_api_specification', '0.11.1'
+gem 'nexmo_api_specification', '0.11.5'
 
 # Really simple JSON and XML parsing, ripped from Merb and Rails.
 gem 'crack', '0.4.3'
@@ -157,9 +157,9 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'guard-livereload', '~> 2.5', require: false
   gem 'guard-rspec'
-
-  # Share git hooks in Ruby projects among all the collaborators automatically, without them having to do anything
-  gem 'git-hookshot', git: 'https://github.com/brandonweiss/git-hookshot.git'
+  # Much nicer error experience, including repl
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

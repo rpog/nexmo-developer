@@ -34,8 +34,8 @@ class DocumentationConstraint
     { code_language: Regexp.new(linkable_languages.compact.join('|')) }
   end
 
-  def self.product
-    products = [
+  def self.product_list
+    [
       'voice',
       'messaging',
       'verify',
@@ -45,8 +45,10 @@ class DocumentationConstraint
       'stitch',
       'messages-and-workflows-apis',
     ]
+  end
 
-    { product: Regexp.new(products.compact.join('|')) }
+  def self.product
+    { product: Regexp.new(product_list.compact.join('|')) }
   end
 
   def self.product_with_parent_list

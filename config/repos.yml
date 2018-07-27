@@ -43,5 +43,6 @@ nexmo-community/nexmo-python-quickstart:
   repo: nexmo-community/nexmo-python-quickstart
   # path: ../nexmo-python-quickstart
 nexmo/conversation-docs:
-  branch: master
-  github: nexmo/conversation-docs
+  repo: nexmo/conversation-docs
+nexmo/curl-building-blocks:
+  repo: nexmo/curl-building-blocks

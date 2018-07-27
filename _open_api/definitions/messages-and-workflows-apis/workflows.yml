@@ -2,7 +2,7 @@ openapi: "3.0.0"
 info:
   version: 0.3.0
   title: Workflows API
-  description: 'The Workflows API enables the developer to specify a multiple message workflow. A workflow follows a template. The first one we are adding is the failover template. The failover template instructs the messaging API to first send a message to the specified channel. If that message fails immediately or if the condition_status is not reached within the given time period the next message is sent. The developer will also recieve status webhooks from the messages resource for each delivery and read event. This API is currently in Developer Preview and you will need to [request access](https://www.nexmo.com/products/messages) to use it.'
+  description: 'The Workflows API enables the developer to specify a multiple message workflow. A workflow follows a template. The first one we are adding is the failover template. The failover template instructs the Messages API to first send a message to the specified channel. If that message fails immediately or if the condition_status is not reached within the given time period the next message is sent. The developer will also receive status webhooks from the messages resource for each delivery and read event. This API is currently in Developer Preview and you will need to [request access](https://www.nexmo.com/products/messages) to use it.'
   x-label: Developer Preview
 servers:
   - url: https://api.nexmo.com/beta
@@ -11,6 +11,7 @@ paths:
     post:
       security:
         - bearerAuth: []
+        - basicAuth: []
       summary: Create a workflow
       operationId: createWorkflow
       requestBody:
@@ -74,6 +75,9 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+    basicAuth:
+      type: http
+      scheme: basic
 
   schemas:
 
@@ -147,7 +151,7 @@ components:
 
             **Messenger**: This value should be the `to.id` value you received in the inbound messenger event.
 
-            **Viber**: This is your Service Message ID given to you by Nexmo Account Manager. To find out more please visit [nexm.com/products/messages](https://www.nexmo.com/products/messages).
+            **Viber**: This is your Service Message ID given to you by Nexmo Account Manager. To find out more please visit [nexmo.com/products/messages](https://www.nexmo.com/products/messages).
 
             **SMS**: This value is not required.
           type: string
@@ -178,7 +182,9 @@ components:
 
                 **Messenger**: supports all types.
 
-                **SMS** or **Viber**  only support `text`.
+                **Viber Service Messages**: supports `image` and `text`.
+
+                **SMS**: supports `text`.
               type: string
               enum:
                 - text
@@ -209,12 +215,34 @@ components:
         viber_service_msg:
           type: object
           properties:
+            category:
+              description: 'The use of different category tags enables the business to send messages for different use cases. For Viber Service Messages the first message sent from a business to a user must be personal, informative and a targeted message - not promotional. By default Nexmo sends the `transaction` category to Viber Service Messages.'
+              type: string
+              example: 'transaction'
+              enum:
+                - transaction
+                - promotion
             ttl:
               description: 'Only valid for Viber Service Messages. Set the time-to-live of message to be delivered in seconds. i.e. if the message is not delivered in 600 seconds then delete the message.'
               type: integer
               example: 600
               minimum: 30
               maximum: 86400
+        messenger:
+          type: object
+          properties:
+            category:
+              description: 'The use of different category tags enables the business to send messages for different use cases. For Facebook Messenger they need to comply with their [Messaging Types policy]( https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types). Nexmo maps our `category` to their `messaging_type`. If `message_tag` is used, then an additional `tag` for that type is mandatory. By default Nexmo sends the `response` category to Facebook Messenger.'
+              type: string
+              example: 'message_tag'
+              enum:
+                - response
+                - update
+                - message_tag
+            tag:
+              description: ‘A full list of the possible tags is available on [developers.facebook.com](https://developers.facebook.com/docs/messenger-platform/send-messages/message-tags)'
+              type: string
+              example: 'ticket_update'
 
     FailoverProperty:
       description: 'Please note that last message does not have failover attribute inside it. All other messages must contain a failover attribute.'
@@ -245,7 +273,7 @@ components:
         properties:
           url:
             type: string
-            description: The URL of the image attachment.
+            description: 'The URL of the image attachment. `messenger` supports .jpg, .png and .gif. `viber_service_msg` supports .jpg and .png.'
             minLength: 1
             maxLength: 2000
             example: 'https://example.com/image.jpg'
@@ -254,7 +282,7 @@ components:
       properties:
         url:
           type: string
-          description: The URL of the audio attachment.
+          description: 'The URL of the audio attachment. `messenger` supports .mp3.'
           minLength: 1
           maxLength: 2000
           example: 'https://example.com/audio.mp3'
@@ -263,7 +291,7 @@ components:
       properties:
         url:
           type: string
-          description: The URL of the video attachment.
+          description: 'The URL of the video attachment. `messenger` supports .mp4'
           minLength: 1
           maxLength: 2000
           example: 'https://example.com/video.mp4'
@@ -272,7 +300,7 @@ components:
       properties:
         url:
           type: string
-          description: The URL of the file attachment.
+          description: 'The URL of the file attachment. `messenger` supports a wide range of attachments including .zip, .csv and .pdf'
           minLength: 1
           maxLength: 2000
           example: 'https://example.com/file.zip'
@@ -314,7 +342,7 @@ components:
         - workflow_uuid
       type: object
       properties:
-        worflow_uuid:
+        workflow_uuid:
           description: 'The parent ID for workflow request.'
           type: string
           example: 'aaaaaaaa-bbbb-cccc-dddd-0123456789ab'
