@@ -124,15 +124,36 @@
   padding: 0 $unit2 4px;
   position: relative;
 
+  &__menu {
+    flex: 1;
+
+    a {
+      display: inline-block;
+    }
+
+    @media #{$S-only} {
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  }
+
   form {
     float: right;
     min-width: 350px;
 
     @media only screen and (max-width: 876px) {
       min-width: auto;
-      position: absolute;
-      right: $unit1;
-      top: 0;
+      float: none;
+      margin-top: -$unit1;
+      margin-bottom: -$unit1;
+      margin-right: -$unit2;
+      flex-shrink: 0;
+
+      .Vlt-input input {
+        border: 0;
+        border-left: 1px solid $grey;
+        border-radius: 0;
+      }
 
       input {
         transition: width .5s;

@@ -29,7 +29,7 @@
     <% if group['schema'] %>
       <% group['schema'].each do |format, schema| %>
         <div class="js-format" data-format="<%= format %>">
-            <h4>Example Model</h4>
+            <h5>Example Model</h5>
             <%= ResponseParserDecorator.new(schema).html(format, xml_options: schema['xml']) %>
         </div>
       <% end %>

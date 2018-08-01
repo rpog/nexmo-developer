@@ -25,36 +25,24 @@
 	padding-top: 0;
 	padding-right: $unit2;
 
+	@media #{$S-only} {
+		padding-left: $unit2;
+	}
+
 	&__code {
-		background: $black;
-		border-bottom: 1px solid $grey-dark;
+		background: $grey-light;
+		border-bottom: 1px solid $grey-lighter;
 		padding-top: $unit3;
 
-		pre {
-			background: rgba($white, 0.1);
-		}
-
-		.tabs {
-			background: $black;
-			width: 100%;
+		h4,
+		h5 {
+			color: $grey-darker;
 		}
 
 		.tabs-content {
 			background: transparent;
 			border: 0;
-			padding: $unit2 0 0;
-		}
-
-		h1,
-		h2,
-		h3,
-		h4,
-		h5,
-		h6,
-		.Vlt-tabs__link,
-		.tabs-title a,
-		p {
-			color: $white;
+			padding: 0 0 0;
 		}
 
 		.tabs {
@@ -62,10 +50,37 @@
 			display: none;
 		}
 
-		&--install {
+		&__header {
+			margin: -#{$unit3} -#{$unit2} #{$unit2} -#{$unit2};
+
 			& > .tabs {
 				// horrible hack but the system is broken
 				display: inline-block;
+				border-bottom: 1px solid $grey;
+				padding-left: $unit2;
+				width: 100%;
+				background: $grey-light;
+			}
+
+			.Vlt-native-dropdown {
+				margin-right: $unit2;
+				float: right;
+			}
+
+			&--sticky {
+				position: fixed;
+				top: 135px;
+				width: 27.5%;
+				z-index: 1000;
+
+				@media #{$S-only} {
+					left: 0;
+					padding: 0 $unit1;
+					top: 52px;
+					width: 100vw;
+					margin: 0;
+
+				}
 			}
 		}
 
@@ -80,23 +95,14 @@
 	&__docs {
 		padding-top: $unit5;
 
+		@media #{$M-plus} {
+			border-bottom: 1px solid $grey-light;
+		}
+
 		.Vlt-tooltip {
 			white-space: nowrap;
 		}
 	}
 
-	.tabs--sticky {
-		position: fixed;
-		top: 111px;
-		width: max-content;
-		z-index: 1000;
-
-		@media #{$S-only} {
-			left: 0;
-			padding: 0 $unit1;
-			top: 100px;
-			width: 100%;
-		}
-	}
 }
 

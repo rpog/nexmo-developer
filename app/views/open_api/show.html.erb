@@ -26,27 +26,33 @@
         </div>
       </div>
       <div class="Vlt-col Vlt-col--1of3 Nxd-api__code Nxd-api__code--install">
-        <% if @definition_initialization_config && @definition_initialization_content %>
-          <ul class="tabs tabs--code" data-tabs>
-            <% if @definition_initialization_config['tabs'] %>
-              <% @definition_initialization_config['tabs'].each_with_index do |tab, index| %>
-                <li
-                  class="tabs-title <%= index.zero? ? 'is-active' : '' %>"
-                  language-linkable="false"
-                  data-language="<%= tab %>"
-                  data-language-type="<%= CodeLanguageResolver.find(tab).type %>"
-                ><a href="#<%= tab %>"><%= CodeLanguageResolver.find(tab).label %></a></li>
-              <% end %>
-            <% end %>
-          </ul>
+        
+          <% if @definition_initialization_config && @definition_initialization_content %>
+            <div class="Nxd-api__code__header">
+              <ul class="tabs tabs--code" data-tabs>
+                <% if @definition_initialization_config['tabs'] %>
+                  <% @definition_initialization_config['tabs'].each_with_index do |tab, index| %>
+                    <li
+                      class="tabs-title <%= index.zero? ? 'is-active' : '' %>"
+                      language-linkable="false"
+                      data-language="<%= tab %>"
+                      data-language-type="<%= CodeLanguageResolver.find(tab).type %>"
+                    ><a href="#<%= tab %>"><%= CodeLanguageResolver.find(tab).label %></a></li>
+                  <% end %>
+                <% end %>
+              </ul>
 
-          <% if @definition_initialization_config && @definition_initialization_config['formats'] %>
-            <select class="js-format-selector">
-              <% @definition_initialization_config['formats'].each do |value, name| %>
-                <option value="<%= value %>"><%= name %></option>
-              <% end %>
-            </select>
-          <% end %>
+              <% if @definition_initialization_config && @definition_initialization_config['formats'] %>
+                <div class="Vlt-native-dropdown">
+                  <select class="js-format-selector">
+                    <% @definition_initialization_config['formats'].each do |value, name| %>
+                      <option value="<%= value %>"><%= name %></option>
+                    <% end %>
+                  </select>
+                </div>
+              </div>
+            <% end %>
+         
 
           
           <%= @definition_initialization_content.html_safe %>
@@ -79,7 +85,7 @@
           </div>
         </div>
         <div class="Vlt-col Vlt-col--1of3 Nxd-api__code">
-            <h4>Example response</h4>
+            <h5>Example response</h5>
             <%= ResponseParserDecorator.new(@definition.raw['components']['schemas']['Error']).html %>
         </div>
       </div>

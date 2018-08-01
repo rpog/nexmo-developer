@@ -13,7 +13,7 @@ export default () => {
 
     const $body = $('.Vlt-main');
     const nav = $('.Nxd-header');
-    const codeNav = $('.Nxd-api__code .tabs--code');
+    const codeNav = $('.Nxd-api__code__header');
 
     $body.on('scroll', function(){   
       var scrollTop = $body.scrollTop();
@@ -27,9 +27,9 @@ export default () => {
 
       //api code
       if (scrollTop > 70 && codeNav.length > 0) {
-        codeNav.addClass('tabs--sticky');
+        codeNav.addClass('Nxd-api__code__header--sticky');
       } else if(codeNav.length > 0) {
-        codeNav.removeClass('tabs--sticky');
+        codeNav.removeClass('Nxd-api__code__header--sticky');
       }
     });
   })
