@@ -1,8 +1,8 @@
-<div class="Vlt-grid">
+<div class="Vlt-grid <% if !group['schema'] %> Nxd-api--noborder Vlt-article--reverse<% end %>">
   <div class="Vlt-col Vlt-col--2of3 Nxd-api__docs">
     <div>
-      <%= content_tag :h2, group['name'], id: group['name'].parameterize %>
-      <%= content_tag :p, group['description'] %>
+      <%= content_tag :h1, group['name'], id: group['name'].parameterize, class: "Vlt-grey-dark" %>
+      <%= content_tag :p, group['description'], class: "Vlt-grey-darker" %>
 
       <% if group['schema'] %>
         <% group['schema'].each do |format, schema| %>

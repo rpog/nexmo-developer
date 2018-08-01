@@ -93,10 +93,11 @@
 	}
 
 	&__docs {
-		padding-top: $unit5;
+		padding-top: $unit3;
 
 		@media #{$M-plus} {
 			border-bottom: 1px solid $grey-light;
+			padding-top: $unit5;
 		}
 
 		.Vlt-tooltip {
@@ -104,5 +105,20 @@
 		}
 	}
 
+	&--noborder {
+		margin-bottom: -$unit2;
+		
+		.Nxd-api__docs {
+			border: 0;
+		}
+
+		.Nxd-api__code {
+			border: 0;
+
+			@media #{$S-only} {
+				display: none;
+			}
+		}
+	}
 }
 
