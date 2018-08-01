@@ -14,8 +14,8 @@
       <%= navigation_from_content(content: @content, title: @document_title) %>
     </nav>
     <div class="Vlt-main Vlt-main--light Nxd-main" id="primary-content" data-turbolinks="false">   
+      <%= render partial: 'layouts/partials/notices' %>
       <div class="Vlt-card">
-        <%= render partial: 'layouts/partials/notices' %>
         <%= yield %>
         <%= render partial: 'layouts/partials/feedback' %>
         <%= render partial: 'layouts/partials/footer' %>

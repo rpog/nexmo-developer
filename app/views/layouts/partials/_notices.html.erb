@@ -1,5 +1,5 @@
 <% if @notices && @notices.any? %>
-  <div class="Nxd-header-notices container">
+  <div class="Nxd-header-notices">
     <% @notices.each do |id, config| %>
       <% if config['path'].nil? || request.path.match(Regexp.new(config['path'])) %>
         <div class="Vlt-callout Vlt-callout--shoutout" data-notice-dismissible="<%= config['dismissible'] || true %>" data-notice-id="<%= id %>">

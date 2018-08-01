@@ -15,8 +15,8 @@
       </div>
     </nav>
     <div class="Vlt-main Vlt-main--light Nxd-main">
+      <%= render partial: 'layouts/partials/notices' %>
       <div class="Vlt-card" id="primary-content">
-        <%= render partial: 'layouts/partials/notices' %>
         <%= yield %>
         <%= render partial: 'layouts/partials/feedback' %>
         <%= render partial: 'layouts/partials/footer' %>
