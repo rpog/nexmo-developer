@@ -129,6 +129,7 @@
 		// Setting main margins
 
 		.Vlt-sidemenu__title {
+			margin-bottom: 0;
 			padding-left: 20px;
 		}
 
@@ -211,7 +212,7 @@
 			justify-content: space-between;
 			line-height: 1.3;
 			margin: 0;
-			padding: 8px 10px;
+			padding: $unit1 10px;
 			text-decoration: none;
 			transition: background 0.2s;
 
@@ -291,6 +292,7 @@
 				position: absolute;
 			    right: 15px;
 			    top: 7px;
+			    z-index: 2;
 			}
 		}
 
@@ -299,6 +301,24 @@
 		&__link {
 			.Vlt-badge {
 				margin-right: 0;
+			}
+		}
+
+		// Compressed version
+		// For longer menus, it compresses the padding of menu items without icons while leaving the ones with icons the same
+
+		&__list--compressed {
+			.Vlt-sidemenu__link,
+			.Vlt-sidemenu__trigger {
+				padding: $unit0 10px;
+
+				.Vlt-badge {
+					top: 4px;
+				}
+			}
+
+			.Vlt-sidemenu__trigger {
+				margin-bottom: 4px;
 			}
 		}
 	}

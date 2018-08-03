@@ -132,3 +132,15 @@
     width: 100%;
   }
 }
+
+.Nxd-col-stretch {
+  display: flex;
+  align-items: stretch;
+
+  .Vlt-card {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -15,7 +15,7 @@
 				}
 
 				li {
-					margin-left: 2.5rem;
+					margin-left: 28px;
 
 					.Vlt-sidemenu__link,
 					.Vlt-sidemenu__trigger {
@@ -28,6 +28,14 @@
 			.Vlt-sidemenu__trigger {
 				border-radius: 4px;
 				margin-bottom: 5px;
+			}
+
+			.Vlt-sidemenu__list--compressed {
+				.Vlt-sidemenu__link,
+				.Vlt-sidemenu__trigger {
+					margin-bottom: 0;
+					padding: 6px 10px;
+				}
 			}
 		}
 	}
