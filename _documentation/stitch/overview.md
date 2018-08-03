@@ -4,7 +4,7 @@ title: Overview
 
 # Nexmo Stitch Overview [Developer Preview]
 
-Nexmo Stitch is a conversation-centric product consisting of iOS, Android, and JavaScript SDKs and an API. Stitch enables communications across multiple channels including in-app messaging and in-app voice over IP; with PSTN voice coming soon.
+Nexmo Stitch is a conversation-centric product consisting of iOS, Android, and JavaScript SDKs and an API. Stitch enables communications across multiple channels including in-app messaging and in-app voice over IP, in-app voice to PSTN and PSTN to in-app voice, and in-app video.
 
 Enable chat or voice on your mobile or web application with our SDKs so that your users can seamlessly communicate no matter which device they are on.
 
@@ -29,6 +29,18 @@ Enable chat or voice on your mobile or web application with our SDKs so that you
 
 - Group Calls – Configure call settings so users can start a group call by adding participants in real time.
 
+## In-App Video
+
+- Nexmo In-App Video uses WebRTC and includes all the essentials you need to build a feature rich video experience.
+
+- User Control – Users can control whether their video stream is muted or unmuted.
+
+- Notifications  – Users can be notified when other members have enabled a video channel.
+
+- Group Calls – Configure conversations so users can start a group video call by adding participants in real time.
+
+- Screen Sharing – Allow users to share their screens
+
 ## Participating in the developer preview
 
 This Developer Preview will focus on the In-App Messaging and Voice capabilities. During this program there will be frequent releases with new features and bug fixes based on your feedback. During the preview it is possible (and probable) that there shall be breaking changes to the SDK and API but these will be explicitly communicated beforehand.
@@ -44,24 +56,26 @@ Read more about:
 
 - [In-App Messaging](/stitch/in-app-messaging/overview)
 - [In-App Voice](/stitch/in-app-voice/overview)
+- [In-App Video](/stitch/in-app-video/overview)
 
 ## SDK Documentation
 
+
 <div class="Vlt-grid">
   <div class="Vlt-col Vlt-col--center">
-    <a href="/stitch/sdk-documentation/javascript" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
+    <a href="/sdk/stitch/javascript/" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
       <svg class="Vlt-yellow"><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-js"></use></svg>
       JavaScript
     </a>
   </div>
   <div class="Vlt-col Vlt-col--center">
-    <a href="/stitch/sdk-documentation/android" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
+    <a href="/sdk/stitch/android/" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
       <svg class="Vlt-green-light"><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-android"></use></svg>
       Android
     </a>
   </div>
   <div class="Vlt-col Vlt-col--center">
-    <a href="/stitch/sdk-documentation/ios" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
+    <a href="/sdk/stitch/ios/" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
       <svg><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-apple"></use></svg>
       iOS
     </a>
@@ -74,25 +88,3 @@ Read more about:
 * [Nexmo CLI](https://github.com/nexmo/nexmo-cli/tree/beta)
 * [Node.JS and Angular Demo](https://github.com/Nexmo/stitch-demo) with an [Android](https://github.com/Nexmo/stitch-demo-android) client demo
 
-## Find the SDKs online
-
-<div class="Vlt-grid">
-  <div class="Vlt-col Vlt-col--center">
-    <a href="https://www.npmjs.com/package/nexmo-stitch" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
-      <svg><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-open"></use></svg>
-      JavaScript
-    </a>
-  </div>
-  <div class="Vlt-col Vlt-col--center">
-    <a href="https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.nexmo%22%20AND%20a%3A%22stitch%22" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
-      <svg><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-open"></use></svg>
-      Android
-    </a>
-  </div>
-  <div class="Vlt-col Vlt-col--center">
-    <a href="https://github.com/nexmo/stitch-ios-sdk" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
-      <svg><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-open"></use></svg>
-      iOS
-    </a>
-  </div>
-</div>
