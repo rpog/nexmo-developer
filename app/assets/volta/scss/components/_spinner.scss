@@ -38,6 +38,11 @@
   &--middle {
     vertical-align: middle;
   }
+
+  &--center {
+    display: block;
+    margin: 0 auto;
+  }
 }
 
 @keyframes spinner {
@@ -50,54 +55,3 @@
   }
 }
 
-
-.cp-spinner {
-    box-sizing: border-box;
-    display: inline-block;
-    height: 48px;
-    position: relative;
-    width: 48px;
-}
-
-.cp-round:before {
-    border-bottom: solid 6px $grey-light;
-    border-left: solid 6px $grey-light;
-    border-radius: 50%;
-    border-right: solid 6px $grey-light;
-    border-top: solid 6px $grey-light;
-    box-sizing: border-box;
-    content: ' ';
-    display: inline-block;
-    height: 48px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 48px;
-}
-
-.cp-round:after {
-    animation: cp-round-animate 1s ease-in-out infinite;
-    border-bottom: solid 6px transparent;
-    border-left: solid 6px transparent;
-    border-radius: 50%;
-    border-right: solid 6px transparent;
-    border-top: solid 6px $teal;
-    box-sizing: border-box;
-    content: ' ';
-    display: inline-block;
-    height: 48px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 48px;
-}
-
-@keyframes cp-round-animate {
-    0% {
-        transform: rotate(0);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}

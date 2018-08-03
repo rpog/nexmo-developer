@@ -5,6 +5,10 @@
 	margin-left: -$unit2;
 	margin-right: -$unit2;
 
+	&--center {
+		justify-content: center;
+	}
+
 	&--nowrap {
 		flex-flow: row;
 	}

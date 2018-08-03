@@ -52,10 +52,6 @@
 		padding: 2px 6px;
 	}
 
-	& + div.Vlt-badge {
-		margin-left: 0;
-	}
-
 	p & {
 		margin: 0 5px;
 	}
@@ -105,12 +101,16 @@
 		}
 	}
 
-	+ .Vlt-badge {
+	& + .Vlt-badge {
 		margin-left: $unit1;
 	}
 
 	&--margin {
 		margin-bottom: $unit1;
 		margin-top: $unit1;
+	}
+
+	&--middle {
+		vertical-align: middle;
 	}
 }

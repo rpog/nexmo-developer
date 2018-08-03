@@ -98,11 +98,13 @@
 	}
 
 	&--nohighlight {
-		tbody {
-			tr {
-				&:hover {
-					> td {
-						background-color: transparent;
+		table {
+			tbody {
+				tr {
+					&:hover {
+						> td {
+							background-color: transparent;
+						}
 					}
 				}
 			}

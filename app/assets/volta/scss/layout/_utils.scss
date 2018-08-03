@@ -1,3 +1,27 @@
+.Vlt-center {
+	text-align: center;
+}
+
+.Vlt-right {
+	text-align: right;
+}
+
+.Vlt-left {
+	text-align: left;
+}
+
+.Vlt-truncate {
+	display: block;
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	&--inline {
+		display: inline;
+	}
+}
+
 hr {
 	border-bottom: 0;
 	border-top: 1px solid $grey-light;
@@ -7,6 +31,10 @@ hr {
 
 .hr--tall {
 	margin: $unit4 0;
+}
+
+.hr--short {
+	margin: $unit2 0;
 }
 
 .Vlt-icon {

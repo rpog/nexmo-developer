@@ -14,7 +14,7 @@
 		transform: translate(-100vw, 0);
 		transition: transform 0.2s;
 		width: 80vw;
-		z-index: $z-index-sidenav;
+		z-index: $z-index-sidenav-mobile;
 
 		&_visible {
 			box-shadow: 4px 0 12px rgba($black, 0.15), 20vw 0 0 rgba($black, 0.15);

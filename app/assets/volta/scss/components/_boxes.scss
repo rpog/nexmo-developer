@@ -7,8 +7,10 @@
 	text-align: left;
 	width: 100%;
 
-	.Vlt-btn {
-		margin-bottom: 0;
+	&__cta {
+		.Vlt-btn {
+			margin-bottom: 0;
+		}
 	}
 
 	h2,

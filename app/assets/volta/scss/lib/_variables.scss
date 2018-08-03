@@ -84,6 +84,7 @@ $z-index-dropdowns: 500;
 $z-index-flash: 1000;
 $z-index-modals: 900;
 $z-index-tooltips: 600;
-$z-index-sidenav: 800; // Sidenav needs to be higher than the header for mobile
+$z-index-sidenav: 650;
+$z-index-sidenav-mobile: 800; // Sidenav needs to be higher than the header for mobile
 $z-index-sidenav-mobile-trigger: 650; // Sidenav button on mobile needs to be lower than the header for mobile
 $z-index-header: 700;

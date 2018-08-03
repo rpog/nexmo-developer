@@ -32,6 +32,7 @@
 
 .Vlt-input,
 .Vlt-select,
+.Vlt-custom-select,
 .Vlt-textarea {
 	max-width: 100%;
 	position: relative;
@@ -39,7 +40,8 @@
 
 .Vlt-input input,
 .Vlt-select select,
-.Vlt-textarea textarea {
+.Vlt-textarea textarea,
+.Vlt-custom-select__input {
 	appearance: none; // prevents box shadow on iOS
 	background: $white;
 	border: 1px solid $grey;
@@ -219,58 +221,69 @@
 	}
 }
 
-.Vlt-select {
-	select {
-		appearance: none;
-		cursor: pointer;
-		padding-right: 42px;
-		text-indent: 1px;
-		text-overflow: '';
-
-		&::-ms-expand {
-		    display: none;
-		}
-	}
+.Vlt-select,
+.Vlt-custom-select {
 
 	&:after {
 		@extend %select-arrow;
 	}
 }
 
+.Vlt-select select,
+.Vlt-custom-select__input {
+	appearance: none;
+	cursor: pointer;
+	padding-right: 42px;
+	text-indent: 1px;
+	text-overflow: '';
+
+	&::-ms-expand {
+	    display: none;
+	}
+}
+
 .Vlt-form__group {
-	@media #{$M-plus} {
-		align-items: flex-end;
-		display: flex;
-		flex-flow: row wrap;
+	align-items: flex-end;
+	display: flex;
+	flex-flow: row wrap;
 
-		.Vlt-form__element {
-			margin-right: $unit1;
+	.Vlt-form__element {
+		margin-right: $unit1;
 
-			& + .Vlt-form__element {
-				margin-left: $unit1;
-			}
-		}
-
-		.Vlt-btn {
-			margin-bottom: $unit1;
+		& + .Vlt-form__element {
 			margin-left: $unit1;
 		}
+	}
 
-		.Vlt-form__element__error,
-		.Vlt-form__element__hint {
-			flex: 0 0 100%;
-			margin-bottom: $unit0;
-		}
+	.Vlt-btn {
+		margin-bottom: $unit1;
+		margin-left: $unit1;
+	}
 
-		& + .Vlt-form__group,
-		& + .Vlt-form__element {
-			margin-top: 0; // This ensures vertical spacing consistency
+	.Vlt-form__element__error,
+	.Vlt-form__element__hint {
+		flex: 0 0 100%;
+		margin-bottom: $unit0;
+	}
+
+	& + .Vlt-form__group,
+	& + .Vlt-form__element {
+		margin-top: 0; // This ensures vertical spacing consistency
+	}
+
+	&--M-plus {
+		@media #{$S-only} {
+			display: block;
 		}
 	}
 
 	&--inline {
-		@media #{$M-plus} {
-			display: inline-flex;
+		display: inline-flex;
+	}
+
+	&--stretch {
+		.Vlt-form__element {
+			flex: auto;
 		}
 	}
 }
@@ -349,6 +362,10 @@
 				margin-left: $unit2;
 			}
 		}
+	}
+
+	.Vlt-dropdown__btn {
+		margin: 0;
 	}
 }
 
@@ -575,9 +592,11 @@
 
 	.Vlt-input,
 	.Vlt-select,
+	.Vlt-custom-select,
 	.Vlt-textarea {
 		input,
-		select {
+		select,
+		.Vlt-custom-select__input {
 			height: 5rem;
 			padding-left: 13px;
 			padding-top: 14px;
@@ -603,7 +622,8 @@
 		}
 	}
 
-	.Vlt-select {
+	.Vlt-select,
+	.Vlt-custom-select {
 		&:after {
 			height: 26px;
 			margin-top: -13px;

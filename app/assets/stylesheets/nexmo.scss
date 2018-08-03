@@ -66,7 +66,6 @@ $font-family: 'Lato', sans-serif;
 @import "../volta/scss/components/card";
 @import "../volta/scss/components/badge";
 @import "../volta/scss/components/color-classes";
-@import "../volta/scss/components/other-elements";
 @import "../volta/scss/components/boxes";
 @import "../volta/scss/components/form-elements";
 @import "../volta/scss/components/spinner";
@@ -79,6 +78,7 @@ $font-family: 'Lato', sans-serif;
 @import "../volta/scss/components/dropdowns";
 
 @import "../volta/scss/layout/article";
+@import "../volta/scss/layout/utils";
 
 @import "../volta/scss/templates/volta-templates";
 
