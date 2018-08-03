@@ -1,11 +1,13 @@
-<h3 class="collapsible">
-    <a class="js-collapsible" data-collapsible-id="<%= id %>">
-        Install dependencies
-    </a>
-</h3>
+<div class="Vlt-accordion__trigger Nxd-accordion" data-collapsible-id="<%= id %>">
+	<h4>
+	        Install dependencies
+	</h4>
+</div>
 
-<div id="<%= id %>" class="collapsible-content" style="display: none;">
-    <p><%=deps['text']%></p>
-    <pre class="highlight bash"><code><%=deps['code']%></code></pre>
+<div id="<%= id %>" class="Vlt-accordion__content">
+	<div class="Vlt-box Vlt-box--lesspadding">
+	    <p><%=deps['text']%></p>
+	    <pre class="highlight bash"><code><%=deps['code']%></code></pre>
+	</div>
 </div>
 

@@ -12,7 +12,8 @@ class HeadingFilter < Banzai::Filter
       parameterized_heading = parameterized_heading_without_collision(heading)
       heading['id'] = parameterized_heading
       heading['data-id'] = SecureRandom.hex
-      heading['class'] = 'Vlt-title--icon'
+      heading['class'] = heading[:class]
+      heading['class'] += ' Vlt-title--icon'
     end
 
     @document.to_html
