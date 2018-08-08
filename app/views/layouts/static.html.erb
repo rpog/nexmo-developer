@@ -13,7 +13,7 @@
       <% end %>
       <%= navigation_from_content(content: @content, title: @document_title) %>
     </nav>
-    <div class="Vlt-main Vlt-main--light Nxd-main" id="primary-content" data-turbolinks="false">   
+    <div class="Vlt-main Vlt-main--light Nxd-main" id="primary-content" data-turbolinks="false" tabindex="2">   
       <%= render partial: 'layouts/partials/notices' %>
       <div class="Vlt-card">
         <%= yield %>

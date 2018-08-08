@@ -6,7 +6,7 @@
     <%= render partial: 'layouts/partials/header' %>
     <div 
     <nav class="Vlt-sidenav Vlt-sidenav--light" id="Vlt-sidenav" data-turbolinks-permanent>
-      <div class="Vlt-sidenav__scroll">
+      <div class="Vlt-sidenav__scroll" tabindex="1">
         <% begin %>
           <%= render partial: "layouts/partials/#{@side_navigation}" %>
         <% rescue ActionView::MissingTemplate %>
@@ -14,7 +14,7 @@
         <% end %>
       </div>
     </nav>
-    <div class="Vlt-main Vlt-main--light Nxd-main">
+    <div class="Vlt-main Vlt-main--light Nxd-main" tabindex="2">
       <%= render partial: 'layouts/partials/notices' %>
       <div class="Vlt-card" id="primary-content">
         <%= yield %>
