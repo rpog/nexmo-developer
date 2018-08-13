@@ -34,6 +34,48 @@ paths:
       operationId: listConversations
       x-group: conversation
       summary: List conversations
+      parameters:
+        - name: name
+          in: query
+          schema:
+            example: 'nexmo-conference-standard'
+            type: string
+            description: Unique name (within the same application) for the conversation.
+        - name: date_start
+          in: query
+          schema:
+            example: '2020-01-01 12:00:00'
+            type: string
+            format: dateTime
+            description: Return the records that occurred after this point in time.
+        - name: date_end
+          in: query
+          schema:
+            example: '2020-01-01 12:00:00'
+            type: string
+            format: dateTime
+            description: Return the records that occurred at this point in time.
+        - name: page_size
+          in: query
+          schema:
+            type: number
+            minimum: 1
+            maximum: 100
+        - name: record_index
+          in: query
+          schema:
+            type: number
+            minimum: 0
+        - name: order
+          in: query
+          schema:
+            type: string
+            description: 'Return the records in ascending or descending order.'
+            enum:
+            - asc
+            - desc
+            - ASC
+            - DESC
       responses:
         '200':
           $ref: '#/components/responses/ConversationsListed'
@@ -46,6 +88,7 @@ paths:
         in: path
         required: true
         description: Conversation ID
+        example: CON-f972836a-550f-45fa-956c-12a2ab5b7d22
         schema:
           type: string
     put:
@@ -89,6 +132,7 @@ paths:
         in: path
         required: true
         description: Conversation ID
+        example: CON-f972836a-550f-45fa-956c-12a2ab5b7d22
         schema:
           type: string
     post:
@@ -125,6 +169,7 @@ paths:
         in: path
         required: true
         description: Conversation ID
+        example: CON-f972836a-550f-45fa-956c-12a2ab5b7d22
         schema:
           type: string
       - name: event_id
@@ -164,6 +209,7 @@ paths:
         in: path
         required: true
         description: Conversation ID
+        example: CON-f972836a-550f-45fa-956c-12a2ab5b7d22
         schema:
           type: string
     get:
@@ -197,12 +243,14 @@ paths:
         in: path
         required: true
         description: Conversation ID
+        example: CON-f972836a-550f-45fa-956c-12a2ab5b7d22
         schema:
           type: string
       - name: member_id
         in: path
         required: true
         description: Member ID
+        example: MEM-00092382-3017-4abb-8306-4bee9e772f7f
         schema:
           type: string
     get:
@@ -242,6 +290,7 @@ paths:
         in: path
         required: true
         description: Conversation ID
+        example: CON-f972836a-550f-45fa-956c-12a2ab5b7d22
         schema:
           type: string
   /users:
@@ -271,6 +320,7 @@ paths:
         in: path
         required: true
         description: User ID
+        example: USR-00092382-3017-4abb-8306-4bee9e772f7f
         schema:
           type: string
     get:
@@ -309,6 +359,7 @@ paths:
         in: path
         required: true
         description: User ID
+        example: USR-00092382-3017-4abb-8306-4bee9e772f7f
         schema:
           type: string
     get:
@@ -337,6 +388,7 @@ paths:
         in: path
         required: true
         description: Leg ID
+        example: 6e99034ce755c5ad7fde645a46d140a4
         schema:
           type: string
     delete:
@@ -792,8 +844,7 @@ components:
     ListConversations:
       discriminator:
         propertyName: ListConversations
-      description: List Conversations Request Payload Object
-      type: object
+      description: List Conversations query parameter
       properties:
         name:
           example: 'nexmo-conference-standard'
@@ -818,7 +869,7 @@ components:
           minimum: 0
         order:
           type: string
-          description: 'Return the records that in ascending or descending order.'
+          description: 'Return the records in ascending or descending order.'
           enum:
             - asc
             - desc
@@ -1510,4 +1561,7 @@ x-groups:
    order: 4
    description: >-
      A leg can be a video call, IP call, or PSTN call that users participate in using multiple platforms. With this endpoint you can retrieve the details about all of the legs that took place in your application.
-  
+   schema:
+     application/json:
+       $ref: '#/components/schemas/Leg'
+
