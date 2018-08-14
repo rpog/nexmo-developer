@@ -29,58 +29,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateConversation'
-    get:
-      x-swagger-router-controller: listConversations
-      operationId: listConversations
-      x-group: conversation
-      summary: List conversations
-      parameters:
-        - name: name
-          in: query
-          schema:
-            example: 'nexmo-conference-standard'
-            type: string
-            description: Unique name (within the same application) for the conversation.
-        - name: date_start
-          in: query
-          schema:
-            example: '2020-01-01 12:00:00'
-            type: string
-            format: dateTime
-            description: Return the records that occurred after this point in time.
-        - name: date_end
-          in: query
-          schema:
-            example: '2020-01-01 12:00:00'
-            type: string
-            format: dateTime
-            description: Return the records that occurred at this point in time.
-        - name: page_size
-          in: query
-          schema:
-            type: number
-            minimum: 1
-            maximum: 100
-        - name: record_index
-          in: query
-          schema:
-            type: number
-            minimum: 0
-        - name: order
-          in: query
-          schema:
-            type: string
-            description: 'Return the records in ascending or descending order.'
-            enum:
-            - asc
-            - desc
-            - ASC
-            - DESC
-      responses:
-        '200':
-          $ref: '#/components/responses/ConversationsListed'
-        '400':
-          $ref: '#/components/responses/ValidationError'
+
 
   '/conversations/{conv_id}':
     parameters:
