@@ -1557,11 +1557,10 @@ x-groups:
       application/json:
         $ref: '#/components/schemas/EventCreated'
   leg:
-   name: "Leg"
-   order: 4
-   description: >-
-     A leg can be a video call, IP call, or PSTN call that users participate in using multiple platforms. With this endpoint you can retrieve the details about all of the legs that took place in your application.
-   schema:
-     application/json:
-       $ref: '#/components/schemas/Leg'
-
+    name: 'Leg'
+    order: 5
+    description: >-
+      A leg can be a video call, IP call, or PSTN call that users participate in using multiple platforms. With this endpoint you can retrieve the details about all of the legs that took place in your application.
+    schema:
+      application/json:
+        $ref: '#/components/schemas/Leg'
