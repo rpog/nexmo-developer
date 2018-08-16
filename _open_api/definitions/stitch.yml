@@ -29,7 +29,58 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateConversation'
-
+    get:
+      x-swagger-router-controller: listConversations
+      operationId: listConversations
+      x-group: conversation
+      summary: List conversations
+      parameters:
+        - name: name
+          in: query
+          schema:
+            example: 'nexmo-conference-standard'
+            type: string
+            description: 'Unique name (within the same application) for the conversation.'
+        - name: date_start
+          in: query
+          schema:
+            example: '2020-01-01 12:00:00'
+            type: string
+            format: dateTime
+            description: 'Return the records that occurred after this point in time.'
+        - name: date_end
+          in: query
+          schema:
+            example: '2020-01-01 12:00:00'
+            type: string
+            format: dateTime
+            description: 'Return the records that occurred at this point in time.'
+        - name: page_size
+          in: query
+          schema:
+            type: number
+            minimum: 1
+            maximum: 100
+        - name: record_index
+          in: query
+          schema:
+            type: number
+            minimum: 0
+        - name: order
+          in: query
+          schema:
+            type: string
+            description: 'Return the records in ascending or descending order.'
+            enum:
+            - asc
+            - desc
+            - ASC
+            - DESC
+      responses:
+        '200':
+          $ref: '#/components/responses/ConversationsListed'
+        '400':
+          $ref: '#/components/responses/ValidationError'
 
   '/conversations/{conv_id}':
     parameters:
@@ -1165,8 +1216,10 @@ components:
       description: Generic Resource
       properties:
         id:
+          description: ID of resource
           type: string
         href:
+          description: Link to resource
           type: string
       required:
         - id
@@ -1217,12 +1270,22 @@ components:
       properties:
         user_id:
           type: string
+          example: USR-00092382-3017-4abb-8306-4bee9e772f7f
         user_name:
           type: string
+          description: The name of the user
+          example: Bob
         member_id:
           type: string
+          description: Member ID
+          example: MEM-00092382-3017-4abb-8306-4bee9e772f7f
         channel:
           type: string
+          enum:
+            - phone
+            - app
+            - sip
+            - websocket
         media:
           type: string
         action:
@@ -1245,16 +1308,29 @@ components:
         id:
           type: string
           description: Member ID
+          example: MEM-00092382-3017-4abb-8306-4bee9e772f7f
         user_id:
           type: string
+          example: USR-00092382-3017-4abb-8306-4bee9e772f7f
         state:
           type: string
+          description: The state that the member is in.
+          enum:
+          - invited
+          - joined
         timestamp:
           type: string
+          description: The time that the member was created.
         channel:
           type: string
+          enum:
+            - phone
+            - app
+            - sip
+            - websocket
         href:
           type: string
+          description: link to the resource
           format: url
       required:
         - id
@@ -1271,6 +1347,11 @@ components:
       properties:
         channel:
           type: string
+          enum:
+            - phone
+            - app
+            - sip
+            - websocket
         action:
           type: string
           enum:
