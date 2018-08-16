@@ -12,7 +12,6 @@ import 'babel-polyfill'
 import { TweenLite, CSSPlugin } from 'gsap'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Collapsible from './Collapsible'
 import GithubCards from './GithubCards'
 import TabbedExamples from './TabbedExamples'
 import Format from './Format'
@@ -32,7 +31,6 @@ import {
   animate as turbolinksAnimate
 } from './Turbolinks'
 
-Collapsible()
 Navigation()
 Scroll()
 turbolinksPreventSamePage()

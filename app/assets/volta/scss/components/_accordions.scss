@@ -16,7 +16,9 @@
 
 .Vlt-accordion {
 	&__trigger {
-		@extend .reset-button;
+		appearance: none;
+		background: none;
+		border: 0;
 		border-bottom: 1px solid rgba($black, 0.1);
 		cursor: pointer;
 		display: flex;

@@ -7,14 +7,10 @@
 'use strict';
 
 Volta.accordion = function () {
-	var _type = {
-		standard: 0,
-		js: 1
-	}
-
 	var _class = {
 		standard: {
 			container: 'Vlt-accordion',
+			containerGroup: 'Vlt-accordion--group',
 			trigger: 'Vlt-accordion__trigger',
 			triggerActive: 'Vlt-accordion__trigger_active',
 			content: 'Vlt-accordion__content',
@@ -32,181 +28,127 @@ Volta.accordion = function () {
 		}
 	}
 
-	function _accordion() {}
+	function Accordion() {}
 
-	_accordion.prototype = {
-		init: function(elementOrId, suppressClickHandler, triggerElem) {
-			var element;
-
-			if(elementOrId.classList) {
-				element = elementOrId;
-			} else if (elementOrId.substring(0, 1) === "#") {
-				element = document.querySelector(elementOrId);
+	Accordion.prototype = {
+		init: function(element, suppressClickHandler, triggerElem) {
+			if(this.isStandard) {
+				this._initStandard(element, suppressClickHandler);
 			} else {
-				element = document.querySelector('#' + elementOrId);
+				this._initJs(element, suppressClickHandler, triggerElem);
 			}
+		},
+		_initStandard: function(element, suppressClickHandler) {
+			var self = this;
 
-			if(Volta._hasClass(element, _class.standard.container)) {
-				this._parent = element;
-				this._triggers = this._parent.querySelectorAll('.' + _class.standard.trigger);
-				this._panels = this._parent.querySelectorAll('.' + _class.standard.content);
+			if(!suppressClickHandler) {
+				element.querySelectorAll('.' + _class.standard.trigger).forEach(function(trigger) {
+					var parent = Volta._closest(trigger, '.' + _class.standard.container, _class.standard.container);
 
-				this._triggerActive = undefined;
-				this._panelOpen = undefined;
-
-				if(!suppressClickHandler) {
-					var _this = this;
-					_this._triggers.forEach(function(trigger) {
+					if(parent && parent == element) {
 						trigger.addEventListener('click', function(){
-							_this.toggle(trigger);
+							self.toggle(trigger);
 						});
-					});
-				}
-			} else {
-				var _this = this;
-				_this._content = element;
-				
-				if(triggerElem) {
-					_this.trigger = triggerElem;
-				} else if(_this._content.dataset.trigger) {
-					var triggerId = _this._content.dataset.trigger;
-					_this.trigger = document.querySelector('#' + triggerId);
-				} else {
-					console.warn("Volta: js accordion trigger missing");
-				}
-
-				if(!suppressClickHandler) {
-					_this.trigger.addEventListener('click', function(){
-						_this.toggle();
-					});
-				}
-
+					}
+				});
 			}
 		},
-		close: function() {
-			if(this.trigger) {
-				this._closeJsAccordion();
+		_initJs: function(element, suppressClickHandler, triggerElem) {
+			this._content = element;
+
+			if(triggerElem) {
+				this.trigger = triggerElem;
+			} else if(this._content.dataset.trigger) {
+				var triggerId = this._content.dataset.trigger;
+				this.trigger = document.querySelector('#' + triggerId);
 			} else {
-				this._closeStandardAccordion(triggerElement);
+				console.warn("Volta: js accordion trigger missing");
+			}
+
+			var self = this;
+			if(!suppressClickHandler && this.trigger) {
+				this.trigger.addEventListener('click', function(){
+					self.toggle();
+				});
 			}
 		},
-		_closeJsAccordion: function() {
-			this.trigger.classList.remove(_class.js.triggerActive);
-			this._content.classList.add(_class.js.contentClosing);
+		close: function(trigger) {
+			var panel = this._content || trigger.nextElementSibling;
+			var trigger = this.trigger || trigger;
+			var classes = this.trigger ? _class.js : _class.standard;
 
-			this._content.style.height = window.getComputedStyle(this._content).height;
-			this._content.offsetHeight; // force repaint
-			this._content.style.height = '0px';
-
-			var _this = this;
-			this._content.addEventListener('transitionend', function closingTransitionEndEvent(event) {
-				if (event.propertyName == 'height') {
-					_this._content.classList.remove(_class.js.contentClosing);
-					_this._content.classList.remove(_class.js.contentOpen);
-					_this._content.style.height = '0px';
-					_this._content.removeEventListener('transitionend', closingTransitionEndEvent, false);
-				}
-			}, { passive: true });
-		},
-		_closeStandardAccordion: function(triggerElement) {
-			var _this = this;
-			var panel = this._panelOpen;
-			this._triggerActive.classList.remove(_class.standard.triggerActive);
-			panel.classList.add(_class.standard.contentClosing);
+			trigger.classList.remove(classes.triggerActive);
+			panel.classList.add(classes.contentClosing);
 
 			panel.style.height = window.getComputedStyle(panel).height;
 			panel.offsetHeight; // force repaint
 			panel.style.height = '0px';
+			panel.classList.remove(classes.contentOpen);
 
-			var _this = this;
+			var self = this;
 			panel.addEventListener('transitionend', function closingTransitionEndEvent(event) {
-				if (event.propertyName == 'height') {
-					panel.classList.remove(_class.standard.contentClosing);
-					panel.classList.remove(_class.standard.contentOpen);
+				if (event.propertyName == 'height' && Volta._hasClass(panel, classes.contentClosing)) {
+					panel.classList.remove(classes.contentClosing);
 					panel.style.height = '0px';
 					panel.removeEventListener('transitionend', closingTransitionEndEvent, false);
 
-					if(triggerElement && triggerElement === _this._triggerActive){
-						_this._triggerActive = undefined;
-						_this._panelOpen = undefined;
+					if(self.isGroup && self._isTriggerActive(trigger,  true)){
+						self._activeGroupTrigger = undefined;
 					}
 				}
-			}, { passive: true });
+			}, { passive: true, once: true });
 		},
-		open: function() {
-			if(this.trigger) {
-				this._openJsAccordion();
-			} else {
-				this._openStandardAccordion(triggerElement);
-			}
+		isOpening: false,
+		_activeGroupTrigger: undefined,
+		_isTriggerActive: function(trigger, match) {
+			return (this.isGroup && this._activeGroupTrigger && (!match || this._activeGroupTrigger === trigger)) || Volta._hasClass(trigger, _class.standard.triggerActive);
 		},
-		_openJsAccordion: function() {
-			this.trigger.classList.add(_class.js.triggerActive);
-			this._content.classList.add(_class.js.contentOpening);
-
-			var startHeight = this._content.style.height;
-			this._content.style.height = 'auto';
-			var endHeight = window.getComputedStyle(this._content).height;
-			this._content.style.height = startHeight;
-			this._content.offsetHeight; // force repaint
-			this._content.style.height = endHeight;
-
-			var _this = this;
-			this._content.addEventListener('transitionend', function openingTransitionEndEvent(event) {
-				if (event.propertyName == 'height') {
-					_this._content.style.height = 'auto';
-					_this._content.classList.remove(_class.js.contentOpening);
-					_this._content.classList.add(_class.js.contentOpen);
-					_this._content.removeEventListener('transitionend', openingTransitionEndEvent, false);
+		open: function(trigger) {
+			if(!this.trigger) {
+				if(this._isTriggerActive(trigger, false)) {
+				this.close(this._activeGroupTrigger || trigger);
 				}
-			}, { passive: true });
-		},
-		_openStandardAccordion: function(triggerElement) {
-			if(this._triggerActive) {
-				this._closeStandardAccordion();
-			}
-			this._triggerActive = triggerElement;
-			this._panelOpen = this._triggerActive.nextElementSibling;
-
-			this._triggerActive.classList.add(_class.standard.triggerActive);
-			this._panelOpen.classList.add(_class.standard.contentOpening);
-
-			var startHeight = this._panelOpen.style.height;
-			this._panelOpen.style.height = 'auto';
-			var endHeight = window.getComputedStyle(this._panelOpen).height;
-			this._panelOpen.style.height = startHeight;
-			this._panelOpen.offsetHeight; // force repaint
-			this._panelOpen.style.height = endHeight;
-
-			var _this = this;
-			this._panelOpen.addEventListener('transitionend', function openingTransitionEndEvent(event) {
-				if (event.propertyName == 'height') {
-					_this._panelOpen.style.height = 'auto';
-					_this._panelOpen.classList.remove(_class.standard.contentOpening);
-					_this._panelOpen.classList.add(_class.standard.contentOpen);
-					_this._panelOpen.removeEventListener('transitionend', openingTransitionEndEvent, false);
+				if(this.isGroup) {
+					this._activeGroupTrigger = trigger;
 				}
-			}, { passive: true });
-		},
-		toggle: function(triggerElement) {
-			if(this.trigger) {
-				this._toggleJsAccordion();
-			} else {
-				this._toggleStandardAccordion(triggerElement);
 			}
+
+			var trig = this.trigger || trigger;
+			var classes = this.trigger ? _class.js : _class.standard;
+			var panel = this._content || trig.nextElementSibling;
+
+			this.isOpening = true;
+
+			trig.classList.add(classes.triggerActive);
+			panel.classList.add(classes.contentOpening);
+
+			var startHeight = panel.style.height;
+			panel.style.height = 'auto';
+			var endHeight = window.getComputedStyle(panel).height;
+			panel.style.height = startHeight;
+			panel.offsetHeight; // force repaint
+			panel.style.height = endHeight;
+
+			var self = this;
+			panel.addEventListener('transitionend', function openingTransitionEndEvent(event) {
+				if (event.propertyName == 'height' && Volta._hasClass(panel, classes.contentOpening)) {
+					panel.style.height = 'auto';
+					panel.classList.remove(classes.contentOpening);
+					panel.classList.add(classes.contentOpen);
+					panel.removeEventListener('transitionend', openingTransitionEndEvent, false);
+					self.isOpening = false;
+				}
+			}, { passive: true, once: true });
 		},
-		_toggleJsAccordion: function() {
-			if(Volta._hasClass(this._content, _class.js.contentOpen)) {
-				this._closeJsAccordion();
-			} else {
-				this._openJsAccordion();
+		toggle: function(trigger) {
+			if(this.isOpening) {
+				return false;
 			}
-		},
-		_toggleStandardAccordion: function(triggerElement) {
-			if(this._triggerActive && this._triggerActive === triggerElement) {
-				this._closeStandardAccordion(triggerElement);
+			if((this.trigger && Volta._hasClass(this._content, _class.js.contentOpen))
+				|| (!this.trigger && this._isTriggerActive(trigger, true))) {
+				this.close(trigger);
 			} else {
-				this._openStandardAccordion(triggerElement);
+				this.open(trigger);
 			}
 		}
 	}
@@ -221,16 +163,33 @@ Volta.accordion = function () {
 	 *
 	 *	@description Create an individual accordion object
 	 *	@param {Element|string} elementOrId Reference to the accordion content element or the id
-	 *	@param {boolean} suppressClickHandler Whether click events should be attached on creation
-	 *	@param {Element} _trigger Private required for legacy accordions
+	 *	@param {Boolean} suppressClickHandler Whether click events should be attached on creation
+	 *	@param {Element} trigger Private required for legacy accordions
+	 *	@param {Boolean} isGroup Private required for legacy accordions
 	 *  @return {Object}
 	 */
-	function create(elementOrId, suppressClickHandler, _trigger) {	
+	function create(elementOrId, suppressClickHandler, trigger, isGroup, isStandard) {
 		if(!elementOrId) {
-			consol.warn("Volta: no parameter supplied to accordion.create()");
-		} 
-		var accordion = Object.create(_accordion.prototype, {});
-		accordion.init(elementOrId, suppressClickHandler, _trigger);
+			console.warn("Volta: no parameter supplied to accordion.create()");
+		}
+		var accordion = Object.create(Accordion.prototype, {});
+		var element = getElement(elementOrId);
+
+		Object.defineProperties(accordion, {
+			'isStandard': {
+				value: isStandard || Volta._hasClass(element, _class.standard.container),
+				writable: false
+			}
+		});
+
+		Object.defineProperties(accordion, {
+			'isGroup': {
+				value: isGroup,
+				writable: false
+			}
+		});
+
+		accordion.init(element, suppressClickHandler, trigger);
 
 		return accordion;
 	}
@@ -246,10 +205,10 @@ Volta.accordion = function () {
 
 		if(standardAccordions.length) {
 			standardAccordions.forEach(function(accordion){
-				create(accordion);
+				create(accordion, false, null, Volta._hasClass(accordion, _class.standard.containerGroup), true);
 			});
 		}
-		
+
 		//js
 		var triggers = document.querySelectorAll('.' + _class.js.trigger + '[data-accordion]');
 		if(triggers.length > 0) {
@@ -269,5 +228,22 @@ Volta.accordion = function () {
 				create(jsLegacy);
 			});
 		}
+	}
+
+	/**
+	 *	@private
+	 */
+	function getElement(elementOrId) {
+	 	var element;
+
+		if(elementOrId.classList) {
+			element = elementOrId;
+		} else if (elementOrId.substring(0, 1) === "#") {
+			element = document.querySelector(elementOrId);
+		} else {
+			element = document.querySelector('#' + elementOrId);
+		}
+
+		return element;
 	}
 }();

@@ -81,12 +81,12 @@
       <% endpoint.responses.each do |response| %>
         <% id = SecureRandom.hex %>
 
-        <div class="Vlt-accordion">
-        <h5 class="Vlt-accordion__trigger">
-           <span>HTTP response
-           <span class="Vlt-badge Vlt-badge--<%= response.code[0] == '2' ? 'green' : response.code[0] == '3' ? 'yellow' : 'red'  %>"><%= response.code %></span>
-         </span>
-        </h5>
+      <div class="Vlt-accordion">
+        <button role="button" class="Vlt-accordion__trigger">
+          <h5>HTTP response
+            <span class="Vlt-badge Vlt-badge--<%= response.code[0] == '2' ? 'green' : response.code[0] == '3' ? 'yellow' : 'red'  %>"><%= response.code %></span>
+          </h5>
+        </button>
 
         <div class="Vlt-accordion__content">
           <div class="tabs-content" data-tabs-content="<%= id %>">
