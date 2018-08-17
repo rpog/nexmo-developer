@@ -603,12 +603,11 @@ components:
       description: Leg
       properties:
         uuid:
+          type: string
           description: >-
             The unique identifier for this call leg. The UUID is created when
             your call request is accepted by Nexmo. You use the UUID in all
             requests for individual live calls
-        type:
-          type: string
           
         conversation_uuid:
           type: string
