@@ -39,7 +39,7 @@ and this to `app/build.gradle`
 
 dependencies {
   ...
-  implementation 'com.google.firebase:firebase-messaging:15.0.2'
+  implementation 'com.google.firebase:firebase-messaging:17.3.0'
 }
 
 // ADD THIS AT THE BOTTOM
@@ -50,7 +50,7 @@ Ensure you downloaded a [`google-services.json` file](https://support.google.com
 
 ### Provision your server key with Nexmo Stitch
 
-For this next step we'll need three things. The server key from Firebase, your Nexmo application's ID, and a JWT without a `sub` field- we'll call that your _system token_. We're going to provision your Firebase server key to the Nexmo Stitch API, using your application ID as an identifier and the system token for authentication. First, retrieve your Firebase server key from the [Firebase console](https://console.firebase.google.com/) and click on the project you created, or create a new one if you haven't. Then continue with these steps:
+For this next step we'll need three things. The server key from Firebase, your Nexmo application's ID, and a JWT without a `sub` field- we'll call that your _application token_. We're going to provision your Firebase server key to the Nexmo Stitch API, using your application ID as an identifier and the application token for authentication. First, retrieve your Firebase server key from the [Firebase console](https://console.firebase.google.com/) and click on the project you created, or create a new one if you haven't. Then continue with these steps:
 
 1. click the settings icon/cog wheel next to your project name at the top of the new Firebase Console
 2. Click <kbd>Project settings</kbd>
@@ -77,13 +77,13 @@ We'll also store the Application ID as a bash variable:
 $ APPLICATION_ID=aaaaaaaa-bbbb-cccc-dddd-0123456789ab
 ```
 
-Finally, using our application ID and and private.key that was generated when we first created the Nexmo Application, we can create the system token. You should navigate to the directory the `private.key` file is in and then run the following command:
+Finally, using our application ID and and private.key that was generated when we first created the Nexmo Application, we can create the application token. You should navigate to the directory the `private.key` file is in and then run the following command:
 
 ```sh
-$ SYSTEM_TOKEN=$(nexmo jwt:generate private.key application_id=$APPLICATION_ID acl='{"paths":{"/v1/users/**":{},"/v1/conversations/**":{},"/v1/sessions/**":{},"/v1/devices/**":{},"/v1/image/**":{},"/v3/media/**":{},"/v1/applications/**":{},"/v1/push/**":{},"/v1/knocking/**":{}}}')
+$ APPLICATION_TOKEN=$(nexmo jwt:generate private.key application_id=$APPLICATION_ID)
 ```
 
-After you've successfully ran the command. Verify for yourself that the JWT generated is correct. You can visit [jwt.io](jwt.io) and paste in your the output of `SYSTEM_TOKEN`. Make sure that the payload has the `application_id` and `acl` properties.
+After you've successfully ran the command. Verify for yourself that the JWT generated is correct. You can visit [jwt.io](jwt.io) and paste in your the output of `APPLICATION_TOKEN`. Make sure that the payload has the `application_id` property.
 
 What we've done is create a master JWT that has access to all endpoints for your Nexmo application. Don't share this JWT! We're going to use this JWT to authenticate your request to the Nexmo API endpoint to upload your Firebase server key.
 
@@ -91,7 +91,7 @@ The final set up step is to upload the Firebase server key. Assuming that you st
 
 ```sh
 curl -v -X PUT \
-   -H "Authorization: Bearer $SYSTEM_TOKEN" \
+   -H "Authorization: Bearer $APPLICATION_TOKEN" \
    -H "Content-Type: application/json" \
    -d "{\"token\":\"$FIREBASE_SERVER_KEY\"}" \
    https://api.nexmo.com/v1/applications/$APPLICATION_ID/push_tokens/android
