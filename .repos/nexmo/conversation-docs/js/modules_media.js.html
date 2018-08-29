@@ -92,12 +92,17 @@ class Media {
             this.parentConversation.rtcObjects = {};
             this.rtcNewPromises = [];
             this.streamIndex = 0;
-            this.rtcstats_enabled = (this.application.session.config &amp;&amp; this.application.session.config.rtcstats_enabled);
-            this.rtcstats_events = (this.application.session.config &amp;&amp; this.application.session.config.rtcstats_events);
+            this.rtcstats = {};
+            if (this.application.session.config &amp;&amp; this.application.session.config.rtcstats) {
+                this.rtcstats = {
+                    emit_events: this.application.session.config.rtcstats.emit_events,
+                    ws_url: this.application.session.config.rtcstats.ws_url
+                }
+            }
             if (this.application.session.config &amp;&amp; this.application.session.config.screenShareExtensionId !== '') {
                 this.rtcHelper._setScreenShareExtensionId(this.application.session.config.screenShareExtensionId);
             }
-            if (this.rtcstats_enabled) {
+            if (this.rtcstats.emit_events) {
                 this._initStatsReporting();
             }
         } else {
@@ -121,25 +126,28 @@ class Media {
 	 */
 
     /**
-     * Switch on the rtcStat reporting
+     * Switch on the rtcStat reporting to the websocket connection and events
+     * @param ws_url
      * @private
      */
-    _enableStatsReporting() {
-        this.application.session.config.rtcstats_enabled = true;
+    _enableStatsReporting(ws_url) {
+        this.application.session.config.rtcstats.ws_url = ws_url;
+        this.rtcstats.ws_url = ws_url;
         this._initStatsReporting();
     }
 
     /**
-     * Switch on the rtcStat events
+     * Switch on the rtc stats emit events
      * @private
      */
     _enableStatsEvents() {
-        this.application.session.config.rtcstats_events = true;
+        this.application.session.config.rtcstats.emit_events = true;
+        this.rtcstats.emit_events = true;
         this._initStatsEvents();
     }
 
     _initStatsReporting() {
-        if (!this.rtcHelper.isNode()) {
+        if (!this.rtcHelper.isNode() &amp;&amp; this.application.session.config.rtcstats.ws_url) {
             this.rtcStats_wsConnection = new TraceWS();
             this.rtcStats = new RTCStats(
                 this.rtcStats_wsConnection.trace,
@@ -147,11 +155,9 @@ class Media {
                 1000, // interval at which getStats will be polled,
                 [''] // RTCPeerConnection prefixes to wrap.
             );
-            if (this.application.session.config.rtcstats_url) {
-                this.rtcStats_wsConnection.init({
-                    rtcstatsUri: this.application.session.config.rtcstats_url
-                });
-            }
+            this.rtcStats_wsConnection.init({
+                rtcstatsUri: this.application.session.config.rtcstats.ws_url
+            });
         }
     }
 
@@ -178,7 +184,8 @@ class Media {
      * @private
      */
     _disableStatsReporting() {
-        this.application.session.config.rtcstats_enabled = false;
+        this.application.session.config.rtcstats.ws_url = '';
+        this.rtcstats.ws_url = '';
         this.this.rtcStats_wsConnection.disable();
     }
 
@@ -187,7 +194,8 @@ class Media {
      * @private
      */
     _disableStatsEvents() {
-        this.application.session.config.rtcstats_events = false;
+        this.application.session.config.rtcstats.emit_events = false;
+        this.rtcstats.emit_events = false;
         this.rtcStats.disable();
     }
 
@@ -508,8 +516,6 @@ class Media {
     }
 
     _handleNewOffer(params, event) {
-
-
         const remoteMemberObject = {
             remote_member_id: event.body.member_id,
             remote_leg_id: event.body.member_leg_id,
@@ -1017,10 +1023,9 @@ class Media {
                 }
                 // this needs to happen soon before we use pc.trace
                 // ps.trace is injected in rtcstats module
-                if (this.rtcstats_events) {
+                if (this.rtcstats.emit_events) {
                     this._initStatsEvents();
                 }
-
                 return this._handleAudio(params)
                     .then((result) => resolve(result))
                     .catch((error) => reject(error));
@@ -1052,7 +1057,7 @@ class Media {
                         'rtcpMuxPolicy': 'require',
                         'iceCandidatePoolSize': '0'
                     };
-                    if (this.application.session.config.iceServers) {
+                    if (this.application.session.config &amp;&amp; this.application.session.config.iceServers) {
                         pc_config.iceServers = this.application.session.config.iceServers
                     }
                     const pc = this.rtcHelper.createRTCPeerConnection(pc_config, {
@@ -1446,7 +1451,7 @@ module.exports = Media;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Aug 20 2018 16:32:54 GMT+0100 (BST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Aug 29 2018 14:29:27 GMT+0100 (BST)
 </footer>
 
 <script> prettyPrint(); </script>

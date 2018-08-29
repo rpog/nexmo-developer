@@ -257,13 +257,13 @@
 
         <tr>
             
-                <td class="name"><code>rtcstats_enabled</code></td>
+                <td class="name"><code>rtcstats</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Boolean</span>
+<span class="param-type">object</span>
 
 
             
@@ -274,19 +274,38 @@
             
                 <td class="default">
                 
-                    false
-                
                 </td>
             
 
-            <td class="description last">enable reporting for rtc stats</td>
-        </tr>
+            <td class="description last">set reporting for stream statistics (Websocket or internal event emit)
+                <h6>Properties</h6>
+                
 
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
     
 
         <tr>
             
-                <td class="name"><code>rtcstats_url</code></td>
+                <td class="name"><code>ws_url</code></td>
             
 
             <td class="type">
@@ -308,14 +327,14 @@
                 </td>
             
 
-            <td class="description last">endpoint (weboscket) to send rtc stats reports</td>
+            <td class="description last">endpoint (weboscket) to send rtc stats.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>rtcstats_events</code></td>
+                <td class="name"><code>emit_events</code></td>
             
 
             <td class="type">
@@ -338,6 +357,13 @@
             
 
             <td class="description last">receive rtcstats:report event</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -643,7 +669,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line562">line 562</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line563">line 563</a>
     </li></ul></dd>
     
 
@@ -729,7 +755,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line554">line 554</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line555">line 555</a>
     </li></ul></dd>
     
 
@@ -864,7 +890,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line451">line 451</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line452">line 452</a>
     </li></ul></dd>
     
 
@@ -950,7 +976,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line510">line 510</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line511">line 511</a>
     </li></ul></dd>
     
 
@@ -1044,7 +1070,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line169">line 169</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line170">line 170</a>
     </li></ul></dd>
     
 
@@ -1139,7 +1165,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line182">line 182</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line183">line 183</a>
     </li></ul></dd>
     
 
@@ -1235,7 +1261,7 @@ Error event.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line224">line 224</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line225">line 225</a>
     </li></ul></dd>
     
 
@@ -1330,7 +1356,7 @@ Error event.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line153">line 153</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line154">line 154</a>
     </li></ul></dd>
     
 
@@ -1425,7 +1451,7 @@ Error event.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line195">line 195</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line196">line 196</a>
     </li></ul></dd>
     
 
@@ -1520,7 +1546,7 @@ Error event.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line211">line 211</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line212">line 212</a>
     </li></ul></dd>
     
 
@@ -1575,7 +1601,7 @@ Error event.
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Aug 20 2018 16:32:54 GMT+0100 (BST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Aug 29 2018 14:29:27 GMT+0100 (BST)
 </footer>
 
 <script> prettyPrint(); </script>
