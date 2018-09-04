@@ -1,23 +1,12 @@
 export default () => {
   $(document).ready(function(){
-    const smoothScroll = new SmoothScroll('a[href^="#"]', {
-      offset: 10,
-    })
-
-    if(window.location.hash) {
-      const anchor = document.querySelector(window.location.hash);
-      if (anchor) {
-         smoothScroll.animateScroll(anchor, undefined, { offset: 40 });
-      }
-    }
-
     const $body = $('.Vlt-main');
     const nav = $('.Nxd-header');
     const codeNav = $('.Nxd-api__code__header');
 
-    $body.on('scroll', function(){   
+    $body.on('scroll', function(){
       var scrollTop = $body.scrollTop();
-      
+
       //navigation
       if (scrollTop > 50) {
         nav.addClass('Nxd-scroll-minify');

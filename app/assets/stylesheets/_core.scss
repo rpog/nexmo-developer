@@ -20,6 +20,10 @@ body {
   width: 100%;
 }
 
+.Nxd-main {
+  scroll-behavior: smooth;
+}
+
 @media #{$M-plus} {
   .Nxd-main {
     height: calc(100vh - 111px);
