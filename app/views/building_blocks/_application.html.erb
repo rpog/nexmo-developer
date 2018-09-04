@@ -1,10 +1,10 @@
-<div class="Vlt-accordion__trigger Nxd-accordion" data-collapsible-id="<%= id %>">
+<div class="Vlt-js-accordion__trigger Vlt-accordion__trigger" data-accordion="acc<%= id %>">
     <h4>
         <%= app['use_existing'] ? 'Use your existing application' : 'Create an application' %>
     </h4>
 </div>
 
-<div id="<%=id %>"  class="Vlt-accordion__content">
+<div id="acc<%=id %>"  class="Vlt-js-accordion__content">
     <div class="Vlt-box Vlt-box--lesspadding">
         <% if app['use_existing'] %>
             <p><%= app['use_existing'] %></p>

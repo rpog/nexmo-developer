@@ -1,10 +1,10 @@
-<div class="Vlt-accordion__trigger Nxd-accordion" data-collapsible-id="<%= id %>">
+<div class="Vlt-js-accordion__trigger Vlt-accordion__trigger" data-accordion="acc<%= id %>">
 	<h4>
 	        Initialize your dependencies
 	</h4>
 </div>
 
-<div id="<%= id %>" class="Vlt-accordion__content">
+<div id="acc<%= id %>" class="Vlt-js-accordion__content">
 	<div class="Vlt-box Vlt-box--lesspadding">
 	    <p>Create a file named <code><%= config['file_name'] %></code> and add the following code:</p>
 	    <pre class="highlight bash"><code><%= highlighted_client_source %></code></pre>
