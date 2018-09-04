@@ -3,14 +3,14 @@
     <% next if response.code.to_i == 204 %>
     <% id = SecureRandom.hex %>
     <p class="collapsible">
-    <a class="Vlt-accordion__trigger Vlt-accordion__trigger--noborder Nxd-accordion-button" data-collapsible-id="<%= id %>">
+    <a class="Vlt-js-accordion__trigger Nxd-accordion-button" data-accordion="acc<%= id %>">
         <span class="Vlt-btn Vlt-btn--quaternary Vlt-btn--block">
             View response field descriptions
         </span>
     </a>
     </p>
 
-    <div id="<%= id %>" class="Vlt-accordion__content">
+    <div id="acc<%= id %>" class="Vlt-js-accordion__content">
         <h4>Response Fields</h4>
         <div class="Vlt-table">
             <table>
