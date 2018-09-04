@@ -83,20 +83,37 @@ class Concatenation extends React.Component {
   }
 
   renderSplit(split) {
-    return split.map((group, index) => {
-      return (
-        <tr key={index}>
-          <td style={{ verticalAlign: 'middle' }}><b>Part {index + 1}</b></td>
-          <td style={{ width: '75%' }}>
-            <code
-              style={{ whiteSpace: 'normal', wordBreak: 'break-all' }}
-            >
-              { this.renderUdf(split) }
-              {group}
-            </code>
-          </td>
-        </tr>
-      )
+    return split.map((group, index, arr) => {
+      if(index === arr.length - 1) {
+        return (
+          <div className="Vlt-grid">
+            <div className="Vlt-col Vlt-col--1of3"><b>Part {index + 1}</b></div>
+            <div className="Vlt-col Vlt-col--2of3">
+              <code
+                  style={{ whiteSpace: 'normal', wordBreak: 'break-all' }}
+                >
+                  { this.renderUdf(split) }
+                  {group}
+              </code>
+            </div>
+          </div>
+        )
+      } else {
+        return (
+          <div className="Vlt-grid">
+            <div className="Vlt-col Vlt-col--1of3"><b>Part {index + 1}</b></div>
+            <div className="Vlt-col Vlt-col--2of3">
+              <code
+                  style={{ whiteSpace: 'normal', wordBreak: 'break-all' }}
+                >
+                  { this.renderUdf(split) }
+                  {group}
+              </code>
+            </div>
+            <hr class="hr--shorter" />
+          </div>
+        )
+      }
     })
   }
 
@@ -141,31 +158,29 @@ class Concatenation extends React.Component {
         <div className="Vlt-grid Vlt-grid--margin2">
           <div className="Vlt-col">
             <h4>Data</h4>
-            <div className="Vlt-table Vlt-table--data Vlt-table--bordered Vlt-table--nohighlight">
-              <table>
-                <tbody>
-                  <tr>
-                    <td><b>Unicode is Required?</b></td>
-                    <td style={{ width: '75%' }}>{ this.renderUtfIcon(this.shouldEncodeAs16Bit()) }</td>
-                  </tr>
-                  <tr>
-                    <td><b>Length</b></td>
-                    <td style={{ width: '75%' }}>{ characterCount } { this.pluralize('character', characterCount) } sent in {split.length} message { this.pluralize('part', split.length) }</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="Vlt-box Vlt-box--white Vlt-box--lesspadding">
+              <div className="Vlt-grid">
+                <div className="Vlt-col Vlt-col--1of3">
+                  <b>Unicode is Required?</b>
+                </div>
+                <div className="Vlt-col Vlt-col--2of3">
+                  { this.renderUtfIcon(this.shouldEncodeAs16Bit()) }
+                </div>
+                <hr className="hr--shorter"/>
+                <div className="Vlt-col Vlt-col--1of3">
+                  <b>Length</b>
+                </div>
+                <div className="Vlt-col Vlt-col--2of3">
+                  { characterCount } { this.pluralize('character', characterCount) } sent in {split.length} message { this.pluralize('part', split.length) }
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <h4>Parts</h4>
-
-        <div className="Vlt-table Vlt-table--data Vlt-table--bordered Vlt-table--nohighlight">
-          <table>
-            <tbody>
-              { this.renderSplit(split) }
-            </tbody>
-          </table>
+        <div className="Vlt-box Vlt-box--white Vlt-box--lesspadding">
+          { this.renderSplit(split) }
         </div>
       </div>
     )
