@@ -125,38 +125,48 @@ class Concatenation extends React.Component {
       <div>
         <h2>Try it out</h2>
 
-        <h4>Message</h4>
-
-        <div className="Vlt-textarea">
-          <textarea
-            onChange={ (event) => this.setState({ body: event.target.value })}
-            value={ this.state.body }
-            style={{ width: '100%', height: '150px', resize: 'vertical' }}
-          ></textarea>
+        <div className="Vlt-grid Vlt-grid--margin2">
+          <div className="Vlt-col">
+            <h4>Message</h4>
+            <div className="Vlt-textarea">
+              <textarea
+                onChange={ (event) => this.setState({ body: event.target.value })}
+                value={ this.state.body }
+                style={{ width: '100%', height: '150px', resize: 'vertical' }}
+              ></textarea>
+            </div>
+          </div>
         </div>
 
-        <h4>Data</h4>
-
-          <table>
-            <tbody>
-              <tr>
-                <td><b>Unicode is Required?</b></td>
-                <td style={{ width: '75%' }}>{ this.renderUtfIcon(this.shouldEncodeAs16Bit()) }</td>
-              </tr>
-              <tr>
-                <td><b>Length</b></td>
-                <td style={{ width: '75%' }}>{ characterCount } { this.pluralize('character', characterCount) } sent in {split.length} message { this.pluralize('part', split.length) }</td>
-              </tr>
-            </tbody>
-          </table>
+        <div className="Vlt-grid Vlt-grid--margin2">
+          <div className="Vlt-col">
+            <h4>Data</h4>
+            <div className="Vlt-table Vlt-table--data Vlt-table--bordered Vlt-table--nohighlight">
+              <table>
+                <tbody>
+                  <tr>
+                    <td><b>Unicode is Required?</b></td>
+                    <td style={{ width: '75%' }}>{ this.renderUtfIcon(this.shouldEncodeAs16Bit()) }</td>
+                  </tr>
+                  <tr>
+                    <td><b>Length</b></td>
+                    <td style={{ width: '75%' }}>{ characterCount } { this.pluralize('character', characterCount) } sent in {split.length} message { this.pluralize('part', split.length) }</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
 
         <h4>Parts</h4>
 
+        <div className="Vlt-table Vlt-table--data Vlt-table--bordered Vlt-table--nohighlight">
           <table>
             <tbody>
               { this.renderSplit(split) }
             </tbody>
           </table>
+        </div>
       </div>
     )
   }
