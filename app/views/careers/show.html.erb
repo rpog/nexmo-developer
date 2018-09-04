@@ -3,6 +3,9 @@
     <h2 class="Vlt-title--icon Vlt-title--center">
       <svg class="Vlt-blue-dark"><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-<%= @career.icon == 'account' ? 'user' : @career.icon == 'book' ? 'books' : @career.icon %>"/></svg>
       <%= @career.title %>
+      <% unless @career.published %>
+        [Hidden]
+      <% end %>
     </h2>
     <p class="p-large"><%= @career.summary %></p>
     <p class="Vlt-grey-dark"><%= @career.location %></p>
