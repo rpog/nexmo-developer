@@ -7,7 +7,7 @@
       <% end %>
 
       <div class="Vlt-badge-group">
-        <code class="Vlt-badge Vlt-badge--large Vlt-badge--<%= endpoint.method == 'post' ? 'green' : 'blue' %>"><%= endpoint.method.upcase %></code>
+        <code class="Vlt-badge Vlt-badge--large Nxd-method-badge Nxd-method-badge--<%= endpoint.method %>"><%= endpoint.method.upcase %></code>
         <code class="Vlt-badge Vlt-badge--large Vlt-badge--grey">
           <span><%= endpoint.definition.servers[0]['url'] %></span><%= endpoint.path.path.gsub(/\{(.+?)\}/, '<span class="api-path-parameter">:\1</span>').html_safe %>
         </code>

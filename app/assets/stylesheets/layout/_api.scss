@@ -2,6 +2,26 @@
 	display: flex;
 }
 
+.Nxd-method-badge {
+	text-transform: uppercase;
+
+	&--post {
+		background: $green;
+	}
+
+	&--get {
+		background: $blue-dark;
+	}
+
+	&--delete {
+		background: $red;
+	}
+
+	&--put {
+		background: $purple-dark;
+	}
+}
+
 .table-no-line {
 	td {
 		border-bottom: none !important;

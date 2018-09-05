@@ -10,28 +10,49 @@
     }
   }
 
-  .Nxd-tutorials__language {
-    margin-right: 10px;
-  }
+  .Nxd-tutorials {
+    &__language {
+      margin-right: 10px;
 
-  .Nxd-tutorials__language--Java span {
-    color: $orange-dark;
-  }
+      &--Java span {
+        color: $orange-dark;
+      }
 
-  .Nxd-tutorials__language--Node span, .Nxd-tutorials__language--JavaScript span {
-    color: $yellow;
-  }
+      &--Node span,
+      &--JavaScript span {
+        color: $yellow;
+      }
 
-  .Nxd-tutorials__language--PHP span{
-    color: $blue-dark;
-  }
+      &--PHP span{
+        color: $blue-dark;
+      }
 
-  .Nxd-tutorials__language--Python span {
-    color: $blue-darker;
-  }
+      &--Python span {
+        color: $blue-darker;
+      }
 
-  .Nxd-tutorials__language--Ruby span {
-    color: $red-dark;
+      &--Ruby span {
+        color: $red-dark;
+      }
+    }
+
+    &__product {
+      &--SMS {
+        background: $purple;
+      }
+
+      &--Voice {
+        background: $green;
+      }
+
+      &--Verify {
+        background: $indigo;
+      }
+
+      &--Number {
+        background: $orange;
+      }
+    }
   }
 }
 
