@@ -80,7 +80,8 @@ h1,
 h2,
 h3,
 h4,
-h5 {
+h5,
+h6 {
 	color: $black;
 
 	a {
@@ -113,6 +114,10 @@ p {
 		@media #{$L-plus} {
 			margin-top: 6px;
 		}
+	}
+
+	code {
+		margin: 0 0.3em;
 	}
 }
 

@@ -15,20 +15,17 @@
 }
 
 .Vlt-accordion {
+
 	&__trigger {
 		@extend .reset-button;
-		border-bottom: 1px solid rgba($black, 0.1);
 		cursor: pointer;
 		display: flex;
 		justify-content: space-between;
+		margin-bottom: 0 !important; // useful for accordions-titles
 		padding: $unit1 0;
 		text-align: left;
 		transition: margin 0.2s;
 		width: 100%;
-
-		&:not(.Vlt-accordion__trigger_active) {
-			margin-bottom: $unit0 !important;
-		}
 
 		span {
 			flex: 1;
@@ -55,10 +52,36 @@
 		}
 
 		&--noborder {
-			border: 0;
+			& + .Vlt-accordion__content {
+				border-bottom: 0; // Supporting legacy
+			}
+		}
+	}
 
-			&:not(.Vlt-accordion__trigger_active) {
-				margin-bottom: 0 !important;
+	&__content {
+		border-bottom: 1px solid rgba($black, 0.1);
+
+		&_open {
+			padding-bottom: $unit1;
+		}
+
+		&--noborder {
+			border: 0;
+		}
+	}
+
+	&--large {
+		.Vlt-accordion__trigger {
+			padding: $unit2 0;
+
+			&_active {
+				padding-bottom: $unit1;
+			}
+		}
+
+		.Vlt-accordion__content {
+			&_open {
+				padding-bottom: $unit2;
 			}
 		}
 	}

@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2001-present, Vonage.
- *	
+ *
  * Menu (requires core)
  */
 
 'use strict';
 
-Volta.menu = function () {	
+Volta.menu = function () {
 	var _class = {
 		mobile: 'Vlt-sidenav__mobile',
 		mobileOpen: 'Vlt-body--mobile-menu-open',
@@ -15,6 +15,9 @@ Volta.menu = function () {
 		linkActive: 'Vlt-sidemenu__link_active',
 		sideMenu: 'Vlt-sidemenu',
 		sideTabs: 'Vlt-sidetabs',
+		sideTabsLinkActive: 'Vlt-js-tabs__link_active',
+		sideTabsPanel: 'Vlt-js-tabs__panel',
+		sideTabsPanelActive: 'Vlt-js-tabs__panel_active',
 		sideTabsLink: 'Vlt-sidetabs__link',
 		sideTabsTrigger: 'Vlt-sidetabs__trigger',
 		trigger: 'Vlt-sidemenu__trigger',
@@ -29,8 +32,6 @@ Volta.menu = function () {
 		mobileTrigger: '#Vlt-sidenav-mobile-trigger'
 	}
 
-	var menu;
-
 	var expandedMenus = [],
 		mobileMenuTriggeredTwice;
 
@@ -42,20 +43,22 @@ Volta.menu = function () {
 		init: initialise,
 		expand: expandActiveMenu,
 		showCollapsed: expandMenu,
-		_triggerHandler: attachTriggerHandlers
+		_triggerHandler: attachTriggerHandlers,
+		selectActiveTab: selectActiveTab,
+		styleActiveTrigger: styleActiveTrigger
 	}
 
-	/**   
+	/**
 	 *	@private
-	 *	
+	 *
 	 *	@description Adds the parents of the active menu to the exoanded menus array
-	 *	@param {HTMLElement} element The active menu 
+	 *	@param {HTMLElement} element The active menu
 	 */
 	function addExpandedParentMenuToArr(element){
 		var nestedMenuUl = Volta._closest(element, 'ul', '.' + _class.sideMenu);
 		var nestedMenuTrigger = nestedMenuUl.previousElementSibling;
 
-		if(nestedMenuTrigger) {
+		if(nestedMenuTrigger && Volta._hasClass(nestedMenuTrigger, _class.trigger)) {
 			if(!Volta._hasClass(nestedMenuTrigger, _class.triggerActive)) {
 				nestedMenuTrigger.classList.add(_class.triggerActive);
 			}
@@ -65,9 +68,9 @@ Volta.menu = function () {
 		}
 	}
 
-	/**   
+	/**
 	 *	@private
-	 *	
+	 *
 	 *	@description Attach the listener for the mobile menu trigger
 	 */
 	function attachMobileTriggerHandler() {
@@ -80,8 +83,8 @@ Volta.menu = function () {
 					e.stopPropagation();
 					return;
 				}
-				if(!Volta._hasClass(menu, _class.visible)) {
-					menu.classList.add(_class.visible);
+				if(!Volta._hasClass(Volta.menu._element, _class.visible)) {
+					Volta.menu._element.classList.add(_class.visible);
 					document.body.classList.add(_class.mobileOpen);
 
 					//stop propagation otherwise will immediately call handler
@@ -92,9 +95,9 @@ Volta.menu = function () {
 		}
 	}
 
-	/**   
+	/**
 	 *	@private
-	 *	
+	 *
 	 *	@description Attach the listeners for closing the expanded mobile menu
 	 */
 	function addMobileMenuCollapseListeners() {
@@ -102,25 +105,25 @@ Volta.menu = function () {
 		document.querySelector('body').addEventListener('touchstart', closeMenu, { once: true });
 	}
 
-	/**   
+	/**
 	 *	@public
-	 *	
+	 *
 	 *	@description Attach the listeners to the trigger elements of the menu
 	 */
 	function attachTriggerHandlers() {
 		attachMobileTriggerHandler();
-		menu.querySelectorAll('.' + _class.trigger).forEach(attachHandler);
-		
+		Volta.menu._element.querySelectorAll('.' + _class.trigger).forEach(attachHandler);
+
 		function attachHandler(triggerElem) {
 			triggerElem.addEventListener('click', expandMenu);
 		}
 	}
 
-	/**   
+	/**
 	 *	@private
-	 *	
+	 *
 	 *	@description Attach the listeners to the trigger elements of the menu
-	 * 	@param {HTMLElement} menuItem 
+	 * 	@param {HTMLElement} menuItem
 	 *	@return {boolean} If the menu item is nested returns true, otherwise false
 	 */
 	function checkMenuItemIsNested(menuItem) {
@@ -136,17 +139,17 @@ Volta.menu = function () {
 		return isNested;
 	}
 
-	/**   
+	/**
 	 *	@private
-	 *	
+	 *
 	 *	@description Attach the listeners to the trigger elements of the menu
-	 * 	@param {HTMLElement} menuItem 
+	 * 	@param {HTMLElement} menuItem
 	 *	@return {boolean} If the menu item is nested returns true, otherwise false
 	 */
 	function closeMenu(e) {
-		var isSideMenuChild = Volta._closest(e.target, '.' + _class.sideMenu);
-		if(!Volta._hasClass(e.target, _class.sideMenu) && !isSideMenuChild) {
-			menu.classList.remove(_class.visible);
+		if(!Volta._hasClass(e.target, _class.sideMenu) && !Volta._closest(e.target, '.' + _class.sideMenu) &&
+			!Volta._hasClass(e.target, _class.sideTabs) && !Volta._closest(e.target, '.' + _class.sideTabs)) {
+			Volta.menu._element.classList.remove(_class.visible);
 
 			document.body.classList.remove(_class.mobileOpen);
 
@@ -154,25 +157,25 @@ Volta.menu = function () {
 			if(Volta._hasClass(e.target, _class.mobileTrigger) || isMobileMenu) {
 				mobileMenuTriggeredTwice = true;
 			}
-		} else {		
-			addMobileMenuCollapseListeners();	
+		} else {
+			addMobileMenuCollapseListeners();
 		}
 	}
 
-	/**   
+	/**
 	 *	@private
-	 *	
+	 *
 	 *	@description Expand the nested menu
-	 * 	@param {event} e 
+	 * 	@param {event} e
 	 */
 	function expandMenu(e) {
 		e.preventDefault();
 		e.stopPropagation();
-		
+
 		var _this = this;
 
 		var isNestedMenu = checkMenuItemIsNested(_this);
-		
+
 		if (expandedMenus.indexOf(_this) >= 0 && isNestedMenu) {
 			removeMenuFromSelectedArr(_this);
 		} else if(expandedMenus.indexOf(_this) >= 0) {
@@ -187,49 +190,50 @@ Volta.menu = function () {
 
 		if(Volta.menuCollapse) {
 			Volta.menuCollapse.attachCloseHandler(expandedMenus);
-		}	
+		}
 	}
 
-	/**   
+	/**
 	 *	@public
-	 *	
+	 *
 	 *	@description Expand the active menu - typically used on page load
 	 * 	@param {boolean} isUserForced Whether the action has been trigger by the user
 	 */
-	function expandActiveMenu(isUserForced) {			
-		var activeMenuItem = menu.querySelector('.' + _class.linkActive);
-	
+	function expandActiveMenu(isUserForced) {
+		var activeMenuItem = Volta.menu._element.querySelector('.' + _class.linkActive);
+
+		selectActiveTab(activeMenuItem);
+
 		if(activeMenuItem) {
 			var activeTriggerUl = Volta._closest(activeMenuItem, 'ul', '.' + _class.sideMenu);
-			var activeTrigger = activeTriggerUl.previousElementSibling;
-			
+			var activeTrigger = activeTriggerUl ? activeTriggerUl.previousElementSibling : null;
 			if(activeTrigger) {
-				if(!Volta._hasClass(activeTrigger, _class.triggerActive)) {
-					activeTrigger.classList.add(_class.triggerActive, _class.triggerCurrent);
-				}
-				
 				var isNestedMenu = checkMenuItemIsNested(activeTrigger);
 				if(isNestedMenu) {
 					addExpandedParentMenuToArr(activeTrigger);
 				}
 
+				if(!Volta._hasClass(activeTrigger, _class.triggerActive)) {
+					activeTrigger.classList.add(_class.triggerActive);
+				}
+
 				expandedMenus.push(activeTrigger);
 			}
+			styleActiveTrigger(activeMenuItem);
 		}
 	}
 
-	/**   
+	/**
 	 *	@public
-	 *	
+	 *
 	 *	@description Initialise the menu
 	 * 	@param {boolean} menuCollapse Whether the collapse module has been included
 	 */
 	function initialise(menuCollapse) {
 		expandedMenus = [];
-		menu = document.querySelector(_id.menu);
-		Volta.menu._element = menu;
+		Volta.menu._element = document.querySelector(_id.menu);
 
-		if(menu) {
+		if(Volta.menu._element) {
 			if(!Volta.menuCollapse) {
 				expandActiveMenu();
 			} else if(menuCollapse) {
@@ -240,9 +244,9 @@ Volta.menu = function () {
 		}
 	}
 
-	/**   
+	/**
 	 *	@public
-	 *	
+	 *
 	 *	@description Clear the selected menus array, and close all of the nested menus
 	 */
 	function removeAllMenuItemsFromSelectedArr(){
@@ -252,14 +256,82 @@ Volta.menu = function () {
 		expandedMenus = [];
 	}
 
-	/**   
+	/**
 	 *	@private
-	 *	
+	 *
 	 *	@description Remove a specific menu item from the selected array and close
 	 */
 	function removeMenuFromSelectedArr(menuItem) {
 		var menuIndex = expandedMenus.indexOf(menuItem);
 		menuItem.classList.remove(_class.triggerActive);
 		expandedMenus.splice(menuIndex, 1);
+	}
+
+	/**
+	 *	@public
+	 *
+	 *	@description Select the active side tab
+	 *	@param {activeMenuItem} Element(optional) The active menu item
+	 */
+	function selectActiveTab(activeMenuItem) {
+		activeMenuItem = activeMenuItem || Volta.menu._element.querySelector('.' + _class.linkActive);
+		var navTabs = document.querySelector(_id.menu + ' .' + _class.sideTabs);
+
+		if(!navTabs || !activeMenuItem) {
+			return null;
+		}
+
+		var sideMenus = Volta.menu._element.querySelectorAll('.' + _class.sideMenu);
+		var menuTab = Volta._closest(activeMenuItem, '.' + _class.sideTabsPanel, '.' + _class.sideMenu);
+
+		var tabIndex;
+		var currentNode = 0;
+
+		while(!tabIndex && currentNode < sideMenus.length) {
+			if(sideMenus.item(currentNode) === menuTab) {
+				tabIndex = currentNode;
+				break;
+			}
+			currentNode++;
+		}
+		var sideTabs = Volta.menu._element.querySelectorAll('.' + _class.sideTabsLink);
+		sideTabs[tabIndex].click();
+	}
+
+	/**
+	 *	@public
+	 *
+	 *	@description Adds a class to the top level active trigger
+	 *	@param {activeMenuItem} Element(optional) The active menu item
+	 */
+	function styleActiveTrigger(activeMenuItem) {
+		activeMenuItem = activeMenuItem || Volta.menu._element.querySelector('.' + _class.linkActive);
+
+		if(activeMenuItem) {
+			var topLevelTrigger = getTopLevelTrigger(activeMenuItem);
+
+			if(topLevelTrigger) {
+				topLevelTrigger.classList.add(_class.triggerCurrent);
+			}
+		}
+
+		function getTopLevelTrigger(activeMenuItem) {
+			var element = activeMenuItem;
+			var trigger = null;
+
+			while (element) {
+				if(element.matches('ul') && Volta._hasClass(element, _class.sideMenu)) {
+					break;
+				}
+
+				if (element.matches('ul')) {
+			  		trigger = element;
+				}
+
+				element = element.parentElement;
+			}
+
+			return trigger ? trigger.previousElementSibling : null;
+		}
 	}
 }();

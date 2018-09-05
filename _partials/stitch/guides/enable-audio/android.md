@@ -23,7 +23,7 @@ This guide will introduce you to the following concepts.
 
 We will use the application we already created for the previous quickstarts. All the basic setup has been done in the previous guides and should be in place. We can now focus on updating the client-side application.
 
-### 1.1 - Update permissions in&nbsp;`AndroidManifest`
+### 1.1 - Update permissions in `AndroidManifest`
 
 Since we'll be working with audio, we need to add the necessary permissions to the app.
 
@@ -190,11 +190,11 @@ private void toggleAudio() {
 
 Now we could try out In-App Voice right now by launching the app on two devices and pressing the audio button, but we wouldn't know if the other user enabled audio on their device! In order to know that we need to make some changes to `ChatAdapter.java`
 
-## 2 - Showing&nbsp;`MemberMedia`&nbsp;events
+## 2 - Showing `MemberMedia` events
 
 In the previous quickstart we added a `RecyclerView` to our app and showed the chat history by adding `ChatAdapter.java`. As a refresher, to observe events that happens in a conversation we've tapped into `conversation.messageEvent()` and added a `ResultListener` that's fired whenever there's new event. Up until now, the only events we've dealt with are `Text`. Now we're going to handle any `MemberMedia` events that get sent to a conversation.
 
-### 2.1 - Handling&nbsp;`MemberMedia`&nbsp;events in&nbsp;`ChatAdapter.java`
+### 2.1 - Handling `MemberMedia` events in `ChatAdapter.java`
 
 We're going to make some changes to the `onBindViewHolder()` method. Currently we check for `Text` events like so: `if (events.get(position).getType().equals(EventType.TEXT))`.
 

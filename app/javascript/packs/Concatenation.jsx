@@ -110,7 +110,7 @@ class Concatenation extends React.Component {
                   {group}
               </code>
             </div>
-            <hr class="hr--shorter" />
+            <hr className="hr--shorter" />
           </div>
         )
       }
@@ -142,38 +142,32 @@ class Concatenation extends React.Component {
       <div>
         <h2>Try it out</h2>
 
-        <div className="Vlt-grid Vlt-grid--margin2">
-          <div className="Vlt-col">
-            <h4>Message</h4>
-            <div className="Vlt-textarea">
-              <textarea
-                onChange={ (event) => this.setState({ body: event.target.value })}
-                value={ this.state.body }
-                style={{ width: '100%', height: '150px', resize: 'vertical' }}
-              ></textarea>
-            </div>
-          </div>
+        <h4>Message</h4>
+        <div className="Vlt-textarea">
+          <textarea
+            onChange={ (event) => this.setState({ body: event.target.value })}
+            value={ this.state.body }
+            style={{ width: '100%', height: '150px', resize: 'vertical' }}
+          ></textarea>
         </div>
 
-        <div className="Vlt-grid Vlt-grid--margin2">
-          <div className="Vlt-col">
-            <h4>Data</h4>
-            <div className="Vlt-box Vlt-box--white Vlt-box--lesspadding">
-              <div className="Vlt-grid">
-                <div className="Vlt-col Vlt-col--1of3">
-                  <b>Unicode is Required?</b>
-                </div>
-                <div className="Vlt-col Vlt-col--2of3">
-                  { this.renderUtfIcon(this.shouldEncodeAs16Bit()) }
-                </div>
-                <hr className="hr--shorter"/>
-                <div className="Vlt-col Vlt-col--1of3">
-                  <b>Length</b>
-                </div>
-                <div className="Vlt-col Vlt-col--2of3">
-                  { characterCount } { this.pluralize('character', characterCount) } sent in {split.length} message { this.pluralize('part', split.length) }
-                </div>
-              </div>
+        <div className="Vlt-margin--top2" />
+
+        <h4>Data</h4>
+        <div className="Vlt-box Vlt-box--white Vlt-box--lesspadding">
+          <div className="Vlt-grid">
+            <div className="Vlt-col Vlt-col--1of3">
+              <b>Unicode is Required?</b>
+            </div>
+            <div className="Vlt-col Vlt-col--2of3">
+              { this.renderUtfIcon(this.shouldEncodeAs16Bit()) }
+            </div>
+            <hr className="hr--shorter"/>
+            <div className="Vlt-col Vlt-col--1of3">
+              <b>Length</b>
+            </div>
+            <div className="Vlt-col Vlt-col--2of3">
+              { characterCount } { this.pluralize('character', characterCount) } sent in {split.length} message { this.pluralize('part', split.length) }
             </div>
           </div>
         </div>

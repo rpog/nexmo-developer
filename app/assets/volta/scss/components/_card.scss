@@ -226,7 +226,7 @@
 		}
 
 		.Vlt-card__content {
-			flex: 1;
+			flex: auto; // Has to be 'auto' for IE
 			overflow: auto;
 		}
 	}

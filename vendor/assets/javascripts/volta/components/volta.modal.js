@@ -9,8 +9,10 @@
 Volta.modal = function () {
 	var _class = {
 		auto: 'Vlt-modal--auto',
+		bodyModalOpen: 'Vlt-body--modal-open',
 		cancel: 'Vlt-modal__cancel',
 		confirm: 'Vlt-modal__confirm',
+		content: 'Vlt-modal__content',
 		modal: 'Vlt-modal',
 		out: 'Vlt-modal--out',
 		panel: 'Vlt-modal__panel',
@@ -19,11 +21,13 @@ Volta.modal = function () {
 		dismiss: 'Vlt-modal__dismiss',
 	}
 
-	var dismissModalHandler, 
+	var body,
+		dismissModalHandler, 
 		cancelModalHandler,
 		confirmModalHandler,
 		escHandler,
-		clickHandler;
+		clickHandler,
+		escAttached;
 
 	function Modal() {}
 
@@ -74,15 +78,18 @@ Volta.modal = function () {
 		    this.modal.classList.add(_class.visible);
 		    this.attachButtons();	
 
-		    if(!this.modal.dataset.disableEsc || this.modal.dataset.disableEsc === "false") {
+		    disableScroll();
+
+		    if(!escAttached && !this.modal.dataset.disableEsc || this.modal.dataset.disableEsc === "false") {
 		    	escHandler = closeModalOnEscape.bind(this);
-		   		document.querySelector('body').addEventListener('keyup', escHandler);
+		   		body.addEventListener('keyup', escHandler, { once: true });
+		   		escAttached = true;
 		    }
 
 		    if(!this.modal.dataset.disableClick || this.modal.dataset.disableClick === "false") {
 		    	clickHandler = closeModalOnClick.bind(this);
-		   		document.querySelector('body').addEventListener('click', clickHandler);
-		    }	    		    
+		   		this.modal.addEventListener('click', clickHandler, { once: true });
+		    } 		    
 		},
 		dismiss: function(e, confirmed) {
 			var _this = this;
@@ -92,8 +99,12 @@ Volta.modal = function () {
 		    	e.stopPropagation();
 			}
 
-			_this.modal.classList.remove(_class.visible);
-			_this.modal.classList.add(_class.out);
+			enableScroll();
+
+			if(_this.modal){
+				_this.modal.classList.remove(_class.visible);
+				_this.modal.classList.add(_class.out);
+			}
 			
 			if(_this._callback) {
 				_this._callback(confirmed);
@@ -114,6 +125,10 @@ Volta.modal = function () {
 	 *	@description Attach a click listener to each modals trigger on the screen, which will open the modal
 	 */
 	function attachModalHandlers() {
+		if(!body) {
+			body = document.querySelector('body');
+		}
+
 		var triggers = document.querySelectorAll('.' + _class.trigger);
 
 		if(triggers.length > 0) {
@@ -189,6 +204,8 @@ Volta.modal = function () {
     function closeModalOnEscape(e){
     	if(e && e.keyCode === 27) {
     		this.dismiss(e, false);
+    	}else {
+			body.addEventListener('click', escHandler, { once: true });
     	}
     }
 
@@ -199,9 +216,13 @@ Volta.modal = function () {
 	 *  @param {event} e 
 	 */
     function closeModalOnClick(e){
-    	if(!Volta._hasClass(e.target, _class.trigger) && !Volta._closest(e.target, '.' + _class.panel, '.' + _class.panel)) {
+    	if(!Volta._hasClass(e.target, _class.trigger) 
+			&& !Volta._closest(e.target, '.' + _class.trigger, '.' + _class.trigger)
+    		&& !Volta._closest(e.target, '.' + _class.panel, '.' + _class.panel)) {
     		this.dismiss(e, false);
-    	} 
+    	} else {
+			this.modal.addEventListener('click', clickHandler, { once: true });
+    	}
     }
     
     /**   
@@ -216,7 +237,32 @@ Volta.modal = function () {
 		modal.init(elementOrId);
 		return modal;
     }
-  	
+
+    /**
+	 * Private functions to disable body scroll when modal is open
+     */
+    function disableScroll() {
+	    body.classList.add(_class.bodyModalOpen);
+		body.addEventListener('touchmove', preventScroll);
+		body.querySelector('main').addEventListener('touchmove', preventScroll);
+		body.querySelector('.' + _class.content).addEventListener('touchmove', allowScroll);
+    }
+
+    function enableScroll() {
+		body.classList.remove(_class.bodyModalOpen);
+		body.removeEventListener('touchmove', preventScroll);
+		body.querySelector('main').removeEventListener('touchmove', preventScroll);
+		body.querySelector('.' + _class.content).removeEventListener('touchmove', allowScroll);
+    }
+
+    function allowScroll(e) {
+    	e.stopPropagation();
+    }
+
+    function preventScroll(e) {
+		e.preventDefault();
+    }
+
   	/**   
 	 *	@private
 	 *	
@@ -239,11 +285,12 @@ Volta.modal = function () {
 		}
 
 		if(clickHandler) {
-   			document.querySelector('body').removeEventListener('click', clickHandler);
+   			body.removeEventListener('click', clickHandler);
     	}
 
     	if(escHandler) {
-    		document.querySelector('body').removeEventListener('keyup', escHandler);
+    		body.removeEventListener('keyup', escHandler);
+    		escAttached = false;
     	}		
 	}
 }();

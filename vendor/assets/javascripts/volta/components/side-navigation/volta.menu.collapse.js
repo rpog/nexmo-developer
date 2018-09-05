@@ -60,14 +60,19 @@ Volta.menuCollapse = function () {
 	 */
 	function attachCloseHandler(expandedMenus) {
 		if(document.querySelector('.' + _class.collapsed) && expandedMenus) {
-			document.querySelector('body').addEventListener('click', function(e) {
-				if(!Volta._hasClass(e.target, Volta.menu._class.link) && !Volta._hasClass(e.target.parentElement, Volta.menu._class.link)) {
-					e.preventDefault();
-					e.stopPropagation();
+			document.querySelector('body').addEventListener('click', closeMenu, { once: true });
+		}
 
-					Volta.menu.closeAll();
-				}
-			}, { once: true });
+		function closeMenu(e) {
+			if(!Volta._hasClass(e.target, Volta.menu._class.link) 
+					&& !Volta._hasClass(e.target.parentElement, Volta.menu._class.link)) {
+				e.preventDefault();
+				e.stopPropagation();
+
+				Volta.menu.closeAll();
+			} else {
+				document.querySelector('body').addEventListener('click', closeMenu, { once: true });
+			}
 		}
 	}
 
@@ -78,14 +83,17 @@ Volta.menuCollapse = function () {
 	 */
 	function collapseMenu() {
 		Volta.menu.closeAll();
+		Volta.menu.selectActiveTab();
 
 		Volta.menu._element.classList.add(_class.collapsed);
-		
+
 		document.querySelectorAll(Volta.menu._class.trigger).forEach(function(menuItem){
 	        menuItem.nextElementSibling.style = "top: " + menuItem.positionTop;
 		});
 
-		localStorage.setItem(menuCollapseString, true);
+		if(localStorage) {
+			localStorage.setItem(menuCollapseString, true);
+		}
 
 		var sideTabs = Volta.menu._element.querySelector('.' + Volta.menu._class.sideTabs);
 
@@ -101,6 +109,8 @@ Volta.menuCollapse = function () {
 				link.classList.add(Volta.menu._class.link);
 			});
 		}
+
+		Volta.menu.styleActiveTrigger();
 	}
 
 	/**   
@@ -113,7 +123,7 @@ Volta.menuCollapse = function () {
 
 		attachMenuCollapseHandler();
 
-		var menuCollapsedFlag = localStorage.getItem(menuCollapseString);
+		var menuCollapsedFlag = localStorage ? localStorage.getItem(menuCollapseString) : false;
 
 		if(menuCollapsedFlag) {
 			Volta.menu._element.querySelectorAll('.' + Volta.menu._class.triggerActive).forEach(function(trigger) {
@@ -125,16 +135,17 @@ Volta.menuCollapse = function () {
 		}
 	}
 
-	/**   
+	/**
 	 *	@public
-	 *	
+	 *
 	 *	@description Expand the collapsed menu
 	 */
 	function unCollapseMenu() {
 		Volta.menu._element.classList.remove(_class.collapsed);
-		Volta.menu.expand(true);
 
-		localStorage.removeItem(menuCollapseString);
+		if(localStorage) {
+			localStorage.removeItem(menuCollapseString);
+		}
 
 		var sideTabs = Volta.menu._element.querySelector('.' + Volta.menu._class.sideTabs);
 
@@ -150,5 +161,7 @@ Volta.menuCollapse = function () {
 				link.classList.remove(Volta.menu._class.link);
 			});
 		}
+
+		Volta.menu.expand(true);
 	}
 }();

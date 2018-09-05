@@ -13,7 +13,8 @@ Volta = function (){
 		init: initialise,
 		_isMobile: isMobileDevice,
 		_getElementSiblings: getElementSiblings,
-		_getFunction: getFunctionFromString
+		_getFunction: getFunctionFromString,
+		_removeFromArr: removeFromArr
 	}
 
 	/**   
@@ -76,7 +77,7 @@ Volta = function (){
 	}
 
 	/**   
-	 *	@privates
+	 *	@private
 	 *	
 	 *	@description Check if the given element has a particular class
 	 *	@param {HTMLElement} el Element to evaluate
@@ -181,6 +182,20 @@ Volta = function (){
 				console.warn('Volta: volta.tooltip.js component missing')
 			}
 		}
+	}
+
+	/**   
+	 *	@private
+	 *	
+	 *	@description Remove an element from an array
+	 *  @param {Array} arr The array containing the element
+	 *  @param {Element} element The element to remove
+	 *  @returns {Array} The array minus the element
+	 */
+	function removeFromArr(arr, element) {
+		var index = arr.indexOf(element);
+  		arr.splice(index, 1);
+  		return arr;
 	}
 
 	/**   

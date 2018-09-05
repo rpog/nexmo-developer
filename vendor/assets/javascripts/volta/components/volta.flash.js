@@ -15,9 +15,11 @@ Volta.flash = function () {
 
 	var gap = 20,
 		openBottomFlashes = [],
-		openTopFlashes = [];
+		openTopFlashes = [],
+		timeouts =[];
 
 	return {
+		closeAll: closeAll,
 		init: attachFlashHandlers,
 		show: show
 	}
@@ -52,6 +54,36 @@ Volta.flash = function () {
 	/**   
 	 *	@public
 	 *	
+	 *	@description Close all open flashes
+	 */
+	function closeAll() {		
+		if(timeouts.length > 0) {
+			timeouts.forEach(function(timeout){
+				clearTimeout(timeout);
+			});
+		}
+		if(openBottomFlashes.length > 0) {
+			clearQueue(openBottomFlashes);
+		}
+		if(openTopFlashes.length > 0) {
+			clearQueue(openTopFlashes);
+		}
+		
+		timeouts = [];
+		openBottomFlashes = [];
+		openTopFlashes = [];
+
+		function clearQueue(elementArr) {
+			elementArr.forEach(function(element){
+				_hide(element);
+			});	
+			elementArr = [];
+		}
+	}
+
+	/**   
+	 *	@public
+	 *	
 	 *	@description Show the flash
 	 *  @param {HTMLElement} element 
 	 */
@@ -76,9 +108,12 @@ Volta.flash = function () {
 				
 		element.classList.add(_class.visible);
 		
-		setTimeout(function(){
-			_hide(element);
+		var hideTimeout = setTimeout(function(){
+			_hide(element, true);
+			Volta._removeFromArr(timeouts, hideTimeout);
 		}, time);
+
+		timeouts.push(hideTimeout);
 	}
 
 	/**   
@@ -86,12 +121,13 @@ Volta.flash = function () {
 	 *	@description Hide the flash
 	 *  @param {HTMLElement} element 
 	 */
-	function _hide(element) {
+	function _hide(element, shouldRemove) {
 		var position = Volta._hasClass(element, 'Vlt-flash--bottom') ? 'bottom' : 'top';
 		var arr = position === 'bottom' ? openBottomFlashes : openTopFlashes;
-		var index = arr.indexOf(element);
 		
-		arr.splice(index, 1);
+		if(shouldRemove) {
+			Volta._removeFromArr(arr, element);
+		}
 
 		_updateFlashPositions(arr, element, position);
 

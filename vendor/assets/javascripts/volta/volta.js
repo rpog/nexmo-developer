@@ -1,16 +1,3 @@
-/*!
- * @copyright Copyright (c) 2017 IcoMoon.io
- * @license   Licensed under MIT license
- *            See https://github.com/Keyamoon/svgxuse
- * @version   1.2.6
- */
-(function(){if("undefined"!==typeof window&&window.addEventListener){var e=Object.create(null),l,d=function(){clearTimeout(l);l=setTimeout(n,100)},m=function(){},t=function(){window.addEventListener("resize",d,!1);window.addEventListener("orientationchange",d,!1);if(window.MutationObserver){var k=new MutationObserver(d);k.observe(document.documentElement,{childList:!0,subtree:!0,attributes:!0});m=function(){try{k.disconnect(),window.removeEventListener("resize",d,!1),window.removeEventListener("orientationchange",
-d,!1)}catch(v){}}}else document.documentElement.addEventListener("DOMSubtreeModified",d,!1),m=function(){document.documentElement.removeEventListener("DOMSubtreeModified",d,!1);window.removeEventListener("resize",d,!1);window.removeEventListener("orientationchange",d,!1)}},u=function(k){function e(a){if(void 0!==a.protocol)var c=a;else c=document.createElement("a"),c.href=a;return c.protocol.replace(/:/g,"")+c.host}if(window.XMLHttpRequest){var d=new XMLHttpRequest;var m=e(location);k=e(k);d=void 0===
-d.withCredentials&&""!==k&&k!==m?XDomainRequest||void 0:XMLHttpRequest}return d};var n=function(){function d(){--q;0===q&&(m(),t())}function l(a){return function(){!0!==e[a.base]&&(a.useEl.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href","#"+a.hash),a.useEl.hasAttribute("href")&&a.useEl.setAttribute("href","#"+a.hash))}}function p(a){return function(){var c=document.body,b=document.createElement("x");a.onload=null;b.innerHTML=a.responseText;if(b=b.getElementsByTagName("svg")[0])b.setAttribute("aria-hidden",
-"true"),b.style.position="absolute",b.style.width=0,b.style.height=0,b.style.overflow="hidden",c.insertBefore(b,c.firstChild);d()}}function n(a){return function(){a.onerror=null;a.ontimeout=null;d()}}var a,c,q=0;m();var f=document.getElementsByTagName("use");for(c=0;c<f.length;c+=1){try{var g=f[c].getBoundingClientRect()}catch(w){g=!1}var h=(a=f[c].getAttribute("href")||f[c].getAttributeNS("http://www.w3.org/1999/xlink","href")||f[c].getAttribute("xlink:href"))&&a.split?a.split("#"):["",""];var b=
-h[0];h=h[1];var r=g&&0===g.left&&0===g.right&&0===g.top&&0===g.bottom;g&&0===g.width&&0===g.height&&!r?(f[c].hasAttribute("href")&&f[c].setAttributeNS("http://www.w3.org/1999/xlink","xlink:href",a),b.length&&(a=e[b],!0!==a&&setTimeout(l({useEl:f[c],base:b,hash:h}),0),void 0===a&&(h=u(b),void 0!==h&&(a=new h,e[b]=a,a.onload=p(a),a.onerror=n(a),a.ontimeout=n(a),a.open("GET",b),a.send(),q+=1)))):r?b.length&&e[b]&&setTimeout(l({useEl:f[c],base:b,hash:h}),0):void 0===e[b]?e[b]=!0:e[b].onload&&(e[b].abort(),
-delete e[b].onload,e[b]=!0)}f="";q+=1;d()};var p=function(){window.removeEventListener("load",p,!1);l=setTimeout(n,0)};"complete"!==document.readyState?window.addEventListener("load",p,!1):p()}})();
-
 /**
  * Copyright (c) 2001-present, Vonage.
  *	
@@ -26,7 +13,8 @@ Volta = function (){
 		init: initialise,
 		_isMobile: isMobileDevice,
 		_getElementSiblings: getElementSiblings,
-		_getFunction: getFunctionFromString
+		_getFunction: getFunctionFromString,
+		_removeFromArr: removeFromArr
 	}
 
 	/**   
@@ -89,7 +77,7 @@ Volta = function (){
 	}
 
 	/**   
-	 *	@privates
+	 *	@private
 	 *	
 	 *	@description Check if the given element has a particular class
 	 *	@param {HTMLElement} el Element to evaluate
@@ -199,6 +187,20 @@ Volta = function (){
 	/**   
 	 *	@private
 	 *	
+	 *	@description Remove an element from an array
+	 *  @param {Array} arr The array containing the element
+	 *  @param {Element} element The element to remove
+	 *  @returns {Array} The array minus the element
+	 */
+	function removeFromArr(arr, element) {
+		var index = arr.indexOf(element);
+  		arr.splice(index, 1);
+  		return arr;
+	}
+
+	/**   
+	 *	@private
+	 *	
 	 */ 
 	function polyfilsForIE11() {
 		if (window.NodeList && !NodeList.prototype.forEach) {
@@ -236,14 +238,10 @@ Volta = function (){
 'use strict';
 
 Volta.accordion = function () {
-	var _type = {
-		standard: 0,
-		js: 1
-	}
-
 	var _class = {
 		standard: {
 			container: 'Vlt-accordion',
+			containerGroup: 'Vlt-accordion--group',
 			trigger: 'Vlt-accordion__trigger',
 			triggerActive: 'Vlt-accordion__trigger_active',
 			content: 'Vlt-accordion__content',
@@ -261,181 +259,127 @@ Volta.accordion = function () {
 		}
 	}
 
-	function _accordion() {}
+	function Accordion() {}
 
-	_accordion.prototype = {
-		init: function(elementOrId, suppressClickHandler, triggerElem) {
-			var element;
-
-			if(elementOrId.classList) {
-				element = elementOrId;
-			} else if (elementOrId.substring(0, 1) === "#") {
-				element = document.querySelector(elementOrId);
+	Accordion.prototype = {
+		init: function(element, suppressClickHandler, triggerElem) {
+			if(this.isStandard) {
+				this._initStandard(element, suppressClickHandler);
 			} else {
-				element = document.querySelector('#' + elementOrId);
+				this._initJs(element, suppressClickHandler, triggerElem);
 			}
+		},
+		_initStandard: function(element, suppressClickHandler) {
+			var self = this;
 
-			if(Volta._hasClass(element, _class.standard.container)) {
-				this._parent = element;
-				this._triggers = this._parent.querySelectorAll('.' + _class.standard.trigger);
-				this._panels = this._parent.querySelectorAll('.' + _class.standard.content);
+			if(!suppressClickHandler) {
+				element.querySelectorAll('.' + _class.standard.trigger).forEach(function(trigger) {
+					var parent = Volta._closest(trigger, '.' + _class.standard.container, _class.standard.container);
 
-				this._triggerActive = undefined;
-				this._panelOpen = undefined;
-
-				if(!suppressClickHandler) {
-					var _this = this;
-					_this._triggers.forEach(function(trigger) {
+					if(parent && parent == element) {
 						trigger.addEventListener('click', function(){
-							_this.toggle(trigger);
+							self.toggle(trigger);
 						});
-					});
-				}
-			} else {
-				var _this = this;
-				_this._content = element;
-				
-				if(triggerElem) {
-					_this.trigger = triggerElem;
-				} else if(_this._content.dataset.trigger) {
-					var triggerId = _this._content.dataset.trigger;
-					_this.trigger = document.querySelector('#' + triggerId);
-				} else {
-					console.warn("Volta: js accordion trigger missing");
-				}
-
-				if(!suppressClickHandler) {
-					_this.trigger.addEventListener('click', function(){
-						_this.toggle();
-					});
-				}
-
+					}
+				});
 			}
 		},
-		close: function() {
-			if(this.trigger) {
-				this._closeJsAccordion();
+		_initJs: function(element, suppressClickHandler, triggerElem) {
+			this._content = element;
+
+			if(triggerElem) {
+				this.trigger = triggerElem;
+			} else if(this._content.dataset.trigger) {
+				var triggerId = this._content.dataset.trigger;
+				this.trigger = document.querySelector('#' + triggerId);
 			} else {
-				this._closeStandardAccordion(triggerElement);
+				console.warn("Volta: js accordion trigger missing");
+			}
+
+			var self = this;
+			if(!suppressClickHandler && this.trigger) {
+				this.trigger.addEventListener('click', function(){
+					self.toggle();
+				});
 			}
 		},
-		_closeJsAccordion: function() {
-			this.trigger.classList.remove(_class.js.triggerActive);
-			this._content.classList.add(_class.js.contentClosing);
+		close: function(trigger) {
+			var panel = this._content || trigger.nextElementSibling;
+			var trigger = this.trigger || trigger;
+			var classes = this.trigger ? _class.js : _class.standard;
 
-			this._content.style.height = window.getComputedStyle(this._content).height;
-			this._content.offsetHeight; // force repaint
-			this._content.style.height = '0px';
-
-			var _this = this;
-			this._content.addEventListener('transitionend', function closingTransitionEndEvent(event) {
-				if (event.propertyName == 'height') {
-					_this._content.classList.remove(_class.js.contentClosing);
-					_this._content.classList.remove(_class.js.contentOpen);
-					_this._content.style.height = '0px';
-					_this._content.removeEventListener('transitionend', closingTransitionEndEvent, false);
-				}
-			}, { passive: true });
-		},
-		_closeStandardAccordion: function(triggerElement) {
-			var _this = this;
-			var panel = this._panelOpen;
-			this._triggerActive.classList.remove(_class.standard.triggerActive);
-			panel.classList.add(_class.standard.contentClosing);
+			trigger.classList.remove(classes.triggerActive);
+			panel.classList.add(classes.contentClosing);
 
 			panel.style.height = window.getComputedStyle(panel).height;
 			panel.offsetHeight; // force repaint
 			panel.style.height = '0px';
+			panel.classList.remove(classes.contentOpen);
 
-			var _this = this;
+			var self = this;
 			panel.addEventListener('transitionend', function closingTransitionEndEvent(event) {
-				if (event.propertyName == 'height') {
-					panel.classList.remove(_class.standard.contentClosing);
-					panel.classList.remove(_class.standard.contentOpen);
+				if (event.propertyName == 'height' && Volta._hasClass(panel, classes.contentClosing)) {
+					panel.classList.remove(classes.contentClosing);
 					panel.style.height = '0px';
 					panel.removeEventListener('transitionend', closingTransitionEndEvent, false);
 
-					if(triggerElement && triggerElement === _this._triggerActive){
-						_this._triggerActive = undefined;
-						_this._panelOpen = undefined;
+					if(self.isGroup && self._isTriggerActive(trigger,  true)){
+						self._activeGroupTrigger = undefined;
 					}
 				}
-			}, { passive: true });
+			}, { passive: true, once: true });
 		},
-		open: function() {
-			if(this.trigger) {
-				this._openJsAccordion();
-			} else {
-				this._openStandardAccordion(triggerElement);
-			}
+		isOpening: false,
+		_activeGroupTrigger: undefined,
+		_isTriggerActive: function(trigger, match) {
+			return (this.isGroup && this._activeGroupTrigger && (!match || this._activeGroupTrigger === trigger)) || Volta._hasClass(trigger, _class.standard.triggerActive);
 		},
-		_openJsAccordion: function() {
-			this.trigger.classList.add(_class.js.triggerActive);
-			this._content.classList.add(_class.js.contentOpening);
-
-			var startHeight = this._content.style.height;
-			this._content.style.height = 'auto';
-			var endHeight = window.getComputedStyle(this._content).height;
-			this._content.style.height = startHeight;
-			this._content.offsetHeight; // force repaint
-			this._content.style.height = endHeight;
-
-			var _this = this;
-			this._content.addEventListener('transitionend', function openingTransitionEndEvent(event) {
-				if (event.propertyName == 'height') {
-					_this._content.style.height = 'auto';
-					_this._content.classList.remove(_class.js.contentOpening);
-					_this._content.classList.add(_class.js.contentOpen);
-					_this._content.removeEventListener('transitionend', openingTransitionEndEvent, false);
+		open: function(trigger) {
+			if(!this.trigger) {
+				if(this._isTriggerActive(trigger, false)) {
+				this.close(this._activeGroupTrigger || trigger);
 				}
-			}, { passive: true });
-		},
-		_openStandardAccordion: function(triggerElement) {
-			if(this._triggerActive) {
-				this._closeStandardAccordion();
-			}
-			this._triggerActive = triggerElement;
-			this._panelOpen = this._triggerActive.nextElementSibling;
-
-			this._triggerActive.classList.add(_class.standard.triggerActive);
-			this._panelOpen.classList.add(_class.standard.contentOpening);
-
-			var startHeight = this._panelOpen.style.height;
-			this._panelOpen.style.height = 'auto';
-			var endHeight = window.getComputedStyle(this._panelOpen).height;
-			this._panelOpen.style.height = startHeight;
-			this._panelOpen.offsetHeight; // force repaint
-			this._panelOpen.style.height = endHeight;
-
-			var _this = this;
-			this._panelOpen.addEventListener('transitionend', function openingTransitionEndEvent(event) {
-				if (event.propertyName == 'height') {
-					_this._panelOpen.style.height = 'auto';
-					_this._panelOpen.classList.remove(_class.standard.contentOpening);
-					_this._panelOpen.classList.add(_class.standard.contentOpen);
-					_this._panelOpen.removeEventListener('transitionend', openingTransitionEndEvent, false);
+				if(this.isGroup) {
+					this._activeGroupTrigger = trigger;
 				}
-			}, { passive: true });
-		},
-		toggle: function(triggerElement) {
-			if(this.trigger) {
-				this._toggleJsAccordion();
-			} else {
-				this._toggleStandardAccordion(triggerElement);
 			}
+
+			var trig = this.trigger || trigger;
+			var classes = this.trigger ? _class.js : _class.standard;
+			var panel = this._content || trig.nextElementSibling;
+
+			this.isOpening = true;
+
+			trig.classList.add(classes.triggerActive);
+			panel.classList.add(classes.contentOpening);
+
+			var startHeight = panel.style.height;
+			panel.style.height = 'auto';
+			var endHeight = window.getComputedStyle(panel).height;
+			panel.style.height = startHeight;
+			panel.offsetHeight; // force repaint
+			panel.style.height = endHeight;
+
+			var self = this;
+			panel.addEventListener('transitionend', function openingTransitionEndEvent(event) {
+				if (event.propertyName == 'height' && Volta._hasClass(panel, classes.contentOpening)) {
+					panel.style.height = 'auto';
+					panel.classList.remove(classes.contentOpening);
+					panel.classList.add(classes.contentOpen);
+					panel.removeEventListener('transitionend', openingTransitionEndEvent, false);
+					self.isOpening = false;
+				}
+			}, { passive: true, once: true });
 		},
-		_toggleJsAccordion: function() {
-			if(Volta._hasClass(this._content, _class.js.contentOpen)) {
-				this._closeJsAccordion();
-			} else {
-				this._openJsAccordion();
+		toggle: function(trigger) {
+			if(this.isOpening) {
+				return false;
 			}
-		},
-		_toggleStandardAccordion: function(triggerElement) {
-			if(this._triggerActive && this._triggerActive === triggerElement) {
-				this._closeStandardAccordion(triggerElement);
+			if((this.trigger && Volta._hasClass(this._content, _class.js.contentOpen))
+				|| (!this.trigger && this._isTriggerActive(trigger, true))) {
+				this.close(trigger);
 			} else {
-				this._openStandardAccordion(triggerElement);
+				this.open(trigger);
 			}
 		}
 	}
@@ -450,16 +394,33 @@ Volta.accordion = function () {
 	 *
 	 *	@description Create an individual accordion object
 	 *	@param {Element|string} elementOrId Reference to the accordion content element or the id
-	 *	@param {boolean} suppressClickHandler Whether click events should be attached on creation
-	 *	@param {Element} _trigger Private required for legacy accordions
+	 *	@param {Boolean} suppressClickHandler Whether click events should be attached on creation
+	 *	@param {Element} trigger Private required for legacy accordions
+	 *	@param {Boolean} isGroup Private required for legacy accordions
 	 *  @return {Object}
 	 */
-	function create(elementOrId, suppressClickHandler, _trigger) {	
+	function create(elementOrId, suppressClickHandler, trigger, isGroup, isStandard) {
 		if(!elementOrId) {
-			consol.warn("Volta: no parameter supplied to accordion.create()");
-		} 
-		var accordion = Object.create(_accordion.prototype, {});
-		accordion.init(elementOrId, suppressClickHandler, _trigger);
+			console.warn("Volta: no parameter supplied to accordion.create()");
+		}
+		var accordion = Object.create(Accordion.prototype, {});
+		var element = getElement(elementOrId);
+
+		Object.defineProperties(accordion, {
+			'isStandard': {
+				value: isStandard || Volta._hasClass(element, _class.standard.container),
+				writable: false
+			}
+		});
+
+		Object.defineProperties(accordion, {
+			'isGroup': {
+				value: isGroup,
+				writable: false
+			}
+		});
+
+		accordion.init(element, suppressClickHandler, trigger);
 
 		return accordion;
 	}
@@ -475,10 +436,10 @@ Volta.accordion = function () {
 
 		if(standardAccordions.length) {
 			standardAccordions.forEach(function(accordion){
-				create(accordion);
+				create(accordion, false, null, Volta._hasClass(accordion, _class.standard.containerGroup), true);
 			});
 		}
-		
+
 		//js
 		var triggers = document.querySelectorAll('.' + _class.js.trigger + '[data-accordion]');
 		if(triggers.length > 0) {
@@ -498,6 +459,23 @@ Volta.accordion = function () {
 				create(jsLegacy);
 			});
 		}
+	}
+
+	/**
+	 *	@private
+	 */
+	function getElement(elementOrId) {
+	 	var element;
+
+		if(elementOrId.classList) {
+			element = elementOrId;
+		} else if (elementOrId.substring(0, 1) === "#") {
+			element = document.querySelector(elementOrId);
+		} else {
+			element = document.querySelector('#' + elementOrId);
+		}
+
+		return element;
 	}
 }();
 
@@ -633,21 +611,28 @@ Volta.callout = function () {
 }();
 /**
  * Copyright (c) 2001-present, Vonage.
- *	
+ *
  * Dropdowns (requires core)
  */
 
 'use strict';
 
-Volta.dropdown = function () {	
+Volta.dropdown = function () {
 	var _class = {
 		wrapper: 'Vlt-dropdown',
+		block: 'Vlt-dropdown__block',
 		btn: 'Vlt-dropdown__btn',
 		dismissed: 'Vlt-callout--dismissed',
 		expanded: 'Vlt-dropdown--expanded',
+		label: 'Vlt-dropdown__label',
+		link: 'Vlt-dropdown__link',
+		noCloseLink: 'Vlt-dropdown__link--noclose',
+		noCloseBlock: 'Vlt-dropdown__block--noclose',
 		panel: 'Vlt-dropdown__panel',
 		panelContent: 'Vlt-dropdown__panel__content',
-		selection: 'Vlt-dropdown__selection'
+		selection: 'Vlt-dropdown__selection',
+		switch: 'Vlt-switch',
+		switchSlider: 'Vlt-switch__slider'
 	}
 
 	function Dropdown() {}
@@ -677,19 +662,38 @@ Volta.dropdown = function () {
 			if(!this._suppress){
 				this._addEventListener();
 			}
-			
+
 		},
 		_closeEventHandler: undefined,
 		_closeEvent: function(e) {
 			var targetIsPanel = Volta._hasClass(e.target, _class.panel);
-			var parentIsPanel = Volta._hasClass(e.target.parentElement.parentElement, _class.panelContent);
-			
-			if(!targetIsPanel && !parentIsPanel) {
+			var parentIsPanel = Volta._closest(e.target, '.' + _class.panelContent, _class.panel) !== null;
+			var parentLink = Volta._closest(e.target, '.' + _class.link, _class.wrapper);
+			var parentIsLink = parentLink && parentLink.length === 1;
+			var isSwitchSlider = Volta._hasClass(e.target, _class.switchSlider);
+			var isParentSwitch = Volta._closest(e.target,'.' + _class.switch, _class.link);
+			var isNoClose = Volta._hasClass(e.target, _class.noCloseLink) || Volta._hasClass(e.target, _class.noCloseBlock);
+			var isNoCloseParent = Volta._closest(e.target,'.' + _class.noCloseLink, _class.link) || Volta._closest(e.target,'.' + _class.noCloseBlock, _class.noCloseBlock);
+			var isInput = e.target instanceof HTMLInputElement;
+
+			if(!targetIsPanel && !parentIsPanel && !parentIsLink && !isNoClose && !isInput && !isNoCloseParent) {
 				e.preventDefault();
 				e.stopPropagation();
-			} 
+			}
 
-			var text = parentIsPanel ? e.target.innerHTML : undefined;
+			if(isSwitchSlider || isParentSwitch || isNoClose || isInput || isNoCloseParent) {
+				return null;
+			}
+
+			var text;
+			if(parentIsPanel && Volta._hasClass(e.target, _class.label)) {
+				text = e.target.innerHTML;
+			} else if (parentIsPanel) {
+				var label = e.target.querySelector('.' + _class.label);
+				if(label) {
+					text = label.innerHTML;
+				}
+			}
 
 			this.close(text);
 
@@ -706,11 +710,11 @@ Volta.dropdown = function () {
 			if(!this._suppress){
 				this._closeEventHandler = this._closeEvent.bind(this);
 				document.querySelector('body').addEventListener('click', this._closeEventHandler );
-			}			
+			}
 		},
 		_setDropdownSelectionText: function(text) {
 			if(this.isSelectionVisible) {
-				this.selection .innerText = text;
+				this.selection.innerText = text;
 			} else {
 				this.btn.innerText = text;
 				this.btn.value = text;
@@ -724,24 +728,24 @@ Volta.dropdown = function () {
 		init: attachDropdownHandlers
 	}
 
-	/**   
+	/**
 	 *	@public
-	 *	
+	 *
 	 *	@description Attach a listeners to dropdowns
 	 */
 	function attachDropdownHandlers() {
 		document.querySelectorAll('.' + _class.wrapper).forEach(attachHandler);
-		
+
 		function attachHandler(dropdown) {
 			create(dropdown);
 		}
 	}
 
-	/**   
+	/**
 	 *	@private
-	 *	
+	 *
 	 *	@description Create a dropdown element
-	 *  @param {HTMLElement} element 
+	 *  @param {HTMLElement} element
  	 */
 	function create(element){
 		var dropdown = Object.create(Dropdown.prototype, {})
@@ -766,9 +770,11 @@ Volta.flash = function () {
 
 	var gap = 20,
 		openBottomFlashes = [],
-		openTopFlashes = [];
+		openTopFlashes = [],
+		timeouts =[];
 
 	return {
+		closeAll: closeAll,
 		init: attachFlashHandlers,
 		show: show
 	}
@@ -803,6 +809,36 @@ Volta.flash = function () {
 	/**   
 	 *	@public
 	 *	
+	 *	@description Close all open flashes
+	 */
+	function closeAll() {		
+		if(timeouts.length > 0) {
+			timeouts.forEach(function(timeout){
+				clearTimeout(timeout);
+			});
+		}
+		if(openBottomFlashes.length > 0) {
+			clearQueue(openBottomFlashes);
+		}
+		if(openTopFlashes.length > 0) {
+			clearQueue(openTopFlashes);
+		}
+		
+		timeouts = [];
+		openBottomFlashes = [];
+		openTopFlashes = [];
+
+		function clearQueue(elementArr) {
+			elementArr.forEach(function(element){
+				_hide(element);
+			});	
+			elementArr = [];
+		}
+	}
+
+	/**   
+	 *	@public
+	 *	
 	 *	@description Show the flash
 	 *  @param {HTMLElement} element 
 	 */
@@ -827,9 +863,12 @@ Volta.flash = function () {
 				
 		element.classList.add(_class.visible);
 		
-		setTimeout(function(){
-			_hide(element);
+		var hideTimeout = setTimeout(function(){
+			_hide(element, true);
+			Volta._removeFromArr(timeouts, hideTimeout);
 		}, time);
+
+		timeouts.push(hideTimeout);
 	}
 
 	/**   
@@ -837,12 +876,13 @@ Volta.flash = function () {
 	 *	@description Hide the flash
 	 *  @param {HTMLElement} element 
 	 */
-	function _hide(element) {
+	function _hide(element, shouldRemove) {
 		var position = Volta._hasClass(element, 'Vlt-flash--bottom') ? 'bottom' : 'top';
 		var arr = position === 'bottom' ? openBottomFlashes : openTopFlashes;
-		var index = arr.indexOf(element);
 		
-		arr.splice(index, 1);
+		if(shouldRemove) {
+			Volta._removeFromArr(arr, element);
+		}
 
 		_updateFlashPositions(arr, element, position);
 
@@ -899,8 +939,10 @@ Volta.flash = function () {
 Volta.modal = function () {
 	var _class = {
 		auto: 'Vlt-modal--auto',
+		bodyModalOpen: 'Vlt-body--modal-open',
 		cancel: 'Vlt-modal__cancel',
 		confirm: 'Vlt-modal__confirm',
+		content: 'Vlt-modal__content',
 		modal: 'Vlt-modal',
 		out: 'Vlt-modal--out',
 		panel: 'Vlt-modal__panel',
@@ -909,11 +951,13 @@ Volta.modal = function () {
 		dismiss: 'Vlt-modal__dismiss',
 	}
 
-	var dismissModalHandler, 
+	var body,
+		dismissModalHandler, 
 		cancelModalHandler,
 		confirmModalHandler,
 		escHandler,
-		clickHandler;
+		clickHandler,
+		escAttached;
 
 	function Modal() {}
 
@@ -964,15 +1008,18 @@ Volta.modal = function () {
 		    this.modal.classList.add(_class.visible);
 		    this.attachButtons();	
 
-		    if(!this.modal.dataset.disableEsc || this.modal.dataset.disableEsc === "false") {
+		    disableScroll();
+
+		    if(!escAttached && !this.modal.dataset.disableEsc || this.modal.dataset.disableEsc === "false") {
 		    	escHandler = closeModalOnEscape.bind(this);
-		   		document.querySelector('body').addEventListener('keyup', escHandler);
+		   		body.addEventListener('keyup', escHandler, { once: true });
+		   		escAttached = true;
 		    }
 
 		    if(!this.modal.dataset.disableClick || this.modal.dataset.disableClick === "false") {
 		    	clickHandler = closeModalOnClick.bind(this);
-		   		document.querySelector('body').addEventListener('click', clickHandler);
-		    }	    		    
+		   		this.modal.addEventListener('click', clickHandler, { once: true });
+		    } 		    
 		},
 		dismiss: function(e, confirmed) {
 			var _this = this;
@@ -982,8 +1029,12 @@ Volta.modal = function () {
 		    	e.stopPropagation();
 			}
 
-			_this.modal.classList.remove(_class.visible);
-			_this.modal.classList.add(_class.out);
+			enableScroll();
+
+			if(_this.modal){
+				_this.modal.classList.remove(_class.visible);
+				_this.modal.classList.add(_class.out);
+			}
 			
 			if(_this._callback) {
 				_this._callback(confirmed);
@@ -1004,6 +1055,10 @@ Volta.modal = function () {
 	 *	@description Attach a click listener to each modals trigger on the screen, which will open the modal
 	 */
 	function attachModalHandlers() {
+		if(!body) {
+			body = document.querySelector('body');
+		}
+
 		var triggers = document.querySelectorAll('.' + _class.trigger);
 
 		if(triggers.length > 0) {
@@ -1079,6 +1134,8 @@ Volta.modal = function () {
     function closeModalOnEscape(e){
     	if(e && e.keyCode === 27) {
     		this.dismiss(e, false);
+    	}else {
+			body.addEventListener('click', escHandler, { once: true });
     	}
     }
 
@@ -1089,9 +1146,13 @@ Volta.modal = function () {
 	 *  @param {event} e 
 	 */
     function closeModalOnClick(e){
-    	if(!Volta._hasClass(e.target, _class.trigger) && !Volta._closest(e.target, '.' + _class.panel, '.' + _class.panel)) {
+    	if(!Volta._hasClass(e.target, _class.trigger) 
+			&& !Volta._closest(e.target, '.' + _class.trigger, '.' + _class.trigger)
+    		&& !Volta._closest(e.target, '.' + _class.panel, '.' + _class.panel)) {
     		this.dismiss(e, false);
-    	} 
+    	} else {
+			this.modal.addEventListener('click', clickHandler, { once: true });
+    	}
     }
     
     /**   
@@ -1106,7 +1167,32 @@ Volta.modal = function () {
 		modal.init(elementOrId);
 		return modal;
     }
-  	
+
+    /**
+	 * Private functions to disable body scroll when modal is open
+     */
+    function disableScroll() {
+	    body.classList.add(_class.bodyModalOpen);
+		body.addEventListener('touchmove', preventScroll);
+		body.querySelector('main').addEventListener('touchmove', preventScroll);
+		body.querySelector('.' + _class.content).addEventListener('touchmove', allowScroll);
+    }
+
+    function enableScroll() {
+		body.classList.remove(_class.bodyModalOpen);
+		body.removeEventListener('touchmove', preventScroll);
+		body.querySelector('main').removeEventListener('touchmove', preventScroll);
+		body.querySelector('.' + _class.content).removeEventListener('touchmove', allowScroll);
+    }
+
+    function allowScroll(e) {
+    	e.stopPropagation();
+    }
+
+    function preventScroll(e) {
+		e.preventDefault();
+    }
+
   	/**   
 	 *	@private
 	 *	
@@ -1129,11 +1215,12 @@ Volta.modal = function () {
 		}
 
 		if(clickHandler) {
-   			document.querySelector('body').removeEventListener('click', clickHandler);
+   			body.removeEventListener('click', clickHandler);
     	}
 
     	if(escHandler) {
-    		document.querySelector('body').removeEventListener('keyup', escHandler);
+    		body.removeEventListener('keyup', escHandler);
+    		escAttached = false;
     	}		
 	}
 }();
@@ -1409,14 +1496,19 @@ Volta.menuCollapse = function () {
 	 */
 	function attachCloseHandler(expandedMenus) {
 		if(document.querySelector('.' + _class.collapsed) && expandedMenus) {
-			document.querySelector('body').addEventListener('click', function(e) {
-				if(!Volta._hasClass(e.target, Volta.menu._class.link) && !Volta._hasClass(e.target.parentElement, Volta.menu._class.link)) {
-					e.preventDefault();
-					e.stopPropagation();
+			document.querySelector('body').addEventListener('click', closeMenu, { once: true });
+		}
 
-					Volta.menu.closeAll();
-				}
-			}, { once: true });
+		function closeMenu(e) {
+			if(!Volta._hasClass(e.target, Volta.menu._class.link) 
+					&& !Volta._hasClass(e.target.parentElement, Volta.menu._class.link)) {
+				e.preventDefault();
+				e.stopPropagation();
+
+				Volta.menu.closeAll();
+			} else {
+				document.querySelector('body').addEventListener('click', closeMenu, { once: true });
+			}
 		}
 	}
 
@@ -1427,14 +1519,17 @@ Volta.menuCollapse = function () {
 	 */
 	function collapseMenu() {
 		Volta.menu.closeAll();
+		Volta.menu.selectActiveTab();
 
 		Volta.menu._element.classList.add(_class.collapsed);
-		
+
 		document.querySelectorAll(Volta.menu._class.trigger).forEach(function(menuItem){
 	        menuItem.nextElementSibling.style = "top: " + menuItem.positionTop;
 		});
 
-		localStorage.setItem(menuCollapseString, true);
+		if(localStorage) {
+			localStorage.setItem(menuCollapseString, true);
+		}
 
 		var sideTabs = Volta.menu._element.querySelector('.' + Volta.menu._class.sideTabs);
 
@@ -1450,6 +1545,8 @@ Volta.menuCollapse = function () {
 				link.classList.add(Volta.menu._class.link);
 			});
 		}
+
+		Volta.menu.styleActiveTrigger();
 	}
 
 	/**   
@@ -1462,7 +1559,7 @@ Volta.menuCollapse = function () {
 
 		attachMenuCollapseHandler();
 
-		var menuCollapsedFlag = localStorage.getItem(menuCollapseString);
+		var menuCollapsedFlag = localStorage ? localStorage.getItem(menuCollapseString) : false;
 
 		if(menuCollapsedFlag) {
 			Volta.menu._element.querySelectorAll('.' + Volta.menu._class.triggerActive).forEach(function(trigger) {
@@ -1474,16 +1571,17 @@ Volta.menuCollapse = function () {
 		}
 	}
 
-	/**   
+	/**
 	 *	@public
-	 *	
+	 *
 	 *	@description Expand the collapsed menu
 	 */
 	function unCollapseMenu() {
 		Volta.menu._element.classList.remove(_class.collapsed);
-		Volta.menu.expand(true);
 
-		localStorage.removeItem(menuCollapseString);
+		if(localStorage) {
+			localStorage.removeItem(menuCollapseString);
+		}
 
 		var sideTabs = Volta.menu._element.querySelector('.' + Volta.menu._class.sideTabs);
 
@@ -1499,17 +1597,19 @@ Volta.menuCollapse = function () {
 				link.classList.remove(Volta.menu._class.link);
 			});
 		}
+
+		Volta.menu.expand(true);
 	}
 }();
 /**
  * Copyright (c) 2001-present, Vonage.
- *	
+ *
  * Menu (requires core)
  */
 
 'use strict';
 
-Volta.menu = function () {	
+Volta.menu = function () {
 	var _class = {
 		mobile: 'Vlt-sidenav__mobile',
 		mobileOpen: 'Vlt-body--mobile-menu-open',
@@ -1518,6 +1618,9 @@ Volta.menu = function () {
 		linkActive: 'Vlt-sidemenu__link_active',
 		sideMenu: 'Vlt-sidemenu',
 		sideTabs: 'Vlt-sidetabs',
+		sideTabsLinkActive: 'Vlt-js-tabs__link_active',
+		sideTabsPanel: 'Vlt-js-tabs__panel',
+		sideTabsPanelActive: 'Vlt-js-tabs__panel_active',
 		sideTabsLink: 'Vlt-sidetabs__link',
 		sideTabsTrigger: 'Vlt-sidetabs__trigger',
 		trigger: 'Vlt-sidemenu__trigger',
@@ -1532,8 +1635,6 @@ Volta.menu = function () {
 		mobileTrigger: '#Vlt-sidenav-mobile-trigger'
 	}
 
-	var menu;
-
 	var expandedMenus = [],
 		mobileMenuTriggeredTwice;
 
@@ -1545,20 +1646,22 @@ Volta.menu = function () {
 		init: initialise,
 		expand: expandActiveMenu,
 		showCollapsed: expandMenu,
-		_triggerHandler: attachTriggerHandlers
+		_triggerHandler: attachTriggerHandlers,
+		selectActiveTab: selectActiveTab,
+		styleActiveTrigger: styleActiveTrigger
 	}
 
-	/**   
+	/**
 	 *	@private
-	 *	
+	 *
 	 *	@description Adds the parents of the active menu to the exoanded menus array
-	 *	@param {HTMLElement} element The active menu 
+	 *	@param {HTMLElement} element The active menu
 	 */
 	function addExpandedParentMenuToArr(element){
 		var nestedMenuUl = Volta._closest(element, 'ul', '.' + _class.sideMenu);
 		var nestedMenuTrigger = nestedMenuUl.previousElementSibling;
 
-		if(nestedMenuTrigger) {
+		if(nestedMenuTrigger && Volta._hasClass(nestedMenuTrigger, _class.trigger)) {
 			if(!Volta._hasClass(nestedMenuTrigger, _class.triggerActive)) {
 				nestedMenuTrigger.classList.add(_class.triggerActive);
 			}
@@ -1568,9 +1671,9 @@ Volta.menu = function () {
 		}
 	}
 
-	/**   
+	/**
 	 *	@private
-	 *	
+	 *
 	 *	@description Attach the listener for the mobile menu trigger
 	 */
 	function attachMobileTriggerHandler() {
@@ -1583,8 +1686,8 @@ Volta.menu = function () {
 					e.stopPropagation();
 					return;
 				}
-				if(!Volta._hasClass(menu, _class.visible)) {
-					menu.classList.add(_class.visible);
+				if(!Volta._hasClass(Volta.menu._element, _class.visible)) {
+					Volta.menu._element.classList.add(_class.visible);
 					document.body.classList.add(_class.mobileOpen);
 
 					//stop propagation otherwise will immediately call handler
@@ -1595,9 +1698,9 @@ Volta.menu = function () {
 		}
 	}
 
-	/**   
+	/**
 	 *	@private
-	 *	
+	 *
 	 *	@description Attach the listeners for closing the expanded mobile menu
 	 */
 	function addMobileMenuCollapseListeners() {
@@ -1605,25 +1708,25 @@ Volta.menu = function () {
 		document.querySelector('body').addEventListener('touchstart', closeMenu, { once: true });
 	}
 
-	/**   
+	/**
 	 *	@public
-	 *	
+	 *
 	 *	@description Attach the listeners to the trigger elements of the menu
 	 */
 	function attachTriggerHandlers() {
 		attachMobileTriggerHandler();
-		menu.querySelectorAll('.' + _class.trigger).forEach(attachHandler);
-		
+		Volta.menu._element.querySelectorAll('.' + _class.trigger).forEach(attachHandler);
+
 		function attachHandler(triggerElem) {
 			triggerElem.addEventListener('click', expandMenu);
 		}
 	}
 
-	/**   
+	/**
 	 *	@private
-	 *	
+	 *
 	 *	@description Attach the listeners to the trigger elements of the menu
-	 * 	@param {HTMLElement} menuItem 
+	 * 	@param {HTMLElement} menuItem
 	 *	@return {boolean} If the menu item is nested returns true, otherwise false
 	 */
 	function checkMenuItemIsNested(menuItem) {
@@ -1639,17 +1742,17 @@ Volta.menu = function () {
 		return isNested;
 	}
 
-	/**   
+	/**
 	 *	@private
-	 *	
+	 *
 	 *	@description Attach the listeners to the trigger elements of the menu
-	 * 	@param {HTMLElement} menuItem 
+	 * 	@param {HTMLElement} menuItem
 	 *	@return {boolean} If the menu item is nested returns true, otherwise false
 	 */
 	function closeMenu(e) {
-		var isSideMenuChild = Volta._closest(e.target, '.' + _class.sideMenu);
-		if(!Volta._hasClass(e.target, _class.sideMenu) && !isSideMenuChild) {
-			menu.classList.remove(_class.visible);
+		if(!Volta._hasClass(e.target, _class.sideMenu) && !Volta._closest(e.target, '.' + _class.sideMenu) &&
+			!Volta._hasClass(e.target, _class.sideTabs) && !Volta._closest(e.target, '.' + _class.sideTabs)) {
+			Volta.menu._element.classList.remove(_class.visible);
 
 			document.body.classList.remove(_class.mobileOpen);
 
@@ -1657,25 +1760,25 @@ Volta.menu = function () {
 			if(Volta._hasClass(e.target, _class.mobileTrigger) || isMobileMenu) {
 				mobileMenuTriggeredTwice = true;
 			}
-		} else {		
-			addMobileMenuCollapseListeners();	
+		} else {
+			addMobileMenuCollapseListeners();
 		}
 	}
 
-	/**   
+	/**
 	 *	@private
-	 *	
+	 *
 	 *	@description Expand the nested menu
-	 * 	@param {event} e 
+	 * 	@param {event} e
 	 */
 	function expandMenu(e) {
 		e.preventDefault();
 		e.stopPropagation();
-		
+
 		var _this = this;
 
 		var isNestedMenu = checkMenuItemIsNested(_this);
-		
+
 		if (expandedMenus.indexOf(_this) >= 0 && isNestedMenu) {
 			removeMenuFromSelectedArr(_this);
 		} else if(expandedMenus.indexOf(_this) >= 0) {
@@ -1690,49 +1793,50 @@ Volta.menu = function () {
 
 		if(Volta.menuCollapse) {
 			Volta.menuCollapse.attachCloseHandler(expandedMenus);
-		}	
+		}
 	}
 
-	/**   
+	/**
 	 *	@public
-	 *	
+	 *
 	 *	@description Expand the active menu - typically used on page load
 	 * 	@param {boolean} isUserForced Whether the action has been trigger by the user
 	 */
-	function expandActiveMenu(isUserForced) {			
-		var activeMenuItem = menu.querySelector('.' + _class.linkActive);
-	
+	function expandActiveMenu(isUserForced) {
+		var activeMenuItem = Volta.menu._element.querySelector('.' + _class.linkActive);
+
+		selectActiveTab(activeMenuItem);
+
 		if(activeMenuItem) {
 			var activeTriggerUl = Volta._closest(activeMenuItem, 'ul', '.' + _class.sideMenu);
-			var activeTrigger = activeTriggerUl.previousElementSibling;
-			
+			var activeTrigger = activeTriggerUl ? activeTriggerUl.previousElementSibling : null;
 			if(activeTrigger) {
-				if(!Volta._hasClass(activeTrigger, _class.triggerActive)) {
-					activeTrigger.classList.add(_class.triggerActive, _class.triggerCurrent);
-				}
-				
 				var isNestedMenu = checkMenuItemIsNested(activeTrigger);
 				if(isNestedMenu) {
 					addExpandedParentMenuToArr(activeTrigger);
 				}
 
+				if(!Volta._hasClass(activeTrigger, _class.triggerActive)) {
+					activeTrigger.classList.add(_class.triggerActive);
+				}
+
 				expandedMenus.push(activeTrigger);
 			}
+			styleActiveTrigger(activeMenuItem);
 		}
 	}
 
-	/**   
+	/**
 	 *	@public
-	 *	
+	 *
 	 *	@description Initialise the menu
 	 * 	@param {boolean} menuCollapse Whether the collapse module has been included
 	 */
 	function initialise(menuCollapse) {
 		expandedMenus = [];
-		menu = document.querySelector(_id.menu);
-		Volta.menu._element = menu;
+		Volta.menu._element = document.querySelector(_id.menu);
 
-		if(menu) {
+		if(Volta.menu._element) {
 			if(!Volta.menuCollapse) {
 				expandActiveMenu();
 			} else if(menuCollapse) {
@@ -1743,9 +1847,9 @@ Volta.menu = function () {
 		}
 	}
 
-	/**   
+	/**
 	 *	@public
-	 *	
+	 *
 	 *	@description Clear the selected menus array, and close all of the nested menus
 	 */
 	function removeAllMenuItemsFromSelectedArr(){
@@ -1755,14 +1859,82 @@ Volta.menu = function () {
 		expandedMenus = [];
 	}
 
-	/**   
+	/**
 	 *	@private
-	 *	
+	 *
 	 *	@description Remove a specific menu item from the selected array and close
 	 */
 	function removeMenuFromSelectedArr(menuItem) {
 		var menuIndex = expandedMenus.indexOf(menuItem);
 		menuItem.classList.remove(_class.triggerActive);
 		expandedMenus.splice(menuIndex, 1);
+	}
+
+	/**
+	 *	@public
+	 *
+	 *	@description Select the active side tab
+	 *	@param {activeMenuItem} Element(optional) The active menu item
+	 */
+	function selectActiveTab(activeMenuItem) {
+		activeMenuItem = activeMenuItem || Volta.menu._element.querySelector('.' + _class.linkActive);
+		var navTabs = document.querySelector(_id.menu + ' .' + _class.sideTabs);
+
+		if(!navTabs || !activeMenuItem) {
+			return null;
+		}
+
+		var sideMenus = Volta.menu._element.querySelectorAll('.' + _class.sideMenu);
+		var menuTab = Volta._closest(activeMenuItem, '.' + _class.sideTabsPanel, '.' + _class.sideMenu);
+
+		var tabIndex;
+		var currentNode = 0;
+
+		while(!tabIndex && currentNode < sideMenus.length) {
+			if(sideMenus.item(currentNode) === menuTab) {
+				tabIndex = currentNode;
+				break;
+			}
+			currentNode++;
+		}
+		var sideTabs = Volta.menu._element.querySelectorAll('.' + _class.sideTabsLink);
+		sideTabs[tabIndex].click();
+	}
+
+	/**
+	 *	@public
+	 *
+	 *	@description Adds a class to the top level active trigger
+	 *	@param {activeMenuItem} Element(optional) The active menu item
+	 */
+	function styleActiveTrigger(activeMenuItem) {
+		activeMenuItem = activeMenuItem || Volta.menu._element.querySelector('.' + _class.linkActive);
+
+		if(activeMenuItem) {
+			var topLevelTrigger = getTopLevelTrigger(activeMenuItem);
+
+			if(topLevelTrigger) {
+				topLevelTrigger.classList.add(_class.triggerCurrent);
+			}
+		}
+
+		function getTopLevelTrigger(activeMenuItem) {
+			var element = activeMenuItem;
+			var trigger = null;
+
+			while (element) {
+				if(element.matches('ul') && Volta._hasClass(element, _class.sideMenu)) {
+					break;
+				}
+
+				if (element.matches('ul')) {
+			  		trigger = element;
+				}
+
+				element = element.parentElement;
+			}
+
+			return trigger ? trigger.previousElementSibling : null;
+		}
 	}
 }();

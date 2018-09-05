@@ -38,6 +38,10 @@ hr {
 	margin: $unit2 0;
 }
 
+.hr--shorter {
+	margin: $unit1 0;
+}
+
 .Vlt-icon {
 	display: inline-block;
 	height: 24px;
@@ -71,5 +75,32 @@ hr {
 	&--larger {
 		height: 40px;
 		width: 40px;
+	}
+}
+
+$devices: (
+	#{$L-plus}: '',
+	#{$S-only}: 'S-',
+	#{$M-only}: 'M-',
+	'': 'A-'
+	);
+
+$directions: 'top', 'bottom';
+$units: ($unit1, $unit2, $unit3, $unit4);
+
+@each $direction in $directions {
+	@each $media, $devicePrefix in $devices {
+		@for $i from 1 through 4 {
+
+			.Vlt-margin--#{$devicePrefix}#{$direction}#{$i} {
+				@if $media != '' {
+					@media #{$media} {
+						margin-#{$direction}: nth($units, $i);
+					}
+				} @else {
+					margin-#{$direction}: nth($units, $i);
+				}
+			}
+		}
 	}
 }

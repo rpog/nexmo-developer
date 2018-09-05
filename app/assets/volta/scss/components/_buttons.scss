@@ -421,6 +421,10 @@ $shadow-tertiary: inset 0 0 0px 1px $grey;
 			}
 		}
 	}
+
+	&--inline {
+		display: inline-flex;
+	}
 }
 
 .Vlt-btn-on-hover {

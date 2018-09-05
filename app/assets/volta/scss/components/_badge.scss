@@ -83,7 +83,7 @@
 		padding: 0;
 	}
 
-	&-group {
+	&-combined {
 		display: flex;
 
 		.Vlt-badge {
@@ -108,9 +108,27 @@
 	&--margin {
 		margin-bottom: $unit1;
 		margin-top: $unit1;
+
+		&-left {
+			margin-left: $unit1;
+		}
 	}
 
 	&--middle {
 		vertical-align: middle;
+	}
+
+	&--app {
+		border-radius: $unit0;
+	}
+
+	&-group {
+		.Vlt-badge {
+			margin-right: $unit1;
+
+			& + .Vlt-badge {
+				margin-left: 0;
+			}
+		}
 	}
 }
