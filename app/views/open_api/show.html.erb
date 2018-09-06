@@ -1,6 +1,6 @@
 <%= render 'navigation', definition: @definition %>
 
-<div class="Vlt-main Vlt-main--light Nxd-main" tabindex="2">  
+<div class="Vlt-main Vlt-main--light Nxd-main" tabindex="2">
   <div class="Vlt-card Vlt-article Nxd-api">
     <div id="overview" class="Vlt-grid">
       <div class="Vlt-col Vlt-col--2of3 Nxd-api__docs">
@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="Vlt-col Vlt-col--1of3 Nxd-api__code Nxd-api__code--install">
-        
+
           <% if @definition_initialization_config && @definition_initialization_content %>
             <div class="Nxd-api__code__header">
               <ul class="tabs tabs--code" data-tabs>
@@ -52,11 +52,11 @@
                 </div>
               </div>
             <% end %>
-         
 
-          
+
+
           <%= @definition_initialization_content.html_safe %>
-          
+
         <% end %>
       </div>
     </div>
@@ -90,6 +90,6 @@
         </div>
       </div>
     <% end %>
-    <%= render partial: 'layouts/partials/footer' %>
+    <!--<%= render partial: 'layouts/partials/footer' %>-->
   </div>
 </div>
