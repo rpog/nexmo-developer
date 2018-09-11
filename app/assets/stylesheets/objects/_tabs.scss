@@ -11,16 +11,20 @@ ul.tabs {
 
 .tabs {
   @extend %tabs-header;
+  @extend %tabs-header-bordered;
 
   .tabs-title {
 
     > a {
       @extend %tabs-link;
+      @extend %tabs-link-bordered;
     }
 
     &.is-active {
       > a {
         @extend %tabs-link-active;
+        @extend %tabs-link-active-bordered;
+        background: $grey-lighter;
       }
     }
   }
@@ -28,6 +32,7 @@ ul.tabs {
 
 .tabs-panel {
   @extend %tabs-panel;
+  background: $grey-lighter;
 
   &.is-active {
     @extend %tabs-panel-active;

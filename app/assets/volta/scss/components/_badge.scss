@@ -124,7 +124,14 @@
 
 	&-group {
 		.Vlt-badge {
+			margin-bottom: $unit0;
 			margin-right: $unit1;
+			margin-top: $unit0;
+
+			&.Vlt-badge--large {
+				margin-bottom: $unit1;
+				margin-top: $unit1;
+			}
 
 			& + .Vlt-badge {
 				margin-left: 0;

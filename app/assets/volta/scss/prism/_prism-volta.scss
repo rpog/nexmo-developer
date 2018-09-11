@@ -4,6 +4,12 @@
  * Overrides of prism.css to make the styles suited to Vonage
  */
 
+.pre-nowrap {
+	pre[class*='language-'] {
+		white-space: pre;
+	}
+}
+
 pre[class*='language-'] {
 	-webkit-font-smoothing: antialiased;
 	background: $grey-lighter;
@@ -40,8 +46,8 @@ pre[class*='language-'] {
 
 	&.code-toolbar {
 		& > .toolbar {
-			right: 10px;
-			top: 10px;
+			right: 6px;
+			top: 0;
 
 			a {
 				@extend %Vlt-btn, .Vlt-btn--tertiary, .Vlt-btn--small;

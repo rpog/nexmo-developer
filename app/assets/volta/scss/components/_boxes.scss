@@ -24,6 +24,14 @@
 		color: $black;
 		font-size: 3.6rem;
 		line-height: 3.6rem;
+
+		.Vlt-box--white {
+			h2,
+			h3,
+			h4 {
+				color: $grey-dark;
+			}
+		}
 	}
 
 	&__data-desc {
@@ -67,12 +75,6 @@
 
 	&--white {
 		background: $white;
-
-		h2,
-		h3,
-		h4 {
-			color: $grey-dark;
-		}
 
 		.Vlt-box__data-desc {
 			color: $grey-dark;

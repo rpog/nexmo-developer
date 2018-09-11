@@ -27,7 +27,7 @@
                         <% endpoint.callbacks.each do |callback| %>
                           <% callback.paths.each do |path| %>
                             <% path.endpoints.each do |endpoint| %>
-                              <li>
+                              <li class="Nxd-menu__indent">
                                 <%= link_to "##{endpoint.operationId}", {:class=>"Vlt-sidemenu__link"} do %>
                                 <svg class="Vlt-blue"><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-toggle" /></svg>
                                 <span class="Vlt-sidemenu__label"><%= endpoint.summary %></span>

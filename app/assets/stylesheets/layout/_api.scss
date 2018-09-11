@@ -2,6 +2,10 @@
 	display: flex;
 }
 
+.Nxd-menu__indent {
+	margin-left: 31px !important;
+}
+
 .Nxd-method-badge {
 	text-transform: uppercase;
 
@@ -15,6 +19,10 @@
 
 	&--delete {
 		background: $red;
+	}
+
+	&--patch {
+		background: $teal;
 	}
 
 	&--put {
