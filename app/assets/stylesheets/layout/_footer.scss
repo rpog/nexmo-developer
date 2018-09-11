@@ -6,6 +6,8 @@
   margin-top: $spacing;
   line-height: 1.8;
   z-index: 2;
+  flex: 0 0 100%;
+  width: 100%;
 
   .container {
     display: flex;

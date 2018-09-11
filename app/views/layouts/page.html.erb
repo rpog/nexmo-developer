@@ -4,12 +4,12 @@
 
   <body class="Nxd-template" data-push-state-root="<%= canonical_path %>">
     <%= render partial: 'layouts/partials/header' %>
-    <div class="Vlt-main Vlt-main--light Nxd-main" tabindex="2">
+    <div class="wrapper wrapper--tint" tabindex="2">
       <%= render partial: 'layouts/partials/notices' %>
-      <div class="Vlt-card">
+      <div class="Nxd-landing-main">
         <%= yield %>
-        <%= render partial: 'layouts/partials/footer' %>
       </div>
     </div>
+    <%= render partial: 'layouts/partials/footer' %>
   </body>
 </html>

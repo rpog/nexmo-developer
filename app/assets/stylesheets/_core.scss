@@ -18,6 +18,7 @@ body {
   display: flex;
   flex-flow: row wrap;
   width: 100%;
+  justify-content: center;
 }
 
 .Nxd-main {
@@ -31,9 +32,13 @@ body {
   }
 }
 
+.Nxd-landing-main {
+  padding: $unit3 $unit4;
+}
+
 .container {
   max-width: 1300px;
-  padding: 0 $spacing;
+  padding: $unit3 $spacing 0;
   margin: auto;
 }
 
