@@ -1,0 +1,414 @@
+---
+openapi: "3.0.0"
+info:
+  version: "v2"
+  title: "Number Pools"
+servers:
+  - url: https://api.nexmo.com
+security:
+  - basicAuth: []
+paths:
+  /v2/pools:
+    get:
+      x-group: pool
+      operationId: listPool
+      summary: "List all pools"
+      description: ""
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListPoolsResponse'
+    post:
+      x-group: pool
+      operationId: createPool
+      summary: "Create a new pool"
+      description: ""
+      requestBody:
+        description: Update Pool Description
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Pool"
+                - required:
+                    - pool_id
+                    - fallback
+                    - localised_sender_preferred
+                    - predictable_sender_preferred
+      responses:
+        '201':
+          $ref: '#/components/responses/CreateOrUpdatePoolResponse'
+
+  /v2/pools/{pool_id}:
+    parameters:
+      - $ref: '#/components/parameters/poolId'
+    patch:
+      x-group: pool
+      operationId: patchPool
+      summary: "Update a pool"
+      description: ""
+      requestBody:
+        description: Update Pool Description
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pool"
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateOrUpdatePoolResponse'
+  /v2/pools/{pool_id}/numbers:
+    parameters:
+      - $ref: '#/components/parameters/poolId'
+    get:
+      x-group: numbers
+      operationId: listNumbers
+      summary: "List numbers in pool"
+      description: ""
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                properties:
+                  account_id:
+                    $ref: '#/components/schemas/accountId'
+                  page_size:
+                    $ref: '#/components/schemas/pageSize'
+                  page:
+                    $ref: '#/components/schemas/page'
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            description: Link to the current page
+                            example: /v1/pools/<pool_id>/numbers
+                      next:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            description: Link to the next available page
+                            example: /v1/pools/<pool_id>/numbers?page=<page_id+1>
+                      previous:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            description: Link to the previous available page
+                            example: /v1/pools/<pool_id>/numbers?page=<page_id-1>
+                      first:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            description: Link to the first available page
+                            example: /v1/pools/<pool_id>/numbers?page=1
+                      last:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            description: Link to the last available page
+                            example: /v1/pools/<pool_id>/numbers?page=<count_of_pages>
+                  _embedded:
+                    type: object
+                    properties:
+                      numbers:
+                        type: array
+                        example: ["14155550100", "14155550101"]
+                        items:
+                          type: string
+    
+
+    post:
+      x-group: numbers
+      summary: "Add a number to a pool"
+      operationId: postNumber
+      description: ""
+      requestBody:
+        description: Number In Pool Description
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - numbers
+              properties:
+                numbers:
+                  type: array
+                  x-nexmo-developer-collection-description-shown: true
+                  example:
+                    - 14155550100
+                    - 14155550101
+                  items:
+                    type: number
+                account_id:
+                  $ref: '#/components/schemas/accountId'
+      responses:
+        '201':
+          $ref: '#/components/responses/AddOrDeleteNumberInPoolResponse'
+
+    delete:
+      x-group: numbers
+      summary: "Remove a number from a pool"
+      operationId: deleteNumber
+      description: ""
+      responses:
+        '200':
+          $ref: '#/components/responses/AddOrDeleteNumberInPoolResponse'
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+  responses:
+    ##############################
+    # Pool Management - Responses
+    ##############################
+    CreateOrUpdatePoolResponse:
+      description: "Created"
+      content:
+        application/json:
+          schema:
+            properties:
+              account_id:
+                $ref: '#/components/schemas/accountId'
+              fallback:
+                $ref: '#/components/schemas/fallback'
+              localised_sender_preferred:
+                $ref: '#/components/schemas/localisedSenderPreferred'
+              predictable_sender_preferred:
+                $ref: '#/components/schemas/predictableSenderPreferred'
+              _links:
+                type: object
+                properties:
+                  self:
+                    type: object
+                    properties:
+                      href:
+                        type: string
+                        description: Link to the current pool
+                        example: /v1/pools/<pool_id>
+
+    ListPoolsResponse:
+      description: "Success"
+      content:
+        application/json:
+          schema:
+            properties:
+              page_size:
+                $ref: '#/components/schemas/pageSize'
+              page:
+                $ref: '#/components/schemas/page'
+              _links:
+                type: object
+                properties:
+                  self:
+                    type: object
+                    properties:
+                      href:
+                        type: string
+                        description: Link to the current page
+                        example: /v1/pools?page=<page_id>
+                  next:
+                    type: object
+                    properties:
+                      href:
+                        type: string
+                        description: Link to the next available page
+                        example: /v1/pools?page=<page_id+1>
+                  previous:
+                    type: object
+                    properties:
+                      href:
+                        type: string
+                        description: Link to the previous available page
+                        example: /v1/pools?page=<page_id-1>
+                  first:
+                    type: object
+                    properties:
+                      href:
+                        type: string
+                        description: Link to the first available page
+                        example: /v1/pools?page=1
+                  last:
+                    type: object
+                    properties:
+                      href:
+                        type: string
+                        description: Link to the last available page
+                        example: /v1/pools?page=<count_of_pages>
+              _embedded:
+                type: object
+                properties:
+                  pools:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        pool_id:
+                          $ref: '#/components/schemas/poolId'
+                        account_id:
+                          $ref: '#/components/schemas/accountId'
+                        localised_sender_preferred:
+                            $ref: '#/components/schemas/localisedSenderPreferred'
+                        fallback:
+                            $ref: '#/components/schemas/fallback'
+                        predictable_sender_preferred:
+                            $ref: '#/components/schemas/predictableSenderPreferred'
+                        _links:
+                            type: object
+                            properties:
+                              self:
+                                type: object
+                                properties:
+                                  href:
+                                    type: string
+                                    description: Link to the current pool
+                                    example: /v1/pools/<pool_id>
+
+    ################################
+    # Number Management - Responses
+    ################################
+    AddOrDeleteNumberInPoolResponse:
+      description: "Deleted"
+      content:
+        application/json:
+          schema:
+            properties:
+              account_id:
+                  $ref: '#/components/schemas/accountId'
+              numbers:
+                type: array
+                example: ["14155550100", "14155550101"]
+                description: The numbers added/removed from the pool
+                items:
+                  type: string
+              _links:
+                type: object
+                properties:
+                  self:
+                    type: object
+                    properties:
+                      href:
+                        type: string
+                        description: Link to the numbers in the current pool
+                        example: /v1/pools/<pool_id>/numbers
+
+  parameters:
+    poolId:
+     name: pool_id
+     required: true
+     in: path
+     description: ID of the pool
+     example: POOL_UUID
+     schema:
+       type: string
+
+    accountId:
+     name: account_id
+     in: query
+     description: ID of the account
+     example: abcd1234
+     required: true
+     schema:
+       type: string
+
+    page:
+     name: page
+     in: query
+     description: Page offset
+     example: 11
+     schema:
+       type: string
+
+    pageSize:
+     name: page_size
+     in: query
+     description: Items per page
+     example: 10
+     schema:
+       type: string
+
+  schemas:
+
+    Pool:
+      properties:
+        pool_id:
+          $ref: '#/components/schemas/poolId'
+        fallback:
+          $ref: '#/components/schemas/fallback'
+        localised_sender_preferred:
+          $ref: '#/components/schemas/localisedSenderPreferred'
+        predictable_sender_preferred:
+          $ref: '#/components/schemas/predictableSenderPreferred'
+        account_id:
+          $ref: '#/components/schemas/accountId'
+
+    page:
+      type: integer
+      description: The current page
+      example: 4
+    pageSize:
+      type: integer
+      description: Items per page
+      example: 10
+    totalPages:
+      type: integer
+      description: Total number of pages
+      example: 11
+    totalItems:
+      type: integer
+      description: Total number of items
+      example: 108
+    fallback:
+      type: string
+      description: Specifies the behaviour when no number with matching prefix
+      example: Pool
+      enum:
+        - Pool
+        - CustomFrom
+        - Reject
+    localisedSenderPreferred:
+      type: boolean
+      description: If set to true and such a number is available, select a number at random from within this pool with the same country prefix as the destination.
+      example: true
+    predictableSenderPreferred:
+      type: string
+      description: When true, select the same Sender ID on any subsequent messages to a given destination.
+      example: true
+    accountId:
+      type: string
+      description: If specified we'll act on this API key rather than the one taken from the authentication
+      example: account_id
+    poolId:
+      type: string
+      description: An identifier for this pool to be created — it may be alpha-numeric but MUST be unique to the account
+      example: pool_id
+
+x-groups:
+  pool:
+    name: Pools
+    order: 1
+    description: Pool management
+  numbers:
+    name: Numbers
+    order: 2
+    description: Manage numbers within a pool
+
+
