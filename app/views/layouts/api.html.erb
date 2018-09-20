@@ -5,7 +5,7 @@
   <body class="Nxd-template" data-push-state-root="<%= canonical_path %>">
     <%= render partial: 'layouts/partials/header' %>
     <nav class="Vlt-sidenav Vlt-sidenav--light" id="Vlt-sidenav" data-turbolinks-permanent>
-      <div class="Vlt-sidenav__scroll" tabindex="1">
+      <div class="Vlt-sidenav__scroll">
         <% begin %>
           <%= render partial: "layouts/partials/#{@side_navigation}" %>
         <% rescue ActionView::MissingTemplate %>
