@@ -28,6 +28,12 @@ ul.tabs {
       }
     }
   }
+
+  &--frameless {
+    .tabs-title.is-active > a {
+      background: white;
+    }
+  }
 }
 
 .tabs-panel {
@@ -53,8 +59,10 @@ ul.tabs {
     border: none;
     background: none;
     box-shadow: none;
+
     > .tabs-panel {
       padding: 1rem 0;
+      background: none;
     }
   }
 
