@@ -1,13 +1,10 @@
 class CollapsibleFilter < Banzai::Filter
   def call(input)
     input.gsub(/^\|\s(\#{1,6})(\s)?(.+?)\n^\|\n(.+?)\n\n/m) do |_s|
-      heading_type = "h#{$1.length}"
       heading = $3
       body = $4.gsub(/^\|\n/, "\n")
       body = body.gsub(/^\|\s/, '')
       parsed_body = MarkdownPipeline.new.call(body)
-
-      id = SecureRandom.hex
 
       <<~HEREDOC
         <div class="Vlt-accordion">
@@ -18,9 +15,6 @@ class CollapsibleFilter < Banzai::Filter
             #{parsed_body}
           </div>
         </div>
-
-
-
       HEREDOC
     end
   end

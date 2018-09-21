@@ -106,7 +106,7 @@ module ApplicationHelper
     s = []
     unless received_flatten
       namespace = params[:namespace].presence || 'documentation'
-      s << (root ? "<ul class='Vlt-sidemenu Vlt-sidemenu--rounded navigation js-navigation navigation--#{params[:namespace].presence || 'documentation'}'>" : '<ul class="Vlt-sidemenu__list--compressed">')
+      s << (root ? "<ul class='Vlt-sidemenu Vlt-sidemenu--rounded navigation js-navigation navigation--#{namespace}'>" : '<ul class="Vlt-sidemenu__list--compressed">')
     end
     s << context.map do |child|
       flatten = FLATTEN_TREES.include? normalised_title(child)
@@ -128,7 +128,13 @@ module ApplicationHelper
 
         if !child[:is_file?]
           if context.first[:children]
-            ss << "<a class='Vlt-sidemenu__trigger'>#{options['svg'] && options['svgColor'] ? '<svg class="Vlt-' + options['svgColor'] + '"><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-' + options['svg'] + '" /></svg>' : ''} <span class='Vlt-sidemenu__label'>#{normalised_title(child)}</span></a>"
+            ss << "<a class='Vlt-sidemenu__trigger'>"
+
+            if options['svg'] && options['svgColor'] # rubocop:disable Metrics/BlockNesting
+              ss << '<svg class="Vlt-' + options['svgColor'] + '"><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-' + options['svg'] + '" /></svg>'
+            end
+
+            ss << "<span class='Vlt-sidemenu__label'>#{normalised_title(child)}</span></a>"
           else
             ss << "<h5 class='Vlt-sidemenu__title'>#{normalised_title(child)}</h5>"
           end
