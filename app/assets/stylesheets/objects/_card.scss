@@ -57,6 +57,8 @@
 }
 
 .Nxd-card--products {
+  min-width: 300px;
+
   nav a {
     display: inline-block;
     margin: $unit0 0;
