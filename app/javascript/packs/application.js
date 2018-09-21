@@ -62,6 +62,8 @@ let refresh = () => {
   if (document.getElementById('MarkdownComponent')) {
     ReactDOM.render(<Markdown/>, document.getElementById('MarkdownComponent'))
   }
+
+  document.querySelector(".Vlt-main").focus();
 }
 
 $(document).on('nexmo:load', function() {
