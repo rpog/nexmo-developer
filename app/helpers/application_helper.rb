@@ -106,14 +106,14 @@ module ApplicationHelper
     s = []
     unless received_flatten
       namespace = params[:namespace].presence || 'documentation'
-      s << (root ? "<ul class='Vlt-sidemenu Vlt-sidemenu--rounded navigation js-navigation navigation--#{params[:namespace].present? ? params[:namespace] : 'documentation'}'>" : '<ul class="Vlt-sidemenu__list--compressed">')
+      s << (root ? "<ul class='Vlt-sidemenu Vlt-sidemenu--rounded navigation js-navigation navigation--#{params[:namespace].presence || 'documentation'}'>" : '<ul class="Vlt-sidemenu__list--compressed">')
     end
     s << context.map do |child|
       flatten = FLATTEN_TREES.include? normalised_title(child)
       class_name = (COLLAPSIBLE.include? normalised_title(child)) ? 'js--collapsible' : ''
       configuration_identifier = url_to_configuration_identifier(path_to_url(child[:path]))
       options = configuration_identifier.split('.').inject(NAVIGATION_OVERRIDES) { |h, k| h[k] || {} }
-      #Rails.logger.debug(options)
+      # Rails.logger.debug(options)
 
       unless options['prevent_navigation_item_class']
         class_name = "#{class_name} navigation-item--#{normalised_title(child).parameterize}"
@@ -137,9 +137,9 @@ module ApplicationHelper
         else
           link = link_to url, class: "#{has_active_class ? 'Vlt-sidemenu__link Vlt-sidemenu__link_active' : 'Vlt-sidemenu__link'}" do
             if options['label']
-              ('<span class="Vlt-sidemenu__label">').html_safe + (normalised_title(child) + content_tag(:span, options['label'], class: 'Vlt-badge Vlt-badge--margin')).html_safe + ('</span>').html_safe
+              '<span class="Vlt-sidemenu__label">'.html_safe + (normalised_title(child) + content_tag(:span, options['label'], class: 'Vlt-badge Vlt-badge--margin')).html_safe + '</span>'.html_safe
             elsif options['svg']
-              ('<svg class="Vlt-' + options['svgColor'] + '"><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-' + options['svg'] + '" /></svg><span class="Vlt-sidemenu__label">').html_safe + normalised_title(child) + ('</span>').html_safe
+              ('<svg class="Vlt-' + options['svgColor'] + '"><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-' + options['svg'] + '" /></svg><span class="Vlt-sidemenu__label">').html_safe + normalised_title(child) + '</span>'.html_safe
             else
               normalised_title(child)
             end

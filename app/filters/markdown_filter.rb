@@ -43,7 +43,7 @@ class VoltaRender < HTML
     '</div>'
   end
 
-  def image(link, title, alt_text)
+  def image(link, _title, _alt_text)
     '<figure>' \
       '<img src="'\
       "#{link}"\
@@ -55,7 +55,7 @@ class VoltaRender < HTML
     if "#{list_type}" == 'unordered'
       '<ul class="Vlt-list Vlt-list--simple">' \
       "#{contents}" \
-      '</ul>' 
+      '</ul>'
     else
       '<ol class="Vlt-list Vlt-list--big-number">' \
       "#{contents}" \

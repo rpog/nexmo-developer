@@ -19,7 +19,7 @@ class CollapsibleFilter < Banzai::Filter
           </div>
         </div>
 
-        
+
 
       HEREDOC
     end
