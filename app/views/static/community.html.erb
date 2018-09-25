@@ -5,6 +5,7 @@
 
 </div>
 
+<<<<<<< HEAD
 <% if @sessions.any? %>
   
   <div class="Vlt-card">
@@ -23,6 +24,9 @@
 <% end %>
 
 <hr>
+=======
+<br>
+>>>>>>> 530e6e4afed026950185e5c9ccbc528c03264502
 
 <div class="Vlt-grid Vlt-grid--margin-bottom1">
   <div class="Vlt-col Vlt-col--2of3">
@@ -46,7 +50,28 @@
 
 <hr>
 
+<<<<<<< HEAD
 <center>
+=======
+<% if @sessions.any? %>
+  <br>
+
+  <div class="row">
+    <% @sessions.each_with_position do |session, first, last| %>
+      <div class="columns small-12 medium-6 large-4 <%= 'end' if last %>">
+        <%= session.video_content.html_safe %>
+        <h3><%= session.title %></h3>
+        <p><%= session.description %></p>
+        <br>
+      </div>
+    <% end %>
+  </div>
+
+  <hr>
+<% end %>
+
+<center class="spacious">
+>>>>>>> 530e6e4afed026950185e5c9ccbc528c03264502
   <h2><%= image_tag 'slack.svg', width: 40, id: 'community-slack-image' %> Join the <%= link_to "Nexmo Community Slack", community_slack_path %></h2>
 </center>
 </div>

@@ -6,7 +6,9 @@ OPEN_API_PRODUCTS = %w[
   messages-and-workflows-apis/messages
   messages-and-workflows-apis/workflows
   redact
+  audit
   voice
+  account/secret-management
 ].freeze
 
 class OpenApiConstraint

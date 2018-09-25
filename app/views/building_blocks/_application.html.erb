@@ -4,7 +4,7 @@
     </h4>
 </div>
 
-<div id="acc<%=id %>"  class="Vlt-js-accordion__content">
+<div id="acc<%=id %>"  class="Vlt-js-accordion__content Vlt-accordion__content">
     <div class="Vlt-box Vlt-box--lesspadding">
         <% if app['use_existing'] %>
             <p><%= app['use_existing'] %></p>
@@ -22,5 +22,6 @@
 
             <pre class="highlight shell"><code>$ nexmo app:create "<%=app['name'] %>" <%=app['answer_ur'] %> <%=app['event_url'] %> --keyfile private.key</code></pre>
         <% end %>
+
     </div>
 </div>
