@@ -123,7 +123,8 @@ table {
 }
 
 .Vlt-sidenav .Vlt-sidemenu.Vlt-sidemenu--rounded .Vlt-sidemenu__title--border {
-  border-bottom: 1px solid $grey;
-  padding-bottom: 6px;
-  margin-bottom: 8px;
+  border-top: 1px solid $grey-light;
+  padding-bottom: 4px;
+  padding-top: 10px;
+  margin-top: 8px;
 }
