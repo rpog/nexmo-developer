@@ -46,6 +46,7 @@ a {
 }
 
 pre.highlight {
+  background: $black;
   -webkit-font-smoothing: antialiased;
   padding: $spacing;
   color: $white;
@@ -53,7 +54,6 @@ pre.highlight {
   line-height: 1.35;
   overflow: auto;
   position: relative;
-  background: $black;
   border-radius: 4px;
 
   code {

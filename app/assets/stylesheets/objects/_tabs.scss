@@ -4,7 +4,7 @@ ul.tabs {
   margin-bottom: 0 !important;
 
   li {
-    margin: 0;
+    margin: 0 !important;
     display: inline-block;
   }
 }
@@ -64,11 +64,5 @@ ul.tabs {
       padding: 1rem 0;
       background: none;
     }
-  }
-
-  &--code {
-    padding: 0;
-    border: 0;
-    background: none;
   }
 }

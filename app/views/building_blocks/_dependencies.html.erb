@@ -1,13 +1,13 @@
-<div class="Vlt-js-accordion__trigger Vlt-accordion__trigger" data-accordion="acc<%= id %>">
-	<h4>
-	        Install dependencies
-	</h4>
-</div>
+<h5 class="Vlt-js-accordion__trigger Vlt-accordion__trigger" data-accordion="acc<%= id %>">
 
-<div id="acc<%= id %>" class="Vlt-js-accordion__content">
-	<div class="Vlt-box Vlt-box--lesspadding">
+	        Install dependencies
+
+</h5>
+
+<div id="acc<%= id %>" class="Vlt-js-accordion__content Vlt-accordion__content">
+	
 	    <p><%=deps['text']%></p>
 	    <pre class="highlight bash"><code><%=deps['code']%></code></pre>
-	</div>
+
 </div>
 
