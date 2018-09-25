@@ -51,7 +51,7 @@ navigation_overrides:
     voice-api:
       guides:
         lex-connector:
-          label: 'DP'
+          label: 'Developer Preview'
         websockets:
           label: 'Beta'
   verify:
@@ -66,13 +66,13 @@ navigation_overrides:
   audit:
     label: 'Beta'
   redact:
-    label: 'DP'
+    label: 'Developer Preview'
     svg: 'lock'
     svgColor: 'red'
   stitch:
     svg: 'duplicate'
     svgColor: 'teal'
-    label: 'DP'
+    label: 'Developer Preview'
     sdk-documentation:
       link: false
       prevent_navigation_item_class: true
@@ -80,9 +80,9 @@ navigation_overrides:
     svg: 'message'
     svgColor: 'purple'
     messages:
-      label: 'DP'
+      label: 'Developer Preview'
     workflows:
-      label: 'DP'
+      label: 'Developer Preview'
   numbers:
     svg: 'phone-number'
     svgColor: 'red'
