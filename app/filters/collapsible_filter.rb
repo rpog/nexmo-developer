@@ -7,7 +7,7 @@ class CollapsibleFilter < Banzai::Filter
       parsed_body = MarkdownPipeline.new.call(body)
 
       <<~HEREDOC
-        <div class="Vlt-accordion">
+        <div class="Vlt-accordion" tabindex="0">
           <button class="Vlt-accordion__trigger">
             #{heading}
           </button>
