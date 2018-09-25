@@ -121,3 +121,9 @@ table {
 .Vlt-sidemenu__list--compressed .Vlt-sidemenu__link .Vlt-badge {
   top: 0 !important;
 }
+
+.Vlt-sidenav .Vlt-sidemenu.Vlt-sidemenu--rounded .Vlt-sidemenu__title--border {
+  border-bottom: 1px solid $grey;
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+}

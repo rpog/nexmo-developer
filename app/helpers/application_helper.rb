@@ -136,7 +136,7 @@ module ApplicationHelper
 
             ss << "<span class='Vlt-sidemenu__label'>#{normalised_title(child)}</span></a>"
           else
-            ss << "<h5 class='Vlt-sidemenu__title'>#{normalised_title(child)}</h5>"
+            ss << "<h5 class='Vlt-sidemenu__title Vlt-sidemenu__title--border'>#{normalised_title(child)}</h5>"
           end
         elsif options['link'] == false
           ss << "<span>#{normalised_title(child)}</span>"
