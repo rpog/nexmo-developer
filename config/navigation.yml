@@ -48,7 +48,7 @@ navigation_overrides:
     voice-api:
       guides:
         lex-connector:
-          label: 'Developer Preview'
+          label: 'DP'
   verify:
     svg: 'chat'
     svgColor: 'indigo'
@@ -59,13 +59,13 @@ navigation_overrides:
     svg: 'user'
     svgColor: 'blue'
   redact:
-    label: 'Developer Preview'
+    label: 'DP'
     svg: 'lock'
     svgColor: 'red'
   stitch:
     svg: 'duplicate'
     svgColor: 'teal'
-    label: 'Developer Preview'
+    label: 'DP'
     sdk-documentation:
       link: false
       prevent_navigation_item_class: true
@@ -73,6 +73,6 @@ navigation_overrides:
     svg: 'message'
     svgColor: 'purple'
     messages:
-      label: 'Developer Preview'
+      label: 'DP'
     workflows:
-      label: 'Developer Preview'
+      label: 'DP'

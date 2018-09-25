@@ -115,3 +115,9 @@ table {
     margin: 0 auto;
   }
 }
+
+// Remove after Volta update .19
+
+.Vlt-sidemenu__list--compressed .Vlt-sidemenu__link .Vlt-badge {
+  top: 0 !important;
+}
