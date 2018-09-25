@@ -14,13 +14,10 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery-scrolltofixed
-<<<<<<< HEAD
 //= require volta/volta.core.js
 //= require volta/components/volta.accordion.js
 //= require volta/popper.min.js
 //= require volta/tooltip.min.js
 //= require volta/components/volta.tooltip.js
-=======
 //= require clipboard
 
->>>>>>> 530e6e4afed026950185e5c9ccbc528c03264502
