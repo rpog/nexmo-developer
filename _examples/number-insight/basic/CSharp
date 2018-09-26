@@ -1,0 +1,12 @@
+using Nexmo.Api;
+
+Client = new Client(creds: new Nexmo.Api.Request.Credentials
+{
+    ApiKey = "NEXMO_API_KEY",
+    ApiSecret = "NEXMO_API_SECRET"
+});
+
+var results = Client.NumberInsight.RequestBasic(new NumberInsight.NumberInsightRequest
+{
+    Number = number,
+});
