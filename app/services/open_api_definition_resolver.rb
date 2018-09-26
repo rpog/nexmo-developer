@@ -22,7 +22,7 @@ class OpenApiDefinitionResolver
   end
 
   def self.path(name, format)
-    "_open_api/definitions/#{name}.#{format}"
+    "_open_api/api_specs/definitions/#{name}.#{format}"
   end
 
   def self.resolve(path)
