@@ -154,4 +154,46 @@
 			}
 		}
 	}
+
+	&--light {
+		background: $white;
+		border: 1px solid $grey-light;
+		box-shadow: none;
+
+		.Vlt-dialpad {
+			&__key {
+				&__main {
+					color: $grey-darker;
+				}
+
+				&__sub {
+					color: $aqua;
+				}
+
+				&:hover {
+					background: rgba($aqua-light, 0.25);
+				}
+			}
+
+			&__header {
+				color: $grey-darker;
+
+				&__dismiss {
+					svg {
+						fill: $grey-darker;
+					}
+				}
+			}
+
+			&__strip {
+				background: rgba($aqua-lighter, 0.5);
+
+				&__number {
+					input {
+						color: $grey-darker;
+					}
+				}
+			}
+		}
+	}
 }

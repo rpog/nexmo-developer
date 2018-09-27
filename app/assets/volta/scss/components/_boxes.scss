@@ -89,3 +89,17 @@
 		padding: $unit2;
 	}
 }
+
+a.Vlt-box,
+.Vlt-box--clickable {
+	cursor: pointer;
+	transition: transform 0.2s;
+
+	&:hover {
+      transform: scale(1.03);
+    }
+
+    &:active {
+    	transform: scale(1);
+    }
+}

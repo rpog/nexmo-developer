@@ -75,6 +75,10 @@ $sidenav-titles-color: rgba($aqua-lighter, 0.8);
 
 			&__title {
 				color: $sidenav-titles-color;
+
+				&--border {
+					border-top: 1px solid rgba($aqua-light, 0.2);
+				}
 			}
 		}
 

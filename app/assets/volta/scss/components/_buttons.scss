@@ -315,12 +315,9 @@ $shadow-tertiary: inset 0 0 0px 1px $grey;
 		}
 
 		&--tertiary {
-			&:not(:first-child) {
-				margin-left: -1px;
-			}
-
-			&:not(:last-child) {
-				margin-right: -1px;
+			&:not(:first-child):not(:last-child) {
+				// Override the shadow to only keep top and bottom in any button that isn't the first or the last
+				box-shadow: $shadow-standard, inset 0 1px 0px 0 $grey, inset 0 -1px 0px 0 $grey;
 			}
 		}
 

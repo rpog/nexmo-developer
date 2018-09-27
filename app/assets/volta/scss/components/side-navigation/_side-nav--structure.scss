@@ -4,6 +4,7 @@
 	flex-flow: column;
 	font-weight: 600;
 	height: 100vh;
+	padding-bottom: 10px; // space to allow for the browser url notice
 	width: 270px;
 
 	@media #{$S-only} {
@@ -126,11 +127,11 @@
 			padding: 0;
 		}
 
-		// Setting main margins
+		// Setting main margins with nesting
 
 		.Vlt-sidemenu__title {
 			margin-bottom: 0;
-			padding-left: 20px;
+			margin-left: 10px;
 		}
 
 		li {
@@ -160,7 +161,7 @@
 				}
 
 				.Vlt-sidemenu__title {
-					padding-left: 53px;
+					margin-left: 43px;
 				}
 
 				li {
@@ -175,7 +176,7 @@
 					}
 
 					.Vlt-sidemenu__title {
-						padding-left: 81px;
+						margin-left: 81px;
 					}
 				}
 			}
@@ -269,6 +270,12 @@
 			margin: 0;
 			padding: 10px;
 			text-transform: uppercase;
+
+			&--border {
+				margin-top: 8px;
+				padding-bottom: 4px;
+				padding-top: 10px;
+			}
 		}
 
 		// Behavior of triggers (expanding and collapsing branches)
@@ -276,14 +283,38 @@
 		&__trigger {
 			position: relative;
 
-			& + ul {
-				margin-bottom: 0;
-				max-height: 0;
-				overflow: hidden;
-				transition: max-height 0.3s, margin 0.3s;
+			&:not(.Vlt-sidemenu__trigger_active) + ul {
+			    margin: 0;
+			    opacity: 0;
+			    padding: 0;
+			    transition: opacity 0.25s,
+	                font-size 0.5s 0.25s,
+	                margin 0.5s 0.25s,
+	                padding 0.5s 0.25s,
+	                height 0.5s 0.25s;
 
-				a {
+				a.Vlt-sidemenu__link,
+				a.Vlt-sidemenu__link svg,
+				.Vlt-sidemenu__title,
+				.Vlt-sidemenu__trigger,
+				.Vlt-badge {
+					border: 0;
+					font-size: 0;
+					padding-bottom: 0 !important;
+					padding-top: 0 !important;
 					transition: all 0.2s;
+				}
+
+				a.Vlt-sidemenu__link svg {
+					height: 0;
+				}
+
+				.Vlt-sidemenu__title,
+				.Vlt-badge {
+					border: 0;
+					height: 0;
+					margin-bottom: 0;
+					margin-top: 0;
 				}
 			}
 
@@ -291,7 +322,11 @@
 
 				& + ul {
 					margin-bottom: $unit1;
-					max-height: 100% !important;
+					transition: font-size 0.1s,
+		                margin 0.1s,
+		                opacity 0.3s 0.1s,
+		                padding 0.1s,
+		                height 0.1s;
 				}
 			}
 
@@ -307,10 +342,6 @@
 			.Vlt-sidemenu__link,
 			.Vlt-sidemenu__trigger {
 				padding: $unit0 10px;
-
-				.Vlt-badge {
-					top: 4px;
-				}
 			}
 
 			.Vlt-sidemenu__trigger {

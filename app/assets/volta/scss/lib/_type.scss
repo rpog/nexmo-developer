@@ -8,8 +8,8 @@
 @font-face {
     font-family: 'Lato';
     font-style: normal;
-    font-weight: 900;
-    src: url($Vlt-font-url + 'Lato-Black.woff2') format('woff2'), url($Vlt-font-url + 'Lato-Black.woff') format('woff');
+    font-weight: 800;
+    src: url($Vlt-font-url + 'Lato-Heavy.woff2') format('woff2'), url($Vlt-font-url + 'Lato-Heavy.woff') format('woff');
 }
 
 @font-face {
@@ -56,7 +56,7 @@ a {
 
 b,
 strong {
-	font-weight: 900;
+	font-weight: 800;
 }
 
 a {
@@ -108,15 +108,10 @@ p {
 
 	svg {
 		margin-right: $unit1;
-		margin-top: 5px;
-		vertical-align: bottom;
-
-		@media #{$L-plus} {
-			margin-top: 6px;
-		}
 	}
 
-	code {
+	code,
+	.Vlt-badge {
 		margin: 0 0.3em;
 	}
 }
@@ -150,7 +145,7 @@ p {
 
 h1 {
 	font-size: 3.2rem;
-	font-weight: 900;
+	font-weight: 800;
 	line-height: 3.7rem;
 	margin-bottom: $unit3;
 
@@ -160,22 +155,22 @@ h1 {
 	}
 
 	&.Vlt-title--icon svg {
-		flex: 0 0 28px;
-		height: 28px;
-		width: 28px;
+		flex: 0 0 32px;
+		height: 32px;
+		margin-top: 5px;
+		width: 32px;
 
 		@media #{$L-plus} {
-			flex: 0 0 36px;
-			height: 36px;
-			margin-top: 8px;
-			width: 36px;
+			flex: 0 0 40px;
+			height: 40px;
+			width: 40px;
 		}
 	}
 }
 
 h2 {
 	font-size: 2.8rem;
-	font-weight: 900;
+	font-weight: 800;
 	line-height: 3.2rem;
 	margin-bottom: $unit2;
 
@@ -185,21 +180,22 @@ h2 {
 	}
 
 	&.Vlt-title--icon svg {
-		flex: 0 0 22px;
-		height: 22px;
-		width: 22px;
+		flex: 0 0 28px;
+		height: 28px;
+		margin-top: 4px;
+		width: 28px;
 
 		@media #{$L-plus} {
-			flex: 0 0 24px;
-			height: 24px;
-			width: 24px;
+			flex: 0 0 30px;
+			height: 30px;
+			width: 30px;
 		}
 	}
 }
 
 h3 {
 	font-size: 2.3rem;
-	font-weight: 900;
+	font-weight: 800;
 	line-height: 2.8rem;
 	margin-bottom: $unit2;
 
@@ -209,22 +205,22 @@ h3 {
 	}
 
 	&.Vlt-title--icon svg {
-		flex: 0 0 20px;
-		height: 20px;
-		width: 20px;
+		flex: 0 0 23px;
+		height: 23px;
+		margin-top: 3px;
+		width: 23px;
 
 		@media #{$L-plus} {
-			flex: 0 0 22px;
-			height: 22px;
-			margin-top: 5px;
-			width: 22px;
+			flex: 0 0 25px;
+			height: 25px;
+			width: 25px;
 		}
 	}
 }
 
 h4 {
 	font-size: 2rem;
-	font-weight: 900;
+	font-weight: 800;
 	line-height: 2.4rem;
 	margin-bottom: $unit1;
 
@@ -234,15 +230,16 @@ h4 {
 	}
 
 	&.Vlt-title--icon svg {
-		flex: 0 0 16px;
-		height: 16px;
-		width: 16px;
+		flex: 0 0 21px;
+		height: 21px;
+		margin-top: 2px;
+		width: 21px;
 	}
 }
 
 h5 {
 	font-size: 1.7rem;
-	font-weight: 900;
+	font-weight: 800;
 	line-height: 2rem;
 	margin-bottom: $unit1;
 }
