@@ -16,12 +16,34 @@ ul.tabs {
   .tabs-title {
       @extend %tabs-link;
       @extend %tabs-link-bordered;
+
+      a {
+        color: $black;
+
+        &:hover {
+          color: $black;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
   
 
     &.is-active {
         @extend %tabs-link-active;
         @extend %tabs-link-active-bordered;
         background: $grey-lighter;
+
+        &:hover {
+          background: $grey-lighter;
+        }
+
+        & + .Vlt-tabs__link {
+          &:after {
+            display: none;
+          }
+        }
     
     }
   }
