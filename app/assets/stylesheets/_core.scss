@@ -115,16 +115,3 @@ table {
     margin: 0 auto;
   }
 }
-
-// Remove after Volta update .19
-
-.Vlt-sidemenu__list--compressed .Vlt-sidemenu__link .Vlt-badge {
-  top: 0 !important;
-}
-
-.Vlt-sidenav .Vlt-sidemenu.Vlt-sidemenu--rounded .Vlt-sidemenu__title--border {
-  border-top: 1px solid $grey-light;
-  padding-bottom: 4px;
-  padding-top: 10px;
-  margin-top: 8px;
-}
