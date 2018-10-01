@@ -287,46 +287,42 @@
 			    margin: 0;
 			    opacity: 0;
 			    padding: 0;
-			    transition: opacity 0.25s,
-	                font-size 0.5s 0.25s,
-	                margin 0.5s 0.25s,
-	                padding 0.5s 0.25s,
-	                height 0.5s 0.25s;
+			    transition: opacity 0.1s,
+			    	padding 0.2s 0.2s,
+			    	margin 0.2s 0.2s;
 
-				a.Vlt-sidemenu__link,
-				a.Vlt-sidemenu__link svg,
-				.Vlt-sidemenu__title,
-				.Vlt-sidemenu__trigger,
-				.Vlt-badge {
-					border: 0;
-					font-size: 0;
+	            & * {
+	            	border: 0;
+					font-size: 0 !important;
+					line-height: 0;
+					margin-bottom: 0 !important;
+					margin-top: 0 !important;
+					opacity: 0;
 					padding-bottom: 0 !important;
 					padding-top: 0 !important;
-					transition: all 0.2s;
-				}
+					transition: all 0.1s;
 
-				a.Vlt-sidemenu__link svg {
-					height: 0;
-				}
-
-				.Vlt-sidemenu__title,
-				.Vlt-badge {
-					border: 0;
-					height: 0;
-					margin-bottom: 0;
-					margin-top: 0;
-				}
+			    	svg,
+			    	.Vlt-badge {
+			    		height: 0;
+			    		transition: height 0.1s;
+			    	}
+	            }
 			}
 
 			&_active {
 
 				& + ul {
 					margin-bottom: $unit1;
-					transition: font-size 0.1s,
-		                margin 0.1s,
-		                opacity 0.3s 0.1s,
-		                padding 0.1s,
-		                height 0.1s;
+					transition: font-size 0.2s,
+		                margin 0.2s,
+		                opacity 0.2s 0.2s,
+		                padding 0.2s;
+
+		            & > * {
+		            	opacity: 1;
+		            	transition: all 0.2s;
+		            }
 				}
 			}
 
