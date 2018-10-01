@@ -66,8 +66,10 @@ let refresh = () => {
   }
 
   document.querySelector(".Vlt-main").focus();
+  Volta.init(['accordion', 'tooltip'])
 }
 
 $(document).on('nexmo:load', function() {
   refresh();
 })
+
