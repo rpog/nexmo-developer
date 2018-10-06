@@ -65,7 +65,7 @@ let refresh = () => {
     ReactDOM.render(<Markdown/>, document.getElementById('MarkdownComponent'))
   }
 
-  document.querySelector(".Vlt-main").focus();
+  document.querySelector(".Vlt-main").click();
   Volta.init(['accordion', 'tooltip'])
 }
 
