@@ -7,3 +7,12 @@
     display: none;
   }
 }
+
+.Nxd-accordion-emphasis {
+	border-color: $grey;
+
+	h5 {
+		padding: 0;
+		line-height: 2.5rem;
+	}
+}
