@@ -143,7 +143,9 @@ module ApplicationHelper
         else
           link = link_to url, class: "#{has_active_class ? 'Vlt-sidemenu__link Vlt-sidemenu__link_active' : 'Vlt-sidemenu__link'}" do
             if options['label']
-              '<span class="Vlt-sidemenu__label">'.html_safe + (normalised_title(child) + content_tag(:span, options['label'], class: 'Vlt-badge Vlt-badge--margin-left')).html_safe + '</span>'.html_safe
+              additional_classes = ' '
+              additional_classes += 'Vlt-bg-green' if options['label'].casecmp('beta').zero?
+              '<span class="Vlt-sidemenu__label">'.html_safe + (normalised_title(child) + content_tag(:span, options['label'], class: 'Vlt-badge Vlt-badge--margin-left' + additional_classes)).html_safe + '</span>'.html_safe
             elsif options['svg']
               ('<svg class="Vlt-' + options['svgColor'] + '"><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-' + options['svg'] + '" /></svg><span class="Vlt-sidemenu__label">').html_safe + normalised_title(child) + '</span>'.html_safe
             else
