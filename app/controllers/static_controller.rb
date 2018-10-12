@@ -88,6 +88,47 @@ class StaticController < ApplicationController
     render layout: 'landing'
   end
 
+  def migrate
+    render layout: 'landing'
+  end
+
+  def migrate_details
+    page = params[:guide].split("/")[0]
+    if page == 'sms'
+      @product = 'SMS'
+    @blocks = [
+      {
+        'title' => 'Send an SMS',
+        'content' => 'Flavour text for sending an SMS',
+        'nexmo' => '_examples/migrate/tropo/send-an-sms/nexmo',
+        'tropo' => '_examples/migrate/tropo/send-an-sms/tropo'
+      }
+    ]
+    end
+
+    if page == 'voice'
+      @product = 'Voice'
+      @blocks = []
+    end
+
+    @building_blocks = @blocks.map do |block|
+      block['nexmo'] = "<h2>Nexmo</h2>
+        ```building_blocks
+          code_only: true
+          source: #{block['nexmo']}
+        ```"
+
+      block['tropo'] = "<h2>Tropo</h2>
+        ```building_blocks
+          code_only: true
+          source: #{block['tropo']}
+        ```"
+
+      block
+    end
+    render layout: 'landing'
+  end
+
   def team
     @team = YAML.load_file("#{Rails.root}/config/team.yml")
 
