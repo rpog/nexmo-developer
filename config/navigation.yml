@@ -56,7 +56,7 @@ navigation_overrides:
         websockets:
           label: 'Beta'
   verify:
-    svg: 'chat'
+    svg: 'lock'
     svgColor: 'indigo'
   number-insight:
     svg: 'file-search'
@@ -64,8 +64,6 @@ navigation_overrides:
   account:
     svg: 'user'
     svgColor: 'blue'
-  audit:
-    label: 'Beta'
   redact:
     label: 'Developer Preview'
     svg: 'lock'
@@ -77,16 +75,18 @@ navigation_overrides:
     sdk-documentation:
       link: false
       prevent_navigation_item_class: true
-  messages-and-workflows-apis:
-    svg: 'message'
-    svgColor: 'purple'
-    messages:
-      label: 'Developer Preview'
-    workflows:
-      label: 'Developer Preview'
   numbers:
     svg: 'phone-number'
     svgColor: 'red'
   audit:
     svg: 'file-search'
     svgColor: 'green'
+    label: 'Beta'
+  messages:
+    svg: 'chat'
+    svgColor: 'purple'
+    label: 'Beta'
+  dispatch:
+    svg: 'flow'
+    svgColor: 'purple'
+    label: 'Beta'

@@ -28,3 +28,4 @@ config/algolia.yml
 .vscode/*
 coverage
 
+.DS_Store

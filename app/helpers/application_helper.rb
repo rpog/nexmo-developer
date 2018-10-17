@@ -3,7 +3,7 @@ NAVIGATION = YAML.load_file("#{Rails.root}/config/navigation.yml")
 NAVIGATION_WEIGHT = NAVIGATION['navigation_weight']
 NAVIGATION_OVERRIDES = NAVIGATION['navigation_overrides']
 FLATTEN_TREES = [].freeze
-COLLAPSIBLE = ['Messaging', 'SMS', 'Conversion API', 'SNS', 'US Short Codes', 'Voice', 'Number Insight', 'Account', 'Global', 'SIP', 'Voice API'].freeze
+COLLAPSIBLE = ['Messages API', 'Dispatch API', 'Messaging', 'SMS', 'Conversion API', 'SNS', 'US Short Codes', 'Voice', 'Number Insight', 'Account', 'Global', 'SIP', 'Voice API'].freeze
 
 module ApplicationHelper
   def search_enabled?
@@ -88,7 +88,7 @@ module ApplicationHelper
     end
   end
 
-  def sidenav(path)
+  def sidenav(path, active_path = nil)
     context = directory_hash(path)[:children]
 
     if params[:namespace].present?
@@ -99,10 +99,12 @@ module ApplicationHelper
       }]
     end
 
-    directory(context, true, false)
+    directory(context, true, false, active_path)
   end
 
-  def directory(context = directory_hash("#{Rails.root}/_documentation")[:children], root = true, received_flatten = false)
+  def directory(context = directory_hash("#{Rails.root}/_documentation")[:children], root = true, received_flatten = false, active_path = nil)
+    active_path ||= request.path
+
     s = []
     unless received_flatten
       namespace = params[:namespace].presence || 'documentation'
@@ -124,7 +126,7 @@ module ApplicationHelper
 
       unless flatten
         url = (child[:is_file?] ? path_to_url(child[:path]) : first_link_in_directory(child[:children]))
-        has_active_class = (request.path == url) || request.path.start_with?("#{url}/")
+        has_active_class = (active_path == url) || active_path.start_with?("#{url}/")
 
         if !child[:is_file?]
           if context.first[:children]
@@ -134,7 +136,14 @@ module ApplicationHelper
               ss << '<svg class="Vlt-' + options['svgColor'] + '"><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-' + options['svg'] + '" /></svg>'
             end
 
-            ss << "<span class='Vlt-sidemenu__label'>#{normalised_title(child)}</span></a>"
+            if options['label']
+              additional_classes = ' '
+              additional_classes += 'Vlt-bg-green' if options['label'].casecmp('beta').zero? # rubocop:disable Metrics/BlockNesting
+              ss << '<span class="Vlt-sidemenu__label">'.html_safe + (normalised_title(child) + content_tag(:span, options['label'], class: 'Vlt-badge Vlt-badge--margin-left' + additional_classes)).html_safe + '</span>'.html_safe
+            else
+              ss << "<span class='Vlt-sidemenu__label'>#{normalised_title(child)}</span>"
+            end
+            ss << "</a>"
           else
             ss << "<h5 class='Vlt-sidemenu__title Vlt-sidemenu__title--border'>#{normalised_title(child)}</h5>"
           end
@@ -157,7 +166,7 @@ module ApplicationHelper
         end
       end
 
-      ss << directory(child[:children], false, flatten) if child[:children]
+      ss << directory(child[:children], false, flatten, active_path) if child[:children]
       ss << '</li>' unless received_flatten
       ss.join("\n")
     end
@@ -166,7 +175,7 @@ module ApplicationHelper
       s << '<hr>'
       @side_navigation_extra_links.each do |title, path|
         s << <<~HEREDOC
-          <a href="#{path}" class="#{path == request.path ? 'Vlt-sidemenu__link_active' : ''}">#{options['svg'] && options['svgColor'] ? '<svg class="Vlt-' + options['svgColor'] + '"><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-' + options['svg'] + '" /></svg>' : ''} <span class='Vlt-sidemenu__label'>#{title}</span></a>
+          <a href="#{path}" class="#{path == active_path ? 'Vlt-sidemenu__link_active' : ''}">#{options['svg'] && options['svgColor'] ? '<svg class="Vlt-' + options['svgColor'] + '"><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-' + options['svg'] + '" /></svg>' : ''} <span class='Vlt-sidemenu__label'>#{title}</span></a>
         HEREDOC
       end
     end
