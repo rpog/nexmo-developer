@@ -1,4 +1,7 @@
-<% if endpoint.raw['x-code-example-path'] %>
+<%
+  # @todo Re-enable code examples once we decide how to handle them in OAS
+  false && if endpoint.raw['x-code-example-path']
+%>
   <h5>Example request</h5>
   <%=
     markdown = <<~HEREDOC
