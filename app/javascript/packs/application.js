@@ -65,7 +65,10 @@ let refresh = () => {
     ReactDOM.render(<Markdown/>, document.getElementById('MarkdownComponent'))
   }
 
-  // document.querySelector(".Vlt-main").click();
+  // If we're on a two pane page, make sure that the main pane is focused
+  let rightPane = document.querySelector(".Vlt-main");
+  if (rightPane) { rightPane.click(); }
+
   Volta.init(['accordion', 'tooltip'])
 }
 
