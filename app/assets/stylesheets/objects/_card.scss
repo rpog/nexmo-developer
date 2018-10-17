@@ -1,4 +1,7 @@
 .Nxd-card--tutorials {
+  margin-bottom: $unit2;
+  margin-top: $unit1; // Prevents masonry from cutting top on hover
+
   .Vlt-badge {
     bottom: -10px;
     left: 10px;

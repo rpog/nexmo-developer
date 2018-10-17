@@ -115,3 +115,23 @@ table {
     margin: 0 auto;
   }
 }
+
+.Vlt-title--icon {
+  position: relative
+}
+
+.heading-permalink {
+  opacity: 0;
+  transition: opacity 0.2s;
+  position: absolute;
+  left: -20px;
+
+  svg {
+    height: 18px !important;
+    width: 18px !important;
+  }
+
+  .Vlt-title--icon:hover & {
+    opacity: 1;
+  }
+}

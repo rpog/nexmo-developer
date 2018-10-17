@@ -50,22 +50,23 @@
 }
 
 .navigation--documentation {
-  .navigation-item--tutorials {
-    @include highlighted-navigation($red);
+  .navigation-item--tutorials a {
+    color: $green-dark;
   }
 
-  .navigation-item--api-reference {
-    @include highlighted-navigation($blue-dark);
+  .navigation-item--api-reference a {
+    color: $blue-dark;
   }
 
-  .navigation-item--sdk-documentation > {
-    @include highlighted-navigation($red);
+  .navigation-item--sdk-documentation > a {
+    color: $green
   }
 
-  .navigation-item--ncco-reference {
-    @include highlighted-navigation($teal);
-    .navigation-item--ncco-reference {
-      @include highlighted-navigation($teal);
+  .navigation-item--ncco-reference a {
+    color: $teal;
+
+    .navigation-item--ncco-reference a {
+      color: $teal;
     }
   }
 }
