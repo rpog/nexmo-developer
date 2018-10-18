@@ -6,14 +6,11 @@ class OpenApiController < ApplicationController
   def show
 
 
-    # @TODO mheap
-    # This is currently handled inconsistently, so I'm commenting it out until we revisit how to show code examples
-    # inside the OAS rendering
-    #if File.file? "_open_api/initialization/#{@definition_name}.md"
-    #  definition_initialization = File.read("_open_api/initialization/#{@definition_name}.md")
-    #  @definition_initialization_content = MarkdownPipeline.new.call(File.read("_open_api/initialization/#{@definition_name}.md"))
-    #  @definition_initialization_config = YAML.safe_load(definition_initialization)
-    #end
+    if File.file? "_open_api/initialization/#{@definition_name}.md"
+      definition_initialization = File.read("_open_api/initialization/#{@definition_name}.md")
+      @definition_initialization_content = MarkdownPipeline.new.call(File.read("_open_api/initialization/#{@definition_name}.md"))
+      @definition_initialization_config = YAML.safe_load(definition_initialization)
+    end
 
     #if File.file? "_open_api/errors/#{@definition_name}.md"
     #  @definition_errors = File.read("_open_api/errors/#{@definition_name}.md")

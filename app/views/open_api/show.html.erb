@@ -28,7 +28,9 @@
       <div class="Vlt-col Vlt-col--1of3 Nxd-api__code Nxd-api__code--install">
 
           <% if @definition_initialization_config && @definition_initialization_content %>
+
             <div class="Nxd-api__code__header">
+              <% if @definition_initialization_config['tabs'] %>
               <ul class="tabs tabs--code" data-tabs>
                 <% if @definition_initialization_config['tabs'] %>
                   <% @definition_initialization_config['tabs'].each_with_index do |tab, index| %>
@@ -41,6 +43,7 @@
                   <% end %>
                 <% end %>
               </ul>
+                <% end %>
 
               <% if @definition_initialization_config && @definition_initialization_config['formats'] %>
                 <div class="Vlt-native-dropdown">
