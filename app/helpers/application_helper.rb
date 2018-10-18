@@ -136,14 +136,14 @@ module ApplicationHelper
               ss << '<svg class="Vlt-' + options['svgColor'] + '"><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-' + options['svg'] + '" /></svg>'
             end
 
-            if options['label']
+            if options['label'] # rubocop:disable Metrics/BlockNesting
               additional_classes = ' '
               additional_classes += 'Vlt-bg-green' if options['label'].casecmp('beta').zero? # rubocop:disable Metrics/BlockNesting
               ss << '<span class="Vlt-sidemenu__label">'.html_safe + (normalised_title(child) + content_tag(:span, options['label'], class: 'Vlt-badge Vlt-badge--margin-left' + additional_classes)).html_safe + '</span>'.html_safe
             else
               ss << "<span class='Vlt-sidemenu__label'>#{normalised_title(child)}</span>"
             end
-            ss << "</a>"
+            ss << '</a>'
           else
             ss << "<h5 class='Vlt-sidemenu__title Vlt-sidemenu__title--border'>#{normalised_title(child)}</h5>"
           end
