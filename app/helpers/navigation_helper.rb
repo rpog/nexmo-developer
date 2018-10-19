@@ -14,12 +14,16 @@ module NavigationHelper
 
     document = build_document(content)
 
-    nodes = ['<ul class="js-scrollspy">']
+    nodes = ['<ul class="Vlt-sidemenu Vlt-sidemenu--rounded Vlt-sidemenu--flat navigation js-navigation">']
     last_node = nil
 
     document.css('.reveal').remove
 
     document.css('h0,h2,h3,h4,h5,h6').each do |heading|
+      # If it's a header within tabbed content (including building blocks) we don't want to treat
+      # the header as a navigation item in the sidebar
+      next unless heading.ancestors('.tabs-content').empty?
+
       if last_node.nil? || heading.name == last_node.name
         # Do nothing (cleaner than adding wrapping further conditions)
       elsif heading.name >= last_node.name # e.g. h2 -> h3
@@ -32,7 +36,7 @@ module NavigationHelper
 
       nodes << <<~HEREDOC
         <li>
-          <a href="##{heading.attributes['id']}" data-scrollspy-id="#{heading['data-id']}">
+          <a class="Vlt-sidemenu__link" href="##{heading.attributes['id']}" data-scrollspy-id="#{heading['data-id']}">
             #{heading.text}
           </a>
       HEREDOC

@@ -4,7 +4,8 @@ navigation_weight:
   Voice: 2
   Verify: 3
   Number Insight: 4
-  Messages and Workflows: 5
+  Messages: 5
+  Dispatch: 6
   Numbers: 98
   Account: 99
   Concepts: 0
@@ -34,29 +35,58 @@ navigation_weight:
   In-App Video: 5
 
   Messages API: 1
-  Workflows API: 2
+  Dispatch API: 2
 
   Secret Management: 3
 
 navigation_overrides:
-  audit:
-    label: 'Beta'
-  redact:
-    label: 'Developer Preview'
-  stitch:
-    label: 'Developer Preview'
-    sdk-documentation:
-      link: false
-      prevent_navigation_item_class: true
+  concepts:
+    svg: 'mind-map'
+    svgColor: 'red'
+  messaging:
+    svg: 'message'
+    svgColor: 'purple'
   voice:
+    svg: 'phone'
+    svgColor: 'green'
     voice-api:
       guides:
         lex-connector:
           label: 'Developer Preview'
         websockets:
           label: 'Beta'
-  messages-and-workflows-apis:
-    messages:
-      label: 'Developer Preview'
-    workflows:
-      label: 'Developer Preview'
+  verify:
+    svg: 'lock'
+    svgColor: 'indigo'
+  number-insight:
+    svg: 'file-search'
+    svgColor: 'orange'
+  account:
+    svg: 'user'
+    svgColor: 'blue'
+  redact:
+    label: 'Developer Preview'
+    svg: 'lock'
+    svgColor: 'red'
+  stitch:
+    svg: 'duplicate'
+    svgColor: 'teal'
+    label: 'Developer Preview'
+    sdk-documentation:
+      link: false
+      prevent_navigation_item_class: true
+  numbers:
+    svg: 'phone-number'
+    svgColor: 'red'
+  audit:
+    svg: 'file-search'
+    svgColor: 'green'
+    label: 'Beta'
+  messages:
+    svg: 'chat'
+    svgColor: 'purple'
+    label: 'Beta'
+  dispatch:
+    svg: 'flow'
+    svgColor: 'purple'
+    label: 'Beta'

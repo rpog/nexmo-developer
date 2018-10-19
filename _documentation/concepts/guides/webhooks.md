@@ -27,14 +27,14 @@ Webhooks provide a convenient mechanism for Nexmo to send information to your ap
 
 ## Which APIs support webhooks?
 
-Information resulting from requests to the SMS API, Voice API, Number Insight API, US Short Codes API and Nexmo virtual numbers is sent in an HTTP request to your webhook endpoint on an HTTP server.
+Information resulting from requests to the SMS API, Voice API, Number Insight API, US Short Codes API, and Nexmo virtual numbers are sent in an HTTP request to your webhook endpoint on an HTTP server.
 
 Nexmo sends and retrieves the following information using webhooks:
 
 | API Name | Webhooks usage |
 |-------|--------|
 | SMS API | Sends the delivery status of your message and receives inbound SMS |
-| Voice API | Retrieves the [Nexmo Call Control Objects](/voice/voice-api/ncco-reference) you use to control the call from one webhook endpoint, and sends information about the call status to another |
+| Voice API | Retrieves the [Nexmo Call Control Objects](/voice/voice-api/ncco-reference) you use to control the call from one webhook endpoint, and sends information about the call status to another. View the [Webhook Reference](/voice/voice-api/webhook-reference) for more detail. |
 | Number Insight Advanced Async API | Receives complete information about a phone number |
 | US Short Codes API | Sends the delivery status of your message and receives inbound SMS |
 
@@ -72,7 +72,7 @@ You can also check the Building Blocks section of the documentation for the API 
 
 ## Using Ngrok for local development
 
-Webhooks are an unusual situation for developers; often you will work on local platforms while you're getting the details worked out, but when using webhooks your webhook URLs must be publicly accessible in order for Nexmo or another service to access them. One way to work around this problem is to use a free tool called (Ngrok)[https://ngrok.com/]. Ngrok creates a secure tunnel to your locally-running application from the outside world. To get started with Ngrok, follow these steps:
+Webhooks are an unusual situation for developers; often you will work on local platforms while you're getting the details worked out, but when using webhooks your webhook URLs must be publicly accessible in order for Nexmo or another service to access them. One way to work around this problem is to use a free tool called [Ngrok](https://ngrok.com/). Ngrok creates a secure tunnel to your locally-running application from the outside world. To get started with Ngrok, follow these steps:
 
 1. Download and install Ngrok using the [instructions](https://ngrok.com/download) for your platform.
 2. Start your webserver running locally, and check which port it uses (for example, if you usually use <http://localhost:3000> to access your application, then the port is 3000).
@@ -82,7 +82,7 @@ Webhooks are an unusual situation for developers; often you will work on local p
 
 > Beware that each time you start up the Ngrok tunnel, you're likely to get a new URL so don't forget to update the webhooks configuration accordingly! Paid Ngrok accounts can reserve tunnel names and choose which one to use when they start up, so you can avoid having to reconfigure your webhooks.
 
-**Cool bonus feature of Ngrok:** in addition to the tunnel URL displayed in the command output, you will also see a URL for the "Web Interface". The web interface offers an excellent way of examining the details of all the requests received by the tunnel and the responses returned, and is therefore a very useful debugging tool. You can also use the "Replay" button to repeat a request rather than having to send yourself lots of text messages or continuously reproduce whatever event your webhook code is responding to. These features make testing your application's response to webhooks much more convenient.
+**Cool bonus feature of Ngrok:** in addition to the tunnel URL displayed in the command output, you will also see a URL for the "Web Interface". The web interface offers an excellent way of examining the details of all the requests received by the tunnel and the responses returned and is, therefore, a very useful debugging tool. You can also use the "Replay" button to repeat a request rather than having to send yourself lots of text messages or continuously reproduce whatever event your webhook code is responding to. These features make testing your application's response to webhooks much more convenient.
 
 ## Configuring your firewall
 

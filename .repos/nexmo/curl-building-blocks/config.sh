@@ -10,8 +10,8 @@ FROM_NUMBER=""
 NEXMO_NUMBER=""
 
 # For FaceBook messaging
-SENDER_ID=""
-RECIPIENT_ID=""
+FB_SENDER_ID=""
+FB_RECIPIENT_ID=""
 
 # For Viber messaging
 VIBER_SERVICE_MESSAGE_ID=""
@@ -29,6 +29,14 @@ EVENT_UUID=""  # UUID of audit event
 SEARCH_TEXT="number"
 DATE_FROM="2018-07-01"
 DATE_TO="2018-08-01"
+
+# Number Insight API
+INSIGHT_NUMBER="447700900000"
+WEBHOOK_URL=""
+
+# MMS
+US_SHORT_CODE=""
+IMG_URL=""
 
 # If we have a local config, override using that
 CONFIG_DIR=$(dirname "${BASH_SOURCE[0]}")
