@@ -10,7 +10,7 @@ Code | Text | Meaning
 `1010` | Missing params | Your request is incomplete and missing some mandatory parameters.
 `1020` | Invalid params | The value of one or more parameters is invalid.
 `1021` | Invalid tag | The tag value is invalid.
-`1022` | Invalid template parameters | Some of the parameters of the template were invalid.
+`1022` | Invalid template | Template or template parameters were invalid.
 `1030` | Internal error | There was an error processing your request in the Platform.
 `1040` | Invalid message | The Platform was unable to process your request. For example, due to an unrecognised prefix for the phone number.
 `1050` | Number barred | The number you are trying to submit to is blacklisted and may not receive messages.
