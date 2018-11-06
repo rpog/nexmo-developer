@@ -21,6 +21,10 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/ListPoolsResponse'
+        '401':
+          $ref: '#/components/schemas/ErrorUnauthorized'
+        '404':
+          $ref: '#/components/schemas/ErrorInvalidSubAccount'
     post:
       x-group: pool
       operationId: createPool
@@ -43,62 +47,7 @@ paths:
         '201':
           $ref: '#/components/responses/CreateOrUpdatePoolResponse'
         '400':
-          content:
-            application/json:
-              schema:
-                oneOf:
-                  - description: Invalid fallback type
-                    type: object
-                    properties:
-                      type:
-                        type: string
-                        example: >-
-                          https://developer.nexmo.com/api-errors/number-pools#validation
-                      title:
-                        type: string
-                        example: Bad Request
-                      detail:
-                        type: string
-                        example: The request failed due to validation errors
-                      invalid_parameters:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                              example: fallback
-                            reason:
-                              type: string
-                              example: "Must be one of: 'Pool', 'Custom' or 'Reject'"
-                      instance:
-                        $ref: '#/components/fields/instance'
-                  - description: Missing required field 
-                    type: object
-                    properties:
-                      type:
-                        type: string
-                        example: >-
-                          https://developer.nexmo.com/api-errors/number-pools#validation
-                      title:
-                        type: string
-                        example: Bad Request
-                      detail:
-                        type: string
-                        example: The request failed due to validation errors
-                      invalid_parameters:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                              example: predictable_sender_preferred
-                            reason:
-                              type: string
-                              example: required
-                      instance:
-                        $ref: '#/components/fields/instance'
+          $ref: '#/components/schemas/ErrorPoolValidation'
         '401':
           $ref: '#/components/schemas/ErrorUnauthorized'
         '404':
@@ -125,6 +74,13 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/CreateOrUpdatePoolResponse'
+        '400':
+          $ref: '#/components/schemas/ErrorPoolValidation'
+        '401':
+          $ref: '#/components/schemas/ErrorUnauthorized'
+        '404':
+          $ref: '#/components/schemas/ErrorInvalidSubAccount'
+
   /v2/pools/{pool_id}/numbers:
     parameters:
       - $ref: '#/components/parameters/poolId'
@@ -410,6 +366,64 @@ components:
        type: string
 
   schemas:
+    ErrorPoolValidation:
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - description: Invalid fallback type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: >-
+                      https://developer.nexmo.com/api-errors/number-pools#validation
+                  title:
+                    type: string
+                    example: Bad Request
+                  detail:
+                    type: string
+                    example: The request failed due to validation errors
+                  invalid_parameters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: fallback
+                        reason:
+                          type: string
+                          example: "Must be one of: 'Pool', 'Custom' or 'Reject'"
+                  instance:
+                    $ref: '#/components/fields/instance'
+              - description: Missing required field 
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: >-
+                      https://developer.nexmo.com/api-errors/number-pools#validation
+                  title:
+                    type: string
+                    example: Bad Request
+                  detail:
+                    type: string
+                    example: The request failed due to validation errors
+                  invalid_parameters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: predictable_sender_preferred
+                        reason:
+                          type: string
+                          example: required
+                  instance:
+                    $ref: '#/components/fields/instance'
+
     ErrorUnauthorized:
       description: "Authentication failure"
       content:
