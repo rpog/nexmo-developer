@@ -69,7 +69,7 @@ let refresh = () => {
   let rightPane = document.querySelector(".Vlt-main");
   if (rightPane) { rightPane.click(); }
 
-  Volta.init(['accordion', 'tooltip'])
+  Volta.init(['accordion', 'tooltip', 'tab'])
 }
 
 $(document).on('nexmo:load', function() {
