@@ -152,7 +152,10 @@ paths:
                         example: ["14155550100", "14155550101"]
                         items:
                           type: string
-    
+        '401':
+          $ref: '#/components/schemas/ErrorUnauthorized'
+        '404':
+          $ref: '#/components/schemas/ErrorInvalidPoolId'
 
     post:
       x-group: numbers
@@ -181,6 +184,18 @@ paths:
       responses:
         '201':
           $ref: '#/components/responses/AddOrDeleteNumberInPoolResponse'
+        '400':
+          description: "Authorisation denied"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ErrorAddNumberValidation'
+                  - $ref: '#/components/schemas/ErrorNumberNotSubscribed'
+        '401':
+          $ref: '#/components/schemas/ErrorUnauthorized'
+        '404':
+          $ref: '#/components/schemas/ErrorInvalidPoolId'
 
     delete:
       x-group: numbers
@@ -190,6 +205,10 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/AddOrDeleteNumberInPoolResponse'
+        '401':
+          $ref: '#/components/schemas/ErrorUnauthorized'
+        '404':
+          $ref: '#/components/schemas/ErrorInvalidPoolId'
 
 components:
   securitySchemes:
@@ -366,6 +385,34 @@ components:
        type: string
 
   schemas:
+    ErrorAddNumberValidation:
+      description: Validation error
+      type: object
+      properties:
+        type:
+          type: string
+          example: >-
+            https://developer.nexmo.com/api-errors/number-pools#number-validation
+        title:
+          type: string
+          example: Bad Request
+        detail:
+          type: string
+          example: The request failed due to validation errors
+        invalid_parameters:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: numbers
+              reason:
+                type: string
+                example: must be an array of strings
+        instance:
+          $ref: '#/components/fields/instance'
+
     ErrorPoolValidation:
       content:
         application/json:
@@ -441,6 +488,51 @@ components:
                required: true
                description: Error title
                example: Unauthorized
+
+    ErrorInvalidPoolId:
+      description: Invalid Pool ID
+      content:
+        application/json:
+          schema:
+            properties:
+              type:
+                type: string
+                required: true
+                description: Link to error / remediation options
+                example: https://developer.nexmo.com/api-errors/number-pools#invalid-pool-id
+              title:
+                type: string
+                required: true
+                description: Generic error message
+                example: Invalid Pool ID
+              detail:
+                type: string
+                required: false
+                description: Additional information about the error
+                example: The pool ID specified does not exist, or you do not have access to it
+              instance:
+                $ref: '#/components/fields/instance'
+
+    ErrorNumberNotSubscribed:
+      description: No such number subscription
+      properties:
+        type:
+          type: string
+          required: true
+          description: Link to error / remediation options
+          example: https://developer.nexmo.com/api-errors/number-pools#missing-number-subscription
+        title:
+          type: string
+          required: true
+          description: Generic error message
+          example: No such number subscription
+        detail:
+          type: string
+          required: false
+          description: Additional information about the error
+          example: One or more numbers being added are not subscribed to on this account
+        instance:
+          $ref: '#/components/fields/instance'
 
     ErrorInvalidSubAccount:
       description: Resource could not be found
