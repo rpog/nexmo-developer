@@ -99,7 +99,13 @@ paths:
                               example: required
                       instance:
                         $ref: '#/components/fields/instance'
- 
+        '401':
+          $ref: '#/components/schemas/ErrorUnauthorized'
+        '404':
+          $ref: '#/components/schemas/ErrorInvalidSubAccount'
+        '409':
+          $ref: '#/components/schemas/ErrorPoolIdAlreadyExists'
+  
 
   /v2/pools/{pool_id}:
     parameters:
@@ -404,6 +410,71 @@ components:
        type: string
 
   schemas:
+    ErrorUnauthorized:
+      description: "Authentication failure"
+      content:
+        application/json:
+          schema:
+             type: object
+             properties:
+              type:
+               type: string
+               required: true
+               description: Machine readable error type
+               example: UNAUTHORIZED
+              error_title:
+               type: string
+               required: true
+               description: Error title
+               example: Unauthorized
+
+    ErrorInvalidSubAccount:
+      description: Resource could not be found
+      content:
+        application/json:
+          schema:
+            properties:
+              type:
+                type: string
+                required: true
+                description: Link to error / remediation options
+                example: https://developer.nexmo.com/api-errors#invalid-api-key
+              title:
+                type: string
+                required: true
+                description: Generic error message
+                example: Invalid API Key
+              detail:
+                type: string
+                required: false
+                description: Additional information about the error
+                example: API key 'ABC123' does not exist, or you do not have access
+              instance:
+                $ref: '#/components/fields/instance'
+
+    ErrorPoolIdAlreadyExists:
+      description: Resource could not be found
+      content:
+        application/json:
+          schema:
+            properties:
+              type:
+                type: string
+                required: true
+                description: Link to error / remediation options
+                example: https://developer.nexmo.com/api-errors/number-pools#pool-id-exists
+              title:
+                type: string
+                required: true
+                description: Generic error message
+                example: Pool ID already exists
+              detail:
+                type: string
+                required: false
+                description: Additional information about the error
+                example: A pool with the specified Pool ID already exists
+              instance:
+                $ref: '#/components/fields/instance'
 
     Pool:
       properties:
@@ -461,6 +532,8 @@ components:
 
   fields:
     instance:
+      required: true
+      description: Internal Trace ID
       type: string
       example: 797a8f199c45014ab7b08bfe9cc1c12c
 
