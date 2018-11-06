@@ -42,6 +42,64 @@ paths:
       responses:
         '201':
           $ref: '#/components/responses/CreateOrUpdatePoolResponse'
+        '400':
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - description: Invalid fallback type
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        example: >-
+                          https://developer.nexmo.com/api-errors/number-pools#validation
+                      title:
+                        type: string
+                        example: Bad Request
+                      detail:
+                        type: string
+                        example: The request failed due to validation errors
+                      invalid_parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              example: fallback
+                            reason:
+                              type: string
+                              example: "Must be one of: 'Pool', 'Custom' or 'Reject'"
+                      instance:
+                        $ref: '#/components/fields/instance'
+                  - description: Missing required field 
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        example: >-
+                          https://developer.nexmo.com/api-errors/number-pools#validation
+                      title:
+                        type: string
+                        example: Bad Request
+                      detail:
+                        type: string
+                        example: The request failed due to validation errors
+                      invalid_parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              example: predictable_sender_preferred
+                            reason:
+                              type: string
+                              example: required
+                      instance:
+                        $ref: '#/components/fields/instance'
+ 
 
   /v2/pools/{pool_id}:
     parameters:
@@ -400,6 +458,11 @@ components:
       type: string
       description: An identifier for this pool to be created — it may be alpha-numeric but MUST be unique to the account
       example: pool_id
+
+  fields:
+    instance:
+      type: string
+      example: 797a8f199c45014ab7b08bfe9cc1c12c
 
 x-groups:
   pool:
