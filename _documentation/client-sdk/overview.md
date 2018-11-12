@@ -2,19 +2,24 @@
 title: Overview
 ---
 
-# Nexmo Stitch Overview [Developer Preview]
+# Overview [Developer Preview]
 
-Nexmo Stitch is a conversation-centric product consisting of iOS, Android, and JavaScript SDKs and an API.
+Nexmo Client SDK is a conversation-centric product consisting of iOS, Android, and JavaScript SDKs.
 
-Stitch enables communications across multiple channels including:
+Client SDK enables communications across multiple Channels including:
 
-* In-app messaging over IP
-* In-app voice over IP
-* In-app voice to PSTN
-* PSTN to in-app voice
-* In-app video
+* Voice
+* SIP
+* Websockets
+* App
 
-Enable chat or voice on your mobile or web application with our SDKs so that your users can seamlessly communicate no matter which device they are on.
+Multiple types of Media are supported:
+
+* Messaging
+* Voice
+* Video
+
+The Client SDK provides a convenient layer over the Nexmo Conversation API and WebRTC.
 
 ## In-App Messaging
 
@@ -60,28 +65,27 @@ If you want to communicate with Nexmo during the developer preview you can:
 
 Read more about:
 
-* [In-App Messaging](/stitch/in-app-messaging/overview)
-* [In-App Voice](/stitch/in-app-voice/overview)
-* [In-App Video](/stitch/in-app-video/overview)
+* [In-App Messaging](/client-sdk/in-app-messaging/overview)
+* [In-App Voice](/client-sdk/in-app-voice/overview)
+* [In-App Video](/client-sdk/in-app-video/overview)
 
 ## SDK Documentation
 
-
 <div class="Vlt-grid">
   <div class="Vlt-col Vlt-col--center">
-    <a href="/sdk/stitch/javascript/" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
+    <a href="/sdk/client-sdk/javascript/" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
       <svg class="Vlt-yellow"><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-js"></use></svg>
       JavaScript
     </a>
   </div>
   <div class="Vlt-col Vlt-col--center">
-    <a href="/sdk/stitch/android/" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
+    <a href="/sdk/client-sdk/android/" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
       <svg class="Vlt-green-light"><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-android"></use></svg>
       Android
     </a>
   </div>
   <div class="Vlt-col Vlt-col--center">
-    <a href="/sdk/stitch/ios/" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
+    <a href="/sdk/client-sdk/ios/" class="Vlt-btn Vlt-btn--tertiary Vlt-btn--large">
       <svg><use xlink:href="/symbol/volta-icons.svg#Vlt-icon-apple"></use></svg>
       iOS
     </a>
@@ -90,7 +94,5 @@ Read more about:
 
 ## References
 
-* [API Reference](/api/stitch)
+* [Conversation API Reference](/api/conversation)
 * [Nexmo CLI](https://github.com/nexmo/nexmo-cli/tree/beta)
-* [Node.JS and Angular Demo](https://github.com/Nexmo/stitch-demo) with an [Android](https://github.com/Nexmo/stitch-demo-android) client demo
-
