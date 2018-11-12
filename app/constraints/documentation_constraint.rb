@@ -20,7 +20,7 @@ class DocumentationConstraint
       'number-insight',
       'account',
       'concepts',
-      'stitch',
+      'client-sdk',
       'messages',
       'dispatch',
     ]
@@ -43,8 +43,9 @@ class DocumentationConstraint
       'number-insight',
       'account',
       'concepts',
-      'stitch/in-app-voice',
-      'stitch/in-app-messaging',
+      'client-sdk/in-app-voice',
+      'client-sdk/in-app-video',
+      'client-sdk/in-app-messaging',
       'messages',
       'dispatch',
     ]

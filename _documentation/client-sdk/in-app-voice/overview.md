@@ -4,41 +4,52 @@ title: Overview
 
 # In-App Voice Overview [Developer Preview]
 
-Nexmo In-App Voice uses WebRTC and includes all the essentials you need to build a feature rich voice experience. 
+Nexmo In-App Voice uses WebRTC and includes all the essentials you need to build a feature rich voice experience.
 
-- User Control – Users can control whether their audio stream is muted or unmuted.
-- Notifications  – Users can be notified when they receive a call or when participants are muted.
-- 1:1 or Group Calls – Configure call settings so users can start a direct or group call by adding participants in real time.
+* 1:1 or Group Calls
+* Audio Controls – Mute, earmuff
+* DTMF Support
+* Audio Stream Quality Statistics
 
-Nexmo In-App Voice also integrates with the Nexmo [Voice API](/voice/voice-api/overview) as an additional channel alongside PSTN phone calls, SIP & WebSocket. The Voice API allows users to build high-quality programmable voice applications and amplifies the In-App Voice offering through extra functionality such as:
+Nexmo In-App Voice integrates with the Nexmo Voice API which amplifies the In-App Voice offering through extra functionality such as:
 
-- Outbound and inbound call management
-- Complex call flow configurations 
-- Voice stream recording
-- Conference calling 
-- Text-to-speech messages in 23 languages 
+* Calls to phone devices(PSTN)
+* Calls to SIP-enabled devices 
+* Connection to other services over Websockets
+* Call management
+* Complex call flow configurations
+* Voice stream recording
+* Conference calling
+* Text-to-speech messages in 23 languages
+
+The Android & iOS Client SDKs also offer:
+
+* Network Change Handling
+* Audio Routing Management
+* Push Notifications
+
+## Getting started
+
+TBD
 
 ## Concepts
 
-**Conversation**
-    -> A conversation is a shared core component that Nexmo APIs rely on. Conversations happen over multiple mediums and and can have associated Users through Memberships.
+```concept_list
+product: conversation
+```
 
-**User**
-    -> The concept of a user exists in Nexmo APIs, you can associate one with a user in your own application if you choose. A user can have multiple memberships to conversations and can communicate with other users through various different mediums.
+## Building Blocks
 
-**Member**
-    -> Memberships connect users with conversations. Each membership has one conversation and one user however a user can have many memberships to conversations just as conversations can have many members.
+```building_block_list
+product: client-sdk/in-app-voice
+```
 
-**Audio**
-    -> Audio streams can be enabled and disabled in a Conversation so that Members can communicate with voice.
+## Tutorials
 
-**Media Events**
-    -> Media events will fire in a Conversation when media state changes for a member. This can be when an Audio stream is started or ended.
+```tutorials
+product: client-sdk
+```
 
-## Try out the Quick Start Guides
+## Reference
 
-
-* [JavaScript Quick Start](/stitch/in-app-voice/guides/enable-audio/javascript)
-* [Android Quick Start](/stitch/in-app-voice/guides/enable-audio/android)
-* [iOS Quick Start](/stitch/in-app-voice/guides/enable-audio/ios)
-
+* [Conversation API Reference](/api/conversation)
