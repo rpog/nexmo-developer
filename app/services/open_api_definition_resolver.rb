@@ -4,12 +4,6 @@ class OpenApiDefinitionResolver
       break p if File.file? p
     end
 
-    unless path
-      if NexmoApiSpecification::Definition.exists?(name)
-        path = NexmoApiSpecification::Definition.path(name)
-      end
-    end
-
     return resolve(path) if path
 
     raise "Could not find definition '#{name}'"
