@@ -101,6 +101,14 @@ class BuildingBlockFilter < Banzai::Filter
       BuildingBlockRenderer::Ruby
     when 'php'
       BuildingBlockRenderer::Php
+    when 'android'
+      BuildingBlockRenderer::Android
+    when 'kotlin'
+      BuildingBlockRenderer::Kotlin
+    when 'objective-c'
+      BuildingBlockRenderer::ObjectiveC
+    when 'swift'
+      BuildingBlockRenderer::Swift
     else
       raise "Unknown language: #{language}"
     end
