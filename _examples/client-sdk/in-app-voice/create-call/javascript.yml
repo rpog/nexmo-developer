@@ -1,0 +1,8 @@
+---
+title: JavaScript
+language: javascript
+code:
+    source: .repos/nexmo/client-sdk-javascript-building-blocks/in-app-voice/create-call/create-call.js
+    from_line: 1
+    to_line: 14
+file_name: create-call.js

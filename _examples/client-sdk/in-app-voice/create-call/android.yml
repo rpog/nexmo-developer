@@ -1,0 +1,16 @@
+---
+title: Android
+language: android
+dependencies:
+    - 'android dependency thingies'
+code:
+    source: .repos/nexmo/client-sdk-android-java-building-blocks/create-call/CreateCall.java
+    from_line: 1
+    to_line: 16
+client:
+    source: .repos/nexmo/client-sdk-android-java-building-blocks/create-call/CreateCall.java
+    from_line: 1
+    to_line: 16
+run_command: Run using your IDE
+file_name: CreateCall.java
+unindent: true
