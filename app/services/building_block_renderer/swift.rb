@@ -4,7 +4,7 @@ module BuildingBlockRenderer
       deps.join("\n")
     end
 
-    def self.run_command(command, _filename, _file_path)
+    def self.run_command(_command, _filename, _file_path)
       <<~HEREDOC
         ## Run your code
         We're still working on this. Bear with us
