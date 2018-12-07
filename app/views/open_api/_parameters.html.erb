@@ -112,13 +112,11 @@
 
           <% unless model %>
             <% if parameter.collection? or parameter.oneOf? %>
-              <% if parameter.raw['x-nexmo-developer-collection-description-shown'] %>
                 <!-- Just for spacing -->
                 <td></td>
-              <% end %>
             <% else %>
               <td>
-                <%= (parameter.example ? "<code>#{parameter.example}</code>" : '<i>None</i>').html_safe %>
+                  <%= (parameter.example ? "<code>#{parameter.example.to_s.gsub("\n", "<br />")}</code>" : '<i>None</i>').html_safe %>
               </td>
             <% end %>
           <% end %>
@@ -127,9 +125,11 @@
             <td>
               <% if parameter.raw['x-default-is-meta'] %>
                 <i><%= (parameter.default.nil? ? 'None' : parameter.default) %></i>
-              <% else %>
-                <%= (parameter.default.nil? ? '<i>None</i>' : "<code>#{parameter.default}</code>").html_safe %>
-              <% end %>
+            <% else %>
+                <% unless parameter.type == 'object' %>
+                    <%= (parameter.default.nil? ? '<i>None</i>' : "<code>#{parameter.default}</code>").html_safe %>
+                <% end %>
+            <% end %>
             </td>
           <% end %>
         
