@@ -9,23 +9,21 @@ Nexmo API provides various means of Authentication depending on what product you
 
 API | API Key and Secret (Query String) | API Key and Secret (Header) | JSON Web Token (JWT) | OAuth
 -- | -- | -- | -- | --
-[SMS](/api/sms) | ✅ | ❎ | ❎ | ✅
-[Voice](/api/voice) | ❎ | ❎ | ✅ | ❎
-[Verify](/api/verify) | ✅ | ❎ | ❎| ❎
-[Number Insight](/api/number-insight) | ✅ | ❎ | ❎| ❎
-[Conversion](/api/conversion) | ✅ | ❎ | ❎| ❎
-[Developer](/api/developer) | ✅ | ❎ | ❎| ❎
-[Messages](/api/messages) | ❎ | ✅ | ✅| ❎
-[Dispatch](/api/dispatch) | ❎ | ✅ | ✅| ❎
-[Audit](/api/audit) | ❎ | ✅ | ❎ | ❎
-[Redact](/api/redact) | ❎ | ✅ | ❎ | ❎
+[SMS](/api/sms) | ✅ | ❌ | ❌ | ✅
+[Voice](/api/voice) | ❌ | ❌ | ✅ | ❌
+[Verify](/api/verify) | ✅ | ❌ | ❌ | ❌
+[Number Insight](/api/number-insight) | ✅ | ❌ | ❌| ❌
+[Conversion](/api/conversion) | ✅ | ❌ | ❌| ❌
+[Developer](/api/developer) | ✅ | ❌ | ❌ | ❌
+[Messages](/api/messages-olympus) | ❌ | ✅ | ✅ | ❌
+[Dispatch](/api/dispatch) | ❌ | ✅ | ✅ | ❌
+[Audit](/api/audit) | ❌ | ✅ | ❌ | ❌
+[Redact](/api/redact) | ❌ | ✅ | ❌ | ❌
 
 ## Contents
 
 In this document you can learn about authentication via the following means:
 
-- [Authentication](#authentication)
-  - [Contents](#contents)
   - [API Key and Secret](#api-key-and-secret)
     - [Request Body](#request-body)
     - [Query String](#query-string)
@@ -37,7 +35,7 @@ In this document you can learn about authentication via the following means:
 
 ## API Key and Secret
 
-When you create a Nexmo account, an API key and secret will be created for you. These are located in your [account settings](https://dashboard.nexmo.com/settings) in the Nexmo Dashboard. You should always keep these secure and never share them: be careful when adding it to your codebase to make sure they are not shared with anyone who may use it maliciously.
+When you create a Nexmo account, an API key and secret will be created for you. These are located in your [account settings](https://dashboard.nexmo.com/settings) in the Nexmo Dashboard. You should always keep these secure and **never share these details**: be careful when adding it to your codebase to make sure they are not shared with anyone who may use it maliciously. If you use [message signatures](/concepts/guides/signing-messages), these are generated using the `SIGNATURE_SECRET` rather than the `API_SECRET`; both values can be found in your [account settings](https://dashboard.nexmo.com/settings).
 
 > Note: The secret should always be kept secure and never shared. Be careful when adding it to your codebase to make sure it is not shared with anyone who may use it maliciously. Read more about the [Best Security Practices for your Nexmo Account](https://help.nexmo.com/hc/en-us/articles/115014939548).
 
@@ -49,7 +47,15 @@ For `POST` requests to the SMS API, your API key and secret should be sent as pa
 
 ### Query String
 
-Your API key and secret should be included in the parameters of requests you make to the Conversion, Number Insight or Developer API.
+Your API key and secret should be included in the query parameters of requests you make to the Conversion, Number Insight or Developer API. The parameters are called `api_key` and `api_secret` respectively.
+
+An example of authentication query parameters would be as follows:
+
+```
+?api_key=NEXMO_API_KEY&api_secret=NEXMO_API_SECRET
+```
+
+The request may also need other query parameters and these can be added in any order.
 
 ### Header-based API Key and Secret Authentication
 
@@ -110,8 +116,8 @@ Name | Description | Required
 `application_id` | The unique ID allocated to your application by Nexmo. | ✅
 `iat` | The UNIX timestamp at UTC + 0 indicating the moment the JWT was requested. | ✅
 `jti` | The unique ID of the JWT. | ✅
-`nbf` | The UNIX timestamp at UTC + 0 indicating the moment the JWT became valid. | ❎
-`exp` | The UNIX timestamp at UTC + 0 indicating the moment the JWT is no longer valid. A minimum value of 30 seconds from the time the JWT is generated. A maximum value of 24 hours from the time the JWT is generated. A default value of 15 minutes from the time the JWT is generated. | ❎
+`nbf` | The UNIX timestamp at UTC + 0 indicating the moment the JWT became valid. | ❌
+`exp` | The UNIX timestamp at UTC + 0 indicating the moment the JWT is no longer valid. A minimum value of 30 seconds from the time the JWT is generated. A maximum value of 24 hours from the time the JWT is generated. A default value of 15 minutes from the time the JWT is generated. | ❌
 
 If you are not using a Nexmo library you should refer to [RFC 7519](https://tools.ietf.org/html/rfc7519) to implement JWT.
 

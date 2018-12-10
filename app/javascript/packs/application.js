@@ -24,7 +24,6 @@ import Notices from './Notices'
 import Feedback from './Feedback'
 import Concatenation from './Concatenation'
 import APIStatus from './APIStatus'
-import Markdown from './Markdown'
 import BuildingBlockEvents from './BuildingBlockEvents'
 
 import {
@@ -61,15 +60,19 @@ let refresh = () => {
     ReactDOM.render(<Concatenation/>, document.getElementById('ConcatenationComponent'))
   }
 
-  if (document.getElementById('MarkdownComponent')) {
-    ReactDOM.render(<Markdown/>, document.getElementById('MarkdownComponent'))
-  }
-
   // If we're on a two pane page, make sure that the main pane is focused
   let rightPane = document.querySelector(".Vlt-main");
   if (rightPane) { rightPane.click(); }
 
-  Volta.init(['accordion', 'tooltip'])
+  Volta.init(['accordion', 'tooltip', 'tab'])
+
+  // Fix for Turbolinks scrolling to in-page anchor when navigating to a new page
+  if(window.location.hash){
+    const tag = document.getElementById(window.location.hash.slice(1))
+    if(tag){
+      tag.scrollIntoView(true);
+    }
+  }
 }
 
 $(document).on('nexmo:load', function() {

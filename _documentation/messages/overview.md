@@ -1,5 +1,6 @@
 ---
 title: Overview
+meta_title: Send messages via SMS, WhatsApp, Viber and Facebook Messenger
 navigation_weight: 1
 ---
 
@@ -46,17 +47,17 @@ Channel | Outbound Text | Outbound Image | Outbound Audio | Outbound Video | Out
 SMS | ✅ | n/a | n/a | n/a | n/a | n/a
 Viber Service Messages | ✅ | ✅ | n/a | n/a | n/a | ✅
 Facebook Messenger | ✅ | ✅ | ✅ | ✅ | ✅ | ✅
-WhatsApp | ✅ | ❎ | ❎ | ❎ | ❎ | ✅
+WhatsApp | ✅ | ❌ | ❌ | ❌ | ❌ | ✅
 
 Channel | Inbound Text | Inbound Image | Inbound Audio | Inbound Video | Inbound File | Inbound Location
 -- | -- | -- | -- | -- | -- | --
 Facebook Messenger | ✅ | ✅ | ✅ | ✅ | ✅ | ✅
-WhatsApp | ✅ | ❎ | ❎ | ❎ | ❎ | ✅
+WhatsApp | ✅ | ❌ | ❌ | ❌ | ❌ | ✅
 
 **Key:**
 
 * ✅ = Supported.
-* ❎ = Supported by the channel, but not by Nexmo. 
+* ❌ = Supported by the channel, but not by Nexmo. 
 * n/a = Not supported by the channel.
 
 ## External Accounts API
@@ -102,6 +103,6 @@ product: messages
 
 ## Reference
 
-* [Messages API Reference](/api/messages)
+* [Messages API Reference](/api/messages-olympus)
 * [External Accounts API Reference](/api/external-accounts)
 

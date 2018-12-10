@@ -19,8 +19,6 @@ Rails.application.routes.draw do
 
   get 'markdown/show'
 
-  match '/markdown', to: 'markdown#preview', via: %i[get post]
-
   get '/signout', to: 'sessions#destroy'
 
   post '/jobs/code_example_push', to: 'jobs#code_example_push'
@@ -51,6 +49,8 @@ Rails.application.routes.draw do
 
   get '/hansel', to: 'static#podcast'
 
+  get '/spotlight', to: 'static#developer_spotlight'
+
   get '/migrate/tropo', to: 'static#migrate'
   get '/migrate/tropo/(/*guide)', to: 'static#migrate_details'
 
@@ -69,9 +69,6 @@ Rails.application.routes.draw do
 
   get '/extend', to: 'extend#index'
   get '/extend/:title', to: 'extend#show'
-
-  get '/changelog', to: 'changelog#index'
-  get '/changelog/:version', to: 'changelog#show', constraints: { version: /\d\.\d\.\d/ }
 
   match '/search', to: 'search#results', via: %i[get post]
 

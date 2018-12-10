@@ -1,11 +1,11 @@
 ---
 title: Configure webhooks
-navigation_weight: 1
+navigation_weight: 4
 ---
 
 # Inbound message and message status webhooks
 
-If you want to handle an inbound message or receive message status updates, you will need to configure your inbound message webhook and message status webhook.
+You need to configure both your Inbound Message and Message Status webhooks.
 
 ```partial
 source: _partials/reusable/configure-webhook-urls.md

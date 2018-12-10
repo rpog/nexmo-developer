@@ -8,6 +8,7 @@ navigation_weight: 4
 The Number Insight Advanced API provides all the data from the [Number Insight Standard API](/number-insight/building-blocks/number-insight-standard) together with the following additional information:
 
 * If the number is likely to be valid
+* If the number is ported
 * If the number is reachable
 * If the number is roaming and, if so, the carrier and country
 
@@ -56,3 +57,5 @@ The response from the API contains the following data:
     "roaming": {"status": "not_roaming"}
 }
 ```
+
+For a description of each returned field and to see all possible values, see the [Number Insights API documentation](/api/number-insight?expandResponses=true#response-getNumberInsightAdvanced)

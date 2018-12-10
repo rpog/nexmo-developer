@@ -21,6 +21,8 @@ class DocumentationConstraint
       'account',
       'concepts',
       'client-sdk',
+      'stitch',
+      'conversation',
       'messages',
       'dispatch',
     ]
@@ -46,6 +48,7 @@ class DocumentationConstraint
       'client-sdk/in-app-voice',
       'client-sdk/in-app-video',
       'client-sdk/in-app-messaging',
+      'conversation',
       'messages',
       'dispatch',
     ]

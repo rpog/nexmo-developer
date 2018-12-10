@@ -10,6 +10,11 @@ en:
     number-insight: Number Insight
     stitch: Stitch
     client-sdk: Client SDK
+    conversation: Conversation
+    user: User
+    member: Member
+    event: Event
+    leg: Leg
     in-app-messaging: In-App Messaging
     in-app-voice: In-App Voice
     in-app-video: In-App Video

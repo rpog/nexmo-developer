@@ -1,5 +1,6 @@
 ---
 title: Overview
+meta_title: Number Insights API
 ---
 
 # Number Insight API Overview
@@ -12,7 +13,7 @@ This document contains the following information:
 - [Concepts](#concepts) - what you need to know
 - [Basic, Standard and Advanced API levels](#basic-standard-and-advanced-apis) - understand their different capabilities
 - **[Getting Started with the Number Insight API](#getting-started)** - try it out
-- [Guides](/#guides) - learn how to use the Number Insight API
+- [Guides](#guides) - learn how to use the Number Insight API
 - [Building Blocks](#building-blocks) - code snippets to help with specific tasks
 - [Tutorials](#tutorials) - detailed tutorials for some common use cases
 - [Reference](#reference) - complete API documentation
@@ -34,17 +35,18 @@ Each API level builds upon the capabilities of the previous one. For example, th
 
 ### Feature comparison
 Feature | Basic | Standard | Advanced
---|--|--|--
-Retrieve international and local format | ✅ | ✅ | ✅
-Identify origin country | ✅ | ✅ | ✅
-Detect line type (mobile/landline/virtual number/premium/toll-free) | ❎ | ✅ | ✅
-Determine mobile country code (MCC) and mobile network code (MNC) | ❎ | ✅ | ✅
-Check if number is ported | ❎ | ✅ | ✅
-Identify caller name (USA only) | ❎ | ✅ | ✅
-Verify that number is reachable | ❎ | ❎ | ✅
-Identify network when roaming | ❎ | ❎ | ✅
-Confirm that user's IP address is in same location as their mobile phone | ❎ | ❎ | ✅
-Access asynchronously | ❎ | ❎ | ✅
+:--|:--:|:--:|:--:
+Number format and origin| ✅ | ✅ | ✅    
+Number type| ❌ | ✅ | ✅
+Carrier and country| ❌ | ✅ | ✅
+Ported| ❌ | ❌ | ✅
+IP match| ❌ | ❌ | ✅
+Validity| ❌ | ❌ | ✅
+Reachability| ❌ | ❌ | ✅
+Roaming status| ❌ | ❌ | ✅
+Roaming carrier and country| ❌ | ❌ | ✅
+**US number** caller name and type| ❌ | ✅ | ✅
+
 
 > Check the legislation in your country to ensure that you are allowed to save user roaming information.
 
