@@ -12,8 +12,7 @@ Ensure the following variables are set to your required values using any conveni
 
 Key | Description
 -- | --
-`NEXMO_APPLICATION_ID` | The ID of the application that you created.
-... | ...
+`listener` | CallEventsListener
 
 ```building_blocks
 source: '_examples/client-sdk/in-app-voice/listen-to-call-status'
