@@ -15,13 +15,6 @@ Key | Description
 `NEXMO_APPLICATION_ID` | The ID of the application that you created.
 ... | ...
 
-```building_blocks
-source: '_examples/client-sdk/in-app-messaging/delete-message'
-application:
-  type: in-app-messaging
-  name: 'Delete message'
-```
-
 ## Try it out
 
 When you run the code a message is deleted.

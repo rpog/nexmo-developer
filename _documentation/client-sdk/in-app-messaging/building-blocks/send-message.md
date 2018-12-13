@@ -15,12 +15,6 @@ Key | Description
 `NEXMO_APPLICATION_ID` | The ID of the application that you created.
 ... | ...
 
-```building_blocks
-source: '_examples/client-sdk/in-app-messaging/send-message'
-application:
-  type: in-app-messaging
-  name: 'Send text message'
-```
 
 ## Try it out
 

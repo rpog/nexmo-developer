@@ -4,11 +4,11 @@ language: android
 dependencies:
     - 'android dependency thingies'
 code:
-    source: .repos/nexmo/client-sdk-android-java-building-blocks/create-call/StartServerManagedCall.java
+    source: .repos/nexmo/client-sdk-android-java-building-blocks/in-app-voice/create-call/StartServerManagedCall.java
     from_line: 1
     to_line: 15
 client:
-    source: .repos/nexmo/client-sdk-android-java-building-blocks/create-call/StartServerManagedCall.java
+    source: .repos/nexmo/client-sdk-android-java-building-blocks/in-app-voice/create-call/StartServerManagedCall.java
     from_line: 1
     to_line: 15
 run_command: Run using your IDE

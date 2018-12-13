@@ -15,12 +15,6 @@ Key | Description
 `NEXMO_APPLICATION_ID` | The ID of the application that you created.
 ... | ...
 
-```building_blocks
-source: '_examples/client-sdk/in-app-messaging/add-typing-indicator'
-application:
-  type: in-app-messaging
-  name: 'Add typing indicator'
-```
 
 ## Try it out
 

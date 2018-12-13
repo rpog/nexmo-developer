@@ -18,7 +18,7 @@ Key | Description
 ```building_blocks
 source: '_examples/client-sdk/in-app-voice/earmuff-myself'
 application:
-  type: in-app-voice
+  type: rtc
   name: 'Earmuff myself'
 ```
 

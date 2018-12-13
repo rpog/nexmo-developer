@@ -30,7 +30,7 @@ product: conversation
 ## Building Blocks
 
 ```building_block_list
-product: client-sdk/in-app-voice
+product: client-sdk/in-app-messaging
 ```
 
 ## Tutorials

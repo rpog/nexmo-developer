@@ -15,12 +15,6 @@ Key | Description
 `NEXMO_APPLICATION_ID` | The ID of the application that you created.
 ... | ...
 
-```building_blocks
-source: '_examples/client-sdk/in-app-messaging/receive-events'
-application:
-  type: in-app-messaging
-  name: 'Receive Events'
-```
 
 ## Try it out
 

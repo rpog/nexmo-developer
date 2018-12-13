@@ -17,7 +17,7 @@ Key | Description
 ```building_blocks
 source: '_examples/client-sdk/in-app-voice/listen-to-call-status'
 application:
-  type: in-app-voice
+  type: rtc
   name: 'Listen to Call Status'
 ```
 
