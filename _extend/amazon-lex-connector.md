@@ -2,8 +2,10 @@
 title: Amazon Lex Connector
 description: A hosted and opensource connector to bridge between Nexmo websockets and Amazon Lex
 tags: ["Amazon","Lex","AI","Bots"]
+cta: Get this Repo
 link: https://github.com/nexmo/lex-connector
 image: /assets/images/extend/amazon-lex-logo.jpg
+published: true
 ---
 
 ## Overview
@@ -11,7 +13,7 @@ The Lex connector is a middleware component which sits between the [Nexmo Voice 
 The connector is supplied as an open source project written in python and also has a hosted service on Nexmo in Developer Preview.
 
 ## Resources
-* [GitHub Repository]([https://github.com/nexmo/lex-connector)
+* [GitHub Repository](https://github.com/nexmo/lex-connector)
 * [Hosted Service Docs](/voice/voice-api/guides/lex-connector)
 * [Lex PostContent Endpoint](https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html) For information
 
