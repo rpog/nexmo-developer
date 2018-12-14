@@ -1,0 +1,1 @@
+conversation.me.mute();
