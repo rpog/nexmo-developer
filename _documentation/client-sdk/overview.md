@@ -3,7 +3,7 @@ title: Overview
 meta_title: Realtime communication with In-App Messaging, Audio and Video
 ---
 
-# Overview [Developer Preview]
+# Overview [Early Access]
 
 Nexmo Client SDK is a conversation-centric product consisting of iOS, Android, and JavaScript SDKs.
 
@@ -53,11 +53,11 @@ Some features include:
 * Group Calls – Configure conversations so users can start a group video call by adding participants in real time.
 * Screen Sharing – Allow users to share their screens.
 
-## Participating in the Developer Preview
+## Participating in the Early Access programme
 
-This Developer Preview will focus on the In-App Messaging and Voice capabilities. During this program, there will be frequent releases with new features and bug fixes based on your feedback. During the Developer Preview, it is possible that there shall be breaking changes to the SDK and API but these will be explicitly communicated beforehand.
+This Early Access will focus on the In-App Voice capabilities. During this program, there will be frequent releases with new features and bug fixes based on your feedback. During the Early Access, it is possible that there shall be breaking changes to the SDK and API but these will be explicitly communicated beforehand.
 
-If you want to communicate with Nexmo during the developer preview you can:
+If you want to communicate with Nexmo during the Early Access you can:
 
 * Join the [Nexmo community slack](https://developer.nexmo.com/community/slack/) and check out the [#nexmo-client-sdk](https://nexmo-community.slack.com/messages/C9H152ATW) channel.
 * Email [ea-support@nexmo.com](mailto:ea-support@nexmo.com) directly.

@@ -2,7 +2,7 @@
 title: Overview
 ---
 
-# In-App Voice Overview [Developer Preview]
+# In-App Voice Overview [Early Access]
 
 Nexmo In-App Voice uses WebRTC and includes all the essentials you need to build a feature rich voice experience.
 

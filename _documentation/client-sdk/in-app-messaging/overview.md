@@ -2,7 +2,7 @@
 title: Overview
 ---
 
-# In-App Messaging Overview [Developer Preview]
+# In-App Messaging Overview [Early Access]
 
 Nexmo In-App Messaging enables you to build chat experience as part of your mobile and web app over websockets. The Nexmo Client SDKs offers functionality such as:
 

@@ -2,7 +2,7 @@
 title: Overview
 ---
 
-# In-App Video Overview [Developer Preview]
+# In-App Video Overview [Early Access]
 
 Nexmo In-App Video uses WebRTC and includes all the essentials you need to build a feature rich video experience:
 
