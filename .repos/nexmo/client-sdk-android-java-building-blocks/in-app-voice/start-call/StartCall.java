@@ -1,4 +1,4 @@
-List<String> userIdsToCall = ... ;
+List<String> callees = ... ;
 NexmoIRequestListener<NexmoCall> listener = new NexmoRequestListener<NexmoCall>() {
 
     @Override
@@ -12,4 +12,4 @@ NexmoIRequestListener<NexmoCall> listener = new NexmoRequestListener<NexmoCall>(
     }
 };
 
-NexmoClient.get().call(userIdsToCall, listener);
+NexmoClient.get().call(callees, listener);
