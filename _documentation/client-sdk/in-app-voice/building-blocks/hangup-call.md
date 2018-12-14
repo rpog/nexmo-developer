@@ -2,7 +2,7 @@
 title: Hangup Call
 ---
 
-# Earmuff a Call
+# Hangup a Call
 
 In this building block you will see how to hangup a Call.
 
@@ -11,7 +11,7 @@ In this building block you will see how to hangup a Call.
 ```building_blocks
 source: '_examples/client-sdk/in-app-voice/hangup-call'
 application:
-  type: rtc
+  type: voice
   name: 'Hangup Call'
 ```
 

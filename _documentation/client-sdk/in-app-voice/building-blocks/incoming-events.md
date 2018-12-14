@@ -18,7 +18,7 @@ Key | Description
 ```building_blocks
 source: '_examples/client-sdk/in-app-voice/incoming-events'
 application:
-  type: rtc
+  type: voice
   name: 'Register to receive incoming call Events'
 ```
 

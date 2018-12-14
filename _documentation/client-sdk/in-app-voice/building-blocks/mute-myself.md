@@ -18,7 +18,7 @@ Key | Description
 ```building_blocks
 source: '_examples/client-sdk/in-app-voice/mute-myself'
 application:
-  type: rtc
+  type: voice
   name: 'Mute Myself'
 ```
 

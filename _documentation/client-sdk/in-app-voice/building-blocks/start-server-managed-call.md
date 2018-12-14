@@ -18,7 +18,7 @@ Key | Description
 ```building_blocks
 source: '_examples/client-sdk/in-app-voice/start-server-managed-call'
 application:
-  type: rtc
+  type: voice
   name: 'Start a server managed Call'
 ```
 
