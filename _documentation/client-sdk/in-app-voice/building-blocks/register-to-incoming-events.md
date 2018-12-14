@@ -16,7 +16,7 @@ Key | Description
 `listener` | listener for starting the call method
 
 ```building_blocks
-source: '_examples/client-sdk/in-app-voice/incoming-events'
+source: '_examples/client-sdk/in-app-voice/register-to-incoming-events'
 application:
   type: voice
   name: 'Register to receive incoming call Events'
