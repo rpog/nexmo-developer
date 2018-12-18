@@ -106,7 +106,7 @@ class BuildingBlockFilter < Banzai::Filter
       BuildingBlockRenderer::Android
     when 'kotlin'
       BuildingBlockRenderer::Kotlin
-    when 'objective-c'
+    when 'objective_c'
       BuildingBlockRenderer::ObjectiveC
     when 'swift'
       BuildingBlockRenderer::Swift
