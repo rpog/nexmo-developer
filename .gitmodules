@@ -7,3 +7,6 @@
 [submodule ".repos/nexmo/client-sdk-android-kotlin-building-blocks"]
 	path = .repos/nexmo/client-sdk-android-kotlin-building-blocks
 	url = https://github.com/Nexmo/client-sdk-android-kotlin-building-blocks.git
+[submodule ".repos/nexmo/client-sdk-android-java-building-blocks"]
+	path = .repos/nexmo/client-sdk-android-java-building-blocks
+	url = https://github.com/Nexmo/client-sdk-android-java-building-blocks.git

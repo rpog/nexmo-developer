@@ -1,5 +1,0 @@
-//On your 'app/build.gradle' add the dependency:
-
-dependencies {
-    implementation 'com.nexmo.android:client:0.2.0'
-}
