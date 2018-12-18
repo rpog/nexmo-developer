@@ -1,8 +1,4 @@
 ---
-title: JavaScript
-language: javascript
-dependencies:
-    - To be decided
 code:
     source: .repos/nexmo/client-sdk-javascript-building-blocks/in-app-voice/start-call/StartCall.js
     from_line: 1
@@ -11,5 +7,3 @@ client:
     source: .repos/nexmo/client-sdk-javascript-building-blocks/in-app-voice/start-call/StartCall.js
     from_line: 1
     to_line: 1
-file_name: StartCall.js
-run_command: ' To be decided StartCall.js'
