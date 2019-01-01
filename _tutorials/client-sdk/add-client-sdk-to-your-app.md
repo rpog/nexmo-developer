@@ -29,6 +29,23 @@ A [Nexmo application]("https://developer.nexmo.com/concepts/guides/applications"
 
 - On your app level `build.gradle` file 
 
+### Add Permissions
+
+On your `AndroidManifest.xml` add the requied permissions:
+
+```xml
+ <!-- Audio support dependencies. Developer of the app to ask for these permissions. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+ 
+```
+
 
 ### Init NexmoClient
 

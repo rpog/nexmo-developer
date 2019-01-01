@@ -1,5 +1,5 @@
 ---
-title: Get Started - Calls 
+title: Get Started - In App Calls 
 Tutorial
 products: client-sdk/in-app-voice/android
 description: "This is a test."
@@ -7,9 +7,9 @@ languages:
     - android
 ---
 
-# Get Startred - Calls
+# Get Startred - In App Calls
 
-In this tutorial you'll learn how to use Nexmo Client SDK for Android, in order to perform an in-app call.
+In this tutorial you'll learn how to use Nexmo Client SDK for Android, in order to perform an in-app (IP to IP) call.
 
 You will create a simple app that can call and recieve calls.
 
@@ -22,13 +22,22 @@ The app will have 2 buttons, to login as 2 different users: Jane and Joe. After 
 
 - Make sure you have created a Nexmo Application.
 
-- Make sure you have at least 2 users for that Nexmo Application
+- Make sure you have at least 2 users for that Nexmo Application [//TODO: add link]
 
-- Add Nexmo SDK to your project.
+- Add Nexmo SDK to your project. [//TODO: add link?]
+
+- Clone this Github project [//TODO: add link]
 
 ---
-*Note * you can clopne the sample project from github, that has most of the boilerplate code prepared. 
 
+Open `NexmoHelper` class and swap the users ID and tokens.
+
+```java
+    String USER_ID_JANE = "USR-XXX"; //TODO: swap with the UserId you generated for Jane
+    String USER_ID_JOE = "USR-XXX"; //TODO: swap with the UserId you generated for Jane
+    String JWT_JANE = "PLACEHOLDER";//TODO: swap with the JWT you generated for Jane
+    String JWT_JOE = "PLACEHOLDER"; //TODO: swap with the JWT you generated for Joe
+```
 
 ## 1. Login
 Using the Nexmo SDK should start with logging in to `NexmoClient`, using a `jwt` user token.
@@ -38,83 +47,193 @@ You can read more about generating the `jwt` [here]("https://developer.nexmo.com
 
 For testing and getting started purposes, you can use the `jwt` generated for you on the dashboard. 
 
-Swap the token to log in the relevant user.
+Open `LoginActivity`. It already has 2 button handlers:`onLoginJaneClick(...)` and `onLoginJoeClick(...)`. 
+Each calls the `loginToSdk(...)` method, with a diffrent parameter - the corresponding `jwt`.
+When the login is successful, the logged in `NexmoUser` returns. 
+For convenience, save a reference to `NexmoUser` on `NexmoHelper`, and then, start `CreateCallActivity`.
+
+Complete the `loginToSdk()` method implementation:
 
 ```java
-    NexmoClient.get().login(token, loginListener)
-```
-
-When the login succeeds, `loginListener.onSucceed()` will be called, with the logged in User. You can save a reference to it in order to access it later on. 
-
-```java
-loginListener = new NexmoRequestListener<NexmoUser>() {
+   void loginToSdk(String token) {
+        NexmoClient.get().login(token, new NexmoRequestListener<NexmoUser>() {
+            
             @Override
-            public void onError(NexmoApiError nexmoApiError) {
-                // handle login error
-            }
+            public void onError(NexmoApiError nexmoApiError) {}
 
             @Override
             public void onSuccess(NexmoUser user) {
-                // handle 'user' login success
+                NexmoHelper.user = user;
+
+                Intent intent = new Intent(getBaseContext(), CreateCallActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
+    }
 ```
 
 
+## 2. Start a Call
 
-## 2. Call
-To start a call, simply use the method `NexmoClient.call(callees)`
+Let's start a simple In App call. 
+If you logged in as Jane, you will call Joe, and vice versa.
 
-### Starting an in-app call
-
-If you logged in as Jane, we can start an in-app call to Joe, and vice versa:
+Open `CreateCallActivity` and complete the prepared `onInAppCallClick()` handler:
 
 ```java
-    ArrayList<String> callees = new ArrayList();
-    callees.add(otherUserId);
+public void onInAppCallClick(View view) {
+    List<String> callee = new ArrayList<>();
+    callee.add(getOtherUserName());
 
-    NexmoClient.get().call(callees);
+    NexmoClient.get().call(callee, NexmoCallHandler.IN_APP, callListener);
+}
+
+String getOtherUserName() {
+    return NexmoHelper.user.getName().equals(NexmoHelper.USER_NAME_JANE) ? NexmoHelper.USER_NAME_JOE : NexmoHelper.USER_NAME_JANE;
+}
 ```
 
-### Starting a phone call
-
-You can also start a phone (pstn) call just as easy, by adding the phone number to the `callees` list.
-
-**Note** on your backend, there is some work you should do to support that. see here for more info.["TODO"]
+When the call creation is successful, save the `NexmoCall` on `NexmoHelper`, for convenience, and start `OnCallActivity`.
 
 ```java
-    ArrayList<String> callees = new ArrayList();
-    callees.add(phoneNumber);
+NexmoRequestListener<NexmoCall> callListener = new NexmoRequestListener<NexmoCall>() {
+        @Override
+        public void onError(NexmoApiError nexmoApiError) { }
 
-    NexmoClient.get().call(callees);
+        @Override
+        public void onSuccess(NexmoCall call) {
+            NexmoHelper.currentCall = call;
+            
+            Intent intent = new Intent(CreateCallActivity.this, OnCallActivity.class);
+            startActivity(intent);
+        }
+    };
 ```
+*** Note:
+Just as easy, you can start a call with customized logic, defined by your backend (by an NCCO [//TODO add link] just as easy, by choosing `NexmoCallHandler.SERVER` as the CallHandler. 
+
+```java
+NexmoCient.call(callees, NexmoCallHandler.SERVER, listener)
+```
+
+This will also allow you to start a phone (PSTN) call, by adding a phone number to the `callees` list. To read more about that, see here: [//TODO add link]
+
 
 ## 3. Register to incoming events
 
 When Jane calls Joe, Joe should be notified about it, for example, in order to answer the call.
 
-Joe registers to incoming events, and implements `onIncomingCall()`.
-Whenever Joe is called - this method will be called, with the Call object
+Therefore, Joe should register to incoming events, and implement `onIncomingCall()`.
+Whenever Joe is called to - `onIncomingCall()` is called, with the incoming Call object. 
+
+For simplicity, you will accept incoming calls only on `CreateCallActivity`. 
+Open `CreateCallActivity` and create the `NexmoIncomingCallListener` to save the refrence to the incoming call on `NexmoHelper`, and start `IncomingCallActivity`:
+
 
 ```java
-public static NexmoIncomingCallListener incomingCallListener = new NexmoIncomingCallListener() {
+NexmoIncomingCallListener incomingCallListener = new NexmoIncomingCallListener() {
         @Override
         public void onIncomingCall(NexmoCall call) {
-            currentCall = call;
-            appContext.startActivity(new Intent(appContext, IncomingCallActivity.class));
-            
+
+            NexmoHelper.currentCall = call;
+            startActivity(new Intent(CreateCallActivity.this, IncomingCallActivity.class));
         }
     };
 ```
 
+You should register and unregister the listener, on this case, on `onCreate()` and `onDestroy`, as such:
+
+```java
+@Override
+protected void onCreate(@Nullable Bundle savedInstanceState) {
+    //...
+
+    NexmoClient.get().addIncomingCallListener(incomingCallListener);
+}
+
+@Override
+protected void onDestroy() {
+    NexmoClient.get().removeIncomingCallListeners();
+    super.onDestroy();
+}
+
+```
+
 ## 4. Answer a call
-Once a Joe recieves the incoming call, answering is as simple as:
+Once Joe recieves the incoming call, incredibley simple.
+Open `IncomingCallActivity`, and complete the prepared `onAnswer()` button handler, to start `OnCallActivity` after a successful answer:
+
+```java
+ public void onAnswer(View view) {
+        NexmoHelper.currentCall.answer(new NexmoRequestListener<NexmoCall>() {
+            @Override
+            public void onError(NexmoApiError nexmoApiError) { }
+
+            @Override
+            public void onSuccess(NexmoCall call) {
+                startActivity(new Intent(IncomingCallActivity.this, OnCallActivity.class));
+                finish();
+            }
+        });
+    }
+
+
+```
+
+## Hangup
+`onHangup()` handler, allow Joe to reject the call. Complete the implementation on `IncomingCallActivity`, to finish the activity:
+
+```java
+ public void onHangup(View view) {
+        NexmoHelper.currentCall.hangup(new NexmoRequestListener<NexmoCall>() {
+            @Override
+            public void onError(NexmoApiError nexmoApiError) { }
+
+            @Override
+            public void onSuccess(NexmoCall call) {
+                finish();
+            }
+        });
+    }
+
+```
 
 
 ## register to call status
+If Joe hangs up the call, Jane should know about it, and finish `OnCallActivity`.
+The same way, if Jane decides to hangup before Joe answered, Joe should know about it and finish `IncomingCallActivity`.
 
-When B answered the call, we want B to know about it. Register to callEvents:
-To read more about call statuses
+To be notified on the different call statuses, you should register to `CallEvents`. 
+`FinishOnCallEnd` is a simple `NexmoCallEventListener` that will finish the current activity if the call is completed or canceled.
 
-## Hangup
-Call.hangup()
+Register to its instance, to address the usecases mentioned above.
+On both `OnCallActivity` and `IncomingCallActivity`, add:
+
+```java
+    NexmoCallEventListener callEventListener = new FinishOnCallEnd(this);
+
+@Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        //...
+
+        NexmoHelper.currentCall.addCallEventListener(callEventListener);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        NexmoHelper.currentCall.removeCallEventListener(callEventListener);
+        super.onDestroy();
+    }
+
+```
+
+*** Note: to read more about call statuses, see here [//TODO]
+
+
+## handle permissions
+
+For devices running Android 6.0 (API level 23) and higher, creating and operation on calls requires requesting runtime permissions.
+To simplify the implementation on this tutorial, `BaseActivity` checks the permissions on every Activity's `onStart()` and `onStop()`.
+To read more about the permissions needed, read here [TODO]
