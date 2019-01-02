@@ -1,19 +1,19 @@
 ---
-title: Get Started - In App Calls 
+title: Get Started - In App Voice 
 Tutorial
 products: client-sdk/in-app-voice/android
-description: "This is a test."
+description: "This a tutorial to get started with Nexmo Client In App Voice calls on Android"
 languages:
     - android
 ---
 
-# Get Startred - In App Calls
+# Get Startred - In App Voice
 
 In this tutorial you'll learn how to use Nexmo Client SDK for Android, in order to perform an in-app (IP to IP) call.
 
 You will create a simple app that can call and recieve calls.
 
-The app will have 2 buttons, to login as 2 different users: Jane and Joe. After logging in, the user can call the other user, or to call a pstn number.
+The app will have 2 buttons, to login as 2 different users: Jane and Joe. After logging in, the user can call the other user, or to call a pstn (phone) number.
 
 [//TODO: add gif]
 
