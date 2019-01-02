@@ -1,27 +1,42 @@
 ---
-title: Get Started - Calls 
-Tutorial
-products: client-sdk/in-app-voice/android
-description: "This is a test."
-languages:
-    - android
+title: Setup Nexmo Push Notifications On Android
 ---
 
 # Get Startred - Push Notifications
 
 On incoming events, such as when a user recieves a new message, or an incoming call, the user often expects to recieve a push notification.
-This guide will explain how to set them up:
+This guide will explain how to configure your Android app to recieve push notiifcations from Nexmo Client SDK.
 
-## Before you begin
+## 1. Setup Firebase project for your app
 
-- [Set up a Firebase Cloud Messaging client app on Android]("https://firebase.google.com/docs/cloud-messaging/android/client")
+In case you haven't done that for your Android app, add Firebase to your Android app codebase. 
+More details can be found at the official Firebase documentation, on [this link]("https://firebase.google.com/docs/android/setup").
 
+## 2. Provision your server key
 
+2.1. Obtain a `jwt_dev`, which is a `jwt` without a `sub` claim. More details can be found here.[TODO]
 
-1. In case you haven't, add Firebase to your Android app codebase. More details can be found at the official Firebase documentation, on [this link]("https://firebase.google.com/docs/android/setup").
+2.2. Get your `server_api_key` from Firebase console:
 
+On firebase console --> project settings --> CloudMessaging Tab --> `Server key`
 
-2. On your app level `build.gradle` file (usually `app/build.gradle`), add the `firebase-messaging` dependency.
+2.3. Get your `app_id` from Nexmo Dashboard[TODO]
+
+2.4. Run the following curl command, while replacing `jwt_dev`, `server_api_key`, `app_id` with your own:
+
+```sh
+
+curl -v -X PUT \
+   -H "Authorization: Bearer $jwt_dev" \
+   -H "Content-Type: application/json" \
+   -d "{\"token\":\"$server_api_key\"}" \
+   https://api.nexmo.com/v1/applications/$app_id/push_tokens/android
+
+```
+
+## 3. Add Firebase Cloud Messaging to your Android project
+
+On Android Studio, on your app level `build.gradle` file (usually `app/build.gradle`), add the `firebase-messaging` dependency.
 
 Swap `x.y.z` with the latest Cloud Massaging versions number, which can be found [on Firebase website]("https://firebase.google.com/support/release-notes/android")
 
@@ -31,7 +46,10 @@ dependencies{
 }
 ```
 
-3. On your `AndroidManifest.xml`, add a decleration of a service that extends `FirebaseMessagingService`
+## 4. Implement a Service to receive push notifications
+
+If you don't have one already, create a service that extends `FirebaseMessagingService`. 
+Make sure your service is declared on your `AndroidManifest.xml`:
 
 ```xml
 <service android:name=".MyFirebaseMessagingService">
@@ -41,75 +59,53 @@ dependencies{
 </service>
 ```
 
-4. On your 
+## 5. Enable Nexmo server to send push notifications to your device
 
 ```java
-/**
- * Called if InstanceID token is updated. This may occur if the security of
- * the previous token had been compromised. Note that this is called when the InstanceID token
- * is initially generated so this is where you would retrieve the token.
- */
-@Override
-public void onNewToken(String token) {
-    Log.d(TAG, "Refreshed token: " + token);
-
-    // If you want to send messages to this application instance or
-    // manage this apps subscriptions on the server side, send the
-    // Instance ID token to your app server.
-    sendRegistrationToServer(token);
-}
-MyFirebaseMessagingService.java
-
-```
-
-## register a new token
-
-```java
+// On MyFirebaseMessagingService.kt
 
 override fun onNewToken(token: String?) {
-        token?.let {
-            NexmoManager.get().nexmoClient.enablePushNotifications(token, object : NexmoRequestListener<Void> {
-                override fun onError(nexmoError: NexmoApiError?) {
-                    Log.d(TAG, "$TAG:sendRegistrationToServer:onError() with: $nexmoError")
-                }
-
-                override fun onSuccess(void: Void?) {
-                    Log.d(TAG, "$TAG:sendRegistrationToServer:onSuccess()")
-                }
-            })
-        }
+    token?.let {
+        NexmoClient.get().enablePushNotifications(token, requestListener)
     }
+}
 
 ```
 
+## 6. Receive push notifications
+
+Push notifications are receieved on your implementation of `MyFirebaseMessagingService`, on `onMessageReceived()` method.
+
+You can use `NexmoClient.isNexmoPushNotification(message.data))` to realize whether the message is sent from Nexmo server.
+
+Use `NexmoClient.get().processPushNotification(message.data, listener)` to process the data received from FCM into an easy to use Nexmo object.
 
 
-
-
-## new message
-
-### is push notification?
-
-NexmoClient.isCommsPushNotification(RemoteMessage.data)
-
-
-NexmoClient.get().processPushNotification(message.data, listener)
-
+For example, on your `MyFirebaseMessagingService`:
 
 ```java
-override fun onMessageReceived(message: RemoteMessage?) {
-        if (NexmoClient.isCommsPushNotification(message!!.data)) {
-//            handleNexmoPushForLoggedInUser(message)
-            NexmoClient.get().login("XXX", object : NexmoRequestListener<NexmoUser> {
-                override fun onSuccess(p0: NexmoUser?) {
-                    NexmoClient.get().processPushNotification(message.data, this@`TestAppMessagingService-copy`)
-                }
+ val pushEventListener = object : NexmoPushEventListener {
+        override fun onIncomingCall(p0: NexmoCall?, p1: MemberEvent?) {
+            TODO("not implemented")
+        }
 
-                override fun onError(p0: NexmoApiError?) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
+        override fun onNewEvent(p0: NexmoEvent?) {
+            TODO("not implemented")
+        }
 
-            })
+        override fun onError(p0: NexmoApiError?) {
+            TODO("not implemented")
         }
     }
+
+    override fun onMessageReceived(message: RemoteMessage?) {
+        message?.data?.let {
+            if (NexmoClient.isCommsPushNotification(message.data)) {
+                NexmoClient.get().processPushNotification(message.data, pushEventListener)
+            }
+
+        }
+    }
+
 ```
+
