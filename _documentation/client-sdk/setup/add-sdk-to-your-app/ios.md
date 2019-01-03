@@ -114,8 +114,8 @@ func askAudioPermissions() {
 ## Using NXMClient On Your App
 
 ### Login
-Create a NXMClient object and login with a `jwt`. You can read more about generating the `jwt` [here](_documentation/client-sdk/concepts/jwt-acl).
 
+1. Create a `NXMClient` object and login with a `jwt` user token. You can read more about generating the `jwt` [here](_documentation/client-sdk/concepts/jwt-acl).
 
 **Swift**
 ```swift
@@ -130,9 +130,10 @@ NXMClient *client = [NXMClient new];
 [client setDelegate:self];
 [client loginWithAuthToken:@"your token"];
 ```
-where `"your token"` is the string format of the jwt for the user you wish to log in.  
-**Note:** self should implement the `NXMClientDelegate` protocol.  
-At the end of a succesfull login process, The following delegate method is called with isLoggedIn = true, now you can use the client.
+
+> *Note*: self should implement `NXMClientDelegate` protocol.  
+
+On a succesfull login, The following delegate method is called with `isLoggedIn = true`.
 
 **Swift**
 ```swift
@@ -144,20 +145,8 @@ func loginStatusChanged(_ user: NXMUser?, loginStatus isLoggedIn: Bool, withErro
 - (void)loginStatusChanged:(nullable NXMUser *)user loginStatus:(BOOL)isLoggedIn withError:(nullable NSError *)error;
 ```
 
-if an error occured, isLoggedIn = false, and more details about the error are present in the error object.
+After the login succeeds, the logged in user will be available via:
 
-### Logout
-Logout using the nexmo client.  
-**Swift**
-```swift
-client.logout()
-```
-
-**Objective-C**
-```objective-c
-[client logout];
-```
-**Note:**  At the end of a succesfull logout the loginstatuschanged method is called with isLoggedIn = false. If an error occured, isLoggedIn = true, and more details about the error are present in the error object.
 
 ### Get current user info
 **Swift**
@@ -169,4 +158,8 @@ let user = client.user
 ```objective-c
 NXMUser *user = client.user;
 ```
-**Note:** this method returns nil if no user is currently logged in.
+
+## What's next?
+
+After these steps you are ready to use the Nexmo SDK functionalities.
+Feel free to explore them.

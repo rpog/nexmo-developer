@@ -75,7 +75,7 @@ To use the in app voice features, you should add audio permissions:
  </>
 ```
 
-2. For devices running Android version M (API level 23) or higher, you should add a request for the dangerous permissions required. 
+2. For devices running Android version M (API level 23) or higher, you should add a request for the dangerous permissions required.
 
 ```java
 android.Manifest.permission.READ_PHONE_STATE, android.Manifest.permission.RECORD_AUDIO, android.Manifest.permission.PROCESS_OUTGOING_CALLS
@@ -89,25 +89,25 @@ Read more about requesting runtime permissions on Android [here]("https://develo
 
 ### 1. Init NexmoClient
 
-Before being able to use a NexmoClient instance, you should initialize it.
+Before being able to use a `NexmoClient` instance, you should initialize it.
 
 ```java
- loginListener = object : NexmoLoginListener {
-            override fun onLoginStateChange(eLoginState: NexmoLoginListener.ELoginState, eLoginStateReason: NexmoLoginListener.ELoginStateReason) {
-                //TODO
-            }
+loginListener = object : NexmoLoginListener {
+    override fun onLoginStateChange(eLoginState: NexmoLoginListener.ELoginState, eLoginStateReason: NexmoLoginListener.ELoginStateReason) {
+        //TODO
+    }
 
-            override fun onAvailabilityChange(eAvailability: NexmoLoginListener.EAvailability, nexmoConnectionState: NexmoConnectionState) {
-                //TODO
-            }
-        }
-        NexmoClient.init(context, loginListener)
+    override fun onAvailabilityChange(eAvailability: NexmoLoginListener.EAvailability, nexmoConnectionState: NexmoConnectionState) {
+        //TODO
+    }
+}
+
+NexmoClient.init(context, loginListener)
 ```
 
 ### 2. Login NexmoClient
 
 After initialzing `NexmoClient`, you should log in to it, using a `jwt` user token. You can read more about generating the `jwt` [here](_documentation/client-sdk/concepts/jwt-acl).
-
 
 Swap the token to log in the relevant user.
 
@@ -119,7 +119,7 @@ After the login succeeds, the logged in user will be available via `NexmoClient.
 
 ---
 
-Congratulations! you're all set.
+Congratulations! you're all set!
 
 ## What's next?
 
