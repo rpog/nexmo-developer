@@ -2,9 +2,9 @@
 title: Add Nexmo Client SDK To Your iOS App 
 ---
 
-# Get Started - Add Nexmo Client SDK To Your App
+# Get Started - Add Nexmo Client SDK To Your iOS App
 
-Let's get started with Nexmo SDK on your Android app! Here are all the details on how to set that up:
+Let's get started with Nexmo SDK on your iOS app! Here are all the details on how to set that up:
 
 ## Prerequisites
 
@@ -13,7 +13,11 @@ To use the Nexmo SDK for iOS, you will need to have the following installed:
 * Xcode 10 or later
 * iOS 10 or later
 
-## Import the SDK to your iOS project
+## Add The SDK To Your iOS Project
+
+Open XCode with your iOS project.
+
+You can either install the SDK via CocoaPods or directly:
 
 ### CocoaPods
 
@@ -26,7 +30,7 @@ To use the Nexmo SDK for iOS, you will need to have the following installed:
        pod 'NexmoClient'
    end
    ```
-   * Replace `Target Name` with your project's target.
+
    * Make sure the pod file has the public CocoaPod specs repository source.
 
 4. Install the Pod by opening terminal and running the following command:
@@ -35,11 +39,12 @@ To use the Nexmo SDK for iOS, you will need to have the following installed:
    $ cd 'Project Dir'
    $ pod update
    ```
+
    where `Project Dir` is the path to the parent directory of the `PodFile`
 
 5. Open the `xcworkspace` with XCode and disable `bitcode` for your target.
 
-6. In your code, import the NexmoClient library:  
+6. In your code, import the `NexmoClient` library:  
     **Swift** 
     ```swift
     import NexmoClient  
@@ -51,6 +56,7 @@ To use the Nexmo SDK for iOS, you will need to have the following installed:
     ```
 
 ### Frameworks
+
 1. Download the Nexmo SDK and add it to your project
 
 2. Open the `xcworkspace` with XCode and disable `bitcode` for your target.
@@ -66,45 +72,51 @@ To use the Nexmo SDK for iOS, you will need to have the following installed:
     #import <NexmoClient/NexmoClient.h>;
     ```
 
-### Permissions
-1. **Audio Permissions**  
-    * In your code add a request for Audio Permissions  
-        **swift**:   
-        ```swift
-        import AVFoundation
-        ```
-        ```swift
-        func askAudioPermissions() {
-            AVAudioSession.sharedInstance().requestRecordPermission { (granted:Bool) in
-                NSLog("Allow microphone use. Response: %d", granted)
-            }
-        }
-        ```
-        **objective-c**: 
-        ```objective-c
-        #import <AVFoundation/AVAudioSession.h>
-        ```
-        ```objective-c
-        - (void)askAudioPermissions {
-            if ([[AVAudioSession sharedInstance] respondsToSelector:@selector(requestRecordPermission:)])
-            {
-                [[AVAudioSession sharedInstance] requestRecordPermission: ^ (BOOL granted)
-                {
-                NSLog(@"Allow microphone use. Response: %d", granted);
-                }];
-            }
-        }
-        ```
-    * In your Info.plist add a new row with 'Privacy - Microphone Usage Description' and a description for using the microphone. For example `Audio Calls`.
+## Add Permissions
 
+To use the in app voice features, you should add audio permissions:
 
+1. In your `Info.plist` add a new row with 'Privacy - Microphone Usage Description' and a description for using the microphone. For example `Audio Calls`.
 
-    ## Getting Started
-As part of the authentication process, the nexmo client requires a jwt token with the [proper credentials](DevRel:LinkForNDPExplanationRegardingTokensAndAuthentication).  
-For ease of access, we advise to set up a Web Service to generate a unique Identity Token for each user on request.
+2. In your code add a request for Audio Permissions  
+
+**swift**:
+```swift
+
+import AVFoundation
+
+func askAudioPermissions() {
+    AVAudioSession.sharedInstance().requestRecordPermission { (granted:Bool) in
+        NSLog("Allow microphone use. Response: %d", granted)
+    }
+}
+```
+
+**objective-c**:
+
+```objective-c
+#import <AVFoundation/AVAudioSession.h>
+
+- (void)askAudioPermissions {
+    if ([[AVAudioSession sharedInstance] respondsToSelector:@selector(requestRecordPermission:)])
+    {
+        [[AVAudioSession sharedInstance] requestRecordPermission: ^ (BOOL granted)
+        {
+        NSLog(@"Allow microphone use. Response: %d", granted);
+        }];
+    }
+}
+
+```
+
+---
+
+## Using NXMClient On Your App
 
 ### Login
-Create a NXMClient object and login with a token.  
+Create a NXMClient object and login with a `jwt`. You can read more about generating the `jwt` [here](_documentation/client-sdk/concepts/jwt-acl).
+
+
 **Swift**
 ```swift
 let client = NXMClient()

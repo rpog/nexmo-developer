@@ -2,23 +2,15 @@
 title: Add Nexmo Client SDK To Your Android App 
 ---
 
-# Get Started - Add Nexmo Client SDK To Your App
+# Get Started - Add Nexmo Client SDK To Your Android App
 
 Let's get started with Nexmo SDK on your Android app! Here are all the details on how to set that up:
 
-## Create a Nexmo Application
+## Prerequisites
 
-A [Nexmo application]("https://developer.nexmo.com/concepts/guides/applications") contains the required configuration for your project. You can create an application using the [Nexmo CLI]("https://github.com/Nexmo/nexmo-cli"), or via this [generator webpage]("ADD LINK").
+The SDK supports min Android API level 16.
 
-## Create Nexmo Users
-
-- Make sure you have at least 2 users for that Nexmo Application
-
-## Create User Tokens (JWT)
-
----
-
-## Add The SDK To Your Android App
+## Add The SDK To Your Android Project
 
 Open Android Studio with your Android project codebase
 
@@ -58,29 +50,44 @@ allprojects {
 
 ```
 
-### Add Permissions
+## Add Permissions
 
-On your `AndroidManifest.xml` add the required permissions:
+To use the in app voice features, you should add audio permissions:
+
+1. On your `AndroidManifest.xml` add the required permissions:
 
 ```xml
  <manifest ...>
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <application>
-    ...
+
     </>
  </>
 ```
 
-### Init NexmoClient
+2. For devices running Android version M (API level 23) or higher, you should add a request for the dangerous permissions required. 
+
+```java
+android.Manifest.permission.READ_PHONE_STATE, android.Manifest.permission.RECORD_AUDIO, android.Manifest.permission.PROCESS_OUTGOING_CALLS
+```
+
+Read more about requesting runtime permissions on Android [here]("https://developer.android.com/training/permissions/requesting")
+
+---
+
+## Using NexmoClient On Your App
+
+### 1. Init NexmoClient
 
 Before being able to use a NexmoClient instance, you should initialize it.
 
@@ -97,17 +104,10 @@ Before being able to use a NexmoClient instance, you should initialize it.
         NexmoClient.init(context, loginListener)
 ```
 
-`onLoginStateChange()` receives updates on the login and authentication status of the user.
-While `onAvailabilityChange()` receives updates on the connectivity status to the SDK's functionality.
+### 2. Login NexmoClient
 
-### Login NexmoClient
+After initialzing `NexmoClient`, you should log in to it, using a `jwt` user token. You can read more about generating the `jwt` [here](_documentation/client-sdk/concepts/jwt-acl).
 
-After initialzing `NexmoClient`, you should log in to it, using a `jwt` user token.
-
-On production apps, your server would authenticate the user, and would return to a `jwt` to the app.
-You can read more about generating the `jwt` [here](_documentation/client-sdk/concepts/kwt-acl).
-
-For testing and onboarding, you can use the `jwt` generated for you on the dashboard.
 
 Swap the token to log in the relevant user.
 
