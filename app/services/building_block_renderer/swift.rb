@@ -4,7 +4,7 @@ module BuildingBlockRenderer
       deps.join("\n")
     end
 
-    def self.run_command(_filename, _file_path)
+    def self.run_command(_command, _filename, _file_path)
       nil
     end
 
