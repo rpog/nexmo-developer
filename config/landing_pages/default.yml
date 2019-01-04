@@ -1,16 +1,19 @@
 # Default landing config page
 
-# Header section
-headers:
-  leaders:
-  subheading:
-  action:
-    header:
-    icon:
-    text:
-    link:
+# Column Types: header, building_block, call_to_action, developer_resources, text, html
 
-# Column Types
+# building_block: name (i.e. messaging/sms) & language (i.e. ruby)
+# call_to_action: header, icon, subheader
+# developer_resources: type (i.e. tutorial, sdk), name
+# text: text
+# html: html
+
+- row:
+  - column: header
+    header:
+      lead: "Thanks for joining us!"
+      sublead: "So glad you made it to OneHack Jupiter!"
+      icon: "onehack-icon"
 
 - row:
   - column: building_block
