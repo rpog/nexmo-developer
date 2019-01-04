@@ -2,66 +2,103 @@
 
 # Column Types: header, building_block, call_to_action, developer_resources, text, html
 
-# building_block: name (i.e. messaging/sms) & language (i.e. ruby)
+# building_block: name (i.e. messaging/sms), language (i.e. ruby), pretext, posttext
 # call_to_action: header, icon, subheader
 # developer_resources: type (i.e. tutorial, sdk), name
 # text: text
 # html: html
 
-- row:
-  - column: header
-    header:
-      lead: "Thanks for joining us!"
-      sublead: "So glad you made it to OneHack Jupiter!"
-      icon: "onehack-icon"
+title: "Welcome to Nexmo, Residents of Jupiter"
+meta_title: "A longer title goes here."
 
-- row:
-  - column: building_block
-    building_block:
-      name: messaging/sms
-      language: ruby
-  - column: building_block
-    building_block:
-      name: messaging/send-an-sms
-      language: python
+rows:
+  - columns:
+    - width: 4
+      entries: 
+      - type: header
+        header:
+          lead: "Thanks for joining us!"
+          sublead: "So glad you made it to OneHack Jupiter!"
+          icon: "onehack-icon"
 
-- row:
-  - column: call_to_action
-    call_to_action:
-      header: "Sign Up"
-      icon: "sign-up"
-      subheader: "Try it for free"
-  - column: call_to_action
-    call_to_action:
-      header: "Join Slack"
-      icon: "slack-icon"
-      subheader:
-  - column: call_to_action
-    call_to_action:
-      header: "Find us on GitHub"
-      icon: "github-icon"
-      subheader:
+rows:
+  - columns:
+    - width: 2
+      entries:
+      - type: building_block
+      building_block:
+        name: messaging/sms
+        language: ruby
+        pretext:
+        posttext:
+    - width: 2
+      entries:
+      - type: building_block
+      building_block:
+        name: messaging/send-an-sms
+        language: python
+        pretext:
+        posttext:
 
-- row: 
-  - column: developer_resources
-    developer_resources:
-      type: tutorial
-      name: call-tracking
-  - column: developer_resources
-    developer_resources:
-      type: tutorial
-      name: receive-sms-with-ruby
+rows:
+  - columns:
+    - width: 2 
+      entries:
+      - type: call_to_action
+      call_to_action:
+        header: "Sign Up"
+        icon: "sign-up"
+        subheader: "Try it for free"
+    - width: 1
+      entries: 
+      - type: call_to_action
+      call_to_action:
+        header: "Join Slack"
+        icon: "slack-icon"
+        subheader:
+    - width: 1
+      entries: 
+      - type: call_to_action
+      call_to_action:
+        header: "Find us on GitHub"
+        icon: "github-icon"
+        subheader:
 
-- row: 
-  - column: developer_resources
-    developer_resources:
-      type: sdk
-      name: ruby
+rows: 
+  - columns: 
+    - width: 1
+    entries:
+      - type: developer_resources
+        developer_resources:
+          type: tutorial
+          name: call-tracking
+    - width: 1
+    entries:
+      - type: developer_resources
+        developer_resources:
+          type: tutorial
+          name: receive-sms-with-ruby
+    - width: 2 
+    entries:
+      - type: developer_resources
+        developer_resources:
+          type: sdk
+          name: ruby
 
-- row:
-  - column: text
-    text: Your awesome content
-  - column: text
-    text: More awesome content
-  - column: html
-    html: <a href="/find/me/here">Amazing things</a>
+rows:
+  - columns: 
+    - width: 1
+    entries: 
+      - type: text
+        text:
+          content: Your awesome content
+    - width: 1
+    entries:
+      - type: text
+        text:
+          content: More awesome content
+    - width: 2
+    entries:
+      - type: html
+        html:
+          content: <a href="/find/me/here">Amazing things</a>
