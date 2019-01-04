@@ -20,8 +20,6 @@ rows:
           lead: "Thanks for joining us!"
           sublead: "So glad you made it to OneHack Jupiter!"
           icon: "onehack-icon"
-
-rows:
   - columns:
     - width: 2
       entries:
@@ -39,8 +37,6 @@ rows:
         language: python
         pretext:
         posttext:
-
-rows:
   - columns:
     - width: 2 
       entries:
@@ -63,8 +59,6 @@ rows:
         header: "Find us on GitHub"
         icon: "github-icon"
         subheader:
-
-rows: 
   - columns: 
     - width: 1
     entries:
@@ -84,8 +78,6 @@ rows:
         developer_resources:
           type: sdk
           name: ruby
-
-rows:
   - columns: 
     - width: 1
     entries: 
