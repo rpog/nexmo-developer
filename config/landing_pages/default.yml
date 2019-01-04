@@ -1,0 +1,64 @@
+# Default landing config page
+
+# Header section
+headers:
+  leaders:
+  subheading:
+  action:
+    header:
+    icon:
+    text:
+    link:
+
+# Column Types
+
+- row:
+  - column: building_block
+    building_block:
+      name: messaging/sms
+      language: ruby
+  - column: building_block
+    building_block:
+      name: messaging/send-an-sms
+      language: python
+
+- row:
+  - column: call_to_action
+    call_to_action:
+      header: "Sign Up"
+      icon: "sign-up"
+      subheader: "Try it for free"
+  - column: call_to_action
+    call_to_action:
+      header: "Join Slack"
+      icon: "slack-icon"
+      subheader:
+  - column: call_to_action
+    call_to_action:
+      header: "Find us on GitHub"
+      icon: "github-icon"
+      subheader:
+
+- row: 
+  - column: developer_resources
+    developer_resources:
+      type: tutorial
+      name: call-tracking
+  - column: developer_resources
+    developer_resources:
+      type: tutorial
+      name: receive-sms-with-ruby
+
+- row: 
+  - column: developer_resources
+    developer_resources:
+      type: sdk
+      name: ruby
+
+- row:
+  - column: text
+    text: Your awesome content
+  - column: text
+    text: More awesome content
+  - column: html
+    html: <a href="/find/me/here">Amazing things</a>
