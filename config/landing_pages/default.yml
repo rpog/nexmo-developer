@@ -8,13 +8,14 @@
 # text: text
 # html: html
 
+# columns width: if "width" is not provided then default to 100%
+
 title: "Welcome to Nexmo, Residents of Jupiter"
 meta_title: "A longer title goes here."
 
 rows:
   - columns:
-    - width: 4
-      entries: 
+    - entries: 
       - type: header
         header:
           lead: "Thanks for joining us!"
