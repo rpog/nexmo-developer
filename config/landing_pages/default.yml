@@ -25,41 +25,41 @@ rows:
     - width: 2
       entries:
       - type: building_block
-      building_block:
-        name: messaging/sms
-        language: ruby
-        pretext:
-        posttext:
+        building_block:
+          name: messaging/sms
+          language: ruby
+          pretext:
+          posttext:
     - width: 2
       entries:
       - type: building_block
-      building_block:
-        name: messaging/send-an-sms
-        language: python
-        pretext:
-        posttext:
+        building_block:
+          name: messaging/send-an-sms
+          language: python
+          pretext:
+          posttext:
   - columns:
     - width: 2 
       entries:
       - type: call_to_action
-      call_to_action:
-        header: "Sign Up"
-        icon: "sign-up"
-        subheader: "Try it for free"
+        call_to_action:
+          header: "Sign Up"
+          icon: "sign-up"
+          subheader: "Try it for free"
     - width: 1
       entries: 
       - type: call_to_action
-      call_to_action:
-        header: "Join Slack"
-        icon: "slack-icon"
-        subheader:
+        call_to_action:
+          header: "Join Slack"
+          icon: "slack-icon"
+          subheader:
     - width: 1
       entries: 
       - type: call_to_action
-      call_to_action:
-        header: "Find us on GitHub"
-        icon: "github-icon"
-        subheader:
+        call_to_action:
+          header: "Find us on GitHub"
+          icon: "github-icon"
+          subheader:
   - columns: 
     - width: 1
     entries:
