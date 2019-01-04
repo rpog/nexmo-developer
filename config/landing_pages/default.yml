@@ -48,15 +48,15 @@ rows:
           subheader: "Try it for free"
     - width: 1
       entries: 
-      - type: call_to_action
-        call_to_action:
+      - type: join_slack
+        join_slack:
           header: "Join Slack"
           icon: "slack-icon"
           subheader:
     - width: 1
       entries: 
-      - type: call_to_action
-        call_to_action:
+      - type: go_to_github
+        go_to_github:
           header: "Find us on GitHub"
           icon: "github-icon"
           subheader:
