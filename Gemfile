@@ -166,6 +166,9 @@ group :development do
   # Much nicer error experience, including repl
   gem 'better_errors'
   gem 'binding_of_caller'
+
+  # CLI tools that won't run in production
+  gem 'terminal-table'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
