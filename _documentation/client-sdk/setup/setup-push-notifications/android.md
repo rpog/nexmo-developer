@@ -2,7 +2,7 @@
 title: Setup Nexmo Push Notifications On Android
 ---
 
-# Get Startred - Push Notifications
+# Get Started - Push Notifications
 
 On incoming events, such as when a user recieves a new message, or an incoming call, the user often expects to recieve a push notification, if the app isn't active.
 This guide will explain how to configure your Android app to recieve push notiifcations from Nexmo Client SDK.
@@ -14,7 +14,7 @@ More details can be found at the official Firebase documentation, on [this link]
 
 ## 2. Provision your server key
 
-2.1. Obtain a `jwt_dev`, which is a `jwt` without a `sub` claim. More details can be found here.[TODO]
+2.1. Obtain a `jwt_dev`, which is a `jwt` without a `sub` claim. More details can be found [here](/setup/generate-test-credentials#3.-Generate-a-User-JWT).
 
 2.2. Get your `server_api_key` from Firebase console:
 
