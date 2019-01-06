@@ -57,7 +57,7 @@ Complete the `loginToSdk()` method implementation:
 ```java
    void loginToSdk(String token) {
         NexmoClient.get().login(token, new NexmoRequestListener<NexmoUser>() {
-            
+
             @Override
             public void onError(NexmoApiError nexmoApiError) {}
 
@@ -111,7 +111,7 @@ NexmoRequestListener<NexmoCall> callListener = new NexmoRequestListener<NexmoCal
     };
 ```
 *** Note:
-Just as easy, you can start a call with customized logic, defined by your backend (by an NCCO [//TODO add link] just as easy, by choosing `NexmoCallHandler.SERVER` as the CallHandler. 
+While `NexmoCallHandler.IN_APP` is create for simple calls, you can also start a call with customized logic, defined by your backend (by an NCCO [//TODO add link] just as easy, by choosing `NexmoCallHandler.SERVER` as the CallHandler.
 
 ```java
 NexmoCient.call(callees, NexmoCallHandler.SERVER, listener)
@@ -122,7 +122,7 @@ This will also allow you to start a phone (PSTN) call, by adding a phone number 
 
 ## 3. Register to incoming events
 
-When Jane calls Joe, Joe should be notified about it, for example, in order to answer the call.
+When Jane calls Joe, Joe should be notified about it, for example, in order to answer or decline the call.
 
 Therefore, Joe should register to incoming events, and implement `onIncomingCall()`.
 Whenever Joe is called to - `onIncomingCall()` is called, with the incoming Call object. 
@@ -161,6 +161,7 @@ protected void onDestroy() {
 ```
 
 ## 4. Answer a call
+
 Once Joe recieves the incoming call, incredibley simple.
 Open `IncomingCallActivity`, and complete the prepared `onAnswer()` button handler, to start `OnCallActivity` after a successful answer:
 
@@ -229,7 +230,7 @@ On both `OnCallActivity` and `IncomingCallActivity`, add:
 
 ```
 
-*** Note: to read more about call statuses, see here [//TODO]
+>*Note:* to read more about call statuses, see here [//TODO]
 
 
 ## handle permissions
@@ -237,3 +238,9 @@ On both `OnCallActivity` and `IncomingCallActivity`, add:
 For devices running Android 6.0 (API level 23) and higher, creating and operation on calls requires requesting runtime permissions.
 To simplify the implementation on this tutorial, `BaseActivity` checks the permissions on every Activity's `onStart()` and `onStop()`.
 To read more about the permissions needed, read here [TODO]
+
+---
+
+#Congratulations!
+
+You have implemented your first In App Voice application with Nexmo Client SDK for Android.
