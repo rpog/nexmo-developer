@@ -20,9 +20,11 @@ The app will have 2 buttons, which will login different users: Jane or Joe. Afte
 
 ## Before you begin
 
-- Make sure you have created a Nexmo Application.
+- Make sure you have [created a Nexmo Application.](/setup/generate-test-credentials)
 
-- Make sure you have at least 2 users for that Nexmo Application [//TODO: add link]
+- Make sure you have at least [*2 users* for that Nexmo Application, with valid *JWTs*](/setup/generate-test-credentials)
+
+- [Add Nexmo SDK to your project.](/setup/add-sdk-to-you-app/ios)
 
 - Clone this Github project [//TODO: add link]
 
