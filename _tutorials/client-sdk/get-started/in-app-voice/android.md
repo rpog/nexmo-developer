@@ -15,18 +15,15 @@ You will create a simple app that can call and recieve calls.
 
 The app will have 2 buttons, to login as 2 different users: Jane and Joe. After logging in, the user can call the other user, or to call a pstn (phone) number.
 
-[//TODO: add gif]
-
-
 ## Before you begin
 
 - Make sure you have [created a Nexmo Application.](/setup/generate-test-credentials)
 
 - Make sure you have at least [*2 users* for that Nexmo Application, with valid *JWTs*](/setup/generate-test-credentials)
 
-- Add Nexmo SDK to your project. [//TODO: add link?]
+- [Add Nexmo SDK to your project.](/setup/add-sdk-to-you-app/android)
 
-- Clone this Github project [//TODO: add link]
+- Clone this Github project: [Java](https://github.com/Nexmo/Client-Get-Started-InApp-Voice-Android-Java) | [Kotlin](https://github.com/Nexmo/Client-Get-Started-InApp-Voice-Android-Kotlin)
 
 ---
 
@@ -40,6 +37,7 @@ Open `NexmoHelper` class and swap the users ID and tokens.
 ```
 
 ## 1. Login
+
 Using the Nexmo SDK should start with logging in to `NexmoClient`, using a `jwt` user token.
 
 On production apps, your server would authenticate the user, and would return to a `jwt` to the app. 
@@ -110,15 +108,15 @@ NexmoRequestListener<NexmoCall> callListener = new NexmoRequestListener<NexmoCal
         }
     };
 ```
-*** Note:
-Just as easy, you can start a call with customized logic, defined by your backend (by an NCCO [//TODO add link] just as easy, by choosing `NexmoCallHandler.SERVER` as the CallHandler. 
+
+> **Note:**
+Just as easy, you can start a call with customized logic, defined by your backend ([using an NCCO](https://developer.nexmo.com/stitch/in-app-voice/guides/ncco-guide) ) just as easy, by choosing `NexmoCallHandler.SERVER` as the CallHandler.
 
 ```java
 NexmoCient.call(callees, NexmoCallHandler.SERVER, listener)
 ```
 
-This will also allow you to start a phone (PSTN) call, by adding a phone number to the `callees` list. To read more about that, see here: [//TODO add link]
-
+This will also allow you to start a phone (PSTN) call, by adding a phone number to the `callees` list.
 
 ## 3. Register to incoming events
 
@@ -229,11 +227,8 @@ On both `OnCallActivity` and `IncomingCallActivity`, add:
 
 ```
 
-*** Note: to read more about call statuses, see here [//TODO]
-
-
 ## handle permissions
 
 For devices running Android 6.0 (API level 23) and higher, creating and operation on calls requires requesting runtime permissions.
 To simplify the implementation on this tutorial, `BaseActivity` checks the permissions on every Activity's `onStart()` and `onStop()`.
-To read more about the permissions needed, read here [TODO]
+To read more about the permissions needed, [see here.](_documentation/client-sdk/setup/add-sdk-to-your-app/android#Add-Permissions)
