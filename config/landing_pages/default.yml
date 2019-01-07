@@ -91,7 +91,7 @@ rows:
         text:
           content: More awesome content
     - width: 2
-     entries:
+      entries:
       - type: html
         html:
           content: <a href="/find/me/here">Amazing things</a>
