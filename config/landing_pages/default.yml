@@ -18,8 +18,8 @@ rows:
     - entries: 
       - type: header
         header:
-          lead: "Thanks for joining us!"
-          sublead: "So glad you made it to OneHack Jupiter!"
+          title: "Thanks for joining us!"
+          subtitle: "So glad you made it to OneHack Jupiter!"
           icon: "onehack-icon"
   - columns:
     - width: 2
@@ -28,16 +28,16 @@ rows:
         building_block:
           name: messaging/sms
           language: ruby
-          pretext:
-          posttext:
+          pre_text:
+          post_text:
     - width: 2
       entries:
       - type: building_block
         building_block:
           name: messaging/send-an-sms
           language: python
-          pretext:
-          posttext:
+          pre_text:
+          post_text:
   - columns:
     - width: 2 
       entries:
@@ -62,36 +62,36 @@ rows:
           subheader:
   - columns: 
     - width: 1
-    entries:
+      entries:
       - type: developer_resources
         developer_resources:
           type: tutorial
           name: call-tracking
     - width: 1
-    entries:
+      entries:
       - type: developer_resources
         developer_resources:
           type: tutorial
           name: receive-sms-with-ruby
     - width: 2 
-    entries:
+      entries:
       - type: developer_resources
         developer_resources:
           type: sdk
           name: ruby
   - columns: 
     - width: 1
-    entries: 
+      entries: 
       - type: text
         text:
           content: Your awesome content
     - width: 1
-    entries:
+      entries:
       - type: text
         text:
           content: More awesome content
     - width: 2
-    entries:
+     entries:
       - type: html
         html:
           content: <a href="/find/me/here">Amazing things</a>
