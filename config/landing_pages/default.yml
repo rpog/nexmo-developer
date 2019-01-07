@@ -49,17 +49,15 @@ rows:
     - width: 1
       entries: 
       - type: join_slack
-        join_slack:
-          header: "Join Slack"
-          icon: "slack-icon"
-          subheader:
     - width: 1
       entries: 
       - type: go_to_github
         go_to_github:
-          header: "Find us on GitHub"
+          title: "Find us on GitHub"
+          subtitle:
           icon: "github-icon"
-          subheader:
+          reference_type: repo # or org
+          link:
   - columns: 
     - width: 1
       entries:
