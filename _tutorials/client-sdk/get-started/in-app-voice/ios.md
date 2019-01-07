@@ -15,8 +15,7 @@ You will create a simple app to make a call and recieve a call.
 
 The app will have 2 buttons, which will login different users: Jane or Joe. After logging in, Jane and Joe will be able to place a call and perform actions such as answer, decline or hangup.
 
-[//TODO: add gif]
-
+---
 
 ## Before you begin
 
@@ -26,7 +25,7 @@ The app will have 2 buttons, which will login different users: Jane or Joe. Afte
 
 - [Add Nexmo SDK to your project.](/setup/add-sdk-to-you-app/ios)
 
-- Clone this Github project [//TODO: add link]
+- [Clone this Github project]("https://github.com/Nexmo/Client-Get-Started-InApp-Voice-ObjectiveC")
 
 ---
 
@@ -145,14 +144,13 @@ Implement the required methods for the `NXMCallDelegate` under the `#pragma mark
 `statusChanged:` method notifies on changes that happens to members on the call.
 
 > *Note:*
-While `NXMCallTypeInApp` is great for simple calls, you can also start a call with customized logic, defined by your backend (by an NCCO [//TODO add link] just as easy, by choosing `NXMCallTypeServer` as the callType.
+While `NXMCallTypeInApp` is great for simple calls, you can also start a call with customized logic, defined by your backend ([using an NCCO](https://developer.nexmo.com/stitch/in-app-voice/guides/ncco-guide) ) just as easy, by choosing `NXMCallTypeServer` as the callType.
 
 ```objective-c
 [self.nexmoClient call:@[callees] callType:NXMCallTypeServer delegate:self completion:^(NSError * _Nullable error, NXMCall * _Nullable call){...}];
 ```
 
-This will also allow you to start a phone (PSTN) call, by adding a phone number to the `callees` array. To read more about that, see here: [//TODO add link]
-
+This will also allow you to start a phone (PSTN) call, by adding a phone number to the `callees` array.
 
 ## 3. Receive incoming call
 
@@ -236,13 +234,11 @@ if(callMember.status == NXMCallMemberStatusCancelled || callMember.status == NXM
         [self setActiveViews];
     }
 ```
->*Note:* to read more about call statuses, see here [//TODO]
-
 
 ## handle permissions
 
 For the call to happen, `Audio Permissions` are required. We have added a request for audio permissions in the `appDelegate`, in the implemetation of `application:didFinishLaunchingWithOptions`.  
-To read more about the permissions needed, read here [TODO]
+To read more about the permissions needed, [see here.](_documentation/client-sdk/setup/add-sdk-to-your-app/ios#Add-Permissions)
 
 ---
 
