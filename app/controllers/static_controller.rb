@@ -1,4 +1,10 @@
 class StaticController < ApplicationController
+  def default_landing
+    @content = YAML.load_file("#{Rails.root}/config/landing_pages/default.yml")
+
+    render layout: 'default_landing'
+  end
+
   def landing
     render layout: 'landing'
   end
