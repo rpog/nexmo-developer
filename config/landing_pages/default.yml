@@ -39,7 +39,7 @@ rows:
           pre_text:
           post_text:
   - columns:
-    - width: 2 
+    - width: 1 
       entries:
       - type: call_to_action
         call_to_action:
@@ -51,13 +51,10 @@ rows:
       - type: join_slack
     - width: 1
       entries: 
-      - type: go_to_github
-        go_to_github:
-          title: "Find us on GitHub"
-          subtitle:
-          icon: "github-icon"
-          reference_type: repo # or org
-          link:
+      - type: github_org
+    - width: 1
+      entries:
+      - type: github_repo
   - columns: 
     - width: 1
       entries:
