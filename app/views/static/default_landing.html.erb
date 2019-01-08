@@ -1,0 +1,23 @@
+<div class="Vlt-grid">
+    <% @config["rows"].each do |column| %>
+        <% if @config["rows"].count == 1 %>
+            <div class="Vlt-col">
+        <% elsif @config["rows"].count > 1 %>
+            <% if column["weight"] %>
+                <div class="Vlt-col--<%= @config["rows"]["weight"] %>of<%= @config["rows"].count %>">
+            <% else %>
+                <div class="Vlt-col--1of<%= @config["rows"].count %>">
+            <% end %>
+        <% end %>
+            <% column["columns"].each do |entity| %>
+                <% entity["entities"].each do |content| %>
+                    <% if content["type"] == "text" %>
+                        <%= content["text"]["content"] %>
+                    <% elsif content["type"] == "html" %>
+                        <%= content["html"]["content"] %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        </div>
+    <% end %>
+</div>
