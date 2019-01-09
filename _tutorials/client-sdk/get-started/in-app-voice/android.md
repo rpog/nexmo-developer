@@ -234,6 +234,8 @@ For devices running Android 6.0 (API level 23) and higher, creating and operatio
 To simplify the implementation on this tutorial, `BaseActivity` checks the permissions on every Activity's `onStart()` and `onStop()`.
 To read more about the permissions needed, [see here.](_documentation/client-sdk/setup/add-sdk-to-your-app/android#Add-Permissions)
 
+---
+
 # Congratulations !
 
 You have implemented your first In App Voice application with Nexmo Client SDK for Android.
