@@ -7,11 +7,11 @@ languages:
     - objective-c
 ---
 
-# Get Startred - In App Voice
+# Get Started - In App Voice
 
 In this tutorial you'll learn how to use Nexmo Client SDK for iOS, in order to perform an in-app (IP to IP) call.
 
-You will create a simple app to make a call and recieve a call.
+You will create a simple app to make a call and receive a call.
 
 The app will have 2 buttons, which will login different users: Jane or Joe. After logging in, Jane and Joe will be able to place a call and perform actions such as answer, decline or hangup.
 
@@ -38,15 +38,16 @@ Open `IAVAppDefine.h` class and swap the users IDs and tokens.
     #define kInAppVoiceJoeToken @"JOE_TOKEN" //TODO: swap with a token for Joe
 ```
 
-The `LoginViewController` holds two buttons for you to select which user should login. 
+The `LoginViewController` holds two buttons for you to select which user should login.
 
 ## 1. Login
+
 Using the Nexmo SDK should start with a `NexmoClient` login, using a `jwt` user token.
 
-On production apps, your server would authenticate the user, and would return to a `jwt` to the app. 
+On production apps, your server would authenticate the user, and would return a `jwt` to the app.
 You can read more about generating the `jwt` [here]("https://developer.nexmo.com/stitch/concepts/jwt-acl").
 
-For testing and getting started purposes, you can use the `jwt` generated for you on the dashboard. 
+For testing and getting started purposes, you can use the `jwt` generated for you on the dashboard.
 
 Open `MainViewController.m`. Explore the setup methods that were written for you on `viewDidLoad`.
 
@@ -68,7 +69,7 @@ Add the required protocol adoption declaration to the class extension located in
 @interface MainViewController () <NXMClientDelegate>
 ```
 
-The `NXMClientDelegate` let you know among other things, if the login was succesfull and you can start using the sdk. 
+The `NXMClientDelegate` let you know among other things, if the login was successful and you can start using the sdk.
 
 Add the following methods under the `#pragma mark NXMClientDelegate` line.
 
@@ -80,27 +81,27 @@ Add the following methods under the `#pragma mark NXMClientDelegate` line.
 
 - (void)loginStatusChanged:(nullable NXMUser *)user loginStatus:(BOOL)isLoggedIn withError:(nullable NSError *)error {
     if(error) {
-        [self displayAlertWithTitle:@"Login Error" andMessage:@"Error performing login. Please make sure your credentials are valid and your device is connected to the internet"];
-        
+        [self displayAlertWithTitle:@"Login Error" and Message:@"Error performing login. Please make sure your credentials are valid and your device is connected to the internet"];
+
         return;
     }
-    
+
     [self setWithIsConnected:YES];
 }
 
 - (void)tokenRefreshed {
-    //User succesfully refreshed token.
+    //User successfully refreshed token.
 }
 ```
 
-At this point you should already be able to run the app and see that you can login succesfully with the sdk.
+At this point you should already be able to run the app and see that you can login successfully with the sdk.
 
 ## 2. Start a Call
 
-Let's start a simple In App call. 
+Let's start a simple In App call.
 If you're logged in as Jane, you will call Joe, and vice versa.
 
-`Call Other` button press is connected to the `MainViewController`, in your behalf.
+`Call Other` button press is already connected to the `MainViewController`, in your behalf.
 Go ahead and Implement the `didCallOtherButtonPress:` method to start a call. It should start the call, and also update the UIViews so that Jane or Joe know the call is in progress:
 
 ```objective-c
@@ -124,20 +125,14 @@ As with `NXMClient`, `NXMCall` also receives a delegate which you supplied in  `
 
 Implement the required methods for the `NXMCallDelegate` under the `#pragma mark NXMCallDelegate` line:
 
-
 ```objective-c
-- (void)statusChanged:(NXMCallParticipant *)participant {
-    if(![participant.userId isEqualToString:self.selectedUser.userId]) {
+- (void)statusChanged:(NXMCallMember *)callMember {
+    if(![callMember.userId isEqualToString:self.selectedUser.userId]) {
         return;
     }
 
-    [self updateCallStatusLabelWithStatus:participant.status];
+    [self updateCallStatusLabelWithStatus:callMember.status];
 
-    if(participant.status == NXMParticipantStatusCancelled || participant.status == NXMParticipantStatusCompleted) {
-        self.ongoingCall = nil;
-        self.isInCall = NO;
-        [self setActiveViews];
-    }
 }
 ```
 
@@ -170,7 +165,6 @@ Go back to the `#pragma mark NXMClientDelegate` line and add the `incomingCall:'
 This method takes as a parameter an `NXMCall` object with which you can answer or decline the call.
 An alert was implemented for you, to allow the user to choose whether to answer or decline the call.
 
-
 ## 4. Answer a call
 
 Under the `#pragma mark IncomingCall`, implement this method to answer the incoming call:
@@ -186,13 +180,13 @@ Under the `#pragma mark IncomingCall`, implement this method to answer the incom
             [weakSelf setActiveViews];
             return;
         }
-        
+
         [weakSelf setActiveViews];
     }];
 }
 ```
 
-`answer:completionHandler` accepts an object adopting the `NXMCallDelegate`, and a `completionHandler`, to let you know if an error occured in the process.  
+`answer:completionHandler` accepts an object adopting the `NXMCallDelegate`, and a `completionHandler`, to let you know if an error occurred in the process.  
 You already implemented `NXMCallDelegate` on a previous step.
 
 ## 5. Decline a call
@@ -215,33 +209,39 @@ Similarily, under the `#pragma mark IncomingCall`, implement this method to decl
 }
 ```
 
-`decline:` accepts a single `completionHandler` parameter to let you know if an error occured in the process.
-
+`decline:` accepts a single `completionHandler` parameter to let you know if an error occurred in the process.
 
 ## 6. Hangup a call
 
-Once Jane or Joe presses the big red button, it's time to hangup the call. 
+Once Jane or Joe presses the big red button, it's time to hangup the call.
 Implement `didEndButtonPress:` method and call hangup for myCallMember.
 
 ```objective-c
     [self.ongoingCall.myCallMember hangup];
 ```
-Remember that last `if` statment we added when receiving call participant statuses? when we hangup the status of our participant changes accordingly so we know we are no longer part of the call.
+
+If Jane hung up, Joe should be notified about it.
+Update `statusChanged()` method on `NXMCallDelegate` to do that, as such:
+
 ```objective-c
-if(callMember.status == NXMCallMemberStatusCancelled || callMember.status == NXMPCallMemberStatusCompleted) {
+- (void)statusChanged:(NXMCallMember *)callMember {
+    // ...
+
+    if(callMember.status == NXMCallMemberStatusCancelled || callMember.status == NXMCallMemberStatusCompleted) {
         self.ongoingCall = nil;
         self.isInCall = NO;
         [self setActiveViews];
     }
+}
 ```
 
 ## handle permissions
 
-For the call to happen, `Audio Permissions` are required. We have added a request for audio permissions in the `appDelegate`, in the implemetation of `application:didFinishLaunchingWithOptions`.  
+For the call to happen, `Audio Permissions` are required. On the `appDelegate` of the sample project, you can find an implementation for the permissions request on `application:didFinishLaunchingWithOptions`.  
 To read more about the permissions needed, [see here.](_documentation/client-sdk/setup/add-sdk-to-your-app/ios#Add-Permissions)
 
 ---
 
-#Congratulations!
+# Congratulations!
 
 You have implemented your first In App Voice application with the Nexmo Client SDK for iOS.
