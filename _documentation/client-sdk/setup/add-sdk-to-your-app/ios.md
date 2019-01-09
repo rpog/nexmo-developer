@@ -35,7 +35,7 @@ You can either install the SDK via CocoaPods or directly:
 
 4. Install the Pod by opening terminal and running the following command:
 
-   ```ruby
+```ruby
    $ cd 'Project Dir'
    $ pod update
    ```
