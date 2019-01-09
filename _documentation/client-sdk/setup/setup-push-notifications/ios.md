@@ -4,12 +4,12 @@ title: Setup Nexmo Push Notifications On iOS
 
 # Get Started - Push Notifications
 
-On incoming events, such as when a user recieves a new message, or an incoming call, the user often expects to recieve a push notification, if the app isn't active.
-This guide will explain how to configure your Android app to recieve push notiifcations from Nexmo Client SDK.
+On incoming events, such as when a user receives a new message, or an incoming call, the user often expects to receive a push notification, if the app isn't active.
+This guide will explain how to configure your Android app to receive push notifications from Nexmo Client SDK.
 
 ## 1. Create a push certificate
 
-Log in to your Apple developer account and create a push certificate for your app. [Find more details on Apple's official documentaion]("https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_certificate-based_connection_to_apns"). Download your certificate. On the next step the downloaded certificate name will be reffered to as `applecert.p12`.
+Log in to your Apple developer account and create a push certificate for your app. [Find more details on Apple's official documentation]("https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_certificate-based_connection_to_apns"). Download your certificate. On the next step the downloaded certificate name will be referred to as `applecert.p12`.
 
 ## 2. Upload your certificate
 
@@ -35,7 +35,7 @@ curl -v -X PUT \
 
 ## 3. Integrate push notifications in your app
 
-There are two types of push notfications that you can use:
+There are two types of push notifications that you can use:
 
 * *Voip push* - the better fit for apps which utilizes Nexmo In-App Voice funcionality
 * *Regular push*
