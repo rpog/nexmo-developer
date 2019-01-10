@@ -21,6 +21,17 @@ describe '/static/default_landing' do
         ],
     }
 
+    @grid_size = 1
+    @config['rows'].each do |row|
+        row['columns'].each do |column|
+            if column['width']
+                @grid_size = row['columns'].map { |c| c['width'] }.sum
+            else
+                @grid_size = 1
+            end
+        end
+    end      
+
     erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
     actual = ERB.new(erb).result(binding)
 
@@ -64,6 +75,17 @@ describe '/static/default_landing' do
             },
         ],
     }
+
+    @grid_size = 1
+    @config['rows'].each do |row|
+        row['columns'].each do |column|
+            if column['width']
+                @grid_size = row['columns'].map { |c| c['width'] }.sum
+            else
+                @grid_size = 1
+            end
+        end
+    end      
 
     erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
     actual = ERB.new(erb).result(binding)
@@ -118,6 +140,17 @@ describe '/static/default_landing' do
         ],
     }
 
+    @grid_size = 1
+    @config['rows'].each do |row|
+        row['columns'].each do |column|
+            if column['width']
+                @grid_size = row['columns'].map { |c| c['width'] }.sum
+            else
+                @grid_size = 1
+            end
+        end
+    end      
+
     erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
     actual = ERB.new(erb).result(binding)
 
@@ -129,7 +162,7 @@ describe '/static/default_landing' do
     expect(actual.squish).to eq(expected_output.chomp)
   end
 
-  it 'renders three columns (1:2, 1:1 and 1:1 width)' do
+  it 'renders two columns in three-column grid (1:2 and 1:1)' do
     @config = {
         'rows' => [
           {
@@ -146,24 +179,66 @@ describe '/static/default_landing' do
                         ],
                     },
                   {
-                        'width' => 1,
-                        'entries' => [
-                          {
-                                'type' => 'text',
-                                'text' => {
-                                    'content' => 'Column 2',
-                                },
-                            },
-                        ],
-
-                  },
-                  {
                     'width' => 1,
                     'entries' => [
                       {
                             'type' => 'text',
                             'text' => {
-                                'content' => 'Column 3',
+                                'content' => 'Column 2',
+                            },
+                        },
+                    ],
+
+              },
+                ],
+            },
+        ],
+    }
+    @grid_size = 1
+    @config['rows'].each do |row|
+        row['columns'].each do |column|
+            if column['width']
+                @grid_size = row['columns'].map { |c| c['width'] }.sum
+            else
+                @grid_size = 1
+            end
+        end
+    end      
+
+    erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
+    actual = ERB.new(erb).result(binding)
+
+    expected_output = <<~HEREDOC
+      <div class="Vlt-grid"> <div class="Vlt-col--2of3"> Column 1 </div> <div class="Vlt-col--1of3"> Column 2 </div> </div>
+    HEREDOC
+
+    # .squish() erb output to remove extranous newlines and whitespaces & .chomp trailing newline off expected_output
+    expect(actual.squish).to eq(expected_output.chomp)
+  end
+
+  it 'renders two columns in three-column grid (1:1 and 1:2)' do
+    @config = {
+        'rows' => [
+          {
+                'columns' => [
+                  {
+                        'width' => 1,
+                        'entries' => [
+                          {
+                                'type' => 'text',
+                                'text' => {
+                                    'content' => 'Column 1',
+                                },
+                            },
+                        ],
+                    },
+                  {
+                    'width' => 2,
+                    'entries' => [
+                      {
+                            'type' => 'text',
+                            'text' => {
+                                'content' => 'Column 2',
                             },
                         },
                     ],
@@ -174,18 +249,26 @@ describe '/static/default_landing' do
         ],
     }
 
+    @grid_size = 1
+    @config['rows'].each do |row|
+        row['columns'].each do |column|
+            if column['width']
+                @grid_size = row['columns'].map { |c| c['width'] }.sum
+            else
+                @grid_size = 1
+            end
+        end
+    end      
+
     erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
     actual = ERB.new(erb).result(binding)
 
     expected_output = <<~HEREDOC
-      <div class="Vlt-grid"> <div class="Vlt-col--2of3"> Column 1 </div> <div class="Vlt-col--1of3"> Column 2 </div> <div class="Vlt-col--1of3"> Column 3 </div> </div>
+      <div class="Vlt-grid"> <div class="Vlt-col--1of3"> Column 1 </div> <div class="Vlt-col--2of3"> Column 2 </div> </div>
     HEREDOC
 
     # .squish() erb output to remove extranous newlines and whitespaces & .chomp trailing newline off expected_output
     expect(actual.squish).to eq(expected_output.chomp)
-  end
-
-  it 'renders two columns (1:1 and 1:2)' do
   end
 end
 

@@ -14,8 +14,8 @@
             </div>
         <% elsif column["columns"].count {|k| k.to_s.include?('entries')} > 1 %>
             <% column["columns"].each do |info| %>
-                <% if info["width"] %>
-                    <div class="Vlt-col--<%= info["width"] %>of<%= column["columns"].count {|k| k.to_s.include?('entries')} %>">
+                <% if @grid_size > 1 %>
+                    <div class="Vlt-col--<%= info["width"] %>of<%= @grid_size %>">
                 <% else %>
                     <div class="Vlt-col">
                 <% end %>
