@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe '/static/default_landing' do
-  xit 'renders single column with 100% width' do
+  it 'renders single column with 100% width' do
     @config = {
         'rows' => [
           {
@@ -73,8 +73,7 @@ describe '/static/default_landing' do
     HEREDOC
 
     # .squish() erb output to remove extranous newlines and whitespaces & .chomp trailing newline off expected_output
-    # expect(actual.squish).to eq(expected_output.chomp)
-    puts actual
+    expect(actual.squish).to eq(expected_output.chomp)
   end
 
   it 'renders three columns' do

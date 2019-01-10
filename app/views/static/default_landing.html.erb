@@ -2,24 +2,32 @@
     <% @config["rows"].each do |column| %>
         <% if column["columns"].count {|k| k.to_s.include?('entries')} == 1 %>
             <div class="Vlt-col">
+            <% column["columns"].each do |info| %>
+                <% info["entries"].each do |data| %>
+                    <% if data["type"] == "text" %>
+                        <%= data["text"]["content"] %>
+                    <% elsif data["type"] == "html" %>
+                        <%= data["html"]["content"] %>
+                    <% end %>
+                <% end%>
+            <% end %>
+            </div>
         <% elsif column["columns"].count {|k| k.to_s.include?('entries')} > 1 %>
-            <% column["columns"].each do |data| %>
-                <% if data["width"] %>
-                    <div class="Vlt-col--<%= data["width"] %>of<%= column["columns"].count {|k| k.to_s.include?('entries')} %>">
+            <% column["columns"].each do |info| %>
+                <% if info["width"] %>
+                    <div class="Vlt-col--<%= info["width"] %>of<%= column["columns"].count {|k| k.to_s.include?('entries')} %>">
                 <% else %>
                     <div class="Vlt-col">
                 <% end %>
-            <% end %>
-        <% end %>
-        <% column["columns"].each do |entity| %>
-            <% entity["entries"].each do |content| %>
-                <% if content["type"] == "text" %>
-                    <%= content["text"]["content"] %>
-                <% elsif content["type"] == "html" %>
-                    <%= content["html"]["content"] %>
+                <% info["entries"].each do |data| %>
+                    <% if data["type"] == "text" %>
+                        <%= data["text"]["content"] %>
+                    <% elsif data["type"] == "html" %>
+                        <%= data["html"]["content"] %>
+                    <% end %>
                 <% end %>
+                </div>
             <% end %>
         <% end %>
-    </div>
     <% end %>
 </div>
