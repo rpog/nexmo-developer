@@ -45,6 +45,7 @@ class DocumentationConstraint
       'number-insight',
       'account',
       'concepts',
+      'client-sdk',
       'client-sdk/in-app-voice',
       'client-sdk/in-app-video',
       'client-sdk/in-app-messaging',
