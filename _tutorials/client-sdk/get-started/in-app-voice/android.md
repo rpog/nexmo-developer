@@ -40,12 +40,12 @@ Open `NexmoHelper` class and swap the users ID and tokens.
 
 Using the Nexmo SDK should start with logging in to `NexmoClient`, using a `jwt` user token.
 
-On production apps, your server would authenticate the user, and would return to a `jwt` to the app. 
+On production apps, your server would authenticate the user, and would return to a `jwt` to the app.
 You can read more about generating the `jwt` [here]("https://developer.nexmo.com/stitch/concepts/jwt-acl").
 
-For testing and getting started purposes, you can use the `jwt` generated for you on the dashboard. 
+For testing and getting started purposes, you can use the `jwt` generated for you on the dashboard.
 
-Open `LoginActivity`. It already has 2 button handlers:`onLoginJaneClick(...)` and `onLoginJoeClick(...)`. 
+Open `LoginActivity`. It already has 2 button handlers:`onLoginJaneClick(...)` and `onLoginJoeClick(...)`.
 Each calls the `loginToSdk(...)` method, with a diffrent parameter - the corresponding `jwt`.
 When the login is successful, the logged in `NexmoUser` returns. 
 For convenience, save a reference to `NexmoUser` on `NexmoHelper`, and then, start `CreateCallActivity`.
@@ -55,7 +55,7 @@ Complete the `loginToSdk()` method implementation:
 ```java
    void loginToSdk(String token) {
         NexmoClient.get().login(token, new NexmoRequestListener<NexmoUser>() {
-            
+
             @Override
             public void onError(NexmoApiError nexmoApiError) {}
 
@@ -70,7 +70,6 @@ Complete the `loginToSdk()` method implementation:
         });
     }
 ```
-
 
 ## 2. Start a Call
 
@@ -102,7 +101,7 @@ NexmoRequestListener<NexmoCall> callListener = new NexmoRequestListener<NexmoCal
         @Override
         public void onSuccess(NexmoCall call) {
             NexmoHelper.currentCall = call;
-            
+
             Intent intent = new Intent(CreateCallActivity.this, OnCallActivity.class);
             startActivity(intent);
         }
@@ -123,11 +122,10 @@ This will also allow you to start a phone (PSTN) call, by adding a phone number 
 When Jane calls Joe, Joe should be notified about it, for example, in order to answer the call.
 
 Therefore, Joe should register to incoming events, and implement `onIncomingCall()`.
-Whenever Joe is called to - `onIncomingCall()` is called, with the incoming Call object. 
+Whenever Joe is called to - `onIncomingCall()` is called, with the incoming Call object.
 
 For simplicity, you will accept incoming calls only on `CreateCallActivity`. 
 Open `CreateCallActivity` and create the `NexmoIncomingCallListener` to save the refrence to the incoming call on `NexmoHelper`, and start `IncomingCallActivity`:
-
 
 ```java
 NexmoIncomingCallListener incomingCallListener = new NexmoIncomingCallListener() {
@@ -159,6 +157,7 @@ protected void onDestroy() {
 ```
 
 ## 4. Answer a call
+
 Once Joe recieves the incoming call, incredibley simple.
 Open `IncomingCallActivity`, and complete the prepared `onAnswer()` button handler, to start `OnCallActivity` after a successful answer:
 
@@ -180,6 +179,7 @@ Open `IncomingCallActivity`, and complete the prepared `onAnswer()` button handl
 ```
 
 ## Hangup
+
 `onHangup()` handler, allow Joe to reject the call. Complete the implementation on `IncomingCallActivity`, to finish the activity:
 
 ```java
@@ -197,8 +197,8 @@ Open `IncomingCallActivity`, and complete the prepared `onAnswer()` button handl
 
 ```
 
-
 ## register to call status
+
 If Joe hangs up the call, Jane should know about it, and finish `OnCallActivity`.
 The same way, if Jane decides to hangup before Joe answered, Joe should know about it and finish `IncomingCallActivity`.
 
@@ -232,3 +232,7 @@ On both `OnCallActivity` and `IncomingCallActivity`, add:
 For devices running Android 6.0 (API level 23) and higher, creating and operation on calls requires requesting runtime permissions.
 To simplify the implementation on this tutorial, `BaseActivity` checks the permissions on every Activity's `onStart()` and `onStop()`.
 To read more about the permissions needed, [see here.](_documentation/client-sdk/setup/add-sdk-to-your-app/android#Add-Permissions)
+
+# Congratulations !
+
+You have implemented your first In App Voice application with Nexmo Client SDK for Android.
