@@ -21,7 +21,7 @@ Open Android Studio with your Android project codebase
 ```groovy
 
 dependencies {
-    implementation 'com.nexmo.android:client-sdk:0.6.11'
+    implementation 'com.nexmo.android:client-sdk:0.7.26'
 }
 
 ```
