@@ -23,14 +23,14 @@ describe '/static/default_landing' do
 
     @grid_size = 1
     @config['rows'].each do |row|
-        row['columns'].each do |column|
-            if column['width']
-                @grid_size = row['columns'].map { |c| c['width'] }.sum
-            else
-                @grid_size = 1
-            end
+      row['columns'].each do |column|
+        if column['width']
+          @grid_size = row['columns'].map { |c| c['width'] }.sum
+        else
+          @grid_size = 1
         end
-    end      
+      end
+    end
 
     erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
     actual = ERB.new(erb).result(binding)
@@ -78,14 +78,14 @@ describe '/static/default_landing' do
 
     @grid_size = 1
     @config['rows'].each do |row|
-        row['columns'].each do |column|
-            if column['width']
-                @grid_size = row['columns'].map { |c| c['width'] }.sum
-            else
-                @grid_size = 1
-            end
+      row['columns'].each do |column|
+        if column['width']
+          @grid_size = row['columns'].map { |c| c['width'] }.sum
+        else
+          @grid_size = 1
         end
-    end      
+      end
+    end
 
     erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
     actual = ERB.new(erb).result(binding)
@@ -142,14 +142,14 @@ describe '/static/default_landing' do
 
     @grid_size = 1
     @config['rows'].each do |row|
-        row['columns'].each do |column|
-            if column['width']
-                @grid_size = row['columns'].map { |c| c['width'] }.sum
-            else
-                @grid_size = 1
-            end
+      row['columns'].each do |column|
+        if column['width']
+          @grid_size = row['columns'].map { |c| c['width'] }.sum
+        else
+          @grid_size = 1
         end
-    end      
+      end
+    end
 
     erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
     actual = ERB.new(erb).result(binding)
@@ -196,14 +196,14 @@ describe '/static/default_landing' do
     }
     @grid_size = 1
     @config['rows'].each do |row|
-        row['columns'].each do |column|
-            if column['width']
-                @grid_size = row['columns'].map { |c| c['width'] }.sum
-            else
-                @grid_size = 1
-            end
+      row['columns'].each do |column|
+        if column['width']
+          @grid_size = row['columns'].map { |c| c['width'] }.sum
+        else
+          @grid_size = 1
         end
-    end      
+      end
+    end
 
     erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
     actual = ERB.new(erb).result(binding)
@@ -251,14 +251,14 @@ describe '/static/default_landing' do
 
     @grid_size = 1
     @config['rows'].each do |row|
-        row['columns'].each do |column|
-            if column['width']
-                @grid_size = row['columns'].map { |c| c['width'] }.sum
-            else
-                @grid_size = 1
-            end
+      row['columns'].each do |column|
+        if column['width']
+          @grid_size = row['columns'].map { |c| c['width'] }.sum
+        else
+          @grid_size = 1
         end
-    end      
+      end
+    end
 
     erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
     actual = ERB.new(erb).result(binding)
