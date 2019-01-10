@@ -119,21 +119,21 @@ func askAudioPermissions() {
 
 **Swift**
 ```swift
-let client = NXMClient()
-client.setDelegate(self)
-client.login(withAuthToken: "your token")
+let client = NXMClient(token: "your token")
+client?.setDelegate(self)
+client?.login()
 ```
 
 **Objective-C**
 ```objective-c
-NXMClient *client = [NXMClient new];
+NXMClient *client = [[NXMClient alloc] initWithToken:@"your token"];
 [client setDelegate:self];
-[client loginWithAuthToken:@"your token"];
+[client login];
 ```
 
 > *Note*: self should implement `NXMClientDelegate` protocol.  
 
-On a succesfull login, The following delegate method is called with `isLoggedIn = true`.
+On a succesfull login, The following delegate method is called with `NXMConnectionStatusConnected`.
 
 **Swift**
 ```swift
@@ -142,7 +142,7 @@ func loginStatusChanged(_ user: NXMUser?, loginStatus isLoggedIn: Bool, withErro
 
 **Objective-C**
 ```objective-c
-- (void)loginStatusChanged:(nullable NXMUser *)user loginStatus:(BOOL)isLoggedIn withError:(nullable NSError *)error;
+- (void)connectionStatusChanged:(NXMConnectionStatus)status reason:(NXMConnectionStatusReason)reason;
 ```
 
 After the login succeeds, the logged in user will be available via:
