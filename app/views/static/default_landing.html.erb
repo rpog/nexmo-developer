@@ -1,5 +1,6 @@
 <div class="Vlt-grid">
     <% @config["rows"].each do |column| %>
+      <div class="row">
         <% if column["columns"].count {|k| k.to_s.include?('entries')} == 1 %>
             <div class="Vlt-col">
             <% column["columns"].each do |info| %>
@@ -29,5 +30,6 @@
                 </div>
             <% end %>
         <% end %>
+      </div>
     <% end %>
 </div>

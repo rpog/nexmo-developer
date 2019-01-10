@@ -36,7 +36,7 @@ describe '/static/default_landing' do
     actual = ERB.new(erb).result(binding)
 
     expected_output = <<~HEREDOC
-      <div class="Vlt-grid"> <div class="Vlt-col"> A test </div> </div>
+      <div class=\"Vlt-grid\"> <div class=\"row\"> <div class=\"Vlt-col\"> A test </div> </div> </div>
     HEREDOC
 
     # .squish() erb output to remove extranous newlines and whitespaces & .chomp trailing newline off expected_output
@@ -91,7 +91,7 @@ describe '/static/default_landing' do
     actual = ERB.new(erb).result(binding)
 
     expected_output = <<~HEREDOC
-      <div class="Vlt-grid"> <div class="Vlt-col--1of2"> Column 1 </div> <div class="Vlt-col--1of2"> Column 2 </div> </div>
+      <div class=\"Vlt-grid\"> <div class=\"row\"> <div class=\"Vlt-col--1of2\"> Column 1 </div> <div class=\"Vlt-col--1of2\"> Column 2 </div> </div> </div>
     HEREDOC
 
     # .squish() erb output to remove extranous newlines and whitespaces & .chomp trailing newline off expected_output
@@ -155,7 +155,7 @@ describe '/static/default_landing' do
     actual = ERB.new(erb).result(binding)
 
     expected_output = <<~HEREDOC
-      <div class="Vlt-grid"> <div class="Vlt-col"> Column 1 </div> <div class="Vlt-col"> Column 2 </div> <div class="Vlt-col"> Column 3 </div> </div>
+      <div class=\"Vlt-grid\"> <div class=\"row\"> <div class=\"Vlt-col\"> Column 1 </div> <div class=\"Vlt-col\"> Column 2 </div> <div class=\"Vlt-col\"> Column 3 </div> </div> </div>
     HEREDOC
 
     # .squish() erb output to remove extranous newlines and whitespaces & .chomp trailing newline off expected_output
@@ -209,7 +209,7 @@ describe '/static/default_landing' do
     actual = ERB.new(erb).result(binding)
 
     expected_output = <<~HEREDOC
-      <div class="Vlt-grid"> <div class="Vlt-col--2of3"> Column 1 </div> <div class="Vlt-col--1of3"> Column 2 </div> </div>
+      <div class=\"Vlt-grid\"> <div class=\"row\"> <div class=\"Vlt-col--2of3\"> Column 1 </div> <div class=\"Vlt-col--1of3\"> Column 2 </div> </div> </div>
     HEREDOC
 
     # .squish() erb output to remove extranous newlines and whitespaces & .chomp trailing newline off expected_output
@@ -264,7 +264,7 @@ describe '/static/default_landing' do
     actual = ERB.new(erb).result(binding)
 
     expected_output = <<~HEREDOC
-      <div class="Vlt-grid"> <div class="Vlt-col--1of3"> Column 1 </div> <div class="Vlt-col--2of3"> Column 2 </div> </div>
+      <div class=\"Vlt-grid\"> <div class=\"row\"> <div class=\"Vlt-col--1of3\"> Column 1 </div> <div class=\"Vlt-col--2of3\"> Column 2 </div> </div> </div>
     HEREDOC
 
     # .squish() erb output to remove extranous newlines and whitespaces & .chomp trailing newline off expected_output
