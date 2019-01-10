@@ -158,7 +158,7 @@ describe '/static/default_landing' do
 
                   },
                   {
-                    'width' => 1,  
+                    'width' => 1,
                     'entries' => [
                       {
                             'type' => 'text',
