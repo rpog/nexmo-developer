@@ -76,7 +76,57 @@ describe '/static/default_landing' do
     expect(actual.squish).to eq(expected_output.chomp)
   end
 
-  it 'renders three columns' do
+  it 'renders three columns, no width specified' do
+    @config = {
+        'rows' => [
+          {
+                'columns' => [
+                  {
+                        'entries' => [
+                          {
+                                'type' => 'text',
+                                'text' => {
+                                    'content' => 'Column 1',
+                                },
+                            },
+                        ],
+                    },
+                  {
+                        'entries' => [
+                          {
+                                'type' => 'text',
+                                'text' => {
+                                    'content' => 'Column 2',
+                                },
+                            },
+                        ],
+
+                  },
+                  {
+                    'entries' => [
+                      {
+                            'type' => 'text',
+                            'text' => {
+                                'content' => 'Column 3',
+                            },
+                        },
+                    ],
+
+              },
+                ],
+            },
+        ],
+    }
+
+    erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
+    actual = ERB.new(erb).result(binding)
+
+    expected_output = <<~HEREDOC
+      <div class="Vlt-grid"> <div class="Vlt-col"> Column 1 </div> <div class="Vlt-col"> Column 2 </div> <div class="Vlt-col"> Column 3 </div> </div>
+    HEREDOC
+
+    # .squish() erb output to remove extranous newlines and whitespaces & .chomp trailing newline off expected_output
+    expect(actual.squish).to eq(expected_output.chomp)
   end
 
   it 'renders three columns (1:2, 1:1 and 1:1 width)' do
