@@ -8,12 +8,12 @@ title: JWT and ACL overview
 
 ### Overview
 
-The Stitch SDKs use [JWTs](https://jwt.io/) for authentication when a user logs in. These JWTs are generated using the application ID and private key that is provided when a new application is created.
+The Nexmo Client SDKs use [JWTs](https://jwt.io/) for authentication when a user logs in. These JWTs are generated using the application ID and private key that is provided when a new application is created.
 
 One way to create a new application is from the Nexmo CLI:
 
 ```sh
-nexmo app:create "My Stitch App" https://example.com/answer https://example.com/event --type=rtc --keyfile=private.key
+nexmo app:create "My Nexmo App" https://example.com/answer https://example.com/event --type=rtc --keyfile=private.key
 ```
 
 ```
@@ -27,12 +27,12 @@ You can also create a new application within the [Nexmo Dashboard](https://dashb
 
 ### Claims
 
-Using that `private.key` and the application ID, we can mint a new JWT. In order to log a user into a Stitch client, the JWT will need the following claims:
+Using that `private.key` and the application ID, we can mint a new JWT. In order to log a user into a Nexmo client, the JWT will need the following claims:
 
 |Claim | Description |
 | --------- | ----------- |
-| `sub`| The "subject". The subject, in this case, will be the name of the user created in Stitch |
-| `acl`| Access control list. The Stitch API uses this as a permission system for users. Read more about it in the [ACL overview](#acls) |
+| `sub`| The "subject". The subject, in this case, will be the name of the user created and associated with your Nexmo Application |
+| `acl`| Access control list. The Nexmo Client SDK uses this as a permission system for users. Read more about it in the [ACL overview](#acls) |
 | `application_id`| This is the ID of the Nexmo Application you created. |
 | `iat`| "Issued at time" This is the time the JWT was issued, in unix epoch time. |
 | `jti`| "JWT ID". This is a unique identifier for this JWT. |
@@ -43,7 +43,6 @@ Using that `private.key` and the application ID, we can mint a new JWT. In order
 ### Sample JWT Payload
 
 Once all the claims have been provided, the resulting claims should appear like so:
-
 
 ```json
 {
@@ -72,7 +71,7 @@ Once all the claims have been provided, the resulting claims should appear like 
 
 ### Overview
 
-In the previous section, you can see that the `acl` claim has `paths` object containing multiple endpoints. These endpoints correspond with certain permissions a user can have when utilizing Stitch features.
+In the previous section, you can see that the `acl` claim has `paths` object containing multiple endpoints. These endpoints correspond with certain permissions a user can have when utilizing Nexmo Client SDK features.
 
 ### Paths
 
@@ -144,4 +143,4 @@ Nexmo::generateJwt([
 
 ### Other languages
 
-Creating a JWT with the appropriate claims for authenticating a Stitch user is not currently provided in any of the other Nexmo Client Libraries. Instead, we encourage you to use your JWT library of choice to create a new JWT with the [Sample JWT Payload](#sample-jwt-payload). [JWT.io](https://jwt.io/#libraries-io) has a selection of libraries for generating JWTs in multiple languages.
+Creating a JWT with the appropriate claims for authenticating a Nexmo user is not currently provided in any of the other Nexmo Client Libraries. Instead, we encourage you to use your JWT library of choice to create a new JWT with the [Sample JWT Payload](#sample-jwt-payload). [JWT.io](https://jwt.io/#libraries-io) has a selection of libraries for generating JWTs in multiple languages.
