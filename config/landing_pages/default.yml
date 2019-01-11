@@ -90,8 +90,18 @@ rows:
       - type: text
         text:
           content: More awesome content
-    - width: 2
+    - width: 1
       entries:
       - type: html
         html:
           content: <a href="/find/me/here">Amazing things</a>
+    - width: 1
+      entries:
+      - type: structured_text
+        structured_text:
+          header: "This is the header text"
+          icon: "icon-lightbulb"
+          text:
+            - main_text: "This is bigger text."
+            - small_text: "This is small text block."
+            - small_text: "This is another small text block underneath it."
