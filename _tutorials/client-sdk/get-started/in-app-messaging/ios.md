@@ -18,11 +18,11 @@ Make sure to add Nexmo Client SDK to your app. Find the details on how to do it 
 
 ## Conversation
 
-A Conversation is a shared core component that Nexmo APIs rely on. It connects Users and allows them to communicate. More details about Conversation concept can be found [here](/_documentation/conversation/concepts/conversation)
+A [Conversation](/conversation/concepts/conversation) is a shared core component that Nexmo APIs rely on. It connects Users and allows them to communicate.
 
 ### Create new conversation
 
-Use the `NXMClient` to create a new conversation
+Use the `NXMClient` to create a new conversation:
 
 ```objective-c
 [client createConversationWithName:@"conversation name" completion:^(NSError * _Nullable error, NXMConversation * _Nullable conversation) {
@@ -40,15 +40,15 @@ Use the `NXMClient` to create a new conversation
 >
 >* At the end of this Async request, the completion block is invoked with an `NXMConversation` object if the conversation was created, or an error object if something went wrong.
 >
->* The conversation identifier is needed to query this conversation at a later time
-
+>* The conversation identifier is needed to query this conversation at a later time:
 
 ```objective-c
 NSString* conv_id = conversation.conversationId;
 ```
 
 ### Get existing conversation
-Getting an existing conversation using a conversation identifier
+
+Getting an existing conversation using a conversation identifier:
 
 ```objective-c
 [client getConversationWithId:@"conversation identifier" completion:^(NSError * _Nullable error, NXMConversation * _Nullable conversation) {
@@ -60,11 +60,11 @@ Getting an existing conversation using a conversation identifier
 }];
 ```
 
-> **Note:** At the end of this Async request, the completion block is invoked with an `NXMConversation` object if the conversation was created, or an error object if something went wrong.
+> **Note:** at the end of this Async request, the completion block is invoked with an `NXMConversation` object if the conversation was created, or an error object if something went wrong.
 
 ### Join to a conversation
 
-Join to a conversation to be a member of the conversation and have the ability to send and receive messages and other conversation related information.
+Join to a conversation to be a member of the conversation and have the ability to send and receive messages and other conversation related information:
 
 ```objective-c
 [conversation joinWithCompletion:^(NSError * _Nullable error, NXMMember * _Nullable member) {
@@ -78,7 +78,7 @@ Join to a conversation to be a member of the conversation and have the ability t
 
 ### Add a user to a conversation
 
-Add other users as members of this conversation for them to send and receive messages as well.
+Add other users as members of this conversation for them to send and receive messages as well:
 
 ```objective-c
 [conversation addMemberWithUserId:@"user id" completion:^(NSError * _Nullable error, NXMMember * _Nullable member) {
@@ -92,13 +92,13 @@ Add other users as members of this conversation for them to send and receive mes
 
 ### Get conversation members
 
-* Get current user's member
+* Get current user's member:
 
 ```objective-c
 NXMMember *myMember = conversation.myMember;
 ```
 
-* Get other members of this conversation
+* Get other members of this conversation:
 
 ```objective-c
 NSSet<NXMMember *> *otherMembers = conversation.otherMembers;
@@ -106,7 +106,7 @@ NSSet<NXMMember *> *otherMembers = conversation.otherMembers;
 
 ### Send a text message
 
-Use the conversation object to send a text message
+Use the conversation object to send a text message:
 
 ```objective-c
 [conversartion sendText:@"text" completion:^(NSError * _Nullable error) {
@@ -120,7 +120,7 @@ Use the conversation object to send a text message
 ### Send an attachment message
 
 Use the conversation object to send attachments.  
-The following example shows how to send it in a conversation.
+The following example shows how to send it in a conversation:
 
 ```objective-c
 [conversation sendAttachmentOfType:NXMAttachmentTypeImage WithName:filename data:data completion:^(NSError * _Nullable error) {
@@ -134,7 +134,7 @@ The following example shows how to send it in a conversation.
 
 ## Events Controller
 
-`EventsController` allows to see the events of a conversation. The controller syncs the data from the server to make sure events are handled in realtime, inorder, and with no gaps. It also filters incoming events to hold only the events you need
+`EventsController` allows to see the events of a conversation. The controller syncs the data from the server to make sure events are handled in realtime, inorder, and with no gaps. It also filters incoming events to hold only the events you need.
 
 `EventsController` starts syncing events from the latest `event_id` the conversation is familiar with and onwards. The controller invokes delegate methods when the controllers content is changes. If for example conversation object knows that the latest event to happen was event #5, and a new event #8 was received, events controller will make sure to query for events #6,#7, but not for events #1,#2,#3,#4.
 
@@ -159,13 +159,13 @@ The following three methods are used to report changes to the members of the con
 - (void)nxmConversationEventsControllerWillChangeContent:(NXMConversationEventsController *_Nonnull)controller;
 ```
 
-Invoked when the controller is about to update events array. A number of changes might occur after the invocation of this method.
+Invoked when the controller is about to update events array. A number of changes might occur after the invocation of that method.
 
 ```objective-c
 - (void)nxmConversationEventsControllerDidChangeContent:(NXMConversationEventsController *_Nonnull)controller;
 ```
 
-Invoked when the controller is finished updating events array. A number of changes might have occured before the invocation of this method.
+Invoked when the controller is finished updating events array. A number of changes might have occured before the invocation of that method.
 
 ```objective-c
 - (void)nxmConversationEventsController:(NXMConversationEventsController *_Nonnull)controller didChangeEvent:(NXMEvent*_Nonnull)anEvent atIndex:(NSUInteger)index forChangeType:(NXMConversationEventsControllerChangeType)type newIndex:(NSUInteger)newIndex;
@@ -176,7 +176,8 @@ Invoked on each change to an event. The type of change is indicated by the `NXMC
 >**Note:** changes to the events in this controller are done on the main thread, so it is safe to use this controller directly to update the UI.
 
 ### Load past events
-Events Controller syncs events forward. Loading past events is done on demand.
+
+Events Controller syncs events forward. Loading past events is done on demand:
 
 ```objective-c
 [eventsController loadEarlierEventsWithMaxAmount:AMOUNT_OF_EVENTS_TO_LOAD_MORE completion:^(NSError * _Nullable error) {
@@ -184,12 +185,11 @@ Events Controller syncs events forward. Loading past events is done on demand.
             //error loading more events
             return;
         }
-        
+
         //more events loaded, update
     }];
 ```
 
->**Note:** 
->* completion is not guaranteed to be invoked on the main thread, so beware of directly calling UI methods here.
+>**Note:** completion is not guaranteed to be invoked on the main thread, so beware of directly calling UI methods here.
 >
->* AMOUNT_OF_EVENTS_TO_LOAD_MORE is the maximum amount of events to load. Filtered or deleted events will reduce the number of actuall events loaded.
+>**Note:** AMOUNT_OF_EVENTS_TO_LOAD_MORE is the maximum amount of events to load. Filtered or deleted events will reduce the number of actuall events loaded.
