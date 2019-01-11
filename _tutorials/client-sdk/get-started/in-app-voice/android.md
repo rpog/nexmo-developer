@@ -40,10 +40,9 @@ Open `NexmoHelper` class and swap the users ID and tokens.
 
 Using the Nexmo SDK should start with logging in to `NexmoClient`, using a `jwt` user token.
 
-On production apps, your server would authenticate the user, and would return to a `jwt` to the app.
-You can read more about generating the `jwt` [here]("https://developer.nexmo.com/stitch/concepts/jwt-acl").
+On production apps, your server would authenticate the user, and would return to the app a [`jwt` with the configurations that fit.](https://developer.nexmo.com/stitch/concepts/jwt-acl).
 
-For testing and getting started purposes, you can use the `jwt` generated for you on the dashboard.
+For testing and getting started purposes, you can [use the Nexmo CLI to generate `jwt`s.](/setup/generate-test-credentials)
 
 Open `LoginActivity`. It already has 2 button handlers:`onLoginJaneClick(...)` and `onLoginJoeClick(...)`.
 Each calls the `loginToSdk(...)` method, with a diffrent parameter - the corresponding `jwt`.
