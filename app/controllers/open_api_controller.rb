@@ -91,6 +91,22 @@ module OasParser
       Parser.new(filename, content).resolve
     end
 
+
+    def expand_refs(fragment)
+      if fragment.is_a?(Hash) && fragment.has_key?("$ref")
+        ref = fragment["$ref"]
+
+        re = '\A#/'
+        if ref =~ /#{re}/
+          expand_pointer(ref)
+        else
+          expand_file(ref)
+        end
+      else
+        fragment
+      end
+    end
+
     def expand_file(ref)
       relative_path = ref.split(":").last
       absolute_path = File.expand_path(File.join("..", relative_path), @path)
