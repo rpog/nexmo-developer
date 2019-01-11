@@ -21,6 +21,14 @@ describe '/static/default_landing' do
         ],
     }
 
+    @config["rows"].each do |row|
+      some_columns_have_widths = row['columns'].select {|c| c['width']}.count > 0
+      if some_columns_have_widths
+        row['columns'] = row['columns'].map { |c| c['width'] ||=1; c }
+        row['column_count'] = row['columns'].map { |c| c['width'] }.sum
+      end
+    end
+
     erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
     actual = ERB.new(erb).result(binding)
 
@@ -126,6 +134,14 @@ describe '/static/default_landing' do
         ],
     }
 
+    @config["rows"].each do |row|
+      some_columns_have_widths = row['columns'].select {|c| c['width']}.count > 0
+      if some_columns_have_widths
+        row['columns'] = row['columns'].map { |c| c['width'] ||=1; c }
+        row['column_count'] = row['columns'].map { |c| c['width'] }.sum
+      end
+    end
+
     erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
     actual = ERB.new(erb).result(binding)
 
@@ -170,6 +186,14 @@ describe '/static/default_landing' do
         ],
     }
 
+    @config["rows"].each do |row|
+      some_columns_have_widths = row['columns'].select {|c| c['width']}.count > 0
+      if some_columns_have_widths
+        row['columns'] = row['columns'].map { |c| c['width'] ||=1; c }
+        row['column_count'] = row['columns'].map { |c| c['width'] }.sum
+      end
+    end
+
     erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
     actual = ERB.new(erb).result(binding)
 
@@ -213,6 +237,14 @@ describe '/static/default_landing' do
             },
         ],
     }
+
+    @config["rows"].each do |row|
+      some_columns_have_widths = row['columns'].select {|c| c['width']}.count > 0
+      if some_columns_have_widths
+        row['columns'] = row['columns'].map { |c| c['width'] ||=1; c }
+        row['column_count'] = row['columns'].map { |c| c['width'] }.sum
+      end
+    end
 
     erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
     actual = ERB.new(erb).result(binding)
@@ -259,6 +291,14 @@ describe '/static/default_landing' do
       ],
     }
 
+    @config["rows"].each do |row|
+      some_columns_have_widths = row['columns'].select {|c| c['width']}.count > 0
+      if some_columns_have_widths
+        row['columns'] = row['columns'].map { |c| c['width'] ||=1; c }
+        row['column_count'] = row['columns'].map { |c| c['width'] }.sum
+      end
+    end
+
     erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
     actual = ERB.new(erb).result(binding)
 
@@ -286,6 +326,14 @@ describe '/static/default_landing' do
         },
       ],
     }
+
+    @config["rows"].each do |row|
+      some_columns_have_widths = row['columns'].select {|c| c['width']}.count > 0
+      if some_columns_have_widths
+        row['columns'] = row['columns'].map { |c| c['width'] ||=1; c }
+        row['column_count'] = row['columns'].map { |c| c['width'] }.sum
+      end
+    end
 
     erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
     actual = ERB.new(erb).result(binding)
