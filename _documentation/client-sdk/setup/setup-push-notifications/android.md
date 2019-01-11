@@ -9,18 +9,19 @@ This guide will explain how to configure your Android app to receive push notifi
 
 ## 1. Setup Firebase project for your app
 
-In case you haven't done that for your Android app, add Firebase to your Android app codebase.
-More details can be found at the official Firebase documentation, on [this link]("https://firebase.google.com/docs/android/setup").
+In order to enable push notifications for your Android app, you should use Firebase Cloud Messaging (FCM) API. To do that, you should start by adding Firebase to your Android project.
+
+In case you haven't done that already, more details can be found in the [official Firebase documentation](https://firebase.google.com/docs/android/setup).
 
 ## 2. Provision your server key
 
-2.1. Obtain a `jwt_dev`, which is a `jwt` without a `sub` claim. More details can be found [here](/setup/generate-test-credentials#3.-Generate-a-User-JWT).
+2.1. Obtain a `jwt_dev`, which is a `jwt` without a `sub` claim. More details on how to generate a JWT can be found [on the setup guide](/setup/generate-test-credentials#3.-Generate-a-User-JWT).
 
 2.2. Get your `server_api_key` from Firebase console:
 
 On firebase console --> project settings --> CloudMessaging Tab --> `Server key`
 
-2.3. Get your `app_id` from Nexmo Dashboard[TODO]
+2.3. Get your Nexmo Application ID (`app_id`). It can be obtained from [Nexmo Dashboard](https://dashboard.nexmo.com/voice/your-applications)
 
 2.4. Run the following curl command, while replacing `jwt_dev`, `server_api_key`, `app_id` with your own:
 
@@ -38,7 +39,7 @@ curl -v -X PUT \
 
 On Android Studio, on your app level `build.gradle` file (usually `app/build.gradle`), add the `firebase-messaging` dependency.
 
-Swap `x.y.z` with the latest Cloud Massaging versions number, which can be found [on Firebase website]("https://firebase.google.com/support/release-notes/android")
+Swap `x.y.z` with the latest Cloud Messaging versions number, which can be found [on Firebase website](https://firebase.google.com/support/release-notes/android)
 
 ```groovy
 dependencies{
@@ -48,7 +49,7 @@ dependencies{
 
 ## 4. Implement a Service to receive push notifications
 
-If you don't have one already, create a service that extends `FirebaseMessagingService`. 
+If you don't have one already, create a service that extends `FirebaseMessagingService`.
 Make sure your service is declared on your `AndroidManifest.xml`:
 
 ```xml
@@ -61,15 +62,16 @@ Make sure your service is declared on your `AndroidManifest.xml`:
 
 ## 5. Enable Nexmo server to send push notifications to your device
 
+In order for Nexmo to be able to send push notification to a device, the Nexmo server has to know the device token (also known as InstanceID).
+On your implementation of `FirebaseMessagingService`,  override `onNewToken()` and update the Nexmo servers with it:
+
 ```java
-// On MyFirebaseMessagingService.kt
 
 override fun onNewToken(token: String?) {
     token?.let {
         NexmoClient.get().enablePushNotifications(token, requestListener)
     }
 }
-
 ```
 
 ## 6. Receive push notifications
@@ -78,8 +80,7 @@ Push notifications are received on your implementation of `MyFirebaseMessagingSe
 
 You can use `NexmoClient.isNexmoPushNotification(message.data))` to realize whether the message is sent from Nexmo server.
 
-Use `NexmoClient.get().processPushNotification(message.data, listener)` to process the data received from FCM into an easy to use Nexmo object.
-
+Use `NexmoClient.get().processPushNotification(message.data, listener)` to process the data received from Firebase Cloud Messaging (FCM) into an easy to use Nexmo object.
 
 For example, on your `MyFirebaseMessagingService`:
 
