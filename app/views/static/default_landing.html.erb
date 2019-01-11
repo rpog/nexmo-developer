@@ -1,34 +1,20 @@
 <div class="Vlt-grid">
-    <% @config["rows"].each do |column| %>
-      <div class="row">
-        <% if column["columns"].count {|k| k.to_s.include?('entries')} == 1 %>
-            <div class="Vlt-col">
-            <% column["columns"].each do |info| %>
-                <% info["entries"].each do |data| %>
-                    <% if data["type"] == "text" %>
-                        <%= data["text"]["content"] %>
-                    <% elsif data["type"] == "html" %>
-                        <%= data["html"]["content"] %>
-                    <% end %>
-                <% end%>
-            <% end %>
-            </div>
-        <% elsif column["columns"].count {|k| k.to_s.include?('entries')} > 1 %>
-            <% column["columns"].each do |info| %>
-                <% if @grid_size > 1 %>
-                    <div class="Vlt-col--<%= info["width"] %>of<%= @grid_size %>">
-                <% else %>
-                    <div class="Vlt-col">
-                <% end %>
-                <% info["entries"].each do |data| %>
-                    <% if data["type"] == "text" %>
-                        <%= data["text"]["content"] %>
-                    <% elsif data["type"] == "html" %>
-                        <%= data["html"]["content"] %>
-                    <% end %>
-                <% end %>
-                </div>
-            <% end %>
+    <% @config["rows"].each do |row| %>
+    <div class="row">
+      <% row["columns"].each do |info| %>
+        <% if row['column_count']%>
+          <div class="Vlt-col--<%= info["width"] %>of<%= row['column_count'] %>">
+        <% else %>
+          <div class="Vlt-col">
+        <% end %>
+        <% info["entries"].each do |data| %>
+          <% if data["type"] == "text" %>
+            <%= data["text"]["content"] %>
+          <% elsif data["type"] == "html" %>
+            <%= data["html"]["content"] %>
+          <% end %>
+        <% end %>
+        </div>
         <% end %>
       </div>
     <% end %>
