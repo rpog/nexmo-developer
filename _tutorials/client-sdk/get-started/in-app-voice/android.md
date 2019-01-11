@@ -7,11 +7,11 @@ languages:
     - android
 ---
 
-# Get Startred - In App Voice
+# Get Started - In App Voice
 
 In this tutorial you'll learn how to use Nexmo Client SDK for Android, in order to perform an in-app (IP to IP) call.
 
-You will create a simple app that can call and recieve calls.
+You will create a simple app that can call and receive calls.
 
 The app will have 2 buttons, to login as 2 different users: Jane and Joe. After logging in, the user can call the other user, or to call a pstn (phone) number.
 
@@ -178,7 +178,7 @@ Open `IncomingCallActivity`, and complete the prepared `onAnswer()` button handl
 
 ```
 
-## Hangup
+## 5. Hangup
 
 `onHangup()` handler, allow Joe to reject the call. Complete the implementation on `IncomingCallActivity`, to finish the activity:
 
@@ -197,7 +197,7 @@ Open `IncomingCallActivity`, and complete the prepared `onAnswer()` button handl
 
 ```
 
-## register to call status
+## 6. Register to call status
 
 If Joe hangs up the call, Jane should know about it, and finish `OnCallActivity`.
 The same way, if Jane decides to hangup before Joe answered, Joe should know about it and finish `IncomingCallActivity`.
@@ -227,7 +227,7 @@ On both `OnCallActivity` and `IncomingCallActivity`, add:
 
 ```
 
-## handle permissions
+## 7. Handle permissions
 
 For devices running Android 6.0 (API level 23) and higher, creating and operation on calls requires requesting runtime permissions.
 To simplify the implementation on this tutorial, `BaseActivity` checks the permissions on every Activity's `onStart()` and `onStop()`.
@@ -236,3 +236,4 @@ To read more about the permissions needed, [see here.](_documentation/client-sdk
 # Congratulations !
 
 You have implemented your first In App Voice application with Nexmo Client SDK for Android.
+You can now run the app on two devices, log in as two different users and start an in-app voice call!
