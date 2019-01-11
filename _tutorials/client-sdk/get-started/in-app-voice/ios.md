@@ -25,28 +25,36 @@ The app will have 2 buttons, which will login different users: Jane or Joe. Afte
 
 - [Add Nexmo SDK to your project](/setup/add-sdk-to-you-app/ios)
 
-- [Clone this Github project]("https://github.com/Nexmo/Client-Get-Started-InApp-Voice-ObjectiveC")
+- [Clone this Github project](https://github.com/Nexmo/Client-Get-Started-InApp-Voice-ObjectiveC)
 
-- Open `IAVAppDefine.h` file and swap the users IDs and tokens
+- On the Github project you cloned, on the Stater app, with XCode:
+    
+1. Open `IAVAppDefine.h` file and swap the users IDs and tokens:
+
 ```objective-c
     #define kInAppVoiceJaneUserId @"JANE_USER_ID" //TODO: swap with a userId for Jane
     #define kInAppVoiceJaneToken @"JANE_TOKEN" //TODO: swap with a token for Jane
     #define kInAppVoiceJoeUserId @"JOE_USER_ID" //TODO: swap with a userId for Joe
     #define kInAppVoiceJoeToken @"JOE_TOKEN" //TODO: swap with a token for Joe
 ```
-- Open `MainViewController.m` file and make sure the following lines exist:
-    - `#import <NexmoClient/NexmoClient.h>` - imports the sdk
-    - `@property NXMClient *nexmoClient;` - property for the client instance
-    - `@property NXMCall *ongoingCall;` - property for the call instance
+
+2. Open `MainViewController.m` file and make sure the following lines exist:
+
+    * `#import <NexmoClient/NexmoClient.h>` - imports the sdk
+
+    * `@property NXMClient *nexmoClient;` - property for the client instance
+
+    * `@property NXMCall *ongoingCall;` - property for the call instance
+
 ---
 
 ## 1. Login
-Using the Nexmo SDK should start with a `NexmoClient` login, using a `jwt` user token.
 
-On production apps, your server would authenticate the user, and would return a `jwt` to the app.
-You can read more about generating the `jwt` [here]("https://developer.nexmo.com/stitch/concepts/jwt-acl").
+Using the Nexmo SDK should start with logging in to `NexmoClient`, using a `jwt` user token.
 
-For testing and getting started purposes, you can use the `jwt` generated for you on the dashboard.
+On production apps, your server would authenticate the user, and would return to the app a [`jwt` with the configurations that fit.](https://developer.nexmo.com/stitch/concepts/jwt-acl).
+
+For testing and getting started purposes, you can [use the Nexmo CLI to generate `jwt`s.](/setup/generate-test-credentials)
 
 Open `MainViewController.m`. Explore the setup methods that were written for you on `viewDidLoad`.
 
@@ -69,7 +77,7 @@ It should look like this:
 @interface MainViewController () <NXMClientDelegate>
 ```
 
-The `NXMClientDelegate` let you know among other things, if the login was succesfull and you can start using the sdk.
+The `NXMClientDelegate` let you know among other things, if the login was succesful and you can start using the sdk.
 
 Add the following method under the `#pragma mark NXMClientDelegate` line.
 
@@ -144,7 +152,7 @@ Copy the following Implementation for the `statusChanged` method of the `NXMCall
 You can build the project now and make an outgoing call. Next you will implement receiving an incoming call.
 
 > *Note:*
-While `NXMCallTypeInApp` is great for simple calls, you can also start a call with customized logic, defined by your backend ([using an NCCO](https://developer.nexmo.com/stitch/in-app-voice/guides/ncco-guide) ) just as easy, by choosing `NXMCallTypeServer` as the callType.
+While `NXMCallTypeInApp` is great for simple calls, you can also start a call with customized logic, defined by your backend ([using an NCCO](https://developer.nexmo.com/client-sdk/in-app-voice/guides/ncco-guide) ) just as easy, by choosing `NXMCallTypeServer` as the callType.
 >    ```objective-c
 >    [self.nexmoClient call:@[callees] callType:NXMCallTypeServer delegate:self completion:^(NSError * _Nullable error, NXMCall * _Nullable call){...}];
 >    ```
@@ -255,7 +263,7 @@ To read more about the permissions needed, [see here.](_documentation/client-sdk
 
 ---
 
-#Congratulations!
+## Congratulations!
 
 You have implemented your first In App Voice application with the Nexmo Client SDK for iOS.  
 Run the app on two simulators and see that you can call, answer, decline and hangup.  

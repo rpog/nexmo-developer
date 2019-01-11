@@ -31,9 +31,9 @@ You can either install the SDK via CocoaPods or directly:
    end
    ```
 
-   * Make sure the pod file has the public CocoaPod specs repository source.
+   > *Note:* Make sure the pod file has the public CocoaPod specs repository source.
 
-4. Install the Pod by opening terminal and running the following command:
+3. Install the Pod by opening terminal and running the following command:
 
 ```ruby
    $ cd 'Project Dir'
@@ -42,10 +42,10 @@ You can either install the SDK via CocoaPods or directly:
 
    where `Project Dir` is the path to the parent directory of the `PodFile`
 
-5. Open the `xcworkspace` with XCode and disable `bitcode` for your target.
+4. Open the `xcworkspace` with XCode and disable `bitcode` for your target.
 
-6. In your code, import the `NexmoClient` library:  
-    **Swift** 
+5. In your code, import the `NexmoClient` library:  
+    **Swift**
     ```swift
     import NexmoClient  
     ```
@@ -159,7 +159,6 @@ let user = client.user
 NXMUser *user = client.user;
 ```
 
-## What's next?
+## Congratulations!
 
-After these steps you are ready to use the Nexmo SDK functionalities.
-Feel free to explore them.
+You added the Nexmo Client SDK to your iOS app, and logged in to a `NXMClient` instance. You're all set to use that `NXMClient` client in your app, and utilize the NexmoClient SDK functionalities.

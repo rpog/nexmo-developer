@@ -118,7 +118,7 @@ This will also allow you to start a phone (PSTN) call, by adding a phone number 
 
 ## 3. Register to incoming events
 
-When Jane calls Joe, Joe should be notified about it, for example, in order to answer or decline the call.
+When Jane calls Joe, Joe should be notified about it, for example, in order to answer the call.
 
 Therefore, Joe should register to incoming events, and implement `onIncomingCall()`.
 Whenever Joe is called to - `onIncomingCall()` is called, with the incoming Call object.
