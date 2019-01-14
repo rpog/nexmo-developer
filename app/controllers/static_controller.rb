@@ -3,9 +3,20 @@ class StaticController < ApplicationController
     # Get URL and split the / to retrieve the landing page name
     yaml_name = request.fullpath.split('/')[1]
 
-    @config = YAML.load_file("#{Rails.root}/config/landing_pages/#{yaml_name}.yml")
+    @landing_config = YAML.load_file("#{Rails.root}/config/landing_pages/#{yaml_name}.yml")
 
-    render layout: 'default_landing'
+    @landing_config['rows'].each do |row|
+      some_columns_have_widths = row['columns'].select { |c| c['width'] }.positive?
+      if some_columns_have_widths
+        row['columns'] = row['columns'].map do |c|
+          c['width'] ||= 1
+          c
+        end
+        row['column_count'] = row['columns'].map { |c| c['width'] }.sum
+      end
+    end
+
+    render layout: 'landing'
   end
 
   def landing

@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe StaticController, type: :controller do
   describe 'GET default_landing' do
+    render_views
+
     it 'renders single column with 100% width' do
-      @config = {
+      landing_config = {
           'rows' => [
             {
                 'columns' => [
@@ -21,19 +23,14 @@ RSpec.describe StaticController, type: :controller do
             },
           ],
       }
-      erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
-      actual = ERB.new(erb).result(binding)
 
-      expected_output = <<~HEREDOC
-        <div class=\"Vlt-grid\"> <div class=\"row\"> <div class=\"Vlt-col\"> A test </div> </div> </div>
-      HEREDOC
-
-      # .squish() erb output to remove extranous newlines and whitespaces & .chomp trailing newline off expected_output
-      expect(actual.squish).to eq(expected_output.chomp)
+      assert_rows_and_columns(landing_config, [
+                                ['Vlt-col'],
+                              ])
     end
 
     it 'renders two columns with 50% width each' do
-      @config = {
+      landing_config = {
           'rows' => [
             {
                   'columns' => [
@@ -64,19 +61,13 @@ RSpec.describe StaticController, type: :controller do
               },
           ],
       }
-      erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
-      actual = ERB.new(erb).result(binding)
-
-      expected_output = <<~HEREDOC
-        <div class=\"Vlt-grid\"> <div class=\"row\"> <div class=\"Vlt-col--1of2\"> Column 1 </div> <div class=\"Vlt-col--1of2\"> Column 2 </div> </div> </div>
-      HEREDOC
-
-      # .squish() erb output to remove extranous newlines and whitespaces & .chomp trailing newline off expected_output
-      expect(actual.squish).to eq(expected_output.chomp)
+      assert_rows_and_columns(landing_config, [
+                                ['Vlt-col--1of2', 'Vlt-col--1of2'],
+                              ])
     end
 
     it 'renders three columns, no width specified' do
-      @config = {
+      landing_config = {
           'rows' => [
             {
                   'columns' => [
@@ -116,19 +107,13 @@ RSpec.describe StaticController, type: :controller do
               },
           ],
       }
-      erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
-      actual = ERB.new(erb).result(binding)
-
-      expected_output = <<~HEREDOC
-        <div class=\"Vlt-grid\"> <div class=\"row\"> <div class=\"Vlt-col\"> Column 1 </div> <div class=\"Vlt-col\"> Column 2 </div> <div class=\"Vlt-col\"> Column 3 </div> </div> </div>
-      HEREDOC
-
-      # .squish() erb output to remove extranous newlines and whitespaces & .chomp trailing newline off expected_output
-      expect(actual.squish).to eq(expected_output.chomp)
+      assert_rows_and_columns(landing_config, [
+                                ['Vlt-col', 'Vlt-col', 'Vlt-col'],
+                              ])
     end
 
     it 'renders two columns in three-column grid (1:2 and 1:1)' do
-      @config = {
+      landing_config = {
           'rows' => [
             {
                   'columns' => [
@@ -159,19 +144,14 @@ RSpec.describe StaticController, type: :controller do
               },
           ],
       }
-      erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
-      actual = ERB.new(erb).result(binding)
 
-      expected_output = <<~HEREDOC
-        <div class=\"Vlt-grid\"> <div class=\"row\"> <div class=\"Vlt-col--2of3\"> Column 1 </div> <div class=\"Vlt-col--1of3\"> Column 2 </div> </div> </div>
-      HEREDOC
-
-      # .squish() erb output to remove extranous newlines and whitespaces & .chomp trailing newline off expected_output
-      expect(actual.squish).to eq(expected_output.chomp)
+      assert_rows_and_columns(landing_config, [
+                                ['Vlt-col--2of3', 'Vlt-col--1of3'],
+                              ])
     end
 
     it 'renders two columns in three-column grid (1:1 and 1:2)' do
-      @config = {
+      landing_config = {
           'rows' => [
             {
                   'columns' => [
@@ -202,19 +182,13 @@ RSpec.describe StaticController, type: :controller do
               },
           ],
       }
-      erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
-      actual = ERB.new(erb).result(binding)
-
-      expected_output = <<~HEREDOC
-        <div class=\"Vlt-grid\"> <div class=\"row\"> <div class=\"Vlt-col--1of3\"> Column 1 </div> <div class=\"Vlt-col--2of3\"> Column 2 </div> </div> </div>
-      HEREDOC
-
-      # .squish() erb output to remove extranous newlines and whitespaces & .chomp trailing newline off expected_output
-      expect(actual.squish).to eq(expected_output.chomp)
+      assert_rows_and_columns(landing_config, [
+                                ['Vlt-col--1of3', 'Vlt-col--2of3'],
+                              ])
     end
 
     it 'renders two rows, one with two columns (1:1) and one with three (1:1:1)' do
-      @config = {
+      landing_config = {
           'rows' => [
             {
               'columns' => [
@@ -246,43 +220,71 @@ RSpec.describe StaticController, type: :controller do
             },
           ],
         }
-      erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
-      actual = ERB.new(erb).result(binding)
-
-      expected_output = <<~HEREDOC
-        <div class="Vlt-grid"> <div class="row"> <div class="Vlt-col--1of2"> </div> <div class="Vlt-col--1of2"> </div> </div> <div class="row"> <div class="Vlt-col--1of3"> </div> <div class="Vlt-col--1of3"> </div> <div class="Vlt-col--1of3"> </div> </div> </div>
-      HEREDOC
-
-      # .squish() erb output to remove extranous newlines and whitespaces & .chomp trailing newline off expected_output
-      expect(actual.squish).to eq(expected_output.chomp)
+      assert_rows_and_columns(landing_config, [
+                                ['Vlt-col--1of2', 'Vlt-col--1of2'],
+                                ['Vlt-col--1of3', 'Vlt-col--1of3', 'Vlt-col--1of3'],
+                              ])
     end
 
     it 'renders the correct grid size when the last item in the grid has no explicit width' do
-      @config = {
-          'rows' => [
-            {
-              'columns' => [
-                {
-                  'width' => 1,
-                  'entries' => [],
-                },
-                {
-                  'entries' => [],
-                },
-              ],
-            },
-          ],
-        }
-      erb = File.read("#{Rails.root}/app/views/static/default_landing.html.erb")
-      actual = ERB.new(erb).result(binding)
+      landing_config = {
+        'rows' => [
+          {
+            'columns' => [
+              {
+                'width' => 1,
+                'entries' => [],
+              },
+              {
+                'entries' => [],
+              },
+            ],
+          },
+        ],
+      }
+      assert_rows_and_columns(landing_config, [
+                                ['Vlt-col--1of2', 'Vlt-col--1of2'],
+                              ])
+    end
 
-      puts actual.squish
-      expected_output = <<~HEREDOC
-        <div class=\"Vlt-grid\"> <div class=\"row\"> <div class=\"Vlt-col--1of2\"> </div> <div class=\"Vlt-col--1of2\"> </div> </div> </div>
-      HEREDOC
+    it 'renders the correct grid size when the first item in the grid has no explicit width' do
+      landing_config = {
+        'rows' => [
+          {
+            'columns' => [
+              {
+                'entries' => [],
+              },
+              {
+                'width' => 1,
+                'entries' => [],
+              },
+            ],
+          },
+        ],
+      }
+      assert_rows_and_columns(landing_config, [
+                                ['Vlt-col--1of2', 'Vlt-col--1of2'],
+                              ])
+    end
+  end
+end
 
-      # .squish() erb output to remove extranous newlines and whitespaces & .chomp trailing newline off expected_output
-      expect(actual.squish).to eq(expected_output.chomp)
+def assert_rows_and_columns(config, matches)
+  expect(YAML).to receive(:load_file).with("#{Rails.root}/config/landing_pages/default_landing.yml") .and_return(config)
+  allow(YAML).to receive(:load_file)
+
+  get :default_landing
+
+  assert_select '.Nxd-landing-page' do |elements|
+    assert_select elements[0], '.Nxd-landing-row', matches.count do |rows|
+      rows.each_with_index do |row, i|
+        row_match = matches[i]
+        cols = css_select row, '.Nxd-landing-col'
+        cols.each_with_index do |col, index|
+          expect(col['class']).to include(row_match[index])
+        end
+      end
     end
   end
 end
