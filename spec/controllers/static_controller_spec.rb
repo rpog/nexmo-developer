@@ -24,15 +24,18 @@ RSpec.describe StaticController, type: :controller do
           ],
       }
 
-      assert_rows_and_columns(landing_config, [
-                                ['Vlt-col'],
-                              ])
+      assert_rows_and_columns(
+        landing_config,
+        [
+          ['Vlt-col'],
+        ]
+      )
     end
 
     it 'renders two columns with 50% width each' do
       landing_config = {
-          'rows' => [
-            {
+        'rows' => [
+          {
                   'columns' => [
                     {
                           'width' => 1,
@@ -59,11 +62,14 @@ RSpec.describe StaticController, type: :controller do
                     },
                   ],
               },
-          ],
+        ],
       }
-      assert_rows_and_columns(landing_config, [
-                                ['Vlt-col--1of2', 'Vlt-col--1of2'],
-                              ])
+      assert_rows_and_columns(
+        landing_config,
+        [
+          ['Vlt-col--1of2', 'Vlt-col--1of2'],
+        ]
+      )
     end
 
     it 'renders three columns, no width specified' do
@@ -107,9 +113,12 @@ RSpec.describe StaticController, type: :controller do
               },
           ],
       }
-      assert_rows_and_columns(landing_config, [
-                                ['Vlt-col', 'Vlt-col', 'Vlt-col'],
-                              ])
+      assert_rows_and_columns(
+        landing_config,
+        [
+          ['Vlt-col', 'Vlt-col', 'Vlt-col'],
+        ]
+      )
     end
 
     it 'renders two columns in three-column grid (1:2 and 1:1)' do
@@ -145,9 +154,12 @@ RSpec.describe StaticController, type: :controller do
           ],
       }
 
-      assert_rows_and_columns(landing_config, [
-                                ['Vlt-col--2of3', 'Vlt-col--1of3'],
-                              ])
+      assert_rows_and_columns(
+        landing_config,
+        [
+          ['Vlt-col--2of3', 'Vlt-col--1of3'],
+        ]
+      )
     end
 
     it 'renders two columns in three-column grid (1:1 and 1:2)' do
@@ -182,9 +194,12 @@ RSpec.describe StaticController, type: :controller do
               },
           ],
       }
-      assert_rows_and_columns(landing_config, [
-                                ['Vlt-col--1of3', 'Vlt-col--2of3'],
-                              ])
+      assert_rows_and_columns(
+        landing_config,
+        [
+          ['Vlt-col--1of3', 'Vlt-col--2of3'],
+        ]
+      )
     end
 
     it 'renders two rows, one with two columns (1:1) and one with three (1:1:1)' do
@@ -220,10 +235,13 @@ RSpec.describe StaticController, type: :controller do
             },
           ],
         }
-      assert_rows_and_columns(landing_config, [
-                                ['Vlt-col--1of2', 'Vlt-col--1of2'],
-                                ['Vlt-col--1of3', 'Vlt-col--1of3', 'Vlt-col--1of3'],
-                              ])
+      assert_rows_and_columns(
+        landing_config,
+        [
+          ['Vlt-col--1of2', 'Vlt-col--1of2'],
+          ['Vlt-col--1of3', 'Vlt-col--1of3', 'Vlt-col--1of3'],
+        ]
+      )
     end
 
     it 'renders the correct grid size when the last item in the grid has no explicit width' do
@@ -242,9 +260,12 @@ RSpec.describe StaticController, type: :controller do
           },
         ],
       }
-      assert_rows_and_columns(landing_config, [
-                                ['Vlt-col--1of2', 'Vlt-col--1of2'],
-                              ])
+      assert_rows_and_columns(
+        landing_config,
+        [
+          ['Vlt-col--1of2', 'Vlt-col--1of2'],
+        ]
+      )
     end
 
     it 'renders the correct grid size when the first item in the grid has no explicit width' do
@@ -263,9 +284,12 @@ RSpec.describe StaticController, type: :controller do
           },
         ],
       }
-      assert_rows_and_columns(landing_config, [
-                                ['Vlt-col--1of2', 'Vlt-col--1of2'],
-                              ])
+      assert_rows_and_columns(
+        landing_config,
+        [
+          ['Vlt-col--1of2', 'Vlt-col--1of2'],
+        ]
+      )
     end
   end
 end

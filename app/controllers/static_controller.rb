@@ -6,7 +6,7 @@ class StaticController < ApplicationController
     @landing_config = YAML.load_file("#{Rails.root}/config/landing_pages/#{yaml_name}.yml")
 
     @landing_config['rows'].each do |row|
-      some_columns_have_widths = row['columns'].select { |c| c['width'] }.positive?
+      some_columns_have_widths = row['columns'].select { |c| c['width'] }.count.positive?
       if some_columns_have_widths
         row['columns'] = row['columns'].map do |c|
           c['width'] ||= 1
