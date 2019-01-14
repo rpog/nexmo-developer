@@ -1,6 +1,14 @@
 class StaticController < ApplicationController
   def default_landing
-    @content = YAML.load_file("#{Rails.root}/config/landing_pages/default.yml")
+    @config = YAML.load_file("#{Rails.root}/config/landing_pages/default.yml")
+
+    @config['rows'].each do |row|
+      some_columns_have_widths = row['columns'].select { |c| c['width'] }.count > 0
+      if some_columns_have_widths
+        row['columns'] = row['columns'].map { |c| c['width'] ||= 1; c }
+        row['column_count'] = row['columns'].map { |c| c['width'] }.sum
+      end
+    end
 
     render layout: 'default_landing'
   end
