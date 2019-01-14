@@ -1,6 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe StaticController, type: :controller do
+  before do
+    Rails.application.routes.draw do
+      get '/default_landing' => 'static#default_landing'
+    end
+  end
+  after do
+    Rails.application.reload_routes!
+  end
+
   describe 'GET default_landing' do
     render_views
 
