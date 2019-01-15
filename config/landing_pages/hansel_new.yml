@@ -39,19 +39,16 @@ rows:
   - columns:
     - width: 2
       entries:
-      - type: developer_resources
-        developer_resources:
-          type: tutorial
+      - type: tutorial
+        tutorial:
           name: 2fa-verify-api
     - width: 2
       entries:
-      - type: developer_resources
-        developer_resources:
-          type: tutorial
+      - type: tutorial
+        tutorial:
           name: number-insight-dotnet
   - columns: 
     - entries:
-      - type: developer_resources
-        developer_resources:
-          type: sdk
+      - type: sdk
+        sdk:
           name: dotnet

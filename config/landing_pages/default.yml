@@ -63,21 +63,18 @@ rows:
   - columns: 
     - width: 1
       entries:
-      - type: developer_resources
-        developer_resources:
-          type: tutorial
+      - type: tutorial
+        tutorial:
           name: call-tracking
     - width: 1
       entries:
-      - type: developer_resources
-        developer_resources:
-          type: tutorial
+      - type: tutorial
+        tutorial:
           name: receive-sms-with-ruby
     - width: 2 
       entries:
-      - type: developer_resources
-        developer_resources:
-          type: sdk
+      - type: sdk
+        sdk:
           name: ruby
   - columns: 
     - width: 1
