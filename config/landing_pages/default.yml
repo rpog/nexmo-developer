@@ -99,6 +99,9 @@ rows:
           header: "This is the header text"
           icon: "icon-lightbulb"
           text:
-            - main_text: "This is bigger text."
-            - small_text: "This is small text block."
-            - small_text: "This is another small text block underneath it."
+            - content: "This is bigger text."
+              type: large
+            - content: "This is small text block."
+              type: small
+            - content: "This is another small text block underneath it."
+              type: small
