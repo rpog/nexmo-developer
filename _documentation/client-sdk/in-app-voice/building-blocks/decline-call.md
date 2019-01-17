@@ -17,7 +17,7 @@ Key | Description
 ```building_blocks
 source: '_examples/client-sdk/in-app-voice/decline-call'
 application:
-  type: voice
+  type: rtc
   name: 'Decline a Call'
 ```
 

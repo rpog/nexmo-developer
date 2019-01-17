@@ -18,7 +18,7 @@ Key | Description
 ```building_blocks
 source: '_examples/client-sdk/in-app-voice/start-call'
 application:
-  type: voice
+  type: rtc
   name: 'Start a Call'
 ```
 

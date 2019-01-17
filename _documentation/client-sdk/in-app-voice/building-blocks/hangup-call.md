@@ -11,7 +11,7 @@ In this building block you will see how to hangup a Call.
 ```building_blocks
 source: '_examples/client-sdk/in-app-voice/hangup-call'
 application:
-  type: voice
+  type: rtc
   name: 'Hangup Call'
 ```
 
