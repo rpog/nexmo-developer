@@ -1,6 +1,6 @@
 ---
 title:  NCCO Guide for Calling
-navigation_weight: 5
+description: A guide on controlling voice calls using NCCOs.
 ---
 
 # NCCO Guide for Calling
@@ -109,6 +109,6 @@ NCCOs create new conversation objects by default. If you would like the interact
 
 An example of an answer URL with a dynamic NCCO object using the `NEXMO_NUMBER` and `TO_NUMBER` is available in the [IP to PSTN glitch demo project](https://glitch.com/edit/#!/nexmo-ip-to-pstn)
 
-After reading this guide, you should read more about implementing outbound PSTN calling with the [JavaScript, Android or iOS SDKs](/stitch/in-app-voice/guides/outbound-pstn).
+After reading this guide, you should read more about implementing outbound PSTN calling with the [JavaScript, Android or iOS SDKs](/client-sdk/in-app-voice/guides/outbound-pstn).
 
 If you'd like to learn more about other actions you can use in your NCCO to control the flow of a call such as recording, sending audio files or synthesized speech, you can read more about that in the [NCCO reference guide for the Voice API](/voice/voice-api/ncco-reference).

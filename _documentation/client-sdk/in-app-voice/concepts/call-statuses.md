@@ -1,11 +1,11 @@
 ---
 title: Call Statuses
+description: Information about call statuses such as `ringing`, `answered` and so on.
 ---
 
 # Call Statuses
 
-This guide explains call statuses like started, ringing, answered, rejected, busy, unanswered, timeout, failed, complete and machine. Since everyone is familiar with the phone, these concepts are pretty straightforward.
-
+This topic explains call statuses like started, ringing, answered, rejected, busy, unanswered, timeout, failed, complete and machine. Since everyone is familiar with the phone, these concepts are pretty straightforward.
 
 ## Lifecycle
 
