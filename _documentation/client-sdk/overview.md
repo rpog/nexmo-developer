@@ -70,7 +70,7 @@ Read more about:
 * [In-App Voice](/client-sdk/in-app-voice/overview)
 * [In-App Video](/client-sdk/in-app-video/overview)
 
-## SDK Documentation
+## SDK Documentation (generated from source code)
 
 <div class="Vlt-grid">
   <div class="Vlt-col Vlt-col--center">
