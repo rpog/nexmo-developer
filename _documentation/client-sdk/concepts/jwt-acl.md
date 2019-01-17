@@ -1,5 +1,6 @@
 ---
 title: JWT and ACL overview
+description: How to create JWTs and ACLs
 ---
 
 # JWT and ACL overview

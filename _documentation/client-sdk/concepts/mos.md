@@ -1,5 +1,6 @@
 ---
 title: Measuring Voice Or Video Quality
+description: Information on how to measure voice and video quality.
 ---
 
 # Measuring Voice Or Video Quality
