@@ -23,11 +23,15 @@ product: conversation
 
 ## Building Blocks
 
+In-app Video building blocks:
+
 ```building_block_list
 product: client-sdk/in-app-video
 ```
 
 ## Tutorials
+
+Nexmo Client SDK tutorials:
 
 ```tutorials
 product: client-sdk

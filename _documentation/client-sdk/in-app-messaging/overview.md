@@ -31,11 +31,15 @@ product: conversation
 
 ## Building Blocks
 
+In-app Messaging building blocks:
+
 ```building_block_list
 product: client-sdk/in-app-messaging
 ```
 
 ## Tutorials
+
+Nexmo Client SDK tutorials:
 
 ```tutorials
 product: client-sdk
