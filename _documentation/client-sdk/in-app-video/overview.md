@@ -11,7 +11,10 @@ Nexmo In-App Video uses WebRTC and includes all the essentials you need to build
 
 ## Getting started
 
-TBD
+For JavaScript:
+
+1. [Enable video](/client-sdk/in-app-video/guides/enable-video)
+2. [Enable screenshare](/client-sdk/in-app-video/guides/enable-screenshare)
 
 ## Concepts
 
