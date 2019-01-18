@@ -19,7 +19,11 @@ The Android & iOS Client SDKs also offer:
 
 ## Getting started
 
-TBD
+For JavaScript:
+
+1. [Create a Conversation](/client-sdk/in-app-messaging/guides/simple-conversation)
+2. [Invite members](/client-sdk/in-app-messaging/guides/inviting-members)
+3. [Utilize events](/client-sdk/in-app-messaging/guides/utilizing-events)
 
 ## Concepts
 
