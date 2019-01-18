@@ -13,7 +13,7 @@ Nexmo In-App Messaging enables you to build chat experience as part of your mobi
 * Delivered and Read receipts
 * Message Deletion
 
-The Android & iOS Client SDKs also offer:
+The Android and iOS Client SDKs also offer:
 
 * Push Notifications
 
